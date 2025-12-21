@@ -38,11 +38,16 @@
     
 \end{titlepage}
 
+% ============= Front Matter (Roman Numerals) =============
+\pagenumbering{roman}
+
 % Front matter inputs
 \input{frontmatter/abstract}
 \input{frontmatter/acknowledgments}
 
 % ============= Table of Contents =============
+\newpage
+\addcontentsline{toc}{chapter}{Table of Contents}
 \tableofcontents
 \newpage
 
@@ -57,6 +62,9 @@
 \newpage
 
 \input{frontmatter/abbreviations}
+
+% ============= Main Content (Arabic Numerals starting from 1) =============
+\pagenumbering{arabic}
 
 % Chapter inputs
 \input{chapters/chapter1}

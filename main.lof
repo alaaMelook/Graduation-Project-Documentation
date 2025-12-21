@@ -1,31 +1,31 @@
 \babel@toc {english}{}\relax 
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {1.1}{\ignorespaces Figure from document}}{6}{figure.caption.4}%
+\contentsline {figure}{\numberline {1.1}{\ignorespaces Figure from document}}{1}{figure.caption.4}%
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {4.1}{\ignorespaces Figure from document}}{29}{figure.caption.54}%
-\contentsline {figure}{\numberline {4.2}{\ignorespaces Figure from document}}{30}{figure.caption.55}%
-\contentsline {figure}{\numberline {4.3}{\ignorespaces Figure from document}}{33}{figure.caption.60}%
-\contentsline {figure}{\numberline {4.4}{\ignorespaces Figure from document}}{36}{figure.caption.67}%
-\contentsline {figure}{\numberline {4.5}{\ignorespaces Figure from document}}{40}{figure.caption.72}%
-\contentsline {figure}{\numberline {4.6}{\ignorespaces Figure from document}}{42}{figure.caption.75}%
-\contentsline {figure}{\numberline {4.7}{\ignorespaces Figure from document}}{50}{figure.caption.85}%
-\contentsline {figure}{\numberline {4.8}{\ignorespaces Figure from document}}{54}{figure.caption.92}%
-\contentsline {figure}{\numberline {4.9}{\ignorespaces Figure from document}}{58}{figure.caption.98}%
-\contentsline {figure}{\numberline {4.10}{\ignorespaces Figure from document}}{67}{figure.caption.118}%
-\contentsline {figure}{\numberline {4.11}{\ignorespaces Figure from document}}{69}{figure.caption.120}%
-\contentsline {figure}{\numberline {4.12}{\ignorespaces Figure from document}}{71}{figure.caption.122}%
-\contentsline {figure}{\numberline {4.13}{\ignorespaces Figure from document}}{73}{figure.caption.124}%
-\contentsline {figure}{\numberline {4.14}{\ignorespaces Figure from document}}{75}{figure.caption.126}%
-\contentsline {figure}{\numberline {4.15}{\ignorespaces Figure from document}}{77}{figure.caption.128}%
-\contentsline {figure}{\numberline {4.16}{\ignorespaces Figure from document}}{79}{figure.caption.130}%
-\contentsline {figure}{\numberline {4.17}{\ignorespaces Figure from document}}{82}{figure.caption.131}%
-\contentsline {figure}{\numberline {4.18}{\ignorespaces Figure from document}}{84}{figure.caption.133}%
-\contentsline {figure}{\numberline {4.19}{\ignorespaces Figure from document}}{87}{figure.caption.134}%
-\contentsline {figure}{\numberline {4.20}{\ignorespaces Figure from document}}{90}{figure.caption.135}%
-\contentsline {figure}{\numberline {4.21}{\ignorespaces Figure from document}}{93}{figure.caption.136}%
-\contentsline {figure}{\numberline {4.22}{\ignorespaces Figure from document}}{96}{figure.caption.137}%
-\contentsline {figure}{\numberline {4.23}{\ignorespaces Figure from document}}{99}{figure.caption.138}%
-\contentsline {figure}{\numberline {4.24}{\ignorespaces Figure from document}}{102}{figure.caption.139}%
+\contentsline {figure}{\numberline {4.1}{\ignorespaces TIBSA Platform - Complete Architecture Overview}}{24}{figure.caption.54}%
+\contentsline {figure}{\numberline {4.2}{\ignorespaces Layer 1- User Layer Architecture}}{25}{figure.caption.55}%
+\contentsline {figure}{\numberline {4.3}{\ignorespaces Layer 2- Edge Layer Architecture}}{27}{figure.caption.60}%
+\contentsline {figure}{\numberline {4.4}{\ignorespaces Layer 3- Frontend Layer Architecture}}{30}{figure.caption.67}%
+\contentsline {figure}{\numberline {4.5}{\ignorespaces Layer 4 - API Engine Architecture}}{34}{figure.caption.72}%
+\contentsline {figure}{\numberline {4.6}{\ignorespaces Layer 5 - Backend Services Architecture}}{37}{figure.caption.75}%
+\contentsline {figure}{\numberline {4.7}{\ignorespaces Layer 6 - Data Storage Layer Architecture}}{45}{figure.caption.85}%
+\contentsline {figure}{\numberline {4.8}{\ignorespaces Layer 7 - Monitoring \& Threat Analysis Architecture}}{49}{figure.caption.92}%
+\contentsline {figure}{\numberline {4.9}{\ignorespaces Layer 8 - TIBSA Suite Core Architecture}}{53}{figure.caption.98}%
+\contentsline {figure}{\numberline {4.10}{\ignorespaces Login Screen}}{56}{figure.caption.100}%
+\contentsline {figure}{\numberline {4.11}{\ignorespaces Registration Screen}}{57}{figure.caption.101}%
+\contentsline {figure}{\numberline {4.12}{\ignorespaces Main Dashboard}}{58}{figure.caption.102}%
+\contentsline {figure}{\numberline {4.13}{\ignorespaces Available Antivirus Engines}}{59}{figure.caption.103}%
+\contentsline {figure}{\numberline {4.14}{\ignorespaces Update Antivirus Database}}{59}{figure.caption.104}%
+\contentsline {figure}{\numberline {4.15}{\ignorespaces Add \& Manage AV Engines}}{62}{figure.caption.105}%
+\contentsline {figure}{\numberline {4.16}{\ignorespaces File Upload \& Scan Request}}{63}{figure.caption.106}%
+\contentsline {figure}{\numberline {4.17}{\ignorespaces Multiple File Scan}}{64}{figure.caption.107}%
+\contentsline {figure}{\numberline {4.18}{\ignorespaces Scan Results Overview}}{65}{figure.caption.108}%
+\contentsline {figure}{\numberline {4.19}{\ignorespaces Detailed File Information}}{66}{figure.caption.109}%
+\contentsline {figure}{\numberline {4.20}{\ignorespaces Scan Report Sharing}}{67}{figure.caption.110}%
+\contentsline {figure}{\numberline {4.21}{\ignorespaces Scan URL Interface}}{68}{figure.caption.111}%
+\contentsline {figure}{\numberline {4.22}{\ignorespaces User Profile}}{69}{figure.caption.112}%
+\contentsline {figure}{\numberline {4.23}{\ignorespaces System Settings}}{71}{figure.caption.113}%
+\contentsline {figure}{\numberline {4.24}{\ignorespaces Help \& Support Screen}}{73}{figure.caption.114}%
 \addvspace {10\p@ }

@@ -2,41 +2,26 @@
 \chapter{System Design}
 \label{ch:chapter4}
 
-\section{TIBSA Platform - Complete Architecture with Tools Integration}
+\section{Overview}
+This chapter presents the comprehensive system design for the TIBSA (Threat Intelligence and Behavioral Security Analysis) platform. The design encompasses a multi-layered architecture that integrates modern security tools, cloud-native services, and machine learning capabilities to deliver a robust threat intelligence and security analysis solution. The chapter begins with a detailed exploration of the platform's eight-layer architecture, covering everything from the user interface layer through to the core TIBSA suite. Each layer is examined in terms of its components, data flows, and integration points with other system elements. The chapter also includes complete data flow maps that trace the path of information through the system for key operations such as authentication, file analysis, and threat modeling. Finally, user interface scenarios are presented through wireframes that demonstrate the platform's key screens and user interactions.
 
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.8\textwidth]{media/image1.png}
-\caption{Figure from document}
+\caption{TIBSA Platform - Complete Architecture Overview}
 \label{fig:ch4_fig1}
 \end{figure}
 
-\subsection{Table of Contents}
+\section{Layered Architecture Design}
 
-Layer 1 - User Layer
-
-Layer 2 - Edge Layer
-
-Layer 3 - Frontend Layer
-
-Layer 4 - API Engine
-
-Layer 5 - Backend Services
-
-Layer 6 - Data Storage Layer
-
-Layer 7 - Monitoring \& Threat Analysis
-
-Layer 8 - TIBSA Suite (Core)
-
-Complete Data Flow Map
+This section presents the detailed architecture of the TIBSA platform, organized into eight distinct layers. Each layer represents a logical grouping of components with specific responsibilities, from the user-facing interfaces at the top to the core TIBSA suite at the bottom. The layered approach ensures separation of concerns, modularity, and maintainability, while enabling seamless data flow and integration between components.
 
 \subsection{LAYER 1 - User Layer}
 
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.8\textwidth]{media/image2.png}
-\caption{Figure from document}
+\caption{ Layer 1- User Layer Architecture}
 \label{fig:ch4_fig2}
 \end{figure}
 
@@ -77,7 +62,7 @@ The controls receive outgoing requests, form fields, filenames, and script execu
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.8\textwidth]{media/image3.png}
-\caption{Figure from document}
+\caption{ Layer 2- Edge Layer Architecture}
 \label{fig:ch4_fig3}
 \end{figure}
 
@@ -134,7 +119,7 @@ Routed requests from the Load Balancer arrive as input along with metadata inclu
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.8\textwidth]{media/image4.png}
-\caption{Figure from document}
+\caption{Layer 3- Frontend Layer Architecture}
 \label{fig:ch4_fig4}
 \end{figure}
 
@@ -203,7 +188,7 @@ Integration points include working with the File Hash Calculator in Layer 3.3.6 
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.8\textwidth]{media/image5.png}
-\caption{Figure from document}
+\caption{Layer 4 - API Engine Architecture}
 \label{fig:ch4_fig5}
 \end{figure}
 
@@ -242,7 +227,7 @@ RBAC integration includes defining roles such as Admin, Analyst, User, and Guest
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.8\textwidth]{media/image6.png}
-\caption{Figure from document}
+\caption{Layer 5 - Backend Services Architecture}
 \label{fig:ch4_fig6}
 \end{figure}
 
@@ -397,7 +382,7 @@ The queue receives jobs from all backend services in Layer 5.2, 5.3, 5.6, 5.7, a
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.8\textwidth]{media/image7.png}
-\caption{Figure from document}
+\caption{Layer 6 - Data Storage Layer Architecture}
 \label{fig:ch4_fig7}
 \end{figure}
 
@@ -466,7 +451,7 @@ The database is written by the Scan Service in Layer 5.2 for aggregated scan res
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.8\textwidth]{media/image8.png}
-\caption{Figure from document}
+\caption{Layer 7 - Monitoring \& Threat Analysis Architecture}
 \label{fig:ch4_fig8}
 \end{figure}
 
@@ -533,7 +518,7 @@ The dispatcher receives from the Alert Engine in Layer 7.2 for security alerts, 
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.8\textwidth]{media/image9.png}
-\caption{Figure from document}
+\caption{Layer 8 - TIBSA Suite Core Architecture}
 \label{fig:ch4_fig9}
 \end{figure}
 
@@ -560,183 +545,101 @@ The Custom Report Generator automates comprehensive report generation, accepting
 The Executive Dashboard provides high-level leadership dashboard, accepting aggregated threat modeling results as input and producing single-page summary as output. The summary includes top threats and risk levels, critical assets at risk, recommended priority actions, overall security posture score, and trend indicators showing whether security is improving or worsening. The purpose is to enable rapid executive decision-making.
 
 The suite receives threat modeling requests from the API Gateway in Layer 4, accepts input data from users via the Frontend in Layer 3 in the form of architecture descriptions, executes via the Threagile automation engine, stores models in Postgres in Layer 6 for threat data and risk scores, stores artifacts in Cloudflare R2 in Layer 6 for DFD diagrams and PDF or Word reports, queues jobs in BullMQ in Layer 5.9 for async processing taking 2 to 10 minutes, integrates with the MITRE ATT\&CK database for TTP mapping, notifies via the Notification Service in Layer 5.5 when reports are ready, displays in the Frontend Dashboard in Layer 3 specifically in the Executive Dashboard component, and exports to the SIEM in Layer 7 for security monitoring integration.
-
-\subsection{Complete Data Flow Map}
-
-\subsubsection{Flow 1: User Authentication \& Session Management}
-
-The authentication flow begins when a user accesses the platform through Cloudflare Edge which provides CDN, WAF, DDoS protection, TLS termination, and bot detection. The request proceeds to the Frontend using Next.js where the Login Form is presented. User credentials are processed through Client-Side Security including XSS Sanitizer and CSRF Handler before being passed to the Auth Interceptor. The Auth Interceptor forwards the authenticated request to the API Gateway (KrakenD) which applies the Auth Filter and Rate Limiter. The request is then sent to Authentik which handles JWT issuance and MFA verification. The session is stored in Redis in Layer 6 while user information is stored in Postgres in Layer 6. The JWT is returned to the Frontend and stored in the browser. All subsequent requests include the JWT via the Auth Interceptor.
-
-\subsubsection{Flow 2: File Upload \& Malware Analysis}
-
-The file upload and analysis flow starts when a user selects a file in the File Upload Component in Frontend Layer 3. The File Hash Calculator computes a SHA-256 hash of the file for deduplication. The Chunk Uploader splits the file into manageable chunks for reliable upload. Uppy and Tusd handle the resumable upload process, sending chunks to Cloudflare R2 in Layer 6 where the complete file is stored. The API Gateway routes the scan request to the Scan Service in Layer 5 which initiates comprehensive analysis. BullMQ queues a sandbox job in Layer 5.9 for asynchronous processing. CAPE Sandbox in Layer 5.7 retrieves the file from R2 and executes it in an isolated VM. The sandbox captures behavior including network connections, file modifications, and API calls, generating IOCs in the process. Artifacts including screenshots, memory dumps, and PCAP files are stored in R2 while results are stored in Postgres. The ML Engine in Layer 5.6 classifies the file based on behavioral features and stores predictions in the ML Features DB. Threat Intelligence in Layer 5.3 checks IOCs via MISP and external APIs. The Scan Service aggregates all results from sandbox, ML, and threat intel sources. A comprehensive PDF report is generated and stored in R2. The Notification Service sends a completion email to the user. Finally, the user views the detailed report in the Frontend Dashboard.
-
-\subsubsection{Flow 3: URL Phishing Detection}
-
-The URL scanning flow begins when a user submits a URL to the Scan Service in Layer 5. The ML Engine in Layer 5.6 extracts URL features including domain age, lexical analysis, WHOIS data, and SSL information. The Phishing Classifier runs inference using Llama 3.2 to produce a probability score. Threat Intelligence checks URL reputation by querying VirusTotal, URLhaus, and other external feeds. Results from ML classification and threat intelligence are aggregated by the Scan Service. The complete analysis is stored in the Scan Results DB in Layer 6. A report is generated and stored in R2 for user download. A notification is sent to the user via the Notification Service. Results are displayed in the Alerts Table in Frontend Layer 3 for immediate review.
-
-\subsubsection{Flow 4: Threat Modeling Workflow}
-
-The threat modeling workflow starts when a user uploads system architecture in JSON or YAML format through the Frontend Pentest Wizard in Layer 3. The request passes through the API Gateway to the Threat Modeling Engine (Threagile) in Layer 5. BullMQ queues the threat modeling job for asynchronous processing. Threagile parses the architecture definition and identifies system components. A DFD is automatically generated and stored in R2. STRIDE analysis is performed to identify threats across all categories. MITRE ATT\&CK TTPs are mapped to identified threats for standardization. Risk scores are calculated based on likelihood, impact, and existing controls. Existing controls are evaluated for effectiveness and coverage gaps. Benefit-Cost ratios are computed for recommended controls. A comprehensive PDF or Word report is produced including all analysis, diagrams, and recommendations. The complete threat model data is stored in Postgres in Layer 6 while artifacts are stored in R2. A notification is sent to the user via the Notification Service. The user views the executive summary and full report in the Executive Dashboard in Layer 3.
-
-\subsubsection{Flow 5: Background Job Processing}
-
-The background job processing flow begins when any service including Scan, ML, Threat Modeling, or Threat Intel needs to perform a long-running task. The service queues a job in BullMQ in Layer 5.9 with appropriate priority and parameters. The job is stored in Upstash Redis in Layer 6 for persistence. A worker process picks up the job from the queue based on priority and availability. The worker executes the long-running task which may include Sandbox analysis, ML inference, or report generation. Job status is continuously updated in Redis to track progress. Results are stored in Postgres for structured data or R2 for large files and reports in Layer 6. Upon completion, the Notification Service is triggered to inform the user. The Frontend polls for status updates or receives WebSocket notifications to update the UI in real-time.
-
-\subsubsection{Flow 6: Security Monitoring \& Alerting}
-
-The security monitoring flow operates continuously as all services in Layers 2 through 5 generate logs during normal operation. Logs are sent to Wazuh SIEM in Layer 7 via various methods including Syslog, file monitoring, and API integrations. The SIEM correlates events across different services to detect complex attack patterns. When threats are detected, security alerts are generated with detailed context. The Alert Engine in Layer 7 processes these alerts by deduplicating repeated events, prioritizing based on severity, and enriching with context from Threat Intelligence in Layer 5. Enriched and prioritized alerts are sent to the Threat Dashboard in Layer 7 for visualization. Critical alerts are sent to the Notification Dispatcher which delivers notifications via email, Slack, Teams, or other channels. Alerts are displayed in the Security Analyst Console in Layer 1 for investigation and response.
-
-\subsubsection{Flow 7: Metrics \& Performance Monitoring}
-
-The metrics and performance monitoring flow operates as all services expose metrics endpoints in Prometheus format. Prometheus in Layer 7 scrapes metrics from all services every 15 seconds. Metrics are stored in Prometheus time-series database for historical analysis. Grafana in Layer 7 queries Prometheus to populate real-time dashboards. Dashboards display critical metrics including request rates, error rates, latency, resource utilization, and business metrics. When metrics exceed defined thresholds, alerts are triggered automatically. Notifications are sent via the Notification Service to inform the DevOps team. The DevOps team responds to alerts by investigating issues and taking corrective action to maintain platform health.
-
-\subsubsection{Flow 8: Threat Intelligence Enrichment}
-
-The threat intelligence enrichment flow begins when the Scan Service identifies an IOC such as an IP address, domain, file hash, or URL during analysis. The Threat Intelligence Service in Layer 5 is queried with the IOC. The service first queries the MISP local database for known threats. External APIs including VirusTotal, AbuseIPDB, URLhaus, and HybridAnalysis are queried in parallel. Reputation scores and threat context are aggregated from all sources. Enriched context including associated campaigns, malware families, and threat actors is returned to the Scan Service. Results are included in the comprehensive scan report. IOCs are stored in MISP for future correlation and threat intelligence sharing. Automated feed ingestion via BullMQ scheduled jobs continuously updates the threat intelligence database with the latest indicators.
-
-\subsubsection{Flow 9: Billing \& Subscription Management}
-
-The billing flow starts when a user initiates a subscription through the Frontend. The Billing Service in Layer 5 receives the subscription request. A subscription is created in Lemon Squeezy via API call. A checkout URL is returned to the user for payment. The user completes payment in the Lemon Squeezy hosted checkout. Lemon Squeezy sends a webhook to the Billing Service confirming payment. The Billing Service validates the webhook signature for security. Subscription status is updated in Postgres in Layer 6. A welcome notification is sent to the user via the Notification Service. During ongoing usage, every scan or API call increments the usage counter. Usage is checked against plan limits before allowing resource-intensive operations. When usage approaches limits, overage alerts are sent to users via the Notification Service. Users exceeding plan limits are blocked from additional scans until they upgrade or usage resets.
-
-\subsubsection{Flow 10: Audit \& Compliance Logging}
-
-The audit and compliance logging flow operates continuously as every user action including login, scan initiation, report download, and configuration change is captured. Backend services log actions immediately as they occur. Audit log entries are written to Postgres in Layer 6 with complete details. Each log entry includes timestamp, user ID, action type, resource affected, IP address, and result status. Logs are exported to Loki in Layer 7 for aggregation with other log types. Administrators can query audit logs via the Frontend UI with powerful search and filtering. Compliance reports are generated from audit logs on demand or on schedule. The immutable audit trail supports forensic investigations and compliance audits for GDPR, SOC 2, ISO 27001, and other frameworks.
-
-\subsection{Summary of Tool Distribution by Layer}
-
-\subsubsection{Layer 1 - User Layer}
-
-This layer uses no external tools, consisting entirely of pure UI and client logic components.
-
-\subsubsection{Layer 2 - Edge Layer}
-
-This layer utilizes Cloudflare Free Plan as Service \#1, which provides comprehensive edge services including CDN, WAF, DDoS Protection, TLS Termination, Load Balancing, and Bot Detection.
-
-\subsubsection{Layer 3 - Frontend Layer}
-
-This layer employs Next.js 15 with Tailwind CSS and shadcn/ui as Service \#2 for all UI components, dashboards, and forms. Additionally, it uses Uppy with Tusd as Service \#8 for resumable file upload and chunking capabilities.
-
-\subsubsection{Layer 4 - API Engine}
-
-This layer leverages KrakenD Community Edition as Service \#4 for the API Gateway providing routing, rate limiting, and validation. It also uses Authentik Open Source as Service \#3 for authentication, MFA, RBAC, and user management.
-
-\subsubsection{Layer 5 - Backend Services}
-
-This layer integrates multiple specialized services: CAPE Sandbox as Service \#9 for dynamic malware analysis and VM execution, Ollama with Llama 3.2 or Mistral-Nemo as Service \#10 for ML-powered phishing and malware classification, MISP as Service \#11 for threat intelligence platform and IOC management, External Threat Feeds as Service \#12 including VirusTotal, HybridAnalysis, AbuseIPDB, and URLhaus, Resend with Webhooks as Service \#13 for email and webhook notifications, Lemon Squeezy as Service \#14 for billing and subscription management, Threagile as Service \#17 for automated threat modeling representing the TIBSA core, and BullMQ with Upstash Redis as Service \#18 for background job queue management.
-
-\subsubsection{Layer 6 - Data Storage}
-
-This layer utilizes Neon Serverless Postgres as Service \#5 as the primary relational database, Upstash Serverless Redis as Service \#6 for caching, session storage, rate limiting, and job queue, and Cloudflare R2 as Service \#7 for object storage of files, reports, and artifacts.
-
-\subsubsection{Layer 7 - Monitoring \& Security}
-
-This layer employs Wazuh Open Source as Service \#15 for SIEM, security monitoring, and intrusion detection. It also uses Grafana with Prometheus and Loki as Service \#16 for metrics collection, log aggregation, and dashboards.
-
-\subsubsection{Layer 8 - TIBSA Core}
-
-This layer is powered by Threagile as Service \#17 for all core TIBSA automation including DFD generation, STRIDE analysis, MITRE mapping, risk scoring, and report generation.
-
 \subsection{Key Integration Points Summary}
 
 The authentication flow moves from Cloudflare through Next.js to KrakenD to Authentik and finally to Backend Services. The file analysis pipeline flows from Uppy/Tusd to R2 to CAPE Sandbox to ML Engine to MISP and culminates in comprehensive reports. The threat modeling workflow begins with user input, processes through Threagile to produce DFD, STRIDE, and MITRE analysis, and stores reports in R2. Background processing flows from all services through BullMQ to Redis Queue where workers process jobs and store results in appropriate storage. The monitoring flow captures data from all services, sends it to Prometheus and Loki, displays it in Grafana Dashboards, and generates alerts as needed. Security monitoring aggregates all logs in Wazuh SIEM, processes them through the Alert Engine, and distributes notifications via the Notification Dispatcher. Data persistence is handled with all services storing structured data in Postgres, utilizing Redis for cache, and storing large objects in R2.
 
-\subsection{Scenarios}
+\section{User Interface Wireframes}
+
+This section presents the key user interface wireframes that illustrate how users interact with the TIBSA platform. Each scenario demonstrates a specific functionality of the system, from initial authentication through to advanced features such as file scanning, threat analysis, and system administration. The wireframes are designed to prioritize usability, security, and clarity, ensuring that both technical and non-technical users can effectively navigate the platform. The scenarios cover the complete user journey, including authentication flows, dashboard navigation, security scanning operations, and administrative functions.
 
 \subsection{Login Screen}
 
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.8\textwidth]{media/image10.png}
-\caption{Figure from document}
+\caption{Login Screen}
 \label{fig:ch4_fig10}
 \end{figure}
 
-The Login screen is the main entry point to the system. It allows registered users to authenticate using their email and password. The screen contains clearly labeled input fields for credentials and a primary login button to initiate authentication. Additional options such as '€œRemember Me'€ and '€œForgot Password'€ are included to enhance usability and account recovery. This wireframe focuses on simplicity and security by limiting distractions and guiding the user directly toward authentication.
-
-\subsubsection{Registration Screen}
+The Login screen is the main entry point to the system. It allows registered users to authenticate using their email and password. The screen contains clearly labeled input fields for credentials and a primary login button to initiate authentication. Additional options such as “Remember Me” and “Forgot Password” are included to enhance usability and account recovery. This wireframe focuses on simplicity and security by limiting distractions and guiding the user directly toward authentication.
+\subsection{Registration Screen}
 
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.8\textwidth]{media/image11.png}
-\caption{Figure from document}
+\caption{Registration Screen}
 \label{fig:ch4_fig11}
 \end{figure}
 
 The Registration screen enables new users to create an account on the platform. It includes a structured form collecting essential information such as username, email address, and password. Validation indicators are used to guide the user during data entry. Upon successful registration, the user is redirected to the login process. This screen ensures a smooth onboarding experience while maintaining data consistency and security requirements.
-
-\subsubsection{Main Dashboard}
+\subsection{Main Dashboard}
 
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.8\textwidth]{media/image12.png}
-\caption{Figure from document}
+\caption{Main Dashboard}
 \label{fig:ch4_fig12}
 \end{figure}
 
 The Dashboard represents the central control panel of the system after successful login. It provides an overview of system status, recent scan activities, and engine statistics. Key information is displayed using summary cards, charts, and status indicators to allow users to quickly understand the current security state. Navigation elements are placed at the top or side to provide quick access to core system features such as scan management, engine configuration, and reports.
-
-\subsubsection{Available Antivirus Engines}
+\subsection{Available Antivirus Engines}
 
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.8\textwidth]{media/image13.png}
-\caption{Figure from document}
+\caption{Available Antivirus Engines}
 \label{fig:ch4_fig13}
 \end{figure}
 
 This screen displays a list of all available antivirus engines supported by the system. Each engine is presented with its current status, version, and last update time. Action buttons allow the user to enable, disable, or configure individual engines. The wireframe highlights modularity by allowing multiple engines to operate independently within the same system.
-
-\subsubsection{Update Antivirus Database}
+\subsection{Update Antivirus Database}
 
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.8\textwidth]{media/image14.png}
-\caption{Figure from document}
+\caption{Update Antivirus Database}
 \label{fig:ch4_fig14}
 \end{figure}
 
 This screen provides functionality for updating antivirus signature databases. It displays update progress, current database version, and update history. A progress bar visually communicates update status, ensuring transparency during long-running operations. This screen is essential for maintaining detection accuracy and system reliability.
-
-\subsubsection{Add \& Manage AV Engines}
+\subsection{Add \& Manage AV Engines}
 
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.8\textwidth]{media/image15.png}
-\caption{Figure from document}
+\caption{Add \& Manage AV Engines}
 \label{fig:ch4_fig15}
 \end{figure}
 
-The Admin Dashboard page allows administrators to add and manage antivirus engines. The Add New AV Engine section includes input fields for the engine name, Docker image URL, configuration parameters, and an optional API key, with a prominent '€œAdd AV Engine'€ button to submit the information. A confirmation message appears upon successful addition. The Manage AV Engines section displays a table of installed antivirus engines with columns for engine name, status, version, last update, and an action button to remove any engine. This interface provides a clear and centralized way to configure and maintain multiple antivirus engines.
-
-\subsubsection{File Upload \& Scan Request}
+The Admin Dashboard page allows administrators to add and manage antivirus engines. The Add New AV Engine section includes input fields for the engine name, Docker image URL, configuration parameters, and an optional API key, with a prominent “Add AV Engine” button to submit the information. A confirmation message appears upon successful addition. The Manage AV Engines section displays a table of installed antivirus engines with columns for engine name, status, version, last update, and an action button to remove any engine. This interface provides a clear and centralized way to configure and maintain multiple antivirus engines.
+\subsection{File Upload \& Scan Request}
 
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.8\textwidth]{media/image16.png}
-\caption{Figure from document}
+\caption{File Upload \& Scan Request}
 \label{fig:ch4_fig16}
 \end{figure}
 
 This screen is the primary interface for file security analysis. It includes a drag-and-drop zone for file uploads, with options to browse files, enter a URL, or submit a file hash. Users can upload multiple files for batch processing. Key buttons include "Analyze" to start scanning, "Get Info" for metadata, and "Check File Details." The top navigation bar provides links to Home, About, Docs, Services, and Profile, along with Login and notifications. The design focuses on flexibility and a clean, user-friendly experience.
-
 \subsection{Multiple File Scan}
 
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.8\textwidth]{media/image17.png}
-\caption{Figure from document}
+\caption{Multiple File Scan}
 \label{fig:ch4_fig17}
 \end{figure}
 
 This screen displays the results of scanning multiple uploaded files at once. The table lists each file by name, overall status (Malicious or Clean), detection ratio (number of engines that flagged it as a threat), and a "View Details" button for further information. A summary at the bottom indicates the total number of malicious files detected. Buttons at the top allow uploading additional files and starting the scan process. The layout provides a concise tabular overview to facilitate quick assessment of batch scan outcomes.
 
-\subsubsection{Scan Results Overview}
+\subsection{Scan Results Overview}
 
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.8\textwidth]{media/image18.png}
-\caption{Figure from document}
+\caption{Scan Results Overview}
 \label{fig:ch4_fig18}
 \end{figure}
 
@@ -747,7 +650,7 @@ This screen shows a comprehensive scan report for the analyzed file. It displays
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.8\textwidth]{media/image19.png}
-\caption{Figure from document}
+\caption{Detailed File Information}
 \label{fig:ch4_fig19}
 \end{figure}
 
@@ -758,7 +661,7 @@ This screen shows detailed information for the scanned file, including name, siz
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.8\textwidth]{media/image20.png}
-\caption{Figure from document}
+\caption{Scan Report Sharing}
 \label{fig:ch4_fig20}
 \end{figure}
 
@@ -769,7 +672,7 @@ This screen allows users to share the scan results of a malicious file. It displ
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.8\textwidth]{media/image21.png}
-\caption{Figure from document}
+\caption{Scan URL Interface}
 \label{fig:ch4_fig21}
 \end{figure}
 
@@ -780,7 +683,7 @@ The URL Scan Interface allows users to submit web addresses for security analysi
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.8\textwidth]{media/image22.png}
-\caption{Figure from document}
+\caption{User Profile}
 \label{fig:ch4_fig22}
 \end{figure}
 
@@ -791,7 +694,7 @@ This screen displays the user's profile information on the left sidebar, includi
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.8\textwidth]{media/image23.png}
-\caption{Figure from document}
+\caption{System Settings}
 \label{fig:ch4_fig23}
 \end{figure}
 
@@ -802,14 +705,26 @@ This screen allows customization of user settings. It includes sections for sele
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.8\textwidth]{media/image24.png}
-\caption{Figure from document}
+\caption{Help \& Support Screen}
 \label{fig:ch4_fig24}
 \end{figure}
 
 This screen provides comprehensive user assistance. It features quick access tiles for Documentation, Video Tutorials, and Live Chat. A Frequently Asked Questions section lists common queries with expandable answers. The Contact Support form allows submission of name, email, subject, and message. Additional Resources include links to User Guide, API Documentation, Report a Bug, Feature Requests, Quick Start, News, Community, and Contact Us. The layout centralizes support options for efficient issue resolution and self-help.
 
-\subsection{Conclusion}
+\section{Summary}
 
-This architecture provides a comprehensive, scalable, and secure platform for the TIBSA threat intelligence and modeling system. Each tool is strategically placed within its appropriate layer with clear data flows and integrations ensuring seamless operation. The architecture ensures security through multi-layered protection from Edge to Data layers, scalability through serverless and distributed components including Neon, Upstash, R2, and Cloudflare, reliability through background job processing, retry logic, and comprehensive monitoring, performance through caching, CDN, load balancing, and async processing, observability through comprehensive logging, metrics, and alerting, and compliance through audit trails, RBAC, and secure authentication. The clear separation of concerns and well-defined interfaces between layers enable maintainability, testability, and future extensibility of the platform.
+This chapter has presented the complete system design for the TIBSA platform, detailing an eight-layer architecture that delivers comprehensive threat intelligence and security analysis capabilities. The design leverages modern cloud-native technologies and open-source security tools to create a scalable, secure, and maintainable platform.
 
+The key architectural components include:
 
+\begin{itemize}
+    \item \textbf{User and Edge Layers (1-2):} Provide secure access points with CDN, WAF, DDoS protection, and bot detection through Cloudflare integration.
+    \item \textbf{Frontend Layer (3):} Delivers a responsive user interface using Next.js 15, Tailwind CSS, and shadcn/ui, with robust client-side security controls and resumable file upload capabilities.
+    \item \textbf{API Engine (4):} Centralizes request handling through KrakenD with Authentik providing comprehensive authentication, MFA, and RBAC functionality.
+    \item \textbf{Backend Services (5):} Implements core business logic including scan coordination, threat intelligence via MISP, ML-powered detection using Ollama, dynamic malware analysis through CAPE Sandbox, and automated threat modeling with Threagile.
+    \item \textbf{Data Storage Layer (6):} Utilizes Neon Serverless Postgres, Upstash Redis, and Cloudflare R2 for structured data, caching, and object storage respectively.
+    \item \textbf{Monitoring Layer (7):} Provides comprehensive observability through Wazuh SIEM, Grafana, Prometheus, and Loki for security monitoring, metrics, and log aggregation.
+    \item \textbf{TIBSA Core (8):} Automates the complete threat modeling workflow including DFD generation, STRIDE analysis, MITRE ATT\&CK mapping, and risk scoring.
+\end{itemize}
+
+The architecture ensures security through multi-layered protection, scalability through serverless components, reliability through background job processing and retry logic, performance through caching and CDN, observability through comprehensive monitoring, and compliance through audit trails and RBAC. The user interface wireframes demonstrate a clean, intuitive design that guides users through authentication, scanning, threat analysis, and administrative functions. This modular and well-documented design provides a solid foundation for implementing, testing, and extending the TIBSA platform.
