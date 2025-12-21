@@ -1,0 +1,246 @@
+﻿% ============= CHAPTER 3: REQUIREMENTS ANALYSIS =============
+\chapter{Requirements Analysis}
+\label{ch:chapter3}
+
+\section{Chapter Overview}
+
+Project Title: Integration of Penetration Testing and Threat Modeling for Continuous Monitoring
+
+This chapter presents a comprehensive requirements analysis for the proposed system, integrating and refining the business, user, and system requirements in alignment with the project proposal and the research gaps identified in Chapter 2. The chapter follows an IEEE-style structure and adopts an Agile'€“Scrum development methodology to support continuous adaptation to evolving cybersecurity threats.
+
+\subsubsection{3.1 Business Requirements Identification}
+
+The business requirements for this graduation project were identified through an iterative and collaborative process involving academic supervisors, cybersecurity domain knowledge, and continuous team discussions. These requirements are directly derived from the problem statement, project objectives, expected solutions, and the research gaps highlighted in Chapter 2. Current cybersecurity practices often suffer from fragmentation, where threat modeling remains largely theoretical, penetration testing is reactive and unguided by predictive risk analysis, and continuous monitoring lacks adaptability to emerging threats. This project addresses these limitations by proposing a unified, intelligence-driven framework that integrates threat modeling, penetration testing, threat intelligence, and continuous monitoring.
+
+The key business requirements are summarized as follows:
+
+Seamless Integration of Security Processes: The system shall unify threat modeling (e.g., STRIDE and DFD), penetration testing (e.g., Nmap, OWASP ZAP, Metasploit), threat intelligence (e.g., AlienVault OTX, MISP), and continuous monitoring within a single cohesive workflow. This requirement directly addresses the integration gap identified in Chapter 2, where existing tools lack end-to-end validation capabilities.
+
+Risk-Driven Prioritization: The system shall prioritize testing activities based on quantified business risk using scoring models such as DREAD and CVSS. This ensures focus on high-impact assets and attack vectors, improving efficiency without sacrificing coverage, as supported by risk-driven approaches discussed in the literature.
+
+Enhanced Collaboration and Traceability: The system shall support collaboration among developers, security analysts, penetration testers, and architects through centralized repositories, shared visualizations, and traceable artifacts. This requirement mitigates the unified risk context gap and supports compliance with standards such as ISO 27005 and NIST CSF.
+
+Continuous Adaptation and Improvement: The system shall incorporate automated feedback loops where penetration testing results and threat intelligence updates dynamically refine threat models. This addresses the continuous monitoring and feedback loop gaps identified in prior research.
+
+Automation and Scalability: The system shall automate threat-to-test mapping, dynamic scope definition, and report generation to reduce manual effort and support scalability in complex environments, such as large-scale networks or cyber-physical systems.
+
+Comprehensive Reporting and Compliance: The system shall generate actionable reports linking vulnerabilities to threat scenarios, risk levels, exploitability, and mitigation strategies, supporting regulatory compliance (e.g., GDPR, HIPAA) and informed decision-making.
+
+These business requirements ensure that the proposed framework bridges the gap between predictive security analysis and practical validation while remaining feasible within the constraints of an academic graduation project.
+
+\paragraph{3.1.1 Software Development Methodology}
+
+The Agile software development methodology, implemented through the Scrum framework, was adopted for this project due to the dynamic and exploratory nature of cybersecurity research. Agile emphasizes flexibility, iterative development, and continuous feedback, making it particularly suitable for systems that must evolve alongside emerging threats and changing requirements.
+
+\paragraph{3.1.2 Justification for Scrum Selection}
+
+Scrum was chosen for this project because it effectively addresses the dynamic and uncertain nature of cybersecurity development. Cyber threats evolve rapidly, and system requirements cannot be fully defined upfront; Scrum'€™s short, time-boxed Sprints enable rapid adaptation to new threat intelligence or testing outcomes. The methodology supports incremental value delivery, allowing the project to produce functional components gradually, which facilitates early validation and refinement. Scrum also enhances collaboration and visibility through ceremonies such as Daily Stand-ups, Sprint Reviews, and Retrospectives, ensuring continuous alignment among team members. Furthermore, continuous backlog prioritization and retrospective analysis help identify and mitigate technical and design risks early. Finally, Scrum'€™s lightweight structure aligns well with academic constraints, supporting effective progress tracking and delivery within limited time and resources.
+
+\paragraph{3.1.3 Scrum-Based Development Plan}
+
+The project was implemented over multiple Sprints spanning approximately 15 weeks, as summarized below:
+
+This iterative approach ensured continuous validation of assumptions, alignment with project objectives, and adaptability to emerging cybersecurity threats.
+
+\subsubsection{3.2 User Functional Requirements}
+
+The system targets multiple types of users, each with distinct responsibilities within the integrated threat modeling and penetration testing framework. Defining these roles ensures that functional requirements are aligned with user needs and access privileges.
+
+\paragraph{3.2.1 User Roles}
+
+\paragraph{3.2.2 Functional Requirements}
+
+User functional requirements (UFRs) define the interactions between end users and the system. Each requirement is aligned with one or more of the roles defined above. These requirements were specified following IEEE Std 830 principles and refined through Scrum backlog iterations.
+
+This structured approach ensures clarity, traceability, and alignment of responsibilities with system features, improving usability, collaboration, and adaptability for all stakeholders.
+
+\subsubsection{3.3 System Functional and Non-Functional Requirements}
+
+This section defines the functional and non-functional requirements of the system, ensuring alignment with business and user needs. Functional requirements describe the system behavior and services, while non-functional requirements specify constraints and quality attributes.
+
+\paragraph{3.3.1 System Functional Requirements}
+
+\paragraph{3.3.2 Non-Functional Requirements}
+
+Non-functional requirements specify quality attributes and operational constraints of the system:
+
+These non-functional requirements ensure the system'€™s robustness, adaptability, and user-centered design, complementing the functional capabilities described above.
+
+\subsubsection{3.4 System Evaluation and Validation Criteria}
+
+\subsubsection{This section defines the evaluation and validation criteria derived directly from the identified business, user, and system requirements. These criteria establish a structured basis for assessing whether the proposed framework meets its intended objectives. In accordance with IEEE practices, the criteria are specified at a high level and are used later to guide system validation and performance evaluation, without presenting implementation results at this stage.}
+
+\subsubsection{The evaluation criteria are grouped into functional effectiveness, performance efficiency, risk and security impact, and usability and collaboration.}
+
+\paragraph{3.4.1 Functional Validation Criteria}
+
+\subsubsection{These criteria evaluate the system'€™s ability to fulfill its intended functional requirements:}
+
+\subsubsection{Threat-to-Test Mapping Accuracy: The system shall correctly map identified threat scenarios to relevant penetration testing techniques and attack vectors.}
+
+\subsubsection{Threat Coverage: The system shall ensure that all high-risk threats identified during threat modeling are addressed through corresponding penetration tests.}
+
+\subsubsection{Traceability: The system shall maintain clear traceability between assets, threats, vulnerabilities, test cases, and mitigation strategies.}
+
+\subsubsection{Automation Effectiveness: The system shall reduce reliance on manual configuration during threat analysis and penetration testing activities.}
+
+\paragraph{3.4.2 Performance and Efficiency Criteria}
+
+\subsubsection{These criteria assess the operational efficiency of the proposed framework:}
+
+\subsubsection{Time Efficiency: The system shall reduce the time required to plan and execute security assessments compared to traditional isolated approaches.}
+
+\subsubsection{Responsiveness: The system shall update threat models and risk scores promptly following penetration testing activities or threat intelligence updates.}
+
+\subsubsection{Scalability Support: The system shall handle increasing numbers of assets, threats, and test cases without significant degradation in performance.}
+
+\paragraph{3.4.3 Risk and Security Effectiveness Criteria}
+
+\subsubsection{These criteria measure the system'€™s effectiveness in supporting risk-driven security decision-making:}
+
+\subsubsection{Risk Prioritization Accuracy: The system shall correctly prioritize threats and vulnerabilities based on impact, likelihood, and exploitability.}
+
+\subsubsection{Adaptive Risk Management: The system shall demonstrate the ability to adapt to emerging threats through continuous feedback and threat intelligence integration.}
+
+\subsubsection{Improved Risk Visibility: The system shall provide clear and actionable visual representations of risk levels to support informed security decisions.}
+
+\paragraph{3.4.4 Usability and Collaboration Criteria}
+
+\subsubsection{These criteria evaluate how effectively the system supports user interaction and teamwork:}
+
+\subsubsection{Ease of Use: The system shall provide intuitive interfaces that allow users to perform core security tasks with minimal training.}
+
+\subsubsection{Collaboration Support: The system shall facilitate effective collaboration through shared documentation, notifications, and role-based access control mechanisms.}
+
+\subsubsection{Report Clarity: The system shall generate clear, structured, and understandable reports suitable for both technical and non-technical stakeholders.}
+
+\subsubsection{3.5 Chapter Summary}
+
+This chapter presented an integrated requirements analysis aligned with the project proposal and research gaps. It justified the adoption of the Agile'€“Scrum methodology and defined the business, user, and system requirements that guide the system design and implementation discussed in the subsequent chapters.
+
+\begin{table}[H]
+\centering
+\small
+\begin{tabularx}{\textwidth}{|l|l|X|}
+\hline
+Sprint & Duration & Key Activities / Deliverables \\
+\hline\hline
+Sprint 1 & Weeks 1'€“3 & Requirements elicitation, initial system architecture design, STRIDE-based threat modeling, backlog prioritization \\
+\hline
+Sprint 2 & Weeks 4'€“6 & Core threat modeling and automated threat mapping to attack patterns (MITRE ATT\&CK, CAPEC) \\
+\hline
+Sprint 3 & Weeks 7'€“9 & Penetration testing integration (OWASP ZAP, Nmap) and initial automation workflows \\
+\hline
+Sprint 4 & Weeks 10'€“12 & Continuous feedback loops implementation to update threat models and risk scores \\
+\hline
+Sprint 5 & Weeks 13'€“15 & Risk visualization dashboards, comprehensive reporting mechanisms, final system refinement \\
+\hline
+\end{tabularx}
+\caption{Table from document}
+\end{table}
+
+\begin{table}[H]
+\centering
+\small
+\begin{tabularx}{\textwidth}{|l|X|}
+\hline
+Role & Description / Responsibilities \\
+\hline\hline
+Security Analyst & Creates and maintains threat models, analyzes risk scores, and monitors continuous threat intelligence updates. \\
+\hline
+Penetration Tester & Executes penetration testing activities, validates vulnerabilities, and provides feedback to update threat models. \\
+\hline
+Developer & Reviews identified vulnerabilities, implements fixes, and integrates mitigations into the system design. \\
+\hline
+System Architect & Ensures that system design aligns with security requirements, evaluates architectural risks, and reviews threat model scenarios. \\
+\hline
+Compliance Stakeholder & Reviews security assessment reports to ensure regulatory and organizational compliance, and monitors adherence to security policies. \\
+\hline
+\end{tabularx}
+\caption{Table from document}
+\end{table}
+
+\begin{table}[H]
+\centering
+\small
+\begin{tabularx}{\textwidth}{|l|X|l|}
+\hline
+UFR ID & Requirement & Primary User Role(s) \\
+\hline\hline
+UFR-1 & The system shall allow users to create, edit, and version-control threat models using STRIDE and DFD techniques. & Security Analyst, System Architect \\
+\hline
+UFR-2 & The system shall automatically map identified threats to corresponding penetration testing techniques and tools. & Security Analyst, Penetration Tester \\
+\hline
+UFR-3 & The system shall dynamically adjust testing scope based on system changes and emerging threats. & Penetration Tester, Security Analyst \\
+\hline
+UFR-4 & The system shall provide a centralized repository for storing threat models, testing results, and mitigation actions. & All Roles \\
+\hline
+UFR-5 & The system shall present interactive risk visualizations (e.g., heatmaps, matrices) to support prioritization. & Security Analyst, System Architect, Compliance Stakeholder \\
+\hline
+UFR-6 & The system shall automatically update threat models based on penetration testing outcomes. & Security Analyst, Penetration Tester \\
+\hline
+UFR-7 & The system shall support collaborative features such as shared access, notifications, and role-based permissions. & All Roles \\
+\hline
+UFR-8 & The system shall generate comprehensive security assessment reports for technical and non-technical stakeholders. & Compliance Stakeholder, Security Analyst \\
+\hline
+UFR-9 & The system shall ingest threat intelligence from standardized feeds (e.g., STIX/TAXII) to enrich analysis. & Security Analyst \\
+\hline
+UFR-10 & The system shall support safe simulation environments for controlled penetration testing. & Penetration Tester, Security Analyst \\
+\hline
+\end{tabularx}
+\caption{Table from document}
+\end{table}
+
+\begin{table}[H]
+\centering
+\small
+\begin{tabularx}{\textwidth}{|l|X|l|}
+\hline
+SFR ID & Requirement & Primary User Role \\
+\hline\hline
+SFR-1 & The system shall provide a threat modeling engine supporting STRIDE-based classification and asset mapping. & Security Analyst, System Architect \\
+\hline
+SFR-2 & The system shall automate penetration testing execution using integrated tools (e.g., OWASP ZAP, Nmap, Metasploit). & Penetration Tester \\
+\hline
+SFR-3 & The system shall integrate external threat intelligence and correlate it with internal assets. & Security Analyst, System Architect \\
+\hline
+SFR-4 & The system shall automate threat-to-test mapping and dynamic scoping. & Security Analyst, Penetration Tester \\
+\hline
+SFR-5 & The system shall implement a continuous feedback loop to refine threat models and risk scores. & Security Analyst, Penetration Tester \\
+\hline
+SFR-6 & The system shall generate visual dashboards and structured security reports for decision-making. & Security Analyst, System Architect, Compliance Stakeholder \\
+\hline
+SFR-7 & The system shall maintain secure, traceable storage of all security artifacts. & All Roles \\
+\hline
+SFR-8 & The system shall support virtualized or containerized testing environments. & Penetration Tester, Security Analyst \\
+\hline
+\end{tabularx}
+\caption{Table from document}
+\end{table}
+
+\begin{table}[H]
+\centering
+\small
+\begin{tabularx}{\textwidth}{|l|l|}
+\hline
+Attribute & Requirement \\
+\hline\hline
+Performance & The system shall process threat analysis and testing results within acceptable response times suitable for continuous monitoring. \\
+\hline
+Scalability & The system shall support growth in assets, threats, and testing tools without requiring major architectural changes. \\
+\hline
+Reliability & The system shall ensure consistent operation, accurate data correlation, and availability of security artifacts. \\
+\hline
+Security & The system shall protect data confidentiality, integrity, and availability using encryption, authentication, and access controls. \\
+\hline
+Usability & The system shall provide intuitive interfaces, clear visualizations, and user-friendly navigation. \\
+\hline
+Maintainability & The system shall support modular updates, integration of new intelligence sources, and efficient debugging or enhancements. \\
+\hline
+Portability & The system shall be deployable across multiple platforms and environments, including local, virtualized, and cloud setups. \\
+\hline
+\end{tabularx}
+\caption{Table from document}
+\end{table}
+
+

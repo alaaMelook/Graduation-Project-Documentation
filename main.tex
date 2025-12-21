@@ -1,0 +1,71 @@
+\documentclass[12pt,a4paper]{report}
+\input{preamble}
+\begin{document}
+
+% ============= Cover Page =============
+\begin{titlepage}
+    \centering
+    \vspace*{1cm}
+    
+    {\LARGE\bfseries Faculty of Computers and Data Science \\[0.5cm]}
+    {\Large Alexandria National University\\[2cm]}
+    
+    {\Huge\bfseries Integration of Penetration Testing and Threat Modeling for Continuous Monitoring\\[0.5cm]}
+    {\Large TIBSA Platform\\[2cm]}
+    
+    {\large\bfseries A Graduation Project Submitted to\\
+    The Department of Cybersecurity\\[1cm]}
+    
+    {\large\bfseries In Partial Fulfillment of the Requirements for\\
+    Bachelor Degree in Cybersecurity\\[2cm]}
+    
+    {\large\bfseries Prepared by:}\\[0.5cm]
+    \begin{tabular}{ll}
+        Nadine Rasmy Soliman & 2205203 \\
+        Alaa Hassan Melook & 2205214 \\
+        Yumna Medhat Anter & 2205231 \\
+        Rana Ashraf Abdelaziz & 2205019 \\
+        Mahmoud Amr Zaghloula & 2205055 \\
+        Abdelrahman Hisham Elmoghazy & 2205032 \\
+    \end{tabular}
+    
+    \vfill
+    
+    {\large\bfseries Supervised by:\\[0.3cm]}
+    {\Large Dr. Essam Shabaan\\[1cm]}
+    
+    {\large Academic Year: 2025-2026}
+    
+\end{titlepage}
+
+% Front matter inputs
+\input{frontmatter/abstract}
+\input{frontmatter/acknowledgments}
+
+% ============= Table of Contents =============
+\tableofcontents
+\newpage
+
+% ============= List of Figures =============
+\listoffigures
+\addcontentsline{toc}{chapter}{List of Figures}
+\newpage
+
+% ============= List of Tables =============
+\listoftables
+\addcontentsline{toc}{chapter}{List of Tables}
+\newpage
+
+\input{frontmatter/abbreviations}
+
+% Chapter inputs
+\input{chapters/chapter1}
+\input{chapters/chapter2}
+\input{chapters/chapter3}
+\input{chapters/chapter4}
+\input{chapters/chapter5}
+
+% References
+\input{backmatter/references}
+
+\end{document}

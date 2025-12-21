@@ -1,0 +1,187 @@
+\babel@toc {english}{}\relax 
+\contentsline {chapter}{Abstract}{1}{chapter*.1}%
+\contentsline {chapter}{Acknowledgments}{2}{chapter*.2}%
+\contentsline {chapter}{List of Figures}{3}{chapter*.2}%
+\contentsline {chapter}{List of Tables}{4}{chapter*.2}%
+\contentsline {chapter}{List of Abbreviations}{5}{chapter*.3}%
+\contentsline {chapter}{\numberline {1}Introduction}{6}{chapter.1}%
+\contentsline {section}{\numberline {1.1}Project proposal}{7}{section.1.1}%
+\contentsline {subsection}{\numberline {1.1.1}Integration of penetration testing and threat modelling for continuous monitoring}{7}{subsection.1.1.1}%
+\contentsline {section}{\numberline {1.2}Supervised by:}{7}{section.1.2}%
+\contentsline {subsection}{\numberline {1.2.1}Dr. Essam Shabaan}{7}{subsection.1.2.1}%
+\contentsline {paragraph}{Submitted by:}{7}{section*.5}%
+\contentsline {section}{\numberline {1.3}Department:}{7}{section.1.3}%
+\contentsline {subsection}{\numberline {1.3.1}Cybersecurity Department}{7}{subsection.1.3.1}%
+\contentsline {section}{\numberline {1.4}Academic Year:}{7}{section.1.4}%
+\contentsline {subsection}{\numberline {1.4.1}2025 / 2026}{7}{subsection.1.4.1}%
+\contentsline {section}{\numberline {1.5}TABLE OF CONTENT}{7}{section.1.5}%
+\contentsline {section}{\numberline {1.6}Abstract}{7}{section.1.6}%
+\contentsline {section}{\numberline {1.7}Introduction}{8}{section.1.7}%
+\contentsline {section}{\numberline {1.8}Problem statement}{8}{section.1.8}%
+\contentsline {section}{\numberline {1.9}Motivation}{9}{section.1.9}%
+\contentsline {subsection}{\numberline {1.9.1}This integration allows security teams to:}{9}{subsection.1.9.1}%
+\contentsline {section}{\numberline {1.10}Project Objectives}{9}{section.1.10}%
+\contentsline {section}{\numberline {1.11}Expected Solutions}{9}{section.1.11}%
+\contentsline {subsubsection}{1- Threat-Driven Testing Framework}{9}{section*.6}%
+\contentsline {subsubsection}{2- Automated Threat Mapping}{9}{section*.7}%
+\contentsline {subsubsection}{3- Dynamic Scope Definition}{10}{section*.8}%
+\contentsline {subsubsection}{4- Centralized Documentation}{10}{section*.9}%
+\contentsline {subsubsection}{5- Risk Prioritization and Visualization}{10}{section*.10}%
+\contentsline {subsubsection}{6- Continuous Feedback and Improvement Loop}{10}{section*.11}%
+\contentsline {subsubsection}{7- Collaboration and Role Integration}{10}{section*.12}%
+\contentsline {subsubsection}{8- Comprehensive Reporting}{10}{section*.13}%
+\contentsline {section}{\numberline {1.12}System Scope}{10}{section.1.12}%
+\contentsline {section}{\numberline {1.13}Out of Scope}{11}{section.1.13}%
+\contentsline {subsection}{\numberline {1.13.1}Malware Analyzer}{11}{subsection.1.13.1}%
+\contentsline {subsection}{\numberline {1.13.2}URL Analysis}{11}{subsection.1.13.2}%
+\contentsline {subsection}{\numberline {1.13.3}IP Analysis}{11}{subsection.1.13.3}%
+\contentsline {subsection}{\numberline {1.13.4}Port Scanner}{11}{subsection.1.13.4}%
+\contentsline {subsection}{\numberline {1.13.5}Hash Analyzer}{11}{subsection.1.13.5}%
+\contentsline {subsection}{\numberline {1.13.6}Password Strength Checker}{11}{subsection.1.13.6}%
+\contentsline {section}{\numberline {1.14}Expected Outcomes}{11}{section.1.14}%
+\contentsline {section}{\numberline {1.15}Conclusion}{12}{section.1.15}%
+\contentsline {chapter}{\numberline {2}Literature Review}{13}{chapter.2}%
+\contentsline {section}{\numberline {2.1}Introduction}{13}{section.2.1}%
+\contentsline {section}{\numberline {2.2}Foundational Threat Modeling Approaches}{13}{section.2.2}%
+\contentsline {section}{\numberline {2.3}Automated and AI-Enhanced Threat Modeling}{14}{section.2.3}%
+\contentsline {section}{\numberline {2.4}Integration of Threat Modeling with Penetration Testing}{14}{section.2.4}%
+\contentsline {section}{\numberline {2.5}Research Gap}{15}{section.2.5}%
+\contentsline {section}{\numberline {2.6}Available Solutions Analysis}{15}{section.2.6}%
+\contentsline {subsection}{\numberline {2.6.1}Commercial Solutions}{15}{subsection.2.6.1}%
+\contentsline {subsection}{\numberline {2.6.2}Open-Source Solutions}{15}{subsection.2.6.2}%
+\contentsline {subsection}{\numberline {2.6.3}Gap Analysis}{16}{subsection.2.6.3}%
+\contentsline {section}{\numberline {2.7}Tools Background}{16}{section.2.7}%
+\contentsline {subsection}{\numberline {2.7.1}Threat Modeling Frameworks}{16}{subsection.2.7.1}%
+\contentsline {subsection}{\numberline {2.7.2}Penetration Testing Tools}{16}{subsection.2.7.2}%
+\contentsline {subsection}{\numberline {2.7.3}Vulnerability Assessment Tools}{17}{subsection.2.7.3}%
+\contentsline {subsection}{\numberline {2.7.4}Integration Frameworks}{17}{subsection.2.7.4}%
+\contentsline {subsection}{\numberline {2.7.5}AI and ML Tools}{17}{subsection.2.7.5}%
+\contentsline {subsection}{\numberline {2.7.6}Threat Intelligence Platforms}{17}{subsection.2.7.6}%
+\contentsline {subsection}{\numberline {2.7.7}Virtualization Technologies}{18}{subsection.2.7.7}%
+\contentsline {section}{\numberline {2.8}Summary}{18}{section.2.8}%
+\contentsline {chapter}{\numberline {3}Requirements Analysis}{19}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Chapter Overview}{19}{section.3.1}%
+\contentsline {subsubsection}{3.1 Business Requirements Identification}{19}{section*.14}%
+\contentsline {paragraph}{3.1.1 Software Development Methodology}{20}{section*.15}%
+\contentsline {paragraph}{3.1.2 Justification for Scrum Selection}{20}{section*.16}%
+\contentsline {paragraph}{3.1.3 Scrum-Based Development Plan}{21}{section*.17}%
+\contentsline {subsubsection}{3.2 User Functional Requirements}{21}{section*.18}%
+\contentsline {paragraph}{3.2.1 User Roles}{21}{section*.19}%
+\contentsline {paragraph}{3.2.2 Functional Requirements}{21}{section*.20}%
+\contentsline {subsubsection}{3.3 System Functional and Non-Functional Requirements}{21}{section*.21}%
+\contentsline {paragraph}{3.3.1 System Functional Requirements}{21}{section*.22}%
+\contentsline {paragraph}{3.3.2 Non-Functional Requirements}{21}{section*.23}%
+\contentsline {subsubsection}{3.4 System Evaluation and Validation Criteria}{22}{section*.24}%
+\contentsline {subsubsection}{This section defines the evaluation and validation criteria derived directly from the identified business, user, and system requirements. These criteria establish a structured basis for assessing whether the proposed framework meets its intended objectives. In accordance with IEEE practices, the criteria are specified at a high level and are used later to guide system validation and performance evaluation, without presenting implementation results at this stage.}{22}{section*.25}%
+\contentsline {subsubsection}{The evaluation criteria are grouped into functional effectiveness, performance efficiency, risk and security impact, and usability and collaboration.}{22}{section*.26}%
+\contentsline {paragraph}{3.4.1 Functional Validation Criteria}{22}{section*.27}%
+\contentsline {subsubsection}{These criteria evaluate the system'€™s ability to fulfill its intended functional requirements:}{22}{section*.28}%
+\contentsline {subsubsection}{Threat-to-Test Mapping Accuracy: The system shall correctly map identified threat scenarios to relevant penetration testing techniques and attack vectors.}{22}{section*.29}%
+\contentsline {subsubsection}{Threat Coverage: The system shall ensure that all high-risk threats identified during threat modeling are addressed through corresponding penetration tests.}{22}{section*.30}%
+\contentsline {subsubsection}{Traceability: The system shall maintain clear traceability between assets, threats, vulnerabilities, test cases, and mitigation strategies.}{22}{section*.31}%
+\contentsline {subsubsection}{Automation Effectiveness: The system shall reduce reliance on manual configuration during threat analysis and penetration testing activities.}{22}{section*.32}%
+\contentsline {paragraph}{3.4.2 Performance and Efficiency Criteria}{22}{section*.33}%
+\contentsline {subsubsection}{These criteria assess the operational efficiency of the proposed framework:}{22}{section*.34}%
+\contentsline {subsubsection}{Time Efficiency: The system shall reduce the time required to plan and execute security assessments compared to traditional isolated approaches.}{22}{section*.35}%
+\contentsline {subsubsection}{Responsiveness: The system shall update threat models and risk scores promptly following penetration testing activities or threat intelligence updates.}{22}{section*.36}%
+\contentsline {subsubsection}{Scalability Support: The system shall handle increasing numbers of assets, threats, and test cases without significant degradation in performance.}{22}{section*.37}%
+\contentsline {paragraph}{3.4.3 Risk and Security Effectiveness Criteria}{22}{section*.38}%
+\contentsline {subsubsection}{These criteria measure the system'€™s effectiveness in supporting risk-driven security decision-making:}{23}{section*.39}%
+\contentsline {subsubsection}{Risk Prioritization Accuracy: The system shall correctly prioritize threats and vulnerabilities based on impact, likelihood, and exploitability.}{23}{section*.40}%
+\contentsline {subsubsection}{Adaptive Risk Management: The system shall demonstrate the ability to adapt to emerging threats through continuous feedback and threat intelligence integration.}{23}{section*.41}%
+\contentsline {subsubsection}{Improved Risk Visibility: The system shall provide clear and actionable visual representations of risk levels to support informed security decisions.}{23}{section*.42}%
+\contentsline {paragraph}{3.4.4 Usability and Collaboration Criteria}{23}{section*.43}%
+\contentsline {subsubsection}{These criteria evaluate how effectively the system supports user interaction and teamwork:}{23}{section*.44}%
+\contentsline {subsubsection}{Ease of Use: The system shall provide intuitive interfaces that allow users to perform core security tasks with minimal training.}{23}{section*.45}%
+\contentsline {subsubsection}{Collaboration Support: The system shall facilitate effective collaboration through shared documentation, notifications, and role-based access control mechanisms.}{23}{section*.46}%
+\contentsline {subsubsection}{Report Clarity: The system shall generate clear, structured, and understandable reports suitable for both technical and non-technical stakeholders.}{23}{section*.47}%
+\contentsline {subsubsection}{3.5 Chapter Summary}{23}{section*.48}%
+\contentsline {chapter}{\numberline {4}System Design}{28}{chapter.4}%
+\contentsline {section}{\numberline {4.1}TIBSA Platform - Complete Architecture with Tools Integration}{29}{section.4.1}%
+\contentsline {subsection}{\numberline {4.1.1}Table of Contents}{30}{subsection.4.1.1}%
+\contentsline {subsection}{\numberline {4.1.2}LAYER 1 - User Layer}{30}{subsection.4.1.2}%
+\contentsline {subsubsection}{1.1 Security Analyst Console}{31}{section*.56}%
+\contentsline {subsubsection}{1.2 Client Logic Module}{31}{section*.57}%
+\contentsline {subsubsection}{1.3 Customer Browser Interfaces}{31}{section*.58}%
+\contentsline {subsubsection}{1.4 Client-Side Security Controls}{32}{section*.59}%
+\contentsline {subsection}{\numberline {4.1.3}LAYER 2 - Edge Layer}{33}{subsection.4.1.3}%
+\contentsline {subsubsection}{2.1 CDN (Content Delivery Network)}{33}{section*.61}%
+\contentsline {subsubsection}{2.2 WAF (Web Application Firewall)}{33}{section*.62}%
+\contentsline {subsubsection}{2.3 DDoS Protection}{34}{section*.63}%
+\contentsline {subsubsection}{2.4 TLS Termination}{34}{section*.64}%
+\contentsline {subsubsection}{2.5 Load Balancer}{35}{section*.65}%
+\contentsline {subsubsection}{2.6 Bot Detection Engine}{35}{section*.66}%
+\contentsline {subsection}{\numberline {4.1.4}LAYER 3 - Frontend Layer}{36}{subsection.4.1.4}%
+\contentsline {subsubsection}{3.1 Frontend Framework \& UI Components}{36}{section*.68}%
+\contentsline {subsubsection}{3.2 Frontend Security Controls}{37}{section*.69}%
+\contentsline {subsubsection}{3.3 Frontend Logic Layer}{38}{section*.70}%
+\contentsline {subsubsection}{3.4 File Upload Handler}{39}{section*.71}%
+\contentsline {subsection}{\numberline {4.1.5}LAYER 4 - API Engine}{40}{subsection.4.1.5}%
+\contentsline {subsubsection}{4.1 API Gateway}{40}{section*.73}%
+\contentsline {subsubsection}{4.2 Authentication \& Authorization Service}{41}{section*.74}%
+\contentsline {subsection}{\numberline {4.1.6}LAYER 5 - Backend Services}{42}{subsection.4.1.6}%
+\contentsline {subsubsection}{5.1 User Service}{42}{section*.76}%
+\contentsline {subsubsection}{5.2 Scan Service}{43}{section*.77}%
+\contentsline {subsubsection}{5.3 Threat Intelligence Service}{43}{section*.78}%
+\contentsline {subsubsection}{5.4 Billing Service}{44}{section*.79}%
+\contentsline {subsubsection}{5.5 Notification Service}{45}{section*.80}%
+\contentsline {subsubsection}{5.6 ML Engine}{46}{section*.81}%
+\contentsline {subsubsection}{5.7 Sandbox (Dynamic Malware Analysis)}{47}{section*.82}%
+\contentsline {subsubsection}{5.8 Threat Modeling Engine (TIBSA Core)}{48}{section*.83}%
+\contentsline {subsubsection}{5.9 Background Jobs \& Workflow Queue}{49}{section*.84}%
+\contentsline {subsection}{\numberline {4.1.7}LAYER 6 - Data Storage Layer}{50}{subsection.4.1.7}%
+\contentsline {subsubsection}{6.1 Relational Database (Postgres)}{50}{section*.86}%
+\contentsline {subsubsection}{6.2 Cache \& Queue (Redis)}{51}{section*.87}%
+\contentsline {subsubsection}{6.3 Object Storage (S3-compatible)}{51}{section*.88}%
+\contentsline {subsubsection}{6.4 Audit Logs Storage}{52}{section*.89}%
+\contentsline {subsubsection}{6.5 ML Features Database}{53}{section*.90}%
+\contentsline {subsubsection}{6.6 Scan Results Database}{53}{section*.91}%
+\contentsline {subsection}{\numberline {4.1.8}LAYER 7 - Monitoring \& Threat Analysis}{54}{subsection.4.1.8}%
+\contentsline {subsubsection}{7.1 SIEM (Security Information and Event Management)}{54}{section*.93}%
+\contentsline {subsubsection}{7.2 Alert Engine}{55}{section*.94}%
+\contentsline {subsubsection}{7.3 Threat Dashboard}{55}{section*.95}%
+\contentsline {subsubsection}{7.4 Observability Stack (Monitoring, Metrics, Logs)}{56}{section*.96}%
+\contentsline {subsubsection}{7.5 Notification Dispatcher}{57}{section*.97}%
+\contentsline {subsection}{\numberline {4.1.9}LAYER 8 - TIBSA Suite (Core)}{58}{subsection.4.1.9}%
+\contentsline {subsubsection}{8.1 TIBSA Suite - Level 1 (Absolute Core)}{58}{section*.99}%
+\contentsline {subsection}{\numberline {4.1.10}Complete Data Flow Map}{60}{subsection.4.1.10}%
+\contentsline {subsubsection}{Flow 1: User Authentication \& Session Management}{60}{section*.100}%
+\contentsline {subsubsection}{Flow 2: File Upload \& Malware Analysis}{60}{section*.101}%
+\contentsline {subsubsection}{Flow 3: URL Phishing Detection}{61}{section*.102}%
+\contentsline {subsubsection}{Flow 4: Threat Modeling Workflow}{61}{section*.103}%
+\contentsline {subsubsection}{Flow 5: Background Job Processing}{61}{section*.104}%
+\contentsline {subsubsection}{Flow 6: Security Monitoring \& Alerting}{62}{section*.105}%
+\contentsline {subsubsection}{Flow 7: Metrics \& Performance Monitoring}{62}{section*.106}%
+\contentsline {subsubsection}{Flow 8: Threat Intelligence Enrichment}{62}{section*.107}%
+\contentsline {subsubsection}{Flow 9: Billing \& Subscription Management}{63}{section*.108}%
+\contentsline {subsubsection}{Flow 10: Audit \& Compliance Logging}{63}{section*.109}%
+\contentsline {subsection}{\numberline {4.1.11}Summary of Tool Distribution by Layer}{63}{subsection.4.1.11}%
+\contentsline {subsubsection}{Layer 1 - User Layer}{63}{section*.110}%
+\contentsline {subsubsection}{Layer 2 - Edge Layer}{63}{section*.111}%
+\contentsline {subsubsection}{Layer 3 - Frontend Layer}{64}{section*.112}%
+\contentsline {subsubsection}{Layer 4 - API Engine}{64}{section*.113}%
+\contentsline {subsubsection}{Layer 5 - Backend Services}{64}{section*.114}%
+\contentsline {subsubsection}{Layer 6 - Data Storage}{64}{section*.115}%
+\contentsline {subsubsection}{Layer 7 - Monitoring \& Security}{64}{section*.116}%
+\contentsline {subsubsection}{Layer 8 - TIBSA Core}{64}{section*.117}%
+\contentsline {subsection}{\numberline {4.1.12}Key Integration Points Summary}{65}{subsection.4.1.12}%
+\contentsline {subsection}{\numberline {4.1.13}Scenarios}{67}{subsection.4.1.13}%
+\contentsline {subsection}{\numberline {4.1.14}Login Screen}{67}{subsection.4.1.14}%
+\contentsline {subsubsection}{Registration Screen}{69}{section*.119}%
+\contentsline {subsubsection}{Main Dashboard}{71}{section*.121}%
+\contentsline {subsubsection}{Available Antivirus Engines}{73}{section*.123}%
+\contentsline {subsubsection}{Update Antivirus Database}{75}{section*.125}%
+\contentsline {subsubsection}{Add \& Manage AV Engines}{77}{section*.127}%
+\contentsline {subsubsection}{File Upload \& Scan Request}{79}{section*.129}%
+\contentsline {subsection}{\numberline {4.1.15}Multiple File Scan}{82}{subsection.4.1.15}%
+\contentsline {subsubsection}{Scan Results Overview}{84}{section*.132}%
+\contentsline {subsection}{\numberline {4.1.16}Detailed File Information}{87}{subsection.4.1.16}%
+\contentsline {subsection}{\numberline {4.1.17}Scan Report Sharing}{90}{subsection.4.1.17}%
+\contentsline {subsection}{\numberline {4.1.18}Scan URL}{93}{subsection.4.1.18}%
+\contentsline {subsection}{\numberline {4.1.19}User Profile}{96}{subsection.4.1.19}%
+\contentsline {subsection}{\numberline {4.1.20}System Settings}{99}{subsection.4.1.20}%
+\contentsline {subsection}{\numberline {4.1.21}Help \& Support Screen}{102}{subsection.4.1.21}%
+\contentsline {subsection}{\numberline {4.1.22}Conclusion}{103}{subsection.4.1.22}%
+\contentsline {chapter}{\numberline {5}Conclusion and Future Work}{104}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Summary}{104}{section.5.1}%
+\contentsline {section}{\numberline {5.2}Future Work}{104}{section.5.2}%
