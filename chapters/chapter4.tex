@@ -552,7 +552,12 @@ The authentication flow moves from Cloudflare through Next.js to KrakenD to Auth
 
 
 \clearpage
-\section{Use Case Diagram Design}
+
+\section{System Modeling Diagrams}
+
+This section presents the system modeling diagrams that provide comprehensive views of the TIBSA platform from multiple perspectives. The diagrams follow standard UML (Unified Modeling Language) notation and database modeling conventions to ensure clarity and industry compliance. Together, these diagrams illustrate the behavioral aspects (Use Case and Sequence diagrams) and structural aspects (Class Diagram and ERD) of the system, providing a complete foundation for implementation and future development.
+
+\subsection{Use Case Diagram Design}
 
 This section presents the simplified Use Case Diagram of the Threat-Analyzer Multi-AV Scanning System. The diagram provides a high-level behavioral view of the system, focusing on the primary interactions between users, administrators, and core system functionalities. The design intentionally emphasizes clarity and readability by consolidating related functionalities into a reduced set of use cases while preserving the essential system behavior.
 
@@ -565,7 +570,7 @@ The simplified representation ensures that the diagram remains understandable an
 \label{fig:usecase_diagram}
 \end{figure}
 
-\subsection{Actors Overview}
+\subsubsection{Actors Overview}
 
 The system defines two main actors that interact directly with the platform:
 
@@ -575,7 +580,7 @@ The system defines two main actors that interact directly with the platform:
 
 In addition to the primary actors, the system interacts with external actors to support core functionality, including antivirus engines, email services, and external authentication providers.
 
-\subsection{User Use Cases}
+\subsubsection{User Use Cases}
 
 User use cases describe the primary functional capabilities available to authenticated users.
 
@@ -591,7 +596,7 @@ User use cases describe the primary functional capabilities available to authent
 
 \textbf{Manage Preferences}: This use case allows users to configure personal settings such as notification preferences, scan behavior options, and interface customization.
 
-\subsection{Administrative Use Cases}
+\subsubsection{Administrative Use Cases}
 
 Administrative use cases represent system-level operations required to maintain platform reliability and effectiveness.
 
@@ -603,23 +608,23 @@ Administrative use cases represent system-level operations required to maintain 
 
 \textbf{Manage Users}: This use case provides administrative control over user accounts, including role management and access control.
 
-\subsection{Use Case Relationships}
+\subsubsection{Use Case Relationships}
 
 The simplified Use Case Diagram employs limited but essential relationships to maintain clarity.
 
-\subsubsection{Include Relationships}
+\paragraph{Include Relationships}
 
 The Submit Scan Request use case includes the Start Scan operation, indicating that scanning is a mandatory step once a scan request is submitted.
 
 The Generate \& Share Report use case includes Send Report via Email, reflecting that email delivery is an integral part of the report sharing process.
 
-\subsubsection{Extend Relationships}
+\paragraph{Extend Relationships}
 
 The Authenticate use case is extended by Social Login, representing an optional authentication mechanism that supplements standard login credentials.
 
 These relationships reduce redundancy while clearly defining mandatory and optional system behaviors.
 
-\subsection{External System Interactions}
+\subsubsection{External System Interactions}
 
 The platform interacts with several external systems to fulfill its functionality:
 
@@ -633,11 +638,18 @@ These interactions enhance system extensibility and integration without increasi
 
 \clearpage
 
-\section{Sequence Diagram}
+\subsection{Sequence Diagram}
 
 This section presents the Sequence Diagram of the TIBSA platform, which illustrates the dynamic behavior of the system by modeling the interactions between key components over time. The sequence diagram provides a chronological view of how different system elements collaborate to fulfill core operations such as user authentication and file scanning workflows. By visualizing these message exchanges, the diagram clarifies the temporal ordering of operations, the responsibilities of each layer, and the communication protocols that ensure secure and efficient data processing throughout the platform.
 
-\subsection{System Components}
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.9\textwidth]{media/sequance diagram.png}
+\caption{TIBSA Platform - System Sequence Diagram}
+\label{fig:sequence_diagram}
+\end{figure}
+
+\subsubsection{System Components}
 
 The sequence diagram identifies five primary system components that participate in the interaction flows:
 
@@ -649,7 +661,7 @@ The sequence diagram identifies five primary system components that participate 
     \item \textbf{Database}: The Neon Serverless Postgres database that stores user data, scan results, threat models, and system configuration.
 \end{itemize}
 
-\subsection{Authentication Flow}
+\subsubsection{Authentication Flow}
 
 The first interaction flow demonstrates the user authentication process:
 
@@ -663,7 +675,7 @@ The first interaction flow demonstrates the user authentication process:
 
 This flow ensures secure authentication while maintaining separation of concerns between presentation, routing, and data persistence layers.
 
-\subsection{File Upload and Scanning Flow}
+\subsubsection{File Upload and Scanning Flow}
 
 The second interaction flow illustrates the file upload and security scanning process:
 
@@ -678,14 +690,7 @@ The second interaction flow illustrates the file upload and security scanning pr
 
 This workflow demonstrates the platform's ability to handle file analysis requests efficiently while leveraging multiple security tools for comprehensive threat detection.
 
-\begin{figure}[H]
-\centering
-\includegraphics[width=0.9\textwidth]{media/sequance diagram.png}
-\caption{TIBSA Platform - System Sequence Diagram}
-\label{fig:sequence_diagram}
-\end{figure}
-
-\subsection{Design Considerations}
+\subsubsection{Design Considerations}
 
 The sequence diagram reflects several important design decisions:
 
@@ -698,7 +703,7 @@ The sequence diagram reflects several important design decisions:
 
 \clearpage
 
-\section{Object-Oriented Class Design}
+\subsection{Object-Oriented Class Design}
 
 This section presents the object-oriented class design of the TIBSA platform, illustrating the structural relationships between the system's core components. The design follows established object-oriented principles including encapsulation, inheritance, composition, and aggregation to ensure modularity, maintainability, and extensibility of the codebase. Each class encapsulates specific functionality and data, with well-defined interfaces for interaction with other components.
 
@@ -709,7 +714,7 @@ This section presents the object-oriented class design of the TIBSA platform, il
 \label{fig:class_diagram}
 \end{figure}
 
-\subsection{Core Classes Overview}
+\subsubsection{Core Classes Overview}
 
 The platform's class structure is organized around the following core domain entities that represent the fundamental building blocks of the system:
 
@@ -731,11 +736,11 @@ The platform's class structure is organized around the following core domain ent
 
 \textbf{Detection}: Represents individual detection results from antivirus engines. Attributes include \texttt{detected} boolean flag, \texttt{malwareType} classification, and \texttt{confidence} score indicating detection certainty.
 
-\subsection{Class Relationships}
+\subsubsection{Class Relationships}
 
 The classes within the TIBSA platform exhibit various types of relationships that define how objects interact and collaborate to fulfill system functionality:
 
-\subsubsection{Composition Relationships}
+\paragraph{Composition Relationships}
 
 Composition represents strong ownership where the part cannot exist without the whole:
 
@@ -744,7 +749,7 @@ Composition represents strong ownership where the part cannot exist without the 
     \item \textbf{ThreatModel -- Threat}: A ThreatModel contains multiple identified Threat instances. Threats are created within the context of a specific model and cannot exist independently. Deleting a threat model cascades to remove all associated threats.
 \end{itemize}
 
-\subsubsection{Aggregation Relationships}
+\paragraph{Aggregation Relationships}
 
 Aggregation represents weak ownership where parts can exist independently:
 
@@ -752,7 +757,7 @@ Aggregation represents weak ownership where parts can exist independently:
     \item \textbf{Threat -- Mitigation}: Threats are mitigated by security controls, but mitigations can exist independently and may apply to multiple threats across different threat models. A single mitigation control (e.g., encryption) can address multiple threats simultaneously.
 \end{itemize}
 
-\subsubsection{Association Relationships}
+\paragraph{Association Relationships}
 
 Associations represent general relationships between classes with defined multiplicity:
 
@@ -766,7 +771,7 @@ Associations represent general relationships between classes with defined multip
     \item \textbf{AVEngine -- Detection} (1 to many): Each antivirus engine produces multiple detection records across different scan operations.
 \end{itemize}
 
-\subsection{Design Patterns}
+\subsubsection{Design Patterns}
 
 The class design incorporates several established software design patterns:
 
@@ -778,7 +783,7 @@ The class design incorporates several established software design patterns:
 
 \clearpage
 \clearpage
-\section{Entity-Relationship Diagram (ERD)}
+\subsection{Entity-Relationship Diagram (ERD)}
 
 This section presents the entity-relationship design of the cybersecurity platform, illustrating the structural organization of data and the relationships between the system’s core entities through a comprehensive Entity-Relationship Diagram (ERD). The ERD provides a detailed view of the platform’s database schema, showcasing tables, their attributes, primary and foreign keys, and the associations that connect them. This design follows established database normalization principles to ensure data integrity, consistency, and efficient storage, while also supporting the platform’s functional requirements such as scan management, threat modeling, and mitigation tracking. By mapping entities and their relationships in a structured manner, the ERD forms the foundation for both backend implementation and future scalability of the system.
 
@@ -789,25 +794,25 @@ This section presents the entity-relationship design of the cybersecurity platfo
 \label{fig:erd}
 \end{figure}
 
-\subsection{User Table}
+\subsubsection{User Table}
 The User table stores information about registered users of the cybersecurity platform, serving as the primary entity for user management. Its attributes include \texttt{user\_id}, which uniquely identifies each user, email for communication and login purposes, and timestamps \texttt{created\_at} and \texttt{updated\_at} to track account creation and modifications. Users are responsible for submitting scan requests and creating threat models, forming the basis of the platform’s user-specific operations.
 
-\subsection{Scan\_Request Table}
+\subsubsection{Scan\_Request Table}
 The \texttt{Scan\_Request} table manages individual scan operations initiated by users. Key attributes include \texttt{scan\_id} as the unique identifier, \texttt{user\_id} linking the scan to the submitting user, \texttt{scan\_type} specifying the kind of scan (e.g., file or URL), and \texttt{status} indicating the current state of the scan, such as pending, completed, or failed. This table ensures that every scan is traceable to a user and forms the foundation for subsequent scan results.
 
 
-\subsection{File Table}
+\subsubsection{File Table}
 The File table handles all files submitted for analysis. Its attributes include\texttt{file\_id} as the unique identifier, \texttt{scan\_id} referencing the associated scan request, and \texttt{original\_filename} storing the name of the submitted file. Each file is linked to a specific scan request, allowing the system to track which files are being analyzed in each scanning operation.
 
 
-\subsection{URL Table}
+\subsubsection{URL Table}
 The URL table stores URLs submitted for scanning. It includes \texttt{url\_id}
 as the primary key, \texttt{scan\_id} linking it to the related scan request,
 and \texttt{url} containing the web address being analyzed. This entity
 parallels the File table and provides a structured way to manage web-based
 submissions for threat detection.
 
-\subsection{Scan\_Result Table}
+\subsubsection{Scan\_Result Table}
 The Scan\_Result table captures the outcomes of scan requests, linking back to
 the corresponding Scan\_Request via \texttt{scan\_id}. It contains
 \texttt{result\_id} as the unique identifier, \texttt{verdict} summarizing the
@@ -815,38 +820,38 @@ outcome of the scan, and \texttt{confidence\_score} to indicate the certainty of
 the results. This table allows for detailed tracking of each scan’s outcome and
 supports subsequent analysis by antivirus engines.
 
-\subsection{Antivirus\_Engine Table}
+\subsubsection{Antivirus\_Engine Table}
 The \texttt{Antivirus\_Engine} table maintains information about the antivirus engines utilized for scanning. Its attributes include \texttt{engine\_id} as the unique identifier, \texttt{engine\_name}, \texttt{version}, \texttt{status} to indicate operational readiness, and \texttt{last\_update} for tracking the engine’s current version. Each engine can execute multiple scans and contribute to the overall scan results.
 
 
-\subsection{Engine\_Result Table}
+\subsubsection{Engine\_Result Table}
 The \texttt{Engine\_Result} table records the detection results provided by individual antivirus engines for specific scan results. Its attributes include \texttt{engine\_result\_id} as the unique identifier, \texttt{result\_id} linking to the parent \texttt{Scan\_Result}, \texttt{engine\_id} linking to the responsible \texttt{Antivirus\_Engine}, \texttt{verdict} detailing the engine’s analysis, and \texttt{scan\_time} measuring the duration of the scan. This table allows detailed attribution of detections to individual engines.
 
-\subsection{Threat\_Model Table}
+\subsubsection{Threat\_Model Table}
 The \texttt{Threat\_Model} table represents user-created threat models. Attributes include \texttt{model\_id} as the unique identifier, \texttt{user\_id} linking to the creator, \texttt{model\_name} for the model title, \texttt{architecture\_file\_path} for storing the path to the model file, \texttt{description} providing context, and timestamps \texttt{created\_at} and \texttt{updated\_at}. Each threat model can include multiple system components and identified threats, forming the core structure for threat analysis.
 
-\subsection{System\_Component Table}
+\subsubsection{System\_Component Table}
 The \texttt{System\_Component} table defines individual components within a threat model. Attributes include \texttt{component\_id} as the unique identifier, \texttt{model\_id} referencing the parent threat model, \texttt{component\_name}, \texttt{component\_type}, and \texttt{trust\_boundary} specifying the security zone of the component. This table allows threat models to be structured according to system architecture.
 
-\subsection{Threat Table}
+\subsubsection{Threat Table}
 The \texttt{Threat} table stores threats identified within a threat model. Key attributes include \texttt{threat\_id} as the unique identifier, \texttt{model\_id} linking to the parent threat model, \texttt{category} and \texttt{description} detailing the nature of the threat, \texttt{likelihood} and \texttt{impact} for risk assessment, \texttt{risk\_score} as a calculated metric, and \texttt{status} to indicate whether the threat is active or mitigated. Each threat can be associated with multiple \texttt{Mitigation} entries.
 
-\subsection{Mitigation Table}
+\subsubsection{Mitigation Table}
 The \texttt{Mitigation} table represents the security controls applied to threats. Attributes include \texttt{mitigation\_id} as the unique identifier, \texttt{threat\_id} linking to the associated threat, \texttt{control\_name} describing the mitigation, \texttt{effectiveness}, \texttt{cost}, and \texttt{benefit\_cost\_ratio} for evaluating resource efficiency. This table provides a structured way to manage and track threat countermeasures within the system.
 
-\subsection{Relationships and Cardinality}
+\subsubsection{Relationships and Cardinality}
 
-\subsubsection{Composition Relationships}
+\paragraph{Composition Relationships}
 The \texttt{Scan\_Request} table maintains a composition relationship with both the \texttt{File} and \texttt{URL} tables, indicating that each scan request is composed of a specific file or URL to be analyzed. When a \texttt{Scan\_Request} instance is deleted, the associated \texttt{File} or \texttt{URL} instance is also removed, reflecting the lifecycle dependency between a scan operation and the content being scanned. Similarly, the \texttt{Scan\_Result} table is composed of multiple \texttt{Engine\_Result} instances, representing the outcomes from different antivirus engines. Deletion of a \texttt{Scan\_Result} instance cascades to its related \texttt{Engine\_Result} instances, maintaining the integrity of engine-level scan data.
 
-\subsubsection{Association Relationships}
+\paragraph{Association Relationships}
 The \texttt{User} table is associated with the \texttt{Scan\_Request} table, establishing that users can submit multiple scans while each scan belongs to a single user. The \texttt{User} table is also associated with the \texttt{Threat\_Model} table, allowing users to create and manage multiple threat models, each linked back to the creator for traceability.
 
 The \texttt{Threat\_Model} table associates with both the \texttt{System\_Component} and \texttt{Threat} tables, reflecting that each threat model contains multiple system components and identifies multiple threats. Furthermore, the \texttt{Threat} table is associated with the \texttt{Mitigation} table, establishing that each identified threat may have multiple mitigation controls applied to reduce its risk.
 
 The \texttt{Antivirus\_Engine} table is associated with the \texttt{Engine\_Result} table, indicating that each antivirus engine can generate multiple results for different scan outcomes. The \texttt{Scan\_Request} table is also associated with the \texttt{Scan\_Result} table, enabling the system to link scan submissions with their corresponding results, which can be further enriched by antivirus engines.
 
-\subsubsection{Multiplicity Summary}
+\paragraph{Multiplicity Summary}
 Each \texttt{User} can submit one or more \texttt{Scan\_Request} instances, while each \texttt{Scan\_Request} is linked to exactly one \texttt{User}. Each \texttt{Scan\_Request} is associated with exactly one \texttt{File} or \texttt{URL}. Each \texttt{Scan\_Result} can contain multiple \texttt{Engine\_Result} instances, while each \texttt{Engine\_Result} belongs to exactly one \texttt{Scan\_Result} and is generated by exactly one \texttt{Antivirus\_Engine}.
 
 Each \texttt{User} can create multiple \texttt{Threat\_Model} instances, with each model belonging to exactly one \texttt{User}. Each \texttt{Threat\_Model} can include multiple \texttt{System\_Component} instances and identify multiple \texttt{Threat} instances. Each \texttt{Threat} may have multiple associated \texttt{Mitigation} entries, while each \texttt{Mitigation} is linked to exactly one \texttt{Threat}.
