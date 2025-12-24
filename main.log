@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2025.12.22)  24 DEC 2025 06:06
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2025.12.22)  24 DEC 2025 18:13
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -660,7 +660,7 @@ File: epstopdf-sys.cfg 2021/03/18 v2.0 Configuration of epstopdf for MiKTeX
 \c@lstlisting=\count323
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: End \AtBeginDocument code.
-<media/image1.jpg, id=508, 225.84375pt x 225.84375pt>
+<media/image1.jpg, id=540, 225.84375pt x 225.84375pt>
 File: media/image1.jpg Graphic file (type jpg)
 <use media/image1.jpg>
 Package pdftex.def Info: media/image1.jpg  used on input line 14.
@@ -1390,7 +1390,7 @@ Underfull \hbox (badness 2460) in paragraph at lines 126--126
 
 [35] [36] [37]) (chapters/chapter4.tex [38]
 Chapter 4.
-<media/image1.png, id=1010, 742.775pt x 1182.4175pt>
+<media/image1.png, id=1056, 742.775pt x 1182.4175pt>
 File: media/image1.png Graphic file (type png)
 <use media/image1.png>
 Package pdftex.def Info: media/image1.png  used on input line 10.
@@ -1398,7 +1398,7 @@ Package pdftex.def Info: media/image1.png  used on input line 10.
 [39
 
 ] [40 <./media/image1.png>]
-<media/image2.png, id=1021, 1975.38pt x 2071.74pt>
+<media/image2.png, id=1067, 1975.38pt x 2071.74pt>
 File: media/image2.png Graphic file (type png)
 <use media/image2.png>
 Package pdftex.def Info: media/image2.png  used on input line 24.
@@ -1406,25 +1406,25 @@ Package pdftex.def Info: media/image2.png  used on input line 24.
  [41
 
  <./media/image2.png>] [42]
-<media/image3.png, id=1034, 1493.58pt x 562.1pt>
+<media/image3.png, id=1080, 1493.58pt x 562.1pt>
 File: media/image3.png Graphic file (type png)
 <use media/image3.png>
 Package pdftex.def Info: media/image3.png  used on input line 65.
 (pdftex.def)             Requested size: 362.37569pt x 136.37341pt.
  [43 <./media/image3.png>] [44] [45]
-<media/image4.png, id=1055, 2922.92pt x 1589.94pt>
+<media/image4.png, id=1101, 2922.92pt x 1589.94pt>
 File: media/image4.png Graphic file (type png)
 <use media/image4.png>
 Package pdftex.def Info: media/image4.png  used on input line 122.
 (pdftex.def)             Requested size: 362.37569pt x 197.11656pt.
  [46] [47 <./media/image4.png>] [48] [49] [50]
-<media/image5.png, id=1083, 1654.18pt x 314.17375pt>
+<media/image5.png, id=1129, 1654.18pt x 314.17375pt>
 File: media/image5.png Graphic file (type png)
 <use media/image5.png>
 Package pdftex.def Info: media/image5.png  used on input line 191.
 (pdftex.def)             Requested size: 362.37569pt x 68.82121pt.
  [51 <./media/image5.png>] [52]
-<media/image6.png, id=1095, 3452.9pt x 1397.22pt>
+<media/image6.png, id=1141, 3452.9pt x 1397.22pt>
 File: media/image6.png Graphic file (type png)
 <use media/image6.png>
 Package pdftex.def Info: media/image6.png  used on input line 230.
@@ -1436,7 +1436,7 @@ de-scrip-tions in JSON or YAML
  []
 
 [59] [60]
-<media/image7.png, id=1139, 1622.06pt x 497.86pt>
+<media/image7.png, id=1185, 1622.06pt x 497.86pt>
 File: media/image7.png Graphic file (type png)
 <use media/image7.png>
 Package pdftex.def Info: media/image7.png  used on input line 385.
@@ -1454,7 +1454,7 @@ Overfull \hbox (1.74976pt too wide) in paragraph at lines 436--437
  []
 
 [64]
-<media/image8.png, id=1164, 1365.1pt x 289.08pt>
+<media/image8.png, id=1210, 1365.1pt x 289.08pt>
 File: media/image8.png Graphic file (type png)
 <use media/image8.png>
 Package pdftex.def Info: media/image8.png  used on input line 454.
@@ -1471,7 +1471,7 @@ Overfull \hbox (12.44072pt too wide) in paragraph at lines 515--516
 for se-cu-rity alerts, Prometheus
  []
 
-<media/image9.png, id=1182, 1813.77625pt x 1188.44pt>
+<media/image9.png, id=1228, 1813.77625pt x 1188.44pt>
 File: media/image9.png Graphic file (type png)
 <use media/image9.png>
 Package pdftex.def Info: media/image9.png  used on input line 521.
@@ -1488,266 +1488,290 @@ Overfull \hbox (7.06271pt too wide) in paragraph at lines 538--539
 con-trols in-ven-tory and iden-ti-fied threats
  []
 
-[70] [71]
-<media/class_diagram.jpg, id=1203, 547.0839pt x 225.7233pt>
-File: media/class_diagram.jpg Graphic file (type jpg)
-<use media/class_diagram.jpg>
-Package pdftex.def Info: media/class_diagram.jpg  used on input line 562.
-(pdftex.def)             Requested size: 498.29999pt x 352.08557pt.
+[70] [71] [72
 
-Overfull \hbox (45.33209pt too wide) in paragraph at lines 562--563
- [][] 
- []
-
-File: media/class_diagram.jpg Graphic file (type jpg)
-<use media/class_diagram.jpg>
-Package pdftex.def Info: media/class_diagram.jpg  used on input line 569.
-(pdftex.def)             Requested size: 498.29999pt x 352.08557pt.
-
-Overfull \hbox (45.33209pt too wide) in paragraph at lines 569--570
- [][] 
- []
-
-[72 <./media/class_diagram.jpg>] [73]
+]
+<media/usecase1.jpg, id=1253, 1346.02875pt x 908.39375pt>
+File: media/usecase1.jpg Graphic file (type jpg)
+<use media/usecase1.jpg>
+Package pdftex.def Info: media/usecase1.jpg  used on input line 564.
+(pdftex.def)             Requested size: 452.9679pt x 305.6895pt.
+<media/usecase2.jpg, id=1254, 1346.02875pt x 490.83376pt>
+File: media/usecase2.jpg Graphic file (type jpg)
+<use media/usecase2.jpg>
+Package pdftex.def Info: media/usecase2.jpg  used on input line 571.
+(pdftex.def)             Requested size: 452.9679pt x 165.17366pt.
+<media/usecase3.jpg, id=1255, 1346.02875pt x 1208.515pt>
+File: media/usecase3.jpg Graphic file (type jpg)
+<use media/usecase3.jpg>
+Package pdftex.def Info: media/usecase3.jpg  used on input line 578.
+(pdftex.def)             Requested size: 452.9679pt x 406.68524pt.
+ [73 <./media/usecase1.jpg> <./media/usecase2.jpg>] [74 <./media/usecase3.jpg>]
 LaTeX Font Info:    Trying to load font information for T1+cmtt on input line 5
-81.
+87.
 
 (C:\Users\walaa\AppData\Local\Programs\MiKTeX\tex/latex/base\t1cmtt.fd
 File: t1cmtt.fd 2023/04/13 v2.5m Standard LaTeX font definitions
 )
-Underfull \hbox (badness 3471) in paragraph at lines 583--584
+[75
+
+
+] [76] [77] [78
+
+]
+<media/class_diagram.jpg, id=1284, 547.0839pt x 225.7233pt>
+File: media/class_diagram.jpg Graphic file (type jpg)
+<use media/class_diagram.jpg>
+Package pdftex.def Info: media/class_diagram.jpg  used on input line 641.
+(pdftex.def)             Requested size: 498.29999pt x 352.08557pt.
+
+Overfull \hbox (45.33209pt too wide) in paragraph at lines 641--642
+ [][] 
+ []
+
+File: media/class_diagram.jpg Graphic file (type jpg)
+<use media/class_diagram.jpg>
+Package pdftex.def Info: media/class_diagram.jpg  used on input line 648.
+(pdftex.def)             Requested size: 498.29999pt x 352.08557pt.
+
+Overfull \hbox (45.33209pt too wide) in paragraph at lines 648--649
+ [][] 
+ []
+
+[79 <./media/class_diagram.jpg>] [80]
+Underfull \hbox (badness 3471) in paragraph at lines 662--663
 []\T1/cmr/m/n/12 The class pro-vides es-sen-tial meth-ods for URL anal-y-sis op
 -er-a-tions. The
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 589--590
+Underfull \hbox (badness 10000) in paragraph at lines 668--669
 []\T1/cmr/m/n/12 The class im-ple-ments com-pre-hen-sive au-then-ti-ca-tion met
 h-ods. The
  []
 
 
-Underfull \hbox (badness 2035) in paragraph at lines 589--590
+Underfull \hbox (badness 2035) in paragraph at lines 668--669
 \T1/cmtt/m/n/12 registerUser(email, password) \T1/cmr/m/n/12 method cre-ates a 
 new user ac-count with the
  []
 
 
-Underfull \hbox (badness 1917) in paragraph at lines 589--590
+Underfull \hbox (badness 1917) in paragraph at lines 668--669
 \T1/cmr/m/n/12 user cre-den-tials and is-sues au-then-ti-ca-tion to-kens. The \
 T1/cmtt/m/n/12 validateToken(token)
  []
 
-[74
+[81
 
 
 ]
-Underfull \hbox (badness 10000) in paragraph at lines 595--596
+Underfull \hbox (badness 10000) in paragraph at lines 674--675
 \T1/cmr/m/n/12 method re-trieves the com-plete pro-file data for a spec-i-fied 
 user. The
  []
 
-[75]
-Underfull \hbox (badness 2980) in paragraph at lines 613--614
+[82]
+Underfull \hbox (badness 2980) in paragraph at lines 692--693
 []\T1/cmr/m/n/12 The class im-ple-ments meth-ods for pen-e-tra-tion test-ing ma
 n-age-ment. The
  []
 
-[76]
-Underfull \hbox (badness 10000) in paragraph at lines 619--620
+[83]
+Underfull \hbox (badness 10000) in paragraph at lines 698--699
 []\T1/cmr/m/n/12 The class pro-vides meth-ods for threat in-tel-li-gence op-er-
 a-tions. The
  []
 
 
-Underfull \hbox (badness 3039) in paragraph at lines 619--620
+Underfull \hbox (badness 3039) in paragraph at lines 698--699
 \T1/cmtt/m/n/12 lookupIOC(indicator) \T1/cmr/m/n/12 method queries threat in-te
 l-li-gence sources for in-di-ca-tor
  []
 
 
-Underfull \hbox (badness 3098) in paragraph at lines 625--626
+Underfull \hbox (badness 3098) in paragraph at lines 704--705
 []\T1/cmr/m/n/12 The class im-ple-ments ma-chine learn-ing meth-ods. The \T1/cm
 tt/m/n/12 classifyURL(url,
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 625--626
+Underfull \hbox (badness 10000) in paragraph at lines 704--705
 \T1/cmtt/m/n/12 features) \T1/cmr/m/n/12 method clas-si-fies a URL as phish-ing
  or le-git-i-mate. The
  []
 
 
-Underfull \hbox (badness 1472) in paragraph at lines 625--626
+Underfull \hbox (badness 1472) in paragraph at lines 704--705
 \T1/cmtt/m/n/12 classifyFile(fileFeatures) \T1/cmr/m/n/12 method de-ter-mines m
 al-ware prob-a-bil-ity for a file.
  []
 
-[77]
-Underfull \hbox (badness 10000) in paragraph at lines 631--632
+[84]
+Underfull \hbox (badness 10000) in paragraph at lines 710--711
 []\T1/cmr/m/n/12 The class pro-vides meth-ods for ac-count man-age-ment. The
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 637--638
+Underfull \hbox (badness 10000) in paragraph at lines 716--717
 []\T1/cmr/m/n/12 The class im-ple-ments com-pre-hen-sive threat mod-el-ing meth
 -ods. The
  []
 
 
-Underfull \hbox (badness 1057) in paragraph at lines 637--638
+Underfull \hbox (badness 1057) in paragraph at lines 716--717
 \T1/cmtt/m/n/12 generateDFD(architecture) \T1/cmr/m/n/12 method cre-ates Data F
 low Di-a-grams from ar-chi-tec-
  []
 
-[78]
-Underfull \hbox (badness 10000) in paragraph at lines 649--650
+[85]
+Underfull \hbox (badness 10000) in paragraph at lines 728--729
 \T1/cmtt/m/n/12 targetFormat) \T1/cmr/m/n/12 method con-verts in-put be-tween s
 up-ported for-mats. The
  []
 
 
-Underfull \hbox (badness 3078) in paragraph at lines 649--650
+Underfull \hbox (badness 3078) in paragraph at lines 728--729
 \T1/cmtt/m/n/12 queueForProcessing(inputID) \T1/cmr/m/n/12 method adds val-i-da
 ted in-put to the pro-cess-ing
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 655--656
+Underfull \hbox (badness 10000) in paragraph at lines 734--735
 []\T1/cmr/m/n/12 The class pro-vides meth-ods for se-cu-rity con-trols eval-u-a
 -tion. The
  []
 
-[79]
-Underfull \hbox (badness 10000) in paragraph at lines 661--662
+[86]
+Underfull \hbox (badness 10000) in paragraph at lines 740--741
 []\T1/cmr/m/n/12 The class im-ple-ments re-port gen-er-a-tion meth-ods. The
  []
 
 
-Underfull \hbox (badness 1565) in paragraph at lines 661--662
+Underfull \hbox (badness 1565) in paragraph at lines 740--741
 \T1/cmtt/m/n/12 compileReportData(sourceID) \T1/cmr/m/n/12 method ag-gre-gates 
 data re-quired for re-port gen-
  []
 
-[80] [81] [82]
-<media/ERD.jpg, id=1259, 2569.6pt x 1241.63875pt>
+[87] [88]
+<media/ERD.jpg, id=1335, 2569.6pt x 1241.63875pt>
 File: media/ERD.jpg Graphic file (type jpg)
 <use media/ERD.jpg>
-Package pdftex.def Info: media/ERD.jpg  used on input line 715.
+Package pdftex.def Info: media/ERD.jpg  used on input line 790.
 (pdftex.def)             Requested size: 452.9679pt x 218.86253pt.
- [83
+ [89
 
 
  <./media/ERD.jpg>]
-Underfull \hbox (badness 1953) in paragraph at lines 728--729
+Underfull \hbox (badness 1953) in paragraph at lines 803--804
 \T1/cmr/m/n/12 as the unique iden-ti-fier, \T1/cmtt/m/n/12 scan_id \T1/cmr/m/n/
 12 ref-er-enc-ing the as-so-ci-ated scan re-quest, and
  []
 
-[84] [85] [86] [87]
-<media/image10.png, id=1284, 405.76593pt x 316.93407pt>
+[90] [91] [92] [93]
+<media/image10.png, id=1360, 405.76593pt x 316.93407pt>
 File: media/image10.png Graphic file (type png)
 <use media/image10.png>
-Package pdftex.def Info: media/image10.png  used on input line 797.
+Package pdftex.def Info: media/image10.png  used on input line 872.
 (pdftex.def)             Requested size: 362.37569pt x 283.05214pt.
-<media/image11.png, id=1285, 347.04657pt x 316.93407pt>
+<media/image11.png, id=1361, 347.04657pt x 316.93407pt>
 File: media/image11.png Graphic file (type png)
 <use media/image11.png>
-Package pdftex.def Info: media/image11.png  used on input line 807.
+Package pdftex.def Info: media/image11.png  used on input line 882.
 (pdftex.def)             Requested size: 362.37569pt x 330.94322pt.
- [88
+ [94
 
 
  <./media/image10.png>]
-<media/image12.png, id=1291, 511.9125pt x 512.66531pt>
+<media/image12.png, id=1367, 511.9125pt x 512.66531pt>
 File: media/image12.png Graphic file (type png)
 <use media/image12.png>
-Package pdftex.def Info: media/image12.png  used on input line 817.
+Package pdftex.def Info: media/image12.png  used on input line 892.
 (pdftex.def)             Requested size: 362.37569pt x 362.90756pt.
- [89 <./media/image11.png>]
-<media/image13.png, id=1297, 471.26062pt x 238.64156pt>
+ [95 <./media/image11.png>]
+<media/image13.png, id=1373, 471.26062pt x 238.64156pt>
 File: media/image13.png Graphic file (type png)
 <use media/image13.png>
-Package pdftex.def Info: media/image13.png  used on input line 827.
+Package pdftex.def Info: media/image13.png  used on input line 902.
 (pdftex.def)             Requested size: 362.37569pt x 183.50694pt.
 
-[90 <./media/image12.png>] [91 <./media/image13.png>]
-<media/image14.png, id=1308, 445.665pt x 332.74312pt>
+[96 <./media/image12.png>] [97 <./media/image13.png>]
+<media/image14.png, id=1384, 445.665pt x 332.74312pt>
 File: media/image14.png Graphic file (type png)
 <use media/image14.png>
-Package pdftex.def Info: media/image14.png  used on input line 841.
+Package pdftex.def Info: media/image14.png  used on input line 916.
 (pdftex.def)             Requested size: 362.37569pt x 270.56128pt.
-<media/image15.png, id=1309, 252.19218pt x 475.02469pt>
+<media/image15.png, id=1385, 252.19218pt x 475.02469pt>
 File: media/image15.png Graphic file (type png)
 <use media/image15.png>
-Package pdftex.def Info: media/image15.png  used on input line 852.
+Package pdftex.def Info: media/image15.png  used on input line 927.
 (pdftex.def)             Requested size: 362.37569pt x 682.57086pt.
- [92
+ [98
 
  <./media/image14.png>]
 Overfull \vbox (5.66399pt too high) has occurred while \output is active []
 
 
-[93 <./media/image15.png>]
-<media/image16.png, id=1321, 551.81157pt x 331.99031pt>
+[99 <./media/image15.png>]
+<media/image16.png, id=1397, 551.81157pt x 331.99031pt>
 File: media/image16.png Graphic file (type png)
 <use media/image16.png>
-Package pdftex.def Info: media/image16.png  used on input line 861.
+Package pdftex.def Info: media/image16.png  used on input line 936.
 (pdftex.def)             Requested size: 362.37569pt x 218.02513pt.
-<media/image17.png, id=1322, 362.85562pt x 353.82187pt>
+<media/image17.png, id=1398, 362.85562pt x 353.82187pt>
 File: media/image17.png Graphic file (type png)
 <use media/image17.png>
-Package pdftex.def Info: media/image17.png  used on input line 871.
+Package pdftex.def Info: media/image17.png  used on input line 946.
 (pdftex.def)             Requested size: 362.37569pt x 353.36209pt.
- [94 <./media/image16.png>]
-<media/image18.png, id=1328, 362.10281pt x 463.7325pt>
+ [100 <./media/image16.png>]
+<media/image18.png, id=1404, 362.10281pt x 463.7325pt>
 File: media/image18.png Graphic file (type png)
 <use media/image18.png>
-Package pdftex.def Info: media/image18.png  used on input line 882.
+Package pdftex.def Info: media/image18.png  used on input line 957.
 (pdftex.def)             Requested size: 362.37569pt x 464.09222pt.
- [95 <./media/image17.png>]
-<media/image19.png, id=1334, 359.09157pt x 445.665pt>
+ [101 <./media/image17.png>]
+<media/image19.png, id=1410, 359.09157pt x 445.665pt>
 File: media/image19.png Graphic file (type png)
 <use media/image19.png>
-Package pdftex.def Info: media/image19.png  used on input line 893.
+Package pdftex.def Info: media/image19.png  used on input line 968.
 (pdftex.def)             Requested size: 362.37569pt x 449.77129pt.
- [96 <./media/image18.png>]
-<media/image20.png, id=1340, 238.64156pt x 359.09157pt>
+ [102 <./media/image18.png>]
+<media/image20.png, id=1416, 238.64156pt x 359.09157pt>
 File: media/image20.png Graphic file (type png)
 <use media/image20.png>
-Package pdftex.def Info: media/image20.png  used on input line 904.
+Package pdftex.def Info: media/image20.png  used on input line 979.
 (pdftex.def)             Requested size: 362.37569pt x 545.30978pt.
- [97 <./media/image19.png>] [98 <./media/image20.png>]
-<media/image21.png, id=1352, 332.74312pt x 386.19281pt>
+ [103 <./media/image19.png>] [104 <./media/image20.png>]
+<media/image21.png, id=1428, 332.74312pt x 386.19281pt>
 File: media/image21.png Graphic file (type png)
 <use media/image21.png>
-Package pdftex.def Info: media/image21.png  used on input line 915.
+Package pdftex.def Info: media/image21.png  used on input line 990.
 (pdftex.def)             Requested size: 362.37569pt x 420.6118pt.
- [99 <./media/image21.png>]
-<media/image22.png, id=1358, 253.69781pt x 432.11438pt>
+ [105 <./media/image21.png>]
+<media/image22.png, id=1434, 253.69781pt x 432.11438pt>
 File: media/image22.png Graphic file (type png)
 <use media/image22.png>
-Package pdftex.def Info: media/image22.png  used on input line 928.
+Package pdftex.def Info: media/image22.png  used on input line 1003.
 (pdftex.def)             Requested size: 271.7835pt x 462.93144pt.
- [100 <./media/image22.png>]
-<media/image23.png, id=1364, 256.70906pt x 453.19313pt>
+ [106 <./media/image22.png>]
+<media/image23.png, id=1440, 256.70906pt x 453.19313pt>
 File: media/image23.png Graphic file (type png)
 <use media/image23.png>
-Package pdftex.def Info: media/image23.png  used on input line 940.
+Package pdftex.def Info: media/image23.png  used on input line 1015.
 (pdftex.def)             Requested size: 226.48395pt x 399.84154pt.
-<media/image24.png, id=1365, 319.1925pt x 478.03593pt>
+<media/image24.png, id=1441, 319.1925pt x 478.03593pt>
 File: media/image24.png Graphic file (type png)
 <use media/image24.png>
-Package pdftex.def Info: media/image24.png  used on input line 949.
+Package pdftex.def Info: media/image24.png  used on input line 1024.
 (pdftex.def)             Requested size: 362.37569pt x 542.7127pt.
- [101
+ [107
 
- <./media/image23.png>] [102 <./media/image24.png>]) (chapters/chapter5.tex [10
-3]
+ <./media/image23.png>] [108 <./media/image24.png>]) (chapters/chapter5.tex [10
+9]
 Chapter 5.
-[104
+[110
 
-]) (backmatter/references.tex [105] [106
+]) (backmatter/references.tex [111] [112
 
 ]
 Underfull \hbox (badness 2261) in paragraph at lines 69--70
@@ -1761,19 +1785,19 @@ Underfull \hbox (badness 2173) in paragraph at lines 72--73
 ail-able: [][][]$\T1/cmtt/m/n/12 https : / / www .
  []
 
-[107]) [108] (main.aux)
+[113]) [114] (main.aux)
  ***********
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-01-04>
  ***********
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: 2DC2175DE9164319D7792AEA21DAC771;22787.
+(rerunfilecheck)             Checksum: FBB3414F3779DEF784BE0AD2E295C40E;24382.
  ) 
 Here is how much of TeX's memory you used:
- 16735 strings out of 474486
- 268802 string characters out of 5743754
+ 16786 strings out of 474486
+ 269767 string characters out of 5743754
  1989542 words of memory out of 5000000
- 38351 multiletter control sequences out of 15000+600000
+ 38383 multiletter control sequences out of 15000+600000
  577057 words of font info for 80 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  80i,12n,82p,3116b,622s stack positions out of 10000i,1000n,20000p,200000b,200000s
@@ -1797,9 +1821,9 @@ Users\walaa\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx2488.pk
 msfonts/cm/cmsy10.pfb><C:/Users/walaa/AppData/Local/Programs/MiKTeX/fonts/type1
 /public/amsfonts/cm/cmsy8.pfb><C:/Users/walaa/AppData/Local/Programs/MiKTeX/fon
 ts/type1/public/amsfonts/symbols/msam10.pfb>
-Output written on main.pdf (119 pages, 2930631 bytes).
+Output written on main.pdf (125 pages, 3180851 bytes).
 PDF statistics:
- 2313 PDF objects out of 2487 (max. 8388607)
- 404 named destinations out of 1000 (max. 500000)
- 1164 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 2393 PDF objects out of 2487 (max. 8388607)
+ 423 named destinations out of 1000 (max. 500000)
+ 1243 words of extra memory for PDF output out of 10000 (max. 10000000)
 
