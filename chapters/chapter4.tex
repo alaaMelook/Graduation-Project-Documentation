@@ -1,0 +1,972 @@
+﻿% ============= CHAPTER 4: SYSTEM DESIGN =============
+\chapter{System Design}
+\label{ch:chapter4}
+
+\section{Overview}
+This chapter presents the comprehensive system design for the TIBSA (Threat Intelligence and Behavioral Security Analysis) platform. The design encompasses a multi-layered architecture that integrates modern security tools, cloud-native services, and machine learning capabilities to deliver a robust threat intelligence and security analysis solution. The chapter begins with a detailed exploration of the platform's eight-layer architecture, covering everything from the user interface layer through to the core TIBSA suite. Each layer is examined in terms of its components, data flows, and integration points with other system elements. The chapter also includes complete data flow maps that trace the path of information through the system for key operations such as authentication, file analysis, and threat modeling. Finally, user interface scenarios are presented through wireframes that demonstrate the platform's key screens and user interactions.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{media/image1.png}
+\caption{TIBSA Platform - Complete Architecture Overview}
+\label{fig:ch4_fig1}
+\end{figure}
+
+\clearpage
+\section{Layered Architecture Design}
+
+This section presents the detailed architecture of the TIBSA platform, organized into eight distinct layers. Each layer represents a logical grouping of components with specific responsibilities, from the user-facing interfaces at the top to the core TIBSA suite at the bottom. The layered approach ensures separation of concerns, modularity, and maintainability, while enabling seamless data flow and integration between components.
+
+\subsection{LAYER 1 - User Layer}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{media/image2.png}
+\caption{ Layer 1- User Layer Architecture}
+\label{fig:ch4_fig2}
+\end{figure}
+
+\subsubsection{1.1 Security Analyst Console}
+
+The Security Analyst Console is the primary interface used by SOC analysts, threat hunters, and penetration testers. It provides access to dashboards, incident views, analytics tools, and pentest management interfaces. This layer uses no external tools, as it is a pure UI layer that serves as the entry point for security professionals.
+
+The console provides several key services including a threat hunting interface, alert investigation dashboard, pentest workflow triggering capabilities, and a results review console. Analysts interact with the system through various actions such as queries, pentest runs, and incident views, all of which are authenticated using JWT tokens and tracked through UI interactions.
+
+The data flow begins when the console receives analyst actions and JWT tokens as input, which are then processed into authenticated API requests, analysis queries, and pentest triggers as output. These requests are first sent to Frontend Security Controls in Layer 3 for input sanitization, then forwarded to the API Gateway in Layer 4 for authentication and routing. The console receives data back from Backend Services in Layer 5 via the API Gateway for display to the analyst.
+
+\subsubsection{1.2 Client Logic Module}
+
+The Client Logic Module serves as the browser-side brain of the platform, managing the complete lifecycle of user sessions and authentication. It operates entirely as client-side JavaScript logic without relying on external tools, handling critical functions that ensure smooth and secure user interactions.
+
+This module provides comprehensive services including JWT token management, token refresh automation, session timeout handling, UI state management based on RBAC (Role-Based Access Control), API error handling, and file chunking preparation. It continuously monitors token expiration and automatically refreshes them to maintain uninterrupted user sessions.
+
+The module accepts user interactions, JWT tokens, UI events, form data, and files as input, transforming these into structured requests, refreshed tokens, chunked uploads, and properly handled errors as output. It maintains session state and authentication tokens while communicating with the Auth Interceptor in Layer 3 to attach tokens to outgoing requests. All backend communication flows through the API Gateway in Layer 4, and the module receives new tokens from the Authentication Service in Layer 5 during refresh cycles.
+
+\subsubsection{1.3 Customer Browser Interfaces}
+
+The Customer Browser Interfaces provide all customer-facing web pages, offering a complete set of UI components for user interaction without requiring external tools. These interfaces encompass every aspect of the customer experience from initial registration through daily platform usage.
+
+The services provided include login and registration pages, MFA (Multi-Factor Authentication) enrollment and verification UI, comprehensive dashboard views, an intuitive file upload interface, and scanning tool initiation forms. Each interface is designed with user experience and security in mind, ensuring that all customer actions are properly validated before reaching backend systems.
+
+Customer actions such as login attempts, registration submissions, file uploads, and scan initiations serve as input to these interfaces, along with MFA inputs when required. The interfaces generate clean UI-validated requests, handle session initialization, and manage navigation events as output. All requests are first sent to Client-Side Security Controls in Layer 3 for validation, then forwarded to the API Gateway in Layer 4 via authenticated requests. Dynamic content is received from Backend Services in Layer 5 to populate dashboards and display results.
+
+\subsubsection{1.4 Client-Side Security Controls}
+
+The Client-Side Security Controls act as the first major security checkpoint in the system, implementing multiple layers of protection using browser-native security features and custom validators. These controls serve as the gatekeeper between user input and the backend infrastructure, ensuring that only clean, validated data proceeds downstream.
+
+The security services provided include XSS (Cross-Site Scripting) prevention through comprehensive input sanitization, Content Security Policy (CSP) enforcement, filename validation to prevent directory traversal attacks, soft rate limiting to prevent abuse, and MFA flow protection to secure authentication processes. Each control operates transparently to users while maintaining strict security standards.
+
+The controls receive outgoing requests, form fields, filenames, and script execution attempts from all User Layer components (Security Analyst Console, Client Logic Module, and Customer Browser Interfaces) as input. They produce sanitized inputs, enforce CSP rules, validate safe file uploads, and apply rate-limited requests as output. After validation, all data is sent to the Frontend Layer (Layer 3), while malicious payloads are blocked before they can reach the backend systems.
+
+\subsection{LAYER 2 - Edge Layer}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{media/image3.png}
+\caption{ Layer 2- Edge Layer Architecture}
+\label{fig:ch4_fig3}
+\end{figure}
+
+\subsubsection{2.1 CDN (Content Delivery Network)}
+
+The CDN serves as the global distributed entry point for all traffic entering the platform, utilizing Cloudflare's Free Plan as Service \#1. It functions as the first point of contact between users worldwide and the TIBSA platform, providing critical performance and availability improvements through intelligent caching and distribution.
+
+The CDN provides several essential services including global content caching, static asset delivery for JavaScript, CSS, and images, nearest-node routing for low latency, basic request validation, and traffic absorption with load distribution. By caching content at edge locations around the world, the CDN dramatically reduces latency for users regardless of their geographic location.
+
+Raw HTTP(S) requests from user browsers worldwide arrive at the CDN as input. When the CDN has cached content (a cache hit), it returns static responses directly to users, bypassing downstream systems entirely. For cache misses, the CDN forwards clean requests to the WAF in Layer 2.2 for application-layer inspection, then caches the response for future requests.
+
+\subsubsection{2.2 WAF (Web Application Firewall)}
+
+The WAF performs deep inspection of incoming requests by analyzing patterns associated with common web attacks, operating as part of Cloudflare's Free Plan (Service \#1). It examines every request that passes through the CDN, looking for malicious patterns and known attack signatures before allowing traffic to proceed further into the infrastructure.
+
+The WAF provides comprehensive protection including SQL Injection detection and blocking, Cross-Site Scripting (XSS) prevention, CSRF token validation, path traversal detection, malicious payload filtering, and CAPTCHA challenges for suspicious requests. Each of these protections operates in real-time, examining request headers, bodies, and parameters for signs of malicious intent.
+
+After receiving CDN-filtered requests as input, the WAF produces three possible outputs: allowed requests are sent to DDoS Protection in Layer 2.3, blocked requests receive an error page, and suspicious requests are challenged with CAPTCHA or JavaScript verification. All blocked attempts are logged and sent to the SIEM analysis system in Layer 7 for security monitoring and threat intelligence purposes.
+
+\subsubsection{2.3 DDoS Protection}
+
+The DDoS Protection system identifies and mitigates abnormal traffic spikes and distributed denial-of-service attacks using Cloudflare's Free Plan (Service \#1). It continuously monitors traffic patterns in real-time, detecting anomalies that could indicate an ongoing attack and taking immediate action to protect the platform's availability.
+
+The system provides multi-layered protection including Layer 3, 4, and 7 DDoS attack mitigation, continuous traffic rate monitoring, anomaly detection using behavioral analysis, packet dropping for malicious traffic, and traffic normalization to ensure clean requests reach application servers. It can distinguish between legitimate traffic spikes (such as during peak usage) and malicious attack patterns.
+
+WAF-validated requests arrive as input, and the system produces two types of output: normalized safe traffic is forwarded to TLS Termination in Layer 2.4, while abnormal or malicious packets are dropped immediately. The system protects all downstream services from volumetric attacks and continuously monitors traffic patterns, sending detailed metrics to the Monitoring Layer in Layer 7 for analysis and alerting.
+
+\subsubsection{2.4 TLS Termination}
+
+TLS Termination is the point where encrypted HTTPS traffic is securely decrypted, utilizing Cloudflare's TLS/SSL capabilities (Service \#1). This critical security function validates certificates, ensures proper use of cryptographic standards, and offloads the computationally expensive encryption and decryption tasks from backend servers, allowing them to focus on application logic.
+
+The system provides essential services including HTTPS traffic decryption, certificate validation, TLS 1.3 support for modern security standards, SSL/TLS offloading to improve backend performance, and secure session handling. It ensures that all traffic uses strong encryption in transit while making content accessible to downstream security inspection tools.
+
+Encrypted HTTPS requests from DDoS Protection arrive as input, and the system validates SSL certificates and encryption standards before producing decrypted HTTP requests as output. These decrypted requests are then sent to the Load Balancer in Layer 2.5, enabling downstream systems to inspect and process the actual request content while maintaining end-to-end security.
+
+\subsubsection{2.5 Load Balancer}
+
+The Load Balancer distributes incoming requests across backend servers based on intelligent routing policies, using Cloudflare's Load Balancing feature (Service \#1). It ensures optimal resource utilization and high availability by directing traffic to healthy servers and avoiding overloaded or failed instances.
+
+The balancer provides comprehensive distribution services including request distribution across multiple servers, health check monitoring to detect server issues, round-robin routing for equal distribution, least connections algorithm to favor less-busy servers, weighted load distribution for capacity-based routing, and automatic failover handling when servers become unavailable. Each routing decision is made in real-time based on current system conditions.
+
+Decrypted HTTP requests from TLS Termination serve as input, and the balancer monitors server health continuously to adjust routing accordingly. Output consists of properly routed requests sent to correct backend service instances based on health checks and load conditions. Before reaching backend services, requests pass through the Bot Detection Engine in Layer 2.6 for final edge validation.
+
+\subsubsection{2.6 Bot Detection Engine}
+
+The Bot Detection Engine analyzes traffic behavior, device fingerprints, user interaction patterns, request frequency, and known malicious IP ranges to distinguish human users from automated bots, utilizing Cloudflare's Bot Management feature (Service \#1). This sophisticated analysis protects the platform from automated attacks, scraping, and abuse while allowing legitimate automation when appropriate.
+
+The engine provides multiple security services including bot versus human traffic distinction, device fingerprinting to identify returning visitors and potential threats, behavioral analysis to detect automation patterns, request pattern detection to identify suspicious activity, malicious IP blocking, automated scraping prevention, and credential stuffing protection. These capabilities work together to create a comprehensive defense against bot-based threats.
+
+Routed requests from the Load Balancer arrive as input along with metadata including IP addresses, user agents, and behavioral patterns. The engine produces two types of output: human-verified requests are forwarded to the Frontend Layer in Layer 3, while blocked or challenged bots receive either a challenge page requiring human verification or are blocked outright. As the final security check at the edge before traffic reaches the application layer, this engine provides critical protection against automated attacks and scraping attempts.
+
+\subsection{LAYER 3 - Frontend Layer}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{media/image4.png}
+\caption{Layer 3- Frontend Layer Architecture}
+\label{fig:ch4_fig4}
+\end{figure}
+
+\subsubsection{3.1 Frontend Framework \& UI Components}
+
+The Frontend Framework provides all user interfaces, dashboards, and interactive components for the entire platform using Next.js 15, Tailwind CSS, and shadcn/ui as Service \#2. This modern technology stack enables server-side rendering, static site generation, and dynamic client interactions while maintaining excellent performance and developer experience.
+
+The framework provides comprehensive services including server-side rendering (SSR) for improved initial load times, static site generation (SSG) for cacheable pages, API routes for backend communication, complete dashboard interfaces for all user types, an intuitive file upload UI, threat modeling interfaces, authentication pages covering login, registration, and MFA, alerts and threat visualization tools, user management interfaces, a guided pentest wizard, and a comprehensive reports viewer.
+
+User interactions, API responses, and routing requests serve as input to the framework, which produces rendered HTML and React components along with API calls to backend services as output. The framework consists of several specialized components: Login Form, Register Component, and MFA Setup UI handle user authentication by accepting email, password, and MFA codes as input and producing JWT access tokens and MFA confirmation as output, sending requests through the Auth Interceptor to the API Gateway and ultimately to Authentik in Layer 4.
+
+Stats Widgets provide KPI visualization, scan statistics, and vulnerability metrics by receiving analytics API responses from backend services and displaying them as charts, counters, and time-series graphs. The Threat Map component offers geographic and topological threat visualization by connecting alert metadata and geo-location data to create an interactive threat map, integrating with the Alerts Table and MISP threat intelligence from Layer 5.
+
+The Alerts Table and Alert Details Modal provide structured alert listing and detailed incident views, receiving data from the SIEM in Layer 7 and Notification Service in Layer 5 to display paginated alerts and drill-down details with evidence. The File Upload Component manages file submission with validation, using the File Hash Calculator and Chunk Uploader to initiate chunked uploads with progress tracking, sending data to the File Upload Handler in Layer 3.2.
+
+The Pentest Wizard guides users through penetration test configuration, accepting scope, targets, scan depth, and schedule as input and producing validated job configurations that are sent to the Pentest Orchestrator in Layer 5. The Logs Console enables real-time log viewing and searching by receiving streamed logs from Loki in Layer 7 and rendering them with search capabilities and downloadable exports.
+
+User Management UI, Team Management UI, and RBAC Matrix components handle user creation, role assignment, and permission management, accepting user data and role definitions as input and sending updates to the User Service in Layer 5 via the API Gateway. The framework receives all traffic from the Edge Layer after bot detection, communicates with the API Gateway in Layer 4 for all backend operations, renders dynamic content based on user roles and permissions, and sends large file operations to the File Upload Handler.
+
+\subsubsection{3.2 Frontend Security Controls}
+
+Frontend Security Controls implement browser-side security mechanisms that protect UI and client-side data using built-in browser security features combined with custom validators. These controls operate transparently to provide multiple layers of protection without impacting user experience.
+
+The XSS Sanitizer provides input sanitization and script tag removal, accepting raw user text and HTML input from forms and producing sanitized, safe HTML strings that are sent to UI Components and the GET/POST Helpers. The JWT Validator performs client-side token validation by accepting JWTs from storage and producing validation status along with extracted claims including user ID, role, and expiry information, which are then used by RBAC Logic and the Auth Interceptor.
+
+The CSRF Token Handler protects against cross-site request forgery by accepting CSRF tokens from the backend and attaching them as headers to all outgoing POST, PUT, and DELETE requests before sending them through the Auth Interceptor to the API Gateway. The CSP Config Loader enforces Content Security Policy by accepting CSP configuration from the server and applying CSP rules that are enforced by the browser, protecting against XSS and malicious script injection.
+
+Sensitive Data Masking provides PII and sensitive data redaction by accepting raw scan results, alert details, and sensitive fields and producing masked values (such as "******1234") that are safely displayed in UI Components. These security controls protect all outgoing requests from the Frontend Layer, work closely with the Frontend Logic Layer to ensure secure communication, and send validated data to the API Gateway in Layer 4.
+
+\subsubsection{3.3 Frontend Logic Layer}
+
+The Frontend Logic Layer handles all client-side business logic, request preparation, and state management using custom JavaScript and TypeScript logic. This layer orchestrates the complex interactions between user interface components, security controls, and backend services.
+
+The GET/POST Helpers provide standardized HTTP request handling, accepting API endpoints, URL parameters, body payloads, and headers as input and producing parsed JSON responses or standardized errors as output, which are then sent to UI Components and the Notifications Queue. The Auth Interceptor performs automatic authentication header attachment by accepting requests from GET/POST helpers along with access tokens and CSRF tokens, producing fully authenticated requests with Authorization and CSRF headers that are sent to the API Gateway in Layer 4, while also triggering token refresh on 401 or 403 errors.
+
+Token Refresh Logic handles automatic token renewal by accepting expiring or expired tokens along with refresh tokens as input and producing new access tokens that are stored in browser storage as output. This component communicates with Authentik in Layer 4 for token refresh and updates the Auth Interceptor with new tokens to maintain uninterrupted sessions.
+
+Retry Logic provides network failure recovery with exponential backoff, accepting failed requests and error details such as timeouts or 5xx errors as input and producing either successful responses or final errors that are sent to the Notifications Queue. This is particularly critical for large file uploads and long-running pentest calls where transient network issues should not cause complete failure.
+
+RBAC Logic implements client-side role-based access control by accepting JWT claims and the RBAC matrix as input and producing visibility and permission flags for UI elements as output, controlling which UI components are shown or hidden per user role. It's important to note that while this provides immediate UI feedback, server-side validation is still enforced in backend services for security.
+
+The File Hash Calculator computes SHA-256 hashes for integrity by accepting binary or text files as input and producing unique file hashes as output, which are sent to the backend as metadata and to the Chunk Uploader for integrity checks. This prevents duplicate scans and ensures forensic consistency across the platform.
+
+Parallel Upload and Chunk Uploader manage large file chunking and parallel upload by accepting file objects, chunk size, upload URL, and session ID as input and producing chunk upload requests, progress updates, and final file IDs as output. This component works with Retry Logic for failed chunks and sends data to the Tusd Server in Layer 3.4, which stores files in Cloudflare R2 in Layer 6.
+
+The Notifications Queue manages real-time notification handling by accepting backend events through polling or WebSockets along with frontend actions as input and producing UI notifications, alerts to the Alerts Table, and log events to the Logs Console as output. It displays scan completions, vulnerabilities, report readiness, and system warnings to keep users informed of important events.
+
+Theme Manager controls visual theme preferences (light and dark mode) by accepting user preferences, system settings, and CSS definitions as input and producing applied CSS variables and dynamic styling as output, improving readability for dashboards and threat visualizations.
+
+The Frontend Logic Layer receives data from Frontend Security Controls in Layer 3.2 after validation, sends requests to the API Gateway in Layer 4 via the Auth Interceptor, and manages all state and logic before backend communication occurs.
+
+\subsubsection{3.4 File Upload Handler}
+
+The File Upload Handler manages resumable, chunked uploads of large files up to 10 GB with integrity checking and resume support, utilizing Uppy and Tusd (open source tus.io server) as Service \#8. This sophisticated upload system ensures that even very large files can be uploaded reliably over unreliable networks.
+
+The handler provides essential services including resumable file uploads that can be paused and continued, chunked upload that splits large files into manageable pieces, upload progress tracking for user feedback, automatic retry on failure without losing progress, session persistence to resume interrupted uploads across browser sessions, support for files up to 10 GB in size, and integrity verification to ensure files are not corrupted during transmission.
+
+File objects from the File Upload Component in Layer 3.1.5 serve as input along with chunk size, upload URL, and session ID. The handler produces several outputs including chunked file segments that are uploaded to the backend, progress updates to the UI to keep users informed, a final file ID upon completion, and upload confirmation.
+
+The handler receives file hashes from the File Upload Component, uses the Chunk Uploader in Layer 3.3.7 for parallel upload management, and sends data to the Tusd Server backend component which stores files in Cloudflare R2 in Layer 6. Once upload is complete, the file is passed to the Scan Service in Layer 5 for processing, and the Notifications Queue in Layer 3.3.8 is notified of completion or failure.
+
+Integration points include working with the File Hash Calculator in Layer 3.3.6 for deduplication to avoid re-scanning identical files, coordinating with Retry Logic in Layer 3.3.4 for failed chunk recovery, storing final files in Cloudflare R2 in Layer 6 via the Tusd server, and triggering the backend processing pipeline that flows through Scan Service, Sandbox, and ML Engine.
+
+\subsection{LAYER 4 - API Engine}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{media/image5.png}
+\caption{Layer 4 - API Engine Architecture}
+\label{fig:ch4_fig5}
+\end{figure}
+
+\subsubsection{4.1 API Gateway}
+
+The API Gateway serves as the central entry point for all API requests using KrakenD Community Edition as Service \#4, providing request validation, authentication, rate limiting, and intelligent routing to backend microservices. This critical component ensures that only valid, authenticated, and properly formatted requests reach backend services.
+
+The gateway provides comprehensive services including serving as the central API entry point for all client requests, request routing to appropriate microservices, rate limiting enforcement to prevent abuse, request and response transformation to adapt between frontend and backend formats, API composition for aggregating multiple backend calls, circuit breaker pattern implementation to prevent cascade failures, and thorough request validation.
+
+The gateway consists of several specialized components: The Auth Filter performs JWT token validation and permission checking by accepting HTTP requests with Authorization headers as input and producing authenticated request context or 401/403 errors as output. It validates tokens with Authentik in Layer 4.2 and sends valid requests to the Rate Limiter component.
+
+The Rate Limiter controls request frequency and prevents DoS attacks by accepting request metadata including IP addresses, user IDs, and endpoint information as input. It uses Upstash Redis in Layer 6 for rate limit storage and produces either allowed requests that proceed to the Schema Validator or 429 Too Many Requests responses when limits are exceeded.
+
+The Schema Validator ensures request body validity against JSON schemas by accepting JSON and FormData payloads as input and producing validated, sanitized data or 400 Bad Request errors as output. This ensures that backend services receive only correct, safe input and sends validated requests to the Routing Engine.
+
+The Routing Engine performs intelligent request routing to appropriate microservices by accepting validated, authenticated requests with URL and HTTP method information as input and producing routed requests to target backend services as output. It can route to Authentication Service in Layer 4.2, User Service, Scan Service, Threat Intelligence Service, Billing Service, Notification Service, ML Engine, Sandbox, and Threat Modeling Engine, all in Layer 5.
+
+The gateway receives requests from the Frontend Layer in Layer 3.3 via the Auth Interceptor, first checks the Auth Filter for token validation, then checks the Rate Limiter using Redis cache, validates request schema and payload, routes to appropriate backend services in Layer 5, and returns aggregated responses to the frontend.
+
+\subsubsection{4.2 Authentication \& Authorization Service}
+
+The Authentication \& Authorization Service manages user authentication flows including login, registration, token refresh, and multi-factor verification using Authentik, an open-source identity platform, as Service \#3. This service is the cornerstone of platform security, ensuring that only authorized users can access protected resources.
+
+The service provides extensive capabilities including user login and registration, Multi-Factor Authentication with TOTP and WebAuthn, comprehensive Role-Based Access Control (RBAC), user directory management, Single Sign-On (SSO) support, OAuth2 and OIDC provider functionality, LDAP and Active Directory integration, session management, token issuance and validation, and password reset flows.
+
+The login function accepts email and password as input and produces JWT access tokens and refresh tokens as output. The process validates credentials, checks MFA status, and issues tokens that are sent to the frontend via the API Gateway. The register function accepts email, password, and user details as input and produces user account creation confirmation as output, validating input, creating users in the directory, and triggering verification emails via the Notification Service in Layer 5.
+
+The refreshToken function accepts valid refresh tokens as input and produces new access tokens as output, validating refresh tokens and issuing new access tokens. This function is called by Token Refresh Logic in Layer 3.3.3 when access tokens expire. The verifyMFA function accepts user sessions and MFA codes (TOTP or WebAuthn) as input and produces MFA verification results and session upgrades as output, validating the second factor and upgrading session privileges for administrative actions and sensitive operations.
+
+The service integrates with the API Gateway Auth Filter in Layer 4.1.1 for token validation, stores user credentials and sessions in Neon Postgres in Layer 6, uses Redis in Layer 6 for session caching, sends notifications via the Notification Service in Layer 5, enforces RBAC policies for all backend services, and provides tokens to all authenticated frontend requests.
+
+RBAC integration includes defining roles such as Admin, Analyst, User, and Guest, managing permissions for scanning, viewing reports, managing users, and configuring the system, enforcing permission checks in backend services, and integrating with the User Management UI in Layer 3.1.8 for role assignment.
+
+\subsection{LAYER 5 - Backend Services}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{media/image6.png}
+\caption{Layer 5 - Backend Services Architecture}
+\label{fig:ch4_fig6}
+\end{figure}
+
+\subsubsection{5.1 User Service}
+
+The User Service manages account-level functionality, user profiles, and role assignments using a custom Node.js or Python microservice. This service is responsible for all user-related operations beyond authentication, providing the foundation for personalized user experiences and access control.
+
+The service provides comprehensive functionality including user profile management, account settings updates, role assignment and updates, user directory operations, and permission mapping. Each of these capabilities ensures that users can manage their accounts while administrators maintain proper access control.
+
+The getProfile function accepts user ID from JWT as input and produces user profile data including name, email, role, and preferences as output, reading this information from Neon Postgres in Layer 6. The updateProfile function accepts user ID and updated profile data as input and produces update confirmation as output, writing changes to Neon Postgres and triggering audit log entries.
+
+The assignRoles function accepts user ID and role list as input and produces role assignment confirmation as output. This function updates Authentik RBAC in Layer 4 and Postgres in Layer 6, but requires admin privileges to execute, ensuring that only authorized personnel can modify user permissions.
+
+The service receives requests from the API Gateway in Layer 4, is authenticated by Authentik in Layer 4, stores data in Neon Postgres in Layer 6, logs all actions in Audit Logs Storage in Layer 6 for compliance and security monitoring, and returns data to the User Management UI in Layer 3.
+
+\subsubsection{5.2 Scan Service}
+
+The Scan Service coordinates security scanning operations for URLs and files using a custom orchestration service, managing the complex workflow of analyzing potentially malicious content through multiple analysis engines. This service is central to the platform's security analysis capabilities.
+
+The service provides critical functionality including URL scanning for phishing and malware, file malware detection, report generation, and scan result aggregation. It orchestrates multiple specialized tools and services to provide comprehensive security analysis.
+
+The scanURL function accepts URLs to scan as input and produces scan results including malicious indicators, reputation scores, and threat levels as output. The process checks URLs against Threat Intelligence in Layer 5.3, queries external feeds such as VirusTotal and URLhaus, runs ML classification through the ML Engine in Layer 5.6, and aggregates all results before storing them in the Scan Results Database in Layer 6.
+
+The scanFile function accepts file IDs from R2 storage as input and produces comprehensive file analysis reports as output. The process retrieves files from Cloudflare R2 in Layer 6, sends them to CAPE Sandbox in Layer 5.7 for dynamic analysis, extracts features for the ML Engine in Layer 5.6, queries Threat Intelligence in Layer 5.3, aggregates all results, and stores them in the Scan Results Database in Layer 6.
+
+The generateReport function accepts scan IDs as input and produces formatted security reports in JSON or PDF format as output. The process aggregates all scan data, formats the report according to templates, stores the report in R2, and returns the report URL to users.
+
+The service receives scan requests from the API Gateway in Layer 4, retrieves files from Cloudflare R2 in Layer 6, sends files to CAPE Sandbox in Layer 5.7 for analysis, sends URLs and features to the ML Engine in Layer 5.6 for classification, queries the Threat Intelligence Service in Layer 5.3 for IOC lookups, stores results in Postgres Scan Results DB in Layer 6, stores reports in Cloudflare R2 in Layer 6, queues long-running jobs in BullMQ in Layer 5.9, and notifies users via the Notification Service in Layer 5.5.
+
+\subsubsection{5.3 Threat Intelligence Service}
+
+The Threat Intelligence Service provides threat enrichment, IOC lookups, and reputation intelligence from multiple sources using MISP (Malware Information Sharing Platform) as Service \#11 and External Threat Feeds including VirusTotal, HybridAnalysis, AbuseIPDB, and URLhaus as Service \#12. This service transforms raw indicators into actionable intelligence.
+
+The service provides essential capabilities including IOC (Indicators of Compromise) lookup, domain, IP, and URL reputation checking, threat feed ingestion and correlation, threat intelligence sharing, and historical threat data storage. These capabilities enable the platform to leverage global threat intelligence for improved detection.
+
+The lookupIOC function accepts IOCs such as IP addresses, domains, file hashes, and URLs as input and produces threat intelligence reports including associated campaigns, malware families, and threat actors as output. The function queries the MISP internal database, checks external APIs, and aggregates results from multiple sources to provide comprehensive intelligence.
+
+The checkReputation function accepts IP addresses, domains, or URLs as input and produces reputation scores (clean, suspicious, or malicious) along with detailed context as output. It queries multiple sources including AbuseIPDB, URLhaus, VirusTotal, and HybridAnalysis in parallel, then aggregates scores to produce an overall assessment.
+
+The mergeFeeds function accepts multiple threat feed sources as input and produces enriched, deduplicated threat intelligence as output. The process ingests feeds from various sources, deduplicates indicators, correlates related information, and stores the results in MISP. This function runs automatically via scheduled jobs managed by BullMQ.
+
+The MISP configuration includes an internal MISP instance for threat storage and correlation, automated feed ingestion from public and private sources, event tagging with MITRE ATT\&CK TTPs for standardized threat categorization, sharing groups for collaborative threat intelligence, and API integration with external services.
+
+External threat feeds provide specialized intelligence: VirusTotal API offers file and URL scanning with hash lookup capabilities, HybridAnalysis provides automated malware analysis, AbuseIPDB delivers IP reputation and abuse reports, URLhaus maintains a malicious URL database, and AlienVault OTX contributes open threat intelligence.
+
+The service receives IOC lookup requests from the Scan Service in Layer 5.2, queries the MISP local database and external APIs, stores intelligence in the MISP database backed by Postgres in Layer 6, updates continuously via automated feed ingestion, returns results to the Scan Service in Layer 5.2 for report inclusion, enriches alert data for the SIEM in Layer 7, and feeds into the Threat Map visualization in Layer 3.
+
+\subsubsection{5.4 Billing Service}
+
+The Billing Service manages subscriptions, usage tracking, and payment processing using Lemon Squeezy as Service \#14. This service ensures proper monetization of the platform while providing transparent usage tracking and billing for customers.
+
+The service provides comprehensive billing functionality including subscription plan management for Freemium, Pro, and Enterprise tiers, payment processing, invoice generation, usage tracking and metering, webhook handling for payment events, and subscription lifecycle management.
+
+The createSubscription function accepts user ID and plan details as input and produces subscription ID and payment URL as output. The process creates a subscription in Lemon Squeezy, returns a checkout URL to the user, and stores subscription details in Postgres Billing Records in Layer 6.
+
+The trackUsage function accepts user ID and resource usage including scans, storage, and API calls as input and produces updated usage metrics as output. The process increments usage counters and checks against plan limits, storing all data in Postgres in Layer 6 to ensure accurate billing and limit enforcement.
+
+The handlePaymentWebhook function accepts webhook events from Lemon Squeezy as input and produces updated subscription status as output. The process validates webhooks, updates subscription information, and sends notifications to users. Events handled include payment success, payment failure, subscription renewal, and subscription cancellation.
+
+The service receives subscription requests from the API Gateway in Layer 4, integrates with the Lemon Squeezy external API for payment processing, receives webhooks from Lemon Squeezy for payment events, stores data in Postgres Billing Records in Layer 6, checks usage against plan limits before allowing scans, notifies users via the Notification Service in Layer 5.5, and blocks actions if usage exceeds plan limits.
+
+\subsubsection{5.5 Notification Service}
+
+The Notification Service handles all outbound messaging and alert delivery across multiple channels using Resend for email and built-in Webhook Support as Service \#13. This service ensures that users and administrators are promptly informed of important events and security findings.
+
+The service provides extensive notification capabilities including email notifications for scan results, alerts, password resets, webhook delivery to external systems such as Slack, Teams, and SIEM, optional SMS notifications, real-time alert distribution, and notification templates with customization options.
+
+The sendEmail function accepts recipient, subject, body, and template information as input and produces email delivery confirmation as output. Use cases include scan completion notifications, vulnerability alerts, password reset instructions, and registration confirmations. The function integrates with the Resend API for reliable email delivery.
+
+The sendWebhook function accepts webhook URL and event payload as input and produces webhook delivery status as output. Use cases include integration with Slack, Teams, Jira, ServiceNow, and external SIEM systems. The format uses JSON payloads with structured event data for easy integration with third-party systems.
+
+The sendSMS function (optional feature) accepts phone number and message as input and produces SMS delivery confirmation as output. Use cases include critical security alerts and MFA codes for enhanced security.
+
+The service is triggered by all backend services when scan completion, alerts, or auth events occur. It sends notifications via the Resend API for emails, delivers to user inboxes, webhook endpoints, and external systems, logs delivery in Audit Logs in Layer 6, queues messages in BullMQ in Layer 5.9 for reliable delivery, and integrates with Notification Dispatcher in Layer 7 for SIEM alerts.
+
+\subsubsection{5.6 ML Engine}
+
+The ML Engine powers AI-driven threat detection using machine learning models for phishing and malware classification, utilizing Ollama with Llama 3.2 3B/8B or Mistral-Nemo as Service \#10. This service provides intelligent threat detection that adapts and improves over time.
+
+The engine provides sophisticated services including phishing URL detection and classification, malware file classification, feature extraction from files and URLs, real-time inference for threat scoring, and model training and updates.
+
+The phishingClassifier function accepts URLs, page content, and domain features as input and produces phishing probability scores from 0 to 1 along with classification (phishing or legitimate) as output. The process extracts features, runs inference using the model, and returns predictions. The model is a fine-tuned Llama 3.2 trained on comprehensive phishing datasets.
+
+The malwareClassifier function accepts file features from static analysis including PE headers, imports, and strings as input and produces malware probability scores and malware family classification as output. The process performs feature extraction, runs model inference, and produces classification results. The model uses Llama 3.2 8B or Mistral-Nemo trained on extensive malware samples.
+
+The extractFeatures function accepts raw files or URLs as input and produces feature vectors for ML input as output. For files, features extracted include PE structure, imports, entropy, strings, and API calls. For URLs, features extracted include domain age, lexical features, WHOIS data, and SSL information.
+
+The runInference function accepts feature vectors as input and produces model predictions with confidence scores as output. The process loads the appropriate model, runs inference on the features, and returns predictions with confidence levels.
+
+The Ollama configuration includes local model hosting for privacy and performance, GPU acceleration for faster inference, model versioning and A/B testing capabilities, and continuous learning from new threat samples to improve accuracy over time.
+
+The engine receives files and URLs for classification from the Scan Service in Layer 5.2, receives features from CAPE Sandbox in Layer 5.7 based on dynamic analysis data, stores features in the ML Features Database in Layer 6, stores predictions in the Scan Results Database in Layer 6, queues inference jobs in BullMQ in Layer 5.9 for async processing, returns results to the Scan Service in Layer 5.2 for report inclusion, and improves from labeled threat data provided by Threat Intelligence in Layer 5.3.
+
+\subsubsection{5.7 Sandbox (Dynamic Malware Analysis)}
+
+The Sandbox executes suspicious files in isolated virtual machines to observe runtime behavior and extract malicious activity using CAPE Sandbox as Service \#9. This critical component provides deep insight into malware behavior that static analysis cannot reveal.
+
+The sandbox provides comprehensive analysis services including safe execution of suspicious files in isolated VMs, behavioral analysis of network connections, file modifications, and registry changes, API call tracing, memory dumping and analysis, screenshot capture during execution, network traffic capture in PCAP format, dropper and payload extraction, and process tree visualization.
+
+The runInVM function accepts files from Cloudflare R2 and execution parameters as input and produces execution session IDs as output. The process spins up clean VM snapshots, loads files, executes them in isolation, and monitors behavior. VM types available include Windows 7, 10, and 11, Linux, and Android, all configurable based on analysis needs.
+
+The captureBehavior function accepts execution session IDs as input and produces comprehensive behavior reports as output. The system captures network connections including IPs and domains contacted, file system changes including files created, modified, or deleted, registry modifications in Windows systems, process creation trees, API calls and system calls, memory dumps, and screenshots of the execution environment.
+
+The generateHash function accepts analyzed files and extracted artifacts as input and produces file hashes including MD5, SHA1, SHA256, and SSDEEP fuzzy hashes as output. The purpose is IOC generation for threat intelligence sharing and future correlation.
+
+The CAPE configuration includes multiple VM snapshots for different OS versions, network simulation for realistic malware execution, a comprehensive signature database for automated detection, Yara rules for pattern matching, and integration with VirusTotal for hash checking.
+
+The sandbox receives files to analyze from the Scan Service in Layer 5.2, retrieves files from Cloudflare R2 in Layer 6, executes files in isolated VM environment on separate infrastructure, generates behavior reports, IOCs, and artifacts, stores results in Postgres Scan Results DB in Layer 6, stores artifacts including PCAP files, memory dumps, and screenshots in Cloudflare R2 in Layer 6, sends features to the ML Engine in Layer 5.6 for classification, sends IOCs to Threat Intelligence in Layer 5.3 for correlation, is queued via BullMQ in Layer 5.9 since sandbox jobs can take 5 to 15 minutes, and notifies the Notification Service in Layer 5.5 upon completion.
+
+\subsubsection{5.8 Threat Modeling Engine (TIBSA Core)}
+
+The Threat Modeling Engine automates threat modeling using the TIBSA methodology, generating DFDs, STRIDE analysis, MITRE ATT\&CK mapping, and risk reports using Threagile as Service \#17. This engine represents the core intellectual property of the platform, automating complex security analysis that traditionally requires expert manual effort.
+
+The engine provides comprehensive services including automated Data Flow Diagram (DFD) generation, STRIDE threat identification, MITRE ATT\&CK TTP mapping, risk scoring and prioritization, security control effectiveness evaluation, and PDF/Word report generation with visualizations.
+
+The generateDFD function accepts system architecture descriptions in JSON or YAML format as input and produces auto-generated DFDs in PNG, SVG, or JSON format as output. The process parses architecture definitions, identifies processes, data stores, and flows, and generates professional diagrams.
+
+The performSTRIDE function accepts DFDs and system components as input and produces STRIDE threat lists covering Spoofing, Tampering, Repudiation, Information Disclosure, Denial of Service, and Elevation of Privilege as output. The process analyzes each component and maps applicable STRIDE threats systematically.
+
+The mapMITRE function accepts identified threats as input and produces MITRE ATT\&CK TTPs mapped to threats as output. The process correlates threats with the ATT\&CK framework and links specific techniques and tactics, providing standardized threat intelligence nomenclature.
+
+The scoreRisk function accepts threats, likelihood, impact, and existing controls as input and produces risk scores similar to CVSS along with prioritized threat lists as output. The process calculates likelihood multiplied by impact, adjusts for existing controls, and ranks threats by severity.
+
+The generateThreatReport function accepts all threat modeling data as input and produces comprehensive PDF or Word reports with diagrams, threat analysis, and recommendations as output. The process compiles all data, formats reports according to professional templates, and generates visualizations for easy consumption.
+
+The Threagile configuration includes YAML-based architecture definitions, an extensible threat catalog, custom risk formulas inspired by CVSS plus probability calculations, PDF report templates for technical and executive audiences, and integration with the MITRE ATT\&CK database.
+
+The engine receives threat modeling requests from the API Gateway in Layer 4, accepts system architecture from users uploaded as JSON or YAML, generates DFDs, STRIDE analysis, MITRE mapping, and risk scores, stores models in Postgres in Layer 6 for threat models and risk data, stores reports in Cloudflare R2 in Layer 6 as PDF or Word documents, stores diagrams in Cloudflare R2 as PNG or SVG files, queues jobs in BullMQ in Layer 5.9 since threat modeling can be time-intensive, notifies the Notification Service in Layer 5.5 when reports are ready, and returns results to the Frontend in Layer 3 for display in dashboards.
+
+\subsubsection{5.9 Background Jobs \& Workflow Queue}
+
+The Background Jobs \& Workflow Queue manages long-running asynchronous tasks without blocking the UI or API using BullMQ with Upstash Redis as Service \#18. This system ensures reliable job execution with retry logic, enabling the platform to handle time-consuming operations gracefully.
+
+The queue provides essential services including job queue management for async tasks, reliable job execution with retry and backoff strategies, job prioritization and scheduling, worker process management, job status tracking and monitoring, and dead letter queue for failed jobs.
+
+Sandbox Analysis Jobs are queued by the Scan Service in Layer 5.2 and execute CAPE Sandbox file analysis in Layer 5.7. These jobs typically take 5 to 15 minutes per file and are assigned high priority for user-submitted files to ensure timely results.
+
+ML Inference Jobs are queued by the Scan Service in Layer 5.2 and execute ML Engine classification in Layer 5.6. These jobs typically take 10 to 60 seconds per inference and are assigned medium priority as they are faster than sandbox analysis.
+
+Threat Modeling Jobs are queued by the Threat Modeling Engine in Layer 5.8 and execute full TIBSA analysis including DFD, STRIDE, MITRE, and Report generation. These jobs typically take 2 to 10 minutes per model and are assigned low priority as batch processing is acceptable for these comprehensive analyses.
+
+Threat Feed Ingestion Jobs are queued by Threat Intelligence in Layer 5.3 and execute automated feed ingestion from external sources. These jobs typically take 5 to 30 minutes and are scheduled hourly or daily with low priority as they are background maintenance tasks.
+
+Report Generation Jobs are queued by the Scan Service in Layer 5.2 and Threat Modeling in Layer 5.8, executing PDF or Word report compilation and rendering. These jobs typically take 30 to 120 seconds and are assigned medium priority for timely delivery to users.
+
+The BullMQ configuration includes Redis-backed queue persistence using Upstash Redis in Layer 6, multiple worker pools for different job types, exponential backoff for failed jobs, concurrency limits to prevent resource exhaustion, job monitoring via Grafana in Layer 7, and rate limiting for external API calls particularly for Threat Intel feeds.
+
+The queue receives jobs from all backend services in Layer 5.2, 5.3, 5.6, 5.7, and 5.8, stores queue in Upstash Redis in Layer 6, executes via worker processes on backend infrastructure, monitors via Prometheus metrics that feed into Grafana dashboards in Layer 7, notifies on completion via the Notification Service in Layer 5.5, updates job status in Postgres in Layer 6 for user visibility, and logs failures in Audit Logs in Layer 6.
+
+\subsection{LAYER 6 - Data Storage Layer}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{media/image7.png}
+\caption{Layer 6 - Data Storage Layer Architecture}
+\label{fig:ch4_fig7}
+\end{figure}
+
+\subsubsection{6.1 Relational Database (Postgres)}
+
+The Relational Database serves as the primary storage for all structured data requiring ACID transactions and complex queries using Neon Serverless Postgres as Service \#5. This database is the foundation of data persistence for the entire platform, ensuring data integrity and consistency.
+
+The database stores multiple categories of critical data: Users information includes credentials managed via Authentik, profiles, preferences, and roles. Scans data encompasses scan metadata, request parameters, and scan status. Reports information includes report metadata, generation timestamps, and access logs. Threat Models data covers architecture definitions, DFDs, STRIDE analysis, and risk scores. Audit Logs contain all user actions, system events, and administrative changes. Billing Records include subscriptions, invoices, usage metrics, and payment history. System Configuration stores platform settings, feature flags, and RBAC policies.
+
+The schema design includes a users table with id, email, role, created\_at, and last\_login fields. The scans table contains id, user\_id, scan\_type, target, status, created\_at, and results\_json fields. The threat\_models table includes id, user\_id, architecture\_json, dfd\_url, stride\_results, and risk\_score fields. The audit\_logs table stores id, user\_id, action, resource, timestamp, and ip\_address information. The billing table maintains id, user\_id, plan, usage, and subscription\_status data.
+
+The database is written by all backend services in Layer 5.1 through 5.9 via ORM, read by all backend services for queries, backed up through automated daily backups provided by Neon, replicated across multiple regions for high availability, and indexed with optimized queries for user\_id, scan\_id, and timestamps. It connects to Authentik in Layer 4 for user authentication data and is queried by Frontend dashboards in Layer 3 via the API Gateway in Layer 4.
+
+\subsubsection{6.2 Cache \& Queue (Redis)}
+
+The Cache \& Queue system provides in-memory caching for performance optimization and queue management for background jobs using Upstash Serverless Redis as Service \#6. This high-speed data store dramatically improves platform performance by reducing database load and enabling real-time features.
+
+The system stores multiple types of data: Session Cache maintains active user sessions and JWT refresh tokens. Rate Limiting stores request counters per user and IP for the API Gateway in Layer 4. Query Cache holds frequently accessed data such as user profiles and scan results. Job Queue manages BullMQ job queue in Layer 5.9 for background tasks. Temporary Results stores ML inference results before they are written to Postgres. Real-time Metrics tracks live scan counts, active users, and system load.
+
+The Redis data structures used include Strings for session tokens and cached JSON responses, Hashes for user session data and cached objects, Lists for job queues used by BullMQ, Sets for active users and IP blacklists, and Sorted Sets for rate limit counters with TTL.
+
+The cache is read from and written to by the API Gateway in Layer 4 for rate limiting, used by BullMQ in Layer 5.9 for job queue persistence, utilized by all backend services in Layer 5.1 through 5.8 for performance, serves as session storage for Authentik in Layer 4, manages TTL with auto-expiry for stale cache entries, and falls back to Postgres in Layer 6.1 on cache miss. The system is monitored by Prometheus in Layer 7 for hit and miss rates.
+
+\subsubsection{6.3 Object Storage (S3-compatible)}
+
+The Object Storage system provides scalable storage for large binary objects, files, and generated artifacts using Cloudflare R2 as Service \#7. This cost-effective storage solution handles all large files without egress fees, making it ideal for security artifacts and reports.
+
+The storage holds multiple types of data: Uploaded Files include user-submitted files for scanning such as binaries, documents, and PCAPs. PDF Reports contain generated security reports from the Scan Service in Layer 5.2 and Threat Modeling in Layer 5.8. Threat Model Diagrams include DFD images in PNG and SVG formats from Threagile in Layer 5.8. Sandbox Artifacts encompass CAPE screenshots, memory dumps, PCAP files, and extracted payloads. Generated Documents include Word reports and executive summaries. User Uploads store profile pictures and team logos if applicable.
+
+The bucket structure organizes files into uploaded-files/ for user-submitted files pending scanning, scan-reports/ for PDF and JSON scan reports, threat-models/ for DFD diagrams and model documents, sandbox-artifacts/ for CAPE analysis outputs including memory dumps, PCAPs, and screenshots, and user-assets/ for profile pictures and logos.
+
+The storage is written to by the File Upload Handler in Layer 3.4 via Tusd, the Scan Service in Layer 5.2 for reports, the Threat Modeling Engine in Layer 5.8 for diagrams and reports, and CAPE Sandbox in Layer 5.7 for artifacts. It is read by the Scan Service in Layer 5.2 to retrieve files for analysis, the Frontend in Layer 3 for report downloads, and CAPE Sandbox in Layer 5.7 to fetch files for execution. Metadata is stored in Postgres in Layer 6.1 including file IDs, URLs, sizes, and timestamps. Access control uses pre-signed URLs for secure, time-limited access, lifecycle policies auto-delete old files after retention periods, and CDN integration with Cloudflare CDN in Layer 2 caches frequently accessed reports.
+
+\subsubsection{6.4 Audit Logs Storage}
+
+The Audit Logs Storage provides immutable storage of all user actions, system events, and administrative changes for compliance and forensics using a dedicated Postgres table in Neon as Service \#5 or a separate append-only log store. This system ensures complete accountability and traceability for all platform activities.
+
+The storage logs multiple categories of events: User Actions include login and logout, file uploads, scan initiations, and report downloads. Administrative Changes cover user creation, role assignments, and configuration updates. System Events track service starts and stops, errors, and security incidents. API Requests log all API calls with timestamps, user IDs, IP addresses, and payloads. Authentication Events record MFA enrollments, password changes, and failed login attempts. Data Access tracks who accessed which reports, threat models, and scan results.
+
+The log structure includes Timestamp for precise event time in ISO 8601 format, User ID for the actor whether user or system, Action for the verb such as created, updated, deleted, or accessed, Resource for the target such as scan ID, user ID, or report URL, IP Address for the source IP, User Agent for browser or client information, Result indicating success or failure, and Metadata providing additional context in JSON format.
+
+The logs are written by all backend services in Layer 5.1 through 5.9 via logging middleware, are immutable as append-only with no updates or deletes, are queried by admin dashboards for compliance reporting, are indexed by timestamp, user\_id, and action for fast searches, are exported to Grafana Loki in Layer 7 for log aggregation, meet compliance requirements for GDPR, SOC 2, and ISO 27001 audit trails, and maintain configurable retention periods such as 7 years for compliance.
+
+\subsubsection{6.5 ML Features Database}
+
+The ML Features Database provides specialized storage for machine learning training data, feature vectors, and model metadata using dedicated Postgres tables or NoSQL such as MongoDB or Elastic as an extension of Service \#5. This specialized storage supports the continuous improvement of the platform's AI capabilities.
+
+The database stores multiple types of ML-specific data: Feature Vectors contain extracted features from files and URLs for ML training. Training Datasets include labeled samples categorized as phishing or benign, malware or clean. Model Metadata tracks model versions, training dates, hyperparameters, and accuracy metrics. Inference Results store ML predictions with confidence scores. Evaluation Metrics maintain precision, recall, F1 scores, and confusion matrices.
+
+The schema design includes a features table with id, file\_hash or url, feature\_vector in JSON or JSONB, label, and timestamp fields. The models table contains id, model\_name, version, trained\_at, accuracy, and model\_file\_url pointing to R2. The predictions table includes id, scan\_id, model\_id, prediction, confidence, and timestamp fields.
+
+The database is written by the ML Engine in Layer 5.6 for feature extraction and predictions, and by CAPE Sandbox in Layer 5.7 for behavioral features. It is read by the ML Engine in Layer 5.6 for training and inference. The training pipeline performs periodic retraining with new samples, model versioning tracks model improvements over time, A/B testing compares multiple models in production, and the database integrates with Threat Intelligence in Layer 5.3 for labeled threat data.
+
+\subsubsection{6.6 Scan Results Database}
+
+The Scan Results Database stores comprehensive results from all security scans including URL, file, sandbox, and threat intel using Postgres tables in Neon as Service \#5 or NoSQL for flexibility. This database aggregates findings from multiple analysis engines into cohesive scan results.
+
+The database stores multiple categories of scan data: Scan Metadata includes scan ID, user ID, scan type, target, and timestamp. Detection Results contain malicious indicators and threat classifications. Threat Intelligence includes IOC lookups and reputation scores. Sandbox Results contain behavioral analysis summaries. ML Predictions store classification scores from the ML Engine. External Feed Results include VirusTotal and HybridAnalysis responses. Historical Data maintains previous scan results for trending and comparison.
+
+The schema design includes a scans table with id, user\_id, scan\_type, target, status, and created\_at fields. The scan\_results table contains id, scan\_id, source indicating sandbox, ml, or threat\_intel, result\_json, and severity fields. The ioc\_matches table includes id, scan\_id, ioc\_type, ioc\_value, and threat\_intel\_source fields.
+
+The database is written by the Scan Service in Layer 5.2 for aggregated scan results, CAPE Sandbox in Layer 5.7 for behavioral analysis, the ML Engine in Layer 5.6 for classification predictions, and Threat Intelligence in Layer 5.3 for IOC matches. It is read by the Scan Service in Layer 5.2 for report generation, Frontend dashboards in Layer 3 for visualization, and the Alerts Engine in Layer 7 for alert triggering. The database is indexed by scan\_id, user\_id, timestamp, and severity, maintains configurable retention such as keeping the last 90 days and archiving older data, and is exported to the SIEM in Layer 7 for security monitoring.
+
+\subsection{LAYER 7 - Monitoring \& Threat Analysis}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{media/image8.png}
+\caption{Layer 7 - Monitoring \& Threat Analysis Architecture}
+\label{fig:ch4_fig8}
+\end{figure}
+
+\subsubsection{7.1 SIEM (Security Information and Event Management)}
+
+The SIEM collects, aggregates, and analyzes security events from all platform components to detect attacks on the infrastructure itself using Wazuh Open Source as Service \#15. This system provides the security monitoring backbone for the entire platform, protecting the protector.
+
+The SIEM provides comprehensive services including log collection from all services including API Gateway, backend services, and databases, security event correlation, intrusion detection with IDS and IPS capabilities, file integrity monitoring (FIM), vulnerability detection, compliance monitoring for PCI DSS, GDPR, and HIPAA, real-time alerting, and a threat hunting interface.
+
+Data sources include API Gateway logs covering request patterns, authentication failures, and rate limit violations, Backend service logs capturing application errors and suspicious activity, System logs recording OS-level events, process executions, and network connections, Database audit logs tracking unauthorized access attempts and schema changes, and Edge layer logs containing WAF blocks and DDoS events from Cloudflare.
+
+Detection capabilities include identifying brute-force attacks through multiple failed login attempts, detecting SQL injection attempts through malicious query patterns in logs, monitoring file tampering for unauthorized file modifications, detecting privilege escalation through unexpected role changes, identifying data exfiltration through unusual data transfer patterns, and detecting malware on infrastructure through suspicious process execution.
+
+The SIEM collects from all layers including Edge, Frontend, API, Backend, and Storage, receives logs via Syslog, file monitoring, and API integrations, stores logs in Wazuh Elasticsearch backend, correlates events using a real-time analysis engine, sends alerts to the Alert Engine in Layer 7.2 for prioritization, integrates with Grafana Loki in Layer 7.4 for unified log view, feeds the Threat Dashboard in Layer 7.3 with security metrics, and triggers the Notification Dispatcher in Layer 7.4 for critical alerts.
+
+\subsubsection{7.2 Alert Engine}
+
+The Alert Engine processes, filters, and prioritizes alerts from SIEM, reducing noise and triggering appropriate responses using custom alert processing logic as part of Wazuh or as a standalone component. This intelligent filtering ensures that security teams focus on genuine threats rather than false positives.
+
+The engine provides critical services including alert deduplication to suppress repeated alerts, severity-based prioritization, context enrichment adding user, asset, and threat intel context, alert correlation to link related events, false positive suppression, automated response triggering, and escalation to human analysts.
+
+The alert processing pipeline follows a structured workflow: First, it receives raw alerts from the SIEM in Layer 7.1. Second, it deduplicates to suppress duplicate alerts within time windows. Third, it enriches alerts by adding context from Postgres for user info and Threat Intel in Layer 5.3. Fourth, it correlates by linking related alerts such as multiple failed logins indicating brute force. Fifth, it prioritizes by scoring based on severity, asset criticality, and threat intel. Sixth, it routes with critical alerts receiving immediate escalation and low priority alerts queued for review. Finally, it responds by triggering automated actions such as blocking IPs, disabling users, or isolating hosts.
+
+The engine receives raw security events from the SIEM in Layer 7.1, enriches with Threat Intelligence from Layer 5.3 for IOC context and Postgres in Layer 6.1 for user and asset data, sends processed alerts to the Threat Dashboard in Layer 7.3 for visualization and the Notification Dispatcher in Layer 7.4 for stakeholder alerts, triggers automated responses such as API calls to block IPs in Cloudflare, and logs actions in Audit Logs in Layer 6.4.
+
+\subsubsection{7.3 Threat Dashboard}
+
+The Threat Dashboard provides visual interface for security analysts to monitor threats, investigate incidents, and track security posture using Grafana dashboards as part of Service \#16 combined with custom UI in Next.js from Layer 3. This dashboard transforms raw security data into actionable intelligence.
+
+The dashboard provides multiple visualizations: Active Alerts shows a real-time alert feed with severity indicators. Threat Heatmap displays geographic visualization of attack origins. Attack Timeline provides chronological view of security events. Top Threats highlights most frequent attack types and sources. Asset Risk Scores displays criticality-based asset view. Incident Status tracks open, in-progress, and closed incidents. Alert Trends shows historical alert volume over time. Attack Graphs provides visual representation of multi-step attacks.
+
+Features include drill-down capability to click alerts and view full details and evidence, filtering by severity, time, asset, and alert type, search functionality with full-text search across all security events, export capability for reports for stakeholders and compliance audits, and collaboration features to assign alerts to analysts and add notes.
+
+The dashboard receives data from the Alert Engine in Layer 7.2 for processed, prioritized alerts, the SIEM in Layer 7.1 for raw event data, and Threat Intelligence in Layer 5.3 for IOC context. It displays on the Frontend in Layer 3 specifically in the Security Analyst Console in Layer 1.1, integrates with the Threat Map in Layer 3 for geo-visualization and the Alerts Table in Layer 3 for tabular view, and queries Postgres in Layer 6.1 for historical data.
+
+\subsubsection{7.4 Observability Stack (Monitoring, Metrics, Logs)}
+
+The Observability Stack provides comprehensive observability for system performance, errors, and operational metrics using Grafana, Prometheus, and Loki as Service \#16. This stack ensures that operations teams have complete visibility into platform health and performance.
+
+Prometheus handles metrics collection as a time-series database, providing services including time-series metrics collection, service health monitoring, resource usage tracking for CPU, memory, disk, and network, API response times and error rates, database query performance, queue lengths for BullMQ jobs, and cache hit and miss rates for Redis.
+
+Metrics collected include API Gateway metrics covering requests per second, latency, error rates, and rate limit hits, Backend Services metrics tracking processing times, job queue depths, and error counts, Database metrics monitoring query times, connection pools, and disk usage, ML Engine metrics recording inference times and model accuracy, and Sandbox metrics tracking VM utilization and analysis completion times.
+
+Loki handles log aggregation, providing services including centralized log collection from all services, log querying with LogQL, log correlation with traces, and long-term log storage. Logs aggregated include application logs covering errors, warnings, and info, access logs for API requests, audit logs for user actions, system logs for OS events, and security logs for authentication and authorization.
+
+Grafana provides visualization and dashboards, offering services including unified dashboard for metrics and logs, custom dashboards per service, alerting based on thresholds, anomaly detection, and performance trending.
+
+Dashboards include Platform Overview showing overall system health, active users, and scan volume, API Gateway displaying request rates, error rates, and latency percentiles, Backend Services showing service-specific metrics and job processing times, Database Performance tracking query times, connection pools, and slow queries, Security Monitoring displaying failed logins, rate limit violations, and WAF blocks, and Cost Monitoring showing resource usage for billing optimization.
+
+The stack scrapes metrics from all backend services in Layer 5.1 through 5.9, the API Gateway in Layer 4.1, and Databases in Layer 6.1 through 6.6. It collects logs from all services via Loki agents, visualizes in Grafana dashboards, sends alerts to the Notification Service in Layer 5.5 on threshold violations, integrates with the SIEM in Layer 7.1 for security event correlation, and is accessed by DevOps team, SREs, and Security analysts.
+
+\subsubsection{7.5 Notification Dispatcher}
+
+The Notification Dispatcher routes alerts and notifications to appropriate stakeholders via multiple communication channels using Resend as Service \#13 for emails and webhook integrations for Slack, Teams, and Jira. This system ensures that critical information reaches the right people through their preferred channels.
+
+The dispatcher provides essential services including email alert delivery for critical security events and system outages, Slack and Teams integration for real-time team notifications, ticketing system integration with Jira and ServiceNow for incident tracking, optional SMS alerts for critical events via Twilio integration, and escalation management to notify senior analysts if alerts go unaddressed.
+
+Notification types include Critical Security Alerts for brute-force attacks, data breaches, and infrastructure compromise, System Health notifications for service outages, database failures, and high error rates, User Notifications for scan completions and report readiness from Layer 5, and Operational Alerts for queue backlogs, resource exhaustion, and failed jobs.
+
+The dispatcher receives from the Alert Engine in Layer 7.2 for security alerts, Prometheus in Layer 7.4 for system health alerts, and the SIEM in Layer 7.1 for critical security events. It delivers via Resend for email, Webhooks for Slack, Teams, and Jira, and optionally SMS. The dispatcher logs delivery in Audit Logs in Layer 6.4 and escalates unacknowledged critical alerts to senior staff.
+
+\subsection{LAYER 8 - TIBSA Suite (Core)}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{media/image9.png}
+\caption{Layer 8 - TIBSA Suite Core Architecture}
+\label{fig:ch4_fig9}
+\end{figure}
+
+\subsubsection{8.1 TIBSA Suite - Level 1 (Absolute Core)}
+
+The TIBSA Suite represents the foundational automation engines that execute the complete threat-modeling and risk-analysis workflow, transforming raw system information into structured models, identified threats, calculated risks, and actionable reports using Threagile as Service \#17 as the core automation engine.
+
+The Automated Threat Modeling Engine applies the complete TIBSA methodology automatically, accepting system architecture in JSON or YAML format, asset inventory, and data flows as input and producing complete threat models with identified threats as output. The process parses architecture, identifies assets, maps data flows, detects threat patterns, and produces comprehensive models.
+
+The DFD Diagram Creator generates Data Flow Diagrams automatically, accepting parsed system descriptions as input and producing structured DFDs in PNG, SVG, or JSON format as output showing processes, data stores, external entities, and data flows. The process identifies components, maps relationships, generates visual diagrams, and stores them in Cloudflare R2 in Layer 6.
+
+The STRIDE and MITRE ATT\&CK Auto-Mapping component provides standardized threat categorization and TTP mapping, accepting system components, DFDs, and identified weak points as input and producing STRIDE threat categories plus correlated MITRE ATT\&CK techniques as output. The process maps components to STRIDE categories covering Spoofing, Tampering, Repudiation, Information Disclosure, Denial of Service, and Elevation of Privilege, correlates threats with MITRE ATT\&CK TTPs, and links to real-world attack patterns ensuring industry-aligned, standardized threat identification.
+
+The TTP Scoring Calculator provides risk scoring for each threat and TTP, accepting identified threats, likelihood factors, impact assessment, exploitation difficulty, and environmental context as input and producing risk scores on a 0 to 10 scale along with likelihood and impact ratings as output. The scoring model considers likelihood based on threat actor capability, attack complexity, and existing controls, impact based on asset criticality, data sensitivity, and business disruption, and combines these into a combined score calculated as likelihood multiplied by impact with contextual adjustments using a formula similar to CVSS but enhanced with probability estimation.
+
+The Security Controls Effectiveness Evaluator assesses existing security controls against identified threats, accepting organization's security controls inventory and identified threats as input and producing control effectiveness ratings, coverage gaps, redundancies, and priority controls needed as output. The evaluation determines which threats are adequately mitigated, which threats lack sufficient controls, which controls are redundant or ineffective, and the cost-benefit of proposed controls.
+
+The Benefit-Cost Ratio Dashboard provides cost-effectiveness analysis for control recommendations, accepting recommended controls, implementation costs, and expected risk reduction as input and producing B/C ratios and prioritized control recommendations ranked by cost-effectiveness as output. This helps decision-makers allocate security budget optimally.
+
+The Asset Impact Analyzer provides business and technical impact assessment for critical assets, accepting asset inventory, business criticality, and dependencies as input and producing asset criticality scores, impact categories covering financial, operational, reputational, and compliance aspects, and priority rankings as output. This supports risk-based decision-making and resource allocation.
+
+The Custom Report Generator automates comprehensive report generation, accepting all threat modeling data including DFD, STRIDE, MITRE, risks, and controls as input and producing PDF or Word reports as output. The reports include executive summary, technical threat analysis, risk scores and rankings, recommended controls with priorities, diagrams and visualizations, and compliance mappings. Templates are customizable for different audiences including technical, executive, and compliance stakeholders.
+
+The Executive Dashboard provides high-level leadership dashboard, accepting aggregated threat modeling results as input and producing single-page summary as output. The summary includes top threats and risk levels, critical assets at risk, recommended priority actions, overall security posture score, and trend indicators showing whether security is improving or worsening. The purpose is to enable rapid executive decision-making.
+
+The suite receives threat modeling requests from the API Gateway in Layer 4, accepts input data from users via the Frontend in Layer 3 in the form of architecture descriptions, executes via the Threagile automation engine, stores models in Postgres in Layer 6 for threat data and risk scores, stores artifacts in Cloudflare R2 in Layer 6 for DFD diagrams and PDF or Word reports, queues jobs in BullMQ in Layer 5.9 for async processing taking 2 to 10 minutes, integrates with the MITRE ATT\&CK database for TTP mapping, notifies via the Notification Service in Layer 5.5 when reports are ready, displays in the Frontend Dashboard in Layer 3 specifically in the Executive Dashboard component, and exports to the SIEM in Layer 7 for security monitoring integration.
+\subsection{Key Integration Points Summary}
+
+The authentication flow moves from Cloudflare through Next.js to KrakenD to Authentik and finally to Backend Services. The file analysis pipeline flows from Uppy/Tusd to R2 to CAPE Sandbox to ML Engine to MISP and culminates in comprehensive reports. The threat modeling workflow begins with user input, processes through Threagile to produce DFD, STRIDE, and MITRE analysis, and stores reports in R2. Background processing flows from all services through BullMQ to Redis Queue where workers process jobs and store results in appropriate storage. The monitoring flow captures data from all services, sends it to Prometheus and Loki, displays it in Grafana Dashboards, and generates alerts as needed. Security monitoring aggregates all logs in Wazuh SIEM, processes them through the Alert Engine, and distributes notifications via the Notification Dispatcher. Data persistence is handled with all services storing structured data in Postgres, utilizing Redis for cache, and storing large objects in R2.
+
+\section{Object-Oriented Class Design}
+
+\sloppy
+This section presents the object-oriented class design of the TIBSA platform, illustrating the structural relationships between the system's core components through a comprehensive Unified Modeling Language (UML) class diagram. The class diagram provides a detailed view of the system's software architecture, showcasing the classes, their attributes, methods, and the associations that bind them together. This design follows established object-oriented principles including encapsulation, inheritance, and composition to ensure modularity, maintainability, and extensibility of the codebase.
+
+% Class Diagram - Split across two facing pages
+\clearpage
+\begin{figure}[p]
+\centering
+\includegraphics[width=1.1\textwidth,height=0.88\textheight,keepaspectratio,clip,trim=0cm 0cm 8cm 0cm]{media/class_diagram.jpg}
+\caption{TIBSA Platform - Comprehensive Class Diagram (Part 1 of 2)}
+\label{fig:ch4_class_diagram_part1}
+\end{figure}
+
+\begin{figure}[p]
+\centering
+\includegraphics[width=1.1\textwidth,height=0.88\textheight,keepaspectratio,clip,trim=8cm 0cm 0cm 0cm]{media/class_diagram.jpg}
+\caption{TIBSA Platform - Comprehensive Class Diagram (Part 2 of 2)}
+\label{fig:ch4_class_diagram}
+\end{figure}
+\clearpage
+
+\subsection{Core Classes Overview}
+
+The TIBSA platform's class structure is organized around several core domain entities that represent the fundamental building blocks of the system. Each class encapsulates specific functionality and data, with well-defined interfaces for interaction with other components. The following subsections provide detailed descriptions of each class, their attributes, methods, and relationships.
+
+\subsection{URLScanning Class}
+
+The URLScanning class serves as the central component responsible for analyzing web addresses for potential security threats such as phishing attempts, malware distribution, and malicious content. This class encapsulates all functionality related to URL-based threat detection and analysis. The class maintains several key attributes including \texttt{scanID} which serves as a unique identifier assigned to each URL scanning operation for tracking and reference purposes, \texttt{targetURL} representing the web address submitted for security analysis, \texttt{scanStatus} indicating the current state of the scanning operation (pending, in-progress, completed, or failed), and \texttt{createdAt} which records the timestamp when the scan request was initiated.
+
+The class provides essential methods for URL analysis operations. The \texttt{initiateScan()} method initiates the URL scanning process by sending the target URL to the analysis engines. The \texttt{getScanResults()} method retrieves the complete analysis results including threat indicators and reputation scores. The \texttt{cancelScan()} method terminates an ongoing scan operation and releases associated resources.
+
+\subsection{AuthenticationHandler Class}
+
+The AuthenticationHandler class manages all aspects of user authentication and session management within the TIBSA platform. It serves as the primary interface between the user interface layer and the authentication service, ensuring secure access control throughout the system. The class attributes include \texttt{sessionID} which provides a unique token identifying the current user session, \texttt{userEmail} containing the email address associated with the authenticated user, \texttt{loginAttempts} as a counter tracking failed login attempts for security monitoring, \texttt{isAuthenticated} as a flag indicating whether the current session is authenticated, \texttt{mfaEnabled} indicating whether multi-factor authentication is enabled for the account, and \texttt{lastLogin} recording the timestamp of the user's most recent successful login.
+
+The class implements comprehensive authentication methods. The \texttt{registerUser(email, password)} method creates a new user account with the provided credentials. The \texttt{authenticateUser(email, password)} method validates user credentials and issues authentication tokens. The \texttt{validateToken(token)} method verifies the validity and expiration status of authentication tokens. The \texttt{refreshToken(refreshToken)} method issues new access tokens using valid refresh tokens. The \texttt{verifyMFA(code)} method validates multi-factor authentication codes. The \texttt{logout()} method terminates the current session and invalidates associated tokens.
+
+\subsection{UserServices Class}
+
+The UserServices class provides comprehensive user account management functionality, handling user profiles, preferences, and account-related operations. This class acts as the service layer for all user-centric operations beyond authentication. The class maintains attributes including \texttt{userID} as the unique identifier for the user account, \texttt{userName} representing the display name of the user, \texttt{userEmail} containing the primary email address associated with the account, \texttt{userRole} indicating the role assigned to the user (Admin, Analyst, User, Guest), \texttt{profileData} as a container for additional user profile information, and \texttt{createdAt} recording the account creation timestamp.
+
+The class provides several methods for user management. The \texttt{getProfile(userID)} method retrieves the complete profile data for a specified user. The \texttt{updateProfile(userID, data)} method updates user profile information with the provided data. The \texttt{deleteAccount(userID)} method permanently removes a user account and associated data. The \texttt{getUserRole(userID)} method returns the current role assignment for a user. The \texttt{updatePreferences(userID, prefs)} method modifies user preferences and settings.
+
+\subsection{ScanServices Class}
+
+The ScanServices class orchestrates all security scanning operations within the platform, coordinating between file analysis, URL scanning, and threat intelligence services. This class serves as the central hub for initiating, managing, and tracking scan operations across the entire system. The class attributes include \texttt{scanID} as the unique identifier for the scan operation, \texttt{scanType} indicating the classification of the scan (file, URL, or hash lookup), \texttt{targetIdentifier} representing the subject of the scan (file path, URL, or hash value), \texttt{priority} indicating the processing priority level for the scan request, \texttt{status} showing the current operational status of the scan, and \texttt{initiatedBy} containing the user ID of the requesting user.
+
+The class implements comprehensive scanning methods. The \texttt{createScan(type, target, userID)} method initializes a new scan operation with specified parameters. The \texttt{getScanStatus(scanID)} method returns the current status and progress of a scan. The \texttt{getScanResults(scanID)} method retrieves completed scan results and analysis data. The \texttt{cancelScan(scanID)} method terminates an in-progress scan operation. The \texttt{queueScan(scan)} method adds a scan to the processing queue for asynchronous execution. The \texttt{aggregateResults(scanID)} method combines results from multiple analysis engines into a unified report.
+
+\subsection{FileAnalysis Class}
+
+The FileAnalysis class handles the processing and security analysis of uploaded files, implementing both static and dynamic analysis techniques. This class integrates with sandbox environments, machine learning engines, and threat intelligence services to provide comprehensive file security assessments. The class maintains attributes including \texttt{fileID} as the unique identifier assigned to the uploaded file, \texttt{fileName} containing the original name of the uploaded file, \texttt{fileHash} representing the SHA-256 hash of the file content for integrity verification, \texttt{fileSize} indicating the size of the file in bytes, \texttt{mimeType} containing the MIME type classification of the file, \texttt{uploadDate} recording the timestamp of file upload, and \texttt{analysisStatus} indicating the current state of the analysis process.
+
+The class provides essential methods for file analysis. The \texttt{uploadFile(file)} method processes and stores an uploaded file for analysis. The \texttt{calculateHash(file)} method computes cryptographic hashes (MD5, SHA-1, SHA-256) for the file. The \texttt{extractMetadata(fileID)} method extracts file properties and metadata information. The \texttt{initiateStaticAnalysis(fileID)} method begins static analysis of file structure and content. The \texttt{initiateDynamicAnalysis(fileID)} method submits the file to sandbox environment for behavioral analysis. The \texttt{getAnalysisReport(fileID)} method retrieves the comprehensive analysis report for a file.
+
+\subsection{PentestJobService Class}
+
+The PentestJobService class manages penetration testing operations within the TIBSA platform, handling job scheduling, execution coordination, and results collection for automated security assessments. The class attributes include \texttt{jobID} as the unique identifier for the penetration testing job, \texttt{targetScope} defining the target scope for testing, \texttt{testModules} as a collection of testing modules to be executed, \texttt{scheduledTime} indicating the scheduled execution time for the job, and \texttt{jobStatus} representing the current status of the pentest job.
+
+The class implements methods for penetration testing management. The \texttt{createJob(scope, modules)} method creates a new penetration testing job with specified parameters. The \texttt{scheduleJob(jobID, time)} method schedules a job for future execution. The \texttt{executeJob(jobID)} method initiates the execution of a pentest job. The \texttt{getJobResults(jobID)} method retrieves the findings and results from a completed job. The \texttt{cancelJob(jobID)} method cancels a scheduled or running job.
+
+\subsection{ThreatIntelService Class}
+
+The ThreatIntelService class provides integration with threat intelligence sources, enabling the platform to enrich security analysis with external threat data, indicators of compromise (IOCs), and reputation information. The class maintains attributes including \texttt{queryID} as the unique identifier for threat intelligence queries, \texttt{indicatorType} indicating the type of indicator being queried (IP, domain, hash, URL), \texttt{indicatorValue} containing the actual indicator value for lookup, \texttt{sources} as a list of threat intelligence sources to query, and \texttt{lastUpdated} recording the timestamp of the most recent data refresh.
+
+The class provides methods for threat intelligence operations. The \texttt{lookupIOC(indicator)} method queries threat intelligence sources for indicator information. The \texttt{getReputation(target)} method retrieves reputation scores for domains, IPs, or URLs. The \texttt{enrichData(scanResults)} method augments scan results with threat intelligence context. The \texttt{syncFeeds()} method synchronizes local threat data with external feed sources. The \texttt{queryMISP(indicator)} method queries the MISP platform for related threat events.
+
+\subsection{MLEngineService Class}
+
+The MLEngineService class encapsulates the machine learning capabilities of the TIBSA platform, providing intelligent threat detection through trained models for phishing classification, malware detection, and anomaly identification. The class attributes include \texttt{modelID} as the identifier for the machine learning model in use, \texttt{modelVersion} indicating the version number of the deployed model, \texttt{modelType} representing the classification of the model (phishing, malware, anomaly), \texttt{accuracy} containing the current accuracy metric of the model, and \texttt{lastTrained} recording the timestamp of the most recent model training.
+
+The class implements machine learning methods. The \texttt{classifyURL(url, features)} method classifies a URL as phishing or legitimate. The \texttt{classifyFile(fileFeatures)} method determines malware probability for a file. The \texttt{extractFeatures(input)} method extracts relevant features for model input. The \texttt{runInference(features)} method executes model inference on provided feature vectors. The \texttt{getConfidenceScore(prediction)} method returns the confidence level of a prediction.
+
+\subsection{AccountManager Class}
+
+The AccountManager class handles subscription management, usage tracking, and account tier administration, integrating with billing services to manage user entitlements and resource allocation. The class maintains attributes including \texttt{accountID} as the unique identifier for the billing account, \texttt{subscriptionPlan} indicating the current subscription tier (Freemium, Pro, Enterprise), \texttt{usageQuota} representing the maximum allowed resource usage for the account, \texttt{currentUsage} tracking the current resource consumption count, \texttt{billingCycle} indicating the billing period (monthly, annual), and \texttt{expirationDate} recording the subscription expiration date.
+
+The class provides methods for account management. The \texttt{getSubscriptionDetails(accountID)} method retrieves current subscription information. The \texttt{updateSubscription(accountID, plan)} method modifies the subscription plan. The \texttt{trackUsage(accountID, resource)} method records resource usage for billing purposes. The \texttt{checkQuota(accountID)} method verifies if the account has remaining quota. The \texttt{generateInvoice(accountID)} method creates billing invoices for the account.
+
+\subsection{ThreatAnalysisEngine Class}
+
+The ThreatAnalysisEngine class represents the core threat modeling functionality of the TIBSA platform, automating the generation of threat models, STRIDE analysis, and risk assessments based on system architecture inputs. The class attributes include \texttt{modelID} as the unique identifier for the threat model, \texttt{architectureInput} containing the system architecture description in JSON or YAML format, \texttt{dfdGenerated} as a flag indicating whether DFD has been generated, \texttt{riskScore} representing the calculated overall risk score for the system, and \texttt{analysisDate} recording the timestamp of the threat analysis execution.
+
+The class implements comprehensive threat modeling methods. The \texttt{generateDFD(architecture)} method creates Data Flow Diagrams from architecture specifications. The \texttt{performSTRIDE(dfd)} method executes STRIDE threat analysis on the model. The \texttt{mapMITRE(threats)} method maps identified threats to MITRE ATT\&CK framework. The \texttt{calculateRisk(threats, controls)} method computes risk scores based on likelihood and impact. The \texttt{generateReport(modelID)} method produces comprehensive threat modeling reports.
+
+\subsection{ITScanAPIWrapper Class}
+
+The ITScanAPIWrapper class provides a unified interface for interacting with external scanning APIs and antivirus engines, abstracting the complexity of multiple vendor integrations behind a consistent API. The class maintains attributes including \texttt{apiEndpoint} containing the base URL for the external API, \texttt{apiKey} as the authentication key for API access, \texttt{engineName} representing the name of the integrated scanning engine, \texttt{isActive} indicating whether the integration is currently active, and \texttt{rateLimitRemaining} tracking the remaining API calls within the rate limit period.
+
+The class provides methods for external API integration. The \texttt{submitScan(target)} method submits a target to the external scanning service. The \texttt{getResults(scanID)} method retrieves scan results from the external service. The \texttt{checkStatus(scanID)} method queries the status of an external scan operation. The \texttt{validateAPIKey()} method verifies the validity of the configured API key.
+
+\subsection{FTPThreagileInput Class}
+
+The FTPThreagileInput class manages the input processing for the Threagile threat modeling engine, handling file transfers and format conversions required for automated threat model generation. The class attributes include \texttt{inputID} as the unique identifier for the input request, \texttt{inputFormat} indicating the format of the input file (JSON, YAML), \texttt{validationStatus} representing the status of input validation, and \texttt{processingQueue} indicating the queue assignment for processing.
+
+The class implements input processing methods. The \texttt{validateInput(data)} method validates input data against schema requirements. The \texttt{transformFormat(input, targetFormat)} method converts input between supported formats. The \texttt{queueForProcessing(inputID)} method adds validated input to the processing queue.
+
+\subsection{SecurityControlsEvaluator Class}
+
+The SecurityControlsEvaluator class assesses the effectiveness of existing security controls against identified threats, providing gap analysis and recommendations for security improvements. The class maintains attributes including \texttt{evaluationID} as the unique identifier for the evaluation session, \texttt{controlsInventory} as a list of security controls under evaluation, \texttt{threatsCovered} representing the threats addressed by current controls, and \texttt{gapsIdentified} containing the security gaps requiring attention.
+
+The class provides methods for security controls evaluation. The \texttt{evaluateControls(controls, threats)} method assesses control effectiveness against threats. The \texttt{identifyGaps(evaluation)} method identifies areas lacking adequate protection. The \texttt{recommendControls(gaps)} method suggests controls to address identified gaps. The \texttt{calculateCoverage(controls)} method computes the percentage of threats mitigated.
+
+\subsection{ReportGenerator Class}
+
+The ReportGenerator class handles the creation and formatting of all reports within the TIBSA platform, including scan reports, threat model documentation, and executive summaries. The class maintains attributes including \texttt{reportID} as the unique identifier for the generated report, \texttt{reportType} indicating the classification of the report (scan, threat model, executive), \texttt{outputFormat} representing the desired output format (PDF, Word, JSON), \texttt{generatedAt} recording the timestamp of report generation, and \texttt{storageURL} containing the location where the report is stored.
+
+The class implements report generation methods. The \texttt{compileReportData(sourceID)} method aggregates data required for report generation. The \texttt{generatePDF(data)} method creates PDF format reports with visualizations. The \texttt{generateWord(data)} method produces Word format documentation. The \texttt{exportJSON(data)} method exports report data in JSON format for integration.
+
+\subsection{Class Relationships and Associations}
+
+The classes within the TIBSA platform exhibit various types of relationships that define how objects interact and collaborate to fulfill system functionality. The following describes the key associations illustrated in the class diagram:
+
+\subsubsection{Composition Relationships}
+
+The ScanServices class maintains a composition relationship with both URLScanning and FileAnalysis classes, indicating that scan operations are composed of specific scanning activities. When a ScanServices instance is destroyed, the associated URLScanning and FileAnalysis instances are also terminated, reflecting the lifecycle dependency between these components.
+
+\subsubsection{Association Relationships}
+
+The AuthenticationHandler class is associated with the UserServices class, enabling user authentication to be linked with profile management. This association allows authenticated sessions to access and modify user-specific data while maintaining separation of concerns between authentication and user management logic.
+
+The ThreatIntelService class associates with the ScanServices class, providing threat intelligence enrichment capabilities to scan operations. This relationship enables scan results to be augmented with external threat data, IOC matches, and reputation information.
+
+\subsubsection{Dependency Relationships}
+
+The MLEngineService class depends on the FileAnalysis and URLScanning classes for feature extraction, as machine learning inference requires preprocessed features derived from analyzed files and URLs. This dependency ensures that ML predictions are based on properly extracted and validated input data.
+
+The ThreatAnalysisEngine class depends on the FTPThreagileInput class for receiving properly formatted architecture specifications, and on the SecurityControlsEvaluator class for assessing control effectiveness during threat modeling operations.
+
+\subsubsection{Aggregation Relationships}
+
+The AccountManager class aggregates UserServices instances, reflecting that a single billing account may encompass multiple user accounts within an organization. This aggregation supports team-based subscriptions and centralized usage tracking across multiple users.
+
+\subsection{Design Patterns Employed}
+
+The class design incorporates several established software design patterns to promote code quality, maintainability, and extensibility:
+
+\begin{itemize}
+    \item \textbf{Service Layer Pattern:} Classes such as UserServices, ScanServices, and ThreatIntelService implement the service layer pattern, encapsulating business logic and providing clean interfaces for upper layers.
+
+    \item \textbf{Factory Pattern:} The ScanServices class employs factory methods to create appropriate scanning instances (URLScanning or FileAnalysis) based on the type of target being analyzed.
+
+    \item \textbf{Wrapper Pattern:} The ITScanAPIWrapper class implements the wrapper pattern to provide a unified interface for multiple external scanning APIs, simplifying integration and maintenance.
+
+    \item \textbf{Strategy Pattern:} The MLEngineService class utilizes the strategy pattern to select appropriate classification models based on the type of input being analyzed (URL vs. file).
+
+    \item \textbf{Observer Pattern:} The notification and status update mechanisms employ the observer pattern, allowing UI components to react to changes in scan status and analysis completion.
+\end{itemize}
+
+\subsection{Class Design Summary}
+
+The class diagram presented in this section provides a comprehensive view of the TIBSA platform's object-oriented architecture. The design emphasizes modularity through well-defined class boundaries, maintainability through clear separation of concerns, and extensibility through the use of established design patterns. Each class encapsulates specific domain functionality while maintaining loose coupling with other components through well-defined interfaces. This architectural approach ensures that the system can evolve to accommodate new features, additional scanning engines, and enhanced threat intelligence capabilities without requiring fundamental structural changes.
+
+\clearpage
+\clearpage
+\section{Entity-Relationship Diagram (ERD)}
+
+This section presents the entity-relationship design of the cybersecurity platform, illustrating the structural organization of data and the relationships between the system’s core entities through a comprehensive Entity-Relationship Diagram (ERD). The ERD provides a detailed view of the platform’s database schema, showcasing tables, their attributes, primary and foreign keys, and the associations that connect them. This design follows established database normalization principles to ensure data integrity, consistency, and efficient storage, while also supporting the platform’s functional requirements such as scan management, threat modeling, and mitigation tracking. By mapping entities and their relationships in a structured manner, the ERD forms the foundation for both backend implementation and future scalability of the system.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=1.0\textwidth]{media/ERD.jpg}
+\caption{TIBSA Platform - Entity-Relationship Diagram (ERD)}
+\label{fig:erd}
+\end{figure}
+
+\subsection{User Table}
+The User table stores information about registered users of the cybersecurity platform, serving as the primary entity for user management. Its attributes include \texttt{user\_id}, which uniquely identifies each user, email for communication and login purposes, and timestamps \texttt{created\_at} and \texttt{updated\_at} to track account creation and modifications. Users are responsible for submitting scan requests and creating threat models, forming the basis of the platform’s user-specific operations.
+
+\subsection{Scan\_Request Table}
+The \texttt{Scan\_Request} table manages individual scan operations initiated by users. Key attributes include \texttt{scan\_id} as the unique identifier, \texttt{user\_id} linking the scan to the submitting user, \texttt{scan\_type} specifying the kind of scan (e.g., file or URL), and \texttt{status} indicating the current state of the scan, such as pending, completed, or failed. This table ensures that every scan is traceable to a user and forms the foundation for subsequent scan results.
+
+
+\subsection{File Table}
+The File table handles all files submitted for analysis. Its attributes include\texttt{file\_id} as the unique identifier, \texttt{scan\_id} referencing the associated scan request, and \texttt{original\_filename} storing the name of the submitted file. Each file is linked to a specific scan request, allowing the system to track which files are being analyzed in each scanning operation.
+
+
+\subsection{URL Table}
+The URL table stores URLs submitted for scanning. It includes \texttt{url\_id}
+as the primary key, \texttt{scan\_id} linking it to the related scan request,
+and \texttt{url} containing the web address being analyzed. This entity
+parallels the File table and provides a structured way to manage web-based
+submissions for threat detection.
+
+\subsection{Scan\_Result Table}
+The Scan\_Result table captures the outcomes of scan requests, linking back to
+the corresponding Scan\_Request via \texttt{scan\_id}. It contains
+\texttt{result\_id} as the unique identifier, \texttt{verdict} summarizing the
+outcome of the scan, and \texttt{confidence\_score} to indicate the certainty of
+the results. This table allows for detailed tracking of each scan’s outcome and
+supports subsequent analysis by antivirus engines.
+
+\subsection{Antivirus\_Engine Table}
+The \texttt{Antivirus\_Engine} table maintains information about the antivirus engines utilized for scanning. Its attributes include \texttt{engine\_id} as the unique identifier, \texttt{engine\_name}, \texttt{version}, \texttt{status} to indicate operational readiness, and \texttt{last\_update} for tracking the engine’s current version. Each engine can execute multiple scans and contribute to the overall scan results.
+
+
+\subsection{Engine\_Result Table}
+The \texttt{Engine\_Result} table records the detection results provided by individual antivirus engines for specific scan results. Its attributes include \texttt{engine\_result\_id} as the unique identifier, \texttt{result\_id} linking to the parent \texttt{Scan\_Result}, \texttt{engine\_id} linking to the responsible \texttt{Antivirus\_Engine}, \texttt{verdict} detailing the engine’s analysis, and \texttt{scan\_time} measuring the duration of the scan. This table allows detailed attribution of detections to individual engines.
+
+\subsection{Threat\_Model Table}
+The \texttt{Threat\_Model} table represents user-created threat models. Attributes include \texttt{model\_id} as the unique identifier, \texttt{user\_id} linking to the creator, \texttt{model\_name} for the model title, \texttt{architecture\_file\_path} for storing the path to the model file, \texttt{description} providing context, and timestamps \texttt{created\_at} and \texttt{updated\_at}. Each threat model can include multiple system components and identified threats, forming the core structure for threat analysis.
+
+\subsection{System\_Component Table}
+The \texttt{System\_Component} table defines individual components within a threat model. Attributes include \texttt{component\_id} as the unique identifier, \texttt{model\_id} referencing the parent threat model, \texttt{component\_name}, \texttt{component\_type}, and \texttt{trust\_boundary} specifying the security zone of the component. This table allows threat models to be structured according to system architecture.
+
+\subsection{Threat Table}
+The \texttt{Threat} table stores threats identified within a threat model. Key attributes include \texttt{threat\_id} as the unique identifier, \texttt{model\_id} linking to the parent threat model, \texttt{category} and \texttt{description} detailing the nature of the threat, \texttt{likelihood} and \texttt{impact} for risk assessment, \texttt{risk\_score} as a calculated metric, and \texttt{status} to indicate whether the threat is active or mitigated. Each threat can be associated with multiple \texttt{Mitigation} entries.
+
+\subsection{Mitigation Table}
+The \texttt{Mitigation} table represents the security controls applied to threats. Attributes include \texttt{mitigation\_id} as the unique identifier, \texttt{threat\_id} linking to the associated threat, \texttt{control\_name} describing the mitigation, \texttt{effectiveness}, \texttt{cost}, and \texttt{benefit\_cost\_ratio} for evaluating resource efficiency. This table provides a structured way to manage and track threat countermeasures within the system.
+
+\subsection{Relationships and Cardinality}
+
+\subsubsection{Composition Relationships}
+The \texttt{Scan\_Request} table maintains a composition relationship with both the \texttt{File} and \texttt{URL} tables, indicating that each scan request is composed of a specific file or URL to be analyzed. When a \texttt{Scan\_Request} instance is deleted, the associated \texttt{File} or \texttt{URL} instance is also removed, reflecting the lifecycle dependency between a scan operation and the content being scanned. Similarly, the \texttt{Scan\_Result} table is composed of multiple \texttt{Engine\_Result} instances, representing the outcomes from different antivirus engines. Deletion of a \texttt{Scan\_Result} instance cascades to its related \texttt{Engine\_Result} instances, maintaining the integrity of engine-level scan data.
+
+\subsubsection{Association Relationships}
+The \texttt{User} table is associated with the \texttt{Scan\_Request} table, establishing that users can submit multiple scans while each scan belongs to a single user. The \texttt{User} table is also associated with the \texttt{Threat\_Model} table, allowing users to create and manage multiple threat models, each linked back to the creator for traceability.
+
+The \texttt{Threat\_Model} table associates with both the \texttt{System\_Component} and \texttt{Threat} tables, reflecting that each threat model contains multiple system components and identifies multiple threats. Furthermore, the \texttt{Threat} table is associated with the \texttt{Mitigation} table, establishing that each identified threat may have multiple mitigation controls applied to reduce its risk.
+
+The \texttt{Antivirus\_Engine} table is associated with the \texttt{Engine\_Result} table, indicating that each antivirus engine can generate multiple results for different scan outcomes. The \texttt{Scan\_Request} table is also associated with the \texttt{Scan\_Result} table, enabling the system to link scan submissions with their corresponding results, which can be further enriched by antivirus engines.
+
+\subsubsection{Multiplicity Summary}
+Each \texttt{User} can submit one or more \texttt{Scan\_Request} instances, while each \texttt{Scan\_Request} is linked to exactly one \texttt{User}. Each \texttt{Scan\_Request} is associated with exactly one \texttt{File} or \texttt{URL}. Each \texttt{Scan\_Result} can contain multiple \texttt{Engine\_Result} instances, while each \texttt{Engine\_Result} belongs to exactly one \texttt{Scan\_Result} and is generated by exactly one \texttt{Antivirus\_Engine}.
+
+Each \texttt{User} can create multiple \texttt{Threat\_Model} instances, with each model belonging to exactly one \texttt{User}. Each \texttt{Threat\_Model} can include multiple \texttt{System\_Component} instances and identify multiple \texttt{Threat} instances. Each \texttt{Threat} may have multiple associated \texttt{Mitigation} entries, while each \texttt{Mitigation} is linked to exactly one \texttt{Threat}.
+
+These multiplicity rules ensure data integrity, traceability, and structured workflows, where all scan operations, threat models, and mitigation measures are fully connected and auditable.
+
+\clearpage
+
+
+\clearpage
+
+\section{User Interface Wireframes}
+
+This section presents the key user interface wireframes that illustrate how users interact with the TIBSA platform. Each scenario demonstrates a specific functionality of the system, from initial authentication through to advanced features such as file scanning, threat analysis, and system administration. The wireframes are designed to prioritize usability, security, and clarity, ensuring that both technical and non-technical users can effectively navigate the platform. The scenarios cover the complete user journey, including authentication flows, dashboard navigation, security scanning operations, and administrative functions.
+
+\subsection{Login Screen}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{media/image10.png}
+\caption{Login Screen}
+\label{fig:ch4_fig10}
+\end{figure}
+
+The Login screen is the main entry point to the system. It allows registered users to authenticate using their email and password. The screen contains clearly labeled input fields for credentials and a primary login button to initiate authentication. Additional options such as “Remember Me” and “Forgot Password” are included to enhance usability and account recovery. This wireframe focuses on simplicity and security by limiting distractions and guiding the user directly toward authentication.
+\subsection{Registration Screen}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{media/image11.png}
+\caption{Registration Screen}
+\label{fig:ch4_fig11}
+\end{figure}
+
+The Registration screen enables new users to create an account on the platform. It includes a structured form collecting essential information such as username, email address, and password. Validation indicators are used to guide the user during data entry. Upon successful registration, the user is redirected to the login process. This screen ensures a smooth onboarding experience while maintaining data consistency and security requirements.
+\subsection{Main Dashboard}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{media/image12.png}
+\caption{Main Dashboard}
+\label{fig:ch4_fig12}
+\end{figure}
+
+The Dashboard represents the central control panel of the system after successful login. It provides an overview of system status, recent scan activities, and engine statistics. Key information is displayed using summary cards, charts, and status indicators to allow users to quickly understand the current security state. Navigation elements are placed at the top or side to provide quick access to core system features such as scan management, engine configuration, and reports.
+\subsection{Available Antivirus Engines}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{media/image13.png}
+\caption{Available Antivirus Engines}
+\label{fig:ch4_fig13}
+\end{figure}
+
+This screen displays a list of all available antivirus engines supported by the system. Each engine is presented with its current status, version, and last update time. Action buttons allow the user to enable, disable, or configure individual engines. The wireframe highlights modularity by allowing multiple engines to operate independently within the same system.
+
+\clearpage
+\subsection{Update Antivirus Database}
+
+This screen provides functionality for updating antivirus signature databases. It displays update progress, current database version, and update history. A progress bar visually communicates update status, ensuring transparency during long-running operations. This screen is essential for maintaining detection accuracy and system reliability.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{media/image14.png}
+\caption{Update Antivirus Database}
+\label{fig:ch4_fig14}
+\end{figure}
+
+\subsection{Add \& Manage AV Engines}
+
+The Admin Dashboard page allows administrators to add and manage antivirus engines. The Add New AV Engine section includes input fields for the engine name, Docker image URL, configuration parameters, and an optional API key, with a prominent “Add AV Engine” button to submit the information. A confirmation message appears upon successful addition. The Manage AV Engines section displays a table of installed antivirus engines with columns for engine name, status, version, last update, and an action button to remove any engine. This interface provides a clear and centralized way to configure and maintain multiple antivirus engines.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{media/image15.png}
+\caption{Add \& Manage AV Engines}
+\label{fig:ch4_fig15}
+\end{figure}
+
+\subsection{File Upload \& Scan Request}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{media/image16.png}
+\caption{File Upload \& Scan Request}
+\label{fig:ch4_fig16}
+\end{figure}
+
+This screen is the primary interface for file security analysis. It includes a drag-and-drop zone for file uploads, with options to browse files, enter a URL, or submit a file hash. Users can upload multiple files for batch processing. Key buttons include "Analyze" to start scanning, "Get Info" for metadata, and "Check File Details." The top navigation bar provides links to Home, About, Docs, Services, and Profile, along with Login and notifications. The design focuses on flexibility and a clean, user-friendly experience.
+\subsection{Multiple File Scan}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{media/image17.png}
+\caption{Multiple File Scan}
+\label{fig:ch4_fig17}
+\end{figure}
+
+This screen displays the results of scanning multiple uploaded files at once. The table lists each file by name, overall status (Malicious or Clean), detection ratio (number of engines that flagged it as a threat), and a "View Details" button for further information. A summary at the bottom indicates the total number of malicious files detected. Buttons at the top allow uploading additional files and starting the scan process. The layout provides a concise tabular overview to facilitate quick assessment of batch scan outcomes.
+
+\subsection{Scan Results Overview}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{media/image18.png}
+\caption{Scan Results Overview}
+\label{fig:ch4_fig18}
+\end{figure}
+
+This screen shows a comprehensive scan report for the analyzed file. It displays file details including name, malicious status, size, and hash value. A table lists results from each antivirus engine with specific detection outcomes. Summary sections highlight the number of engines detecting the file as malicious and clean, along with the total engines used. Export buttons allow downloading the report as PDF or JSON. A timestamp at the bottom records the report generation date and time. The design offers a structured and clear view for thorough threat evaluation.
+
+\subsection{Detailed File Information}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{media/image19.png}
+\caption{Detailed File Information}
+\label{fig:ch4_fig19}
+\end{figure}
+
+This screen shows detailed information for the scanned file, including name, size, MD5, SHA-1, SHA-256 hashes, extension, MIME type, and file type. Below, it lists detection results from various antivirus engines with color-coded indicators for threats like trojans, malware, and generic detections, or clean verdicts. Buttons at the bottom provide options for scan report export and sharing results. The layout offers clear metadata and per-engine insights for effective threat analysis.
+
+\subsection{Scan Report Sharing}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{media/image20.png}
+\caption{Scan Report Sharing}
+\label{fig:ch4_fig20}
+\end{figure}
+
+This screen allows users to share the scan results of a malicious file. It displays file details including name, status, and detection ratio. Options include generating a shareable link with a pre-filled URL and copy button, or sending results directly via email with fields for recipient addresses and an optional message. The layout provides secure and convenient sharing methods for collaboration or reporting.
+
+\subsection{Scan URL}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{media/image21.png}
+\caption{Scan URL Interface}
+\label{fig:ch4_fig21}
+\end{figure}
+
+The URL Scan Interface allows users to submit web addresses for security analysis. It features a simple input field for entering the URL and a primary scan button to initiate analysis. A warning message informs users that files will be temporarily downloaded with a maximum size of 100 MB. Example URLs demonstrate proper format, and supported protocols (HTTPS, HTTP, FTP) are clearly displayed. This screen emphasizes simplicity and ease of use for quick URL verification.
+
+\subsection{User Profile}
+
+This screen displays the user's profile information on the left sidebar, including name, email address, and key statistics such as total scans performed, threats found, and clean files processed. Navigation menu options include Account Settings, View Dashboard, Scan History, Notifications, and a prominent Logout button. The layout provides a quick overview of user activity and easy access to account-related features.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.6\textwidth]{media/image22.png}
+\caption{User Profile}
+\label{fig:ch4_fig22}
+\end{figure}
+
+\clearpage
+\subsection{System Settings}
+
+This screen allows customization of user settings. It includes sections for selecting default antivirus engines with checkboxes, choosing appearance mode (light or dark), language selection, and notification toggles for email notifications, browser alerts, and update reminders. A "Save Preferences" button applies the changes. The design focuses on personalization to enhance the user experience.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.5\textwidth]{media/image23.png}
+\caption{System Settings}
+\label{fig:ch4_fig23}
+\end{figure}
+
+\subsection{Help \& Support Screen}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{media/image24.png}
+\caption{Help \& Support Screen}
+\label{fig:ch4_fig24}
+\end{figure}
+
+This screen provides comprehensive user assistance. It features quick access tiles for Documentation, Video Tutorials, and Live Chat. A Frequently Asked Questions section lists common queries with expandable answers. The Contact Support form allows submission of name, email, subject, and message. Additional Resources include links to User Guide, API Documentation, Report a Bug, Feature Requests, Quick Start, News, Community, and Contact Us. The layout centralizes support options for efficient issue resolution and self-help.
+
+\section{Summary}
+
+This chapter has presented the complete system design for the TIBSA platform, detailing an eight-layer architecture that delivers comprehensive threat intelligence and security analysis capabilities. The design leverages modern cloud-native technologies and open-source security tools to create a scalable, secure, and maintainable platform.
+
+The key architectural components include:
+
+\begin{itemize}
+    \item User and Edge Layers (1-2): Provide secure access points with CDN, WAF, DDoS protection, and bot detection through Cloudflare integration.
+    \item Frontend Layer (3): Delivers a responsive user interface using Next.js 15, Tailwind CSS, and shadcn/ui, with robust client-side security controls and resumable file upload capabilities.
+    \item API Engine (4): Centralizes request handling through KrakenD with Authentik providing comprehensive authentication, MFA, and RBAC functionality.
+    \item Backend Services (5): Implements core business logic including scan coordination, threat intelligence via MISP, ML-powered detection using Ollama, dynamic malware analysis through CAPE Sandbox, and automated threat modeling with Threagile.
+    \item Data Storage Layer (6): Utilizes Neon Serverless Postgres, Upstash Redis, and Cloudflare R2 for structured data, caching, and object storage respectively.
+    \item Monitoring Layer (7): Provides comprehensive observability through Wazuh SIEM, Grafana, Prometheus, and Loki for security monitoring, metrics, and log aggregation.
+    \item TIBSA Core (8): Automates the complete threat modeling workflow including DFD generation, STRIDE analysis, MITRE ATT\&CK mapping, and risk scoring.
+\end{itemize}
+
+The architecture ensures security through multi-layered protection, scalability through serverless components, reliability through background job processing and retry logic, performance through caching and CDN, observability through comprehensive monitoring, and compliance through audit trails and RBAC. The user interface wireframes demonstrate a clean, intuitive design that guides users through authentication, scanning, threat analysis, and administrative functions. This modular and well-documented design provides a solid foundation for implementing, testing, and extending the TIBSA platform.

@@ -1,0 +1,101 @@
+% ============= Packages =============
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[english]{babel}
+
+% Handle problematic Unicode characters
+\DeclareUnicodeCharacter{009D}{}
+\DeclareUnicodeCharacter{0080}{}
+\DeclareUnicodeCharacter{0093}{}
+\DeclareUnicodeCharacter{0094}{}
+\DeclareUnicodeCharacter{0096}{--}
+\DeclareUnicodeCharacter{0097}{---}
+\DeclareUnicodeCharacter{2013}{--}
+\DeclareUnicodeCharacter{2014}{---}
+\DeclareUnicodeCharacter{2018}{`}
+\DeclareUnicodeCharacter{2019}{'}
+\DeclareUnicodeCharacter{201C}{``}
+\DeclareUnicodeCharacter{201D}{''}
+\DeclareUnicodeCharacter{00D7}{$\times$}
+\DeclareUnicodeCharacter{00A0}{~}
+\DeclareUnicodeCharacter{2026}{...}
+\DeclareUnicodeCharacter{00E2}{}
+\DeclareUnicodeCharacter{0082}{}
+\DeclareUnicodeCharacter{20AC}{\texteuro}
+\usepackage{geometry}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage{cite}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{float}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{tabularx}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{ltablex}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{fancyhdr}
+\usepackage{tocloft}
+\usepackage{setspace}
+
+% ============= Page Setup =============
+\geometry{
+    left=1in,
+    right=1in,
+    top=1in,
+    bottom=1in,
+    headheight=15pt
+}
+
+% ============= Hyperref Setup =============
+\hypersetup{
+    colorlinks=true,
+    linkcolor=black,
+    filecolor=black,
+    urlcolor=black,
+    citecolor=black,
+    pdftitle={TIBSA Platform - Graduation Project},
+    pdfauthor={Team Members}
+}
+
+% ============= Code Listing Setup =============
+\lstset{
+    basicstyle=\ttfamily\small,
+    keywordstyle=\color{blue},
+    commentstyle=\color{gray},
+    stringstyle=\color{red},
+    numbers=left,
+    numberstyle=\tiny\color{gray},
+    stepnumber=1,
+    numbersep=5pt,
+    backgroundcolor=\color{white},
+    showspaces=false,
+    showstringspaces=false,
+    showtabs=false,
+    frame=single,
+    tabsize=2,
+    captionpos=b,
+    breaklines=true,
+}
+
+% ============= Header/Footer =============
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\leftmark}
+\fancyhead[R]{\thepage}
+\fancyfoot[C]{Threat-Intelligence Based Security Assessment Platform}
+
+% ============= Caption Setup =============
+\captionsetup{font=small,labelfont=bf}
+
+% ============= Line Spacing =============
+\onehalfspacing
+
+% ============= TOC Customization =============
+\renewcommand{\contentsname}{Table of Contents}
+\renewcommand{\cftchapfont}{\bfseries}
+\renewcommand{\cftsecfont}{\normalfont}
+\setlength{\cftbeforechapskip}{10pt}

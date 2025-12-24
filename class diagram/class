@@ -1,0 +1,564 @@
+classDiagram
+    %% ============================================
+    %% LAYER 1 - USER LAYER
+    %% ============================================
+    class SecurityAnalystConsole {
+        -userId: String
+        -sessionToken: String
+        -dashboardData: Object
+        +displayDashboard()
+        +viewAlerts()
+        +initiatePentest()
+        +reviewResults()
+        +searchThreats()
+        +exportReport()
+    }
+    
+    class ClientLogicModule {
+        -jwtToken: String
+        -refreshToken: String
+        -sessionState: Object
+        -tokenExpiry: DateTime
+        +manageSession()
+        +refreshToken()
+        +handleTimeout()
+        +chunkFile()
+        +validateSession()
+        +clearSession()
+    }
+    
+    class CustomerBrowserInterfaces {
+        -currentUser: User
+        -theme: String
+        +renderLoginPage()
+        +renderRegistrationPage()
+        +renderDashboard()
+        +handleFileUpload()
+        +displayNotifications()
+        +updatePreferences()
+    }
+    
+    class User {
+        -id: String
+        -email: String
+        -role: Role
+        -createdAt: DateTime
+        -lastLogin: DateTime
+        +authenticate()
+        +updateProfile()
+        +changePassword()
+    }
+    
+    class Role {
+        -name: String
+        -permissions: List~Permission~
+        +hasPermission(permission)
+        +assignTo(user)
+    }
+
+    %% ============================================
+    %% LAYER 2 - EDGE LAYER
+    %% ============================================
+    class CDN {
+        +cacheContent()
+        +routeRequest()
+        +deliverAssets()
+    }
+    
+    class WAF {
+        +detectSQLInjection()
+        +preventXSS()
+        +validateCSRF()
+        +filterPayloads()
+    }
+    
+    class LoadBalancer {
+        +distributeRequests()
+        +checkServerHealth()
+        +handleFailover()
+    }
+
+    %% ============================================
+    %% LAYER 3 - FRONTEND LAYER
+    %% ============================================
+    class FrontendFramework {
+        +renderComponents()
+        +handleRouting()
+        +manageState()
+        +callAPI()
+    }
+    
+    class AuthInterceptor {
+        +attachAuthHeaders()
+        +handleAuthErrors()
+        +triggerRefresh()
+    }
+    
+    class FileUploadHandler {
+        -uploadURL: String
+        -sessionID: String
+        +chunkFile()
+        +resumeUpload()
+        +trackProgress()
+        +verifyIntegrity()
+    }
+
+    %% ============================================
+    %% LAYER 4 - API ENGINE
+    %% ============================================
+    class APIGateway {
+        +routeRequest()
+        +validateToken()
+        +enforceRateLimit()
+        +transformRequest()
+    }
+    
+    class AuthenticationService {
+        +login(email: String, password: String): Token
+        +register(userData: Object): User
+        +refreshToken(refreshToken: String): Token
+        +verifyMFA(code: String): Boolean
+        +assignRoles(userId: String, roles: List~Role~): Boolean
+    }
+
+    %% ============================================
+    %% LAYER 5 - BACKEND SERVICES
+    %% ============================================
+    class UserService {
+        -dbConnection: Connection
+        +getProfile(userId: String): UserProfile
+        +updateProfile(userId: String, data: Object): Boolean
+        +assignRoles(userId: String, roles: List~Role~): Boolean
+        +managePermissions(): void
+        +deleteUser(userId: String): Boolean
+    }
+    
+    class ScanService {
+        -scanQueue: Queue
+        -maxConcurrentScans: Integer
+        +scanURL(url: String): ScanResult
+        +scanFile(fileId: String): ScanResult
+        +generateReport(scanId: String): Report
+        +aggregateResults(): ScanSummary
+        +cancelScan(scanId: String): Boolean
+    }
+    
+    class ScanResult {
+        -scanId: String
+        -status: ScanStatus
+        -detections: List~Detection~
+        -timestamp: DateTime
+        -score: Integer
+        +isMalicious(): Boolean
+        +getThreats(): List~Threat~
+    }
+    
+    class Detection {
+        -engineName: String
+        -result: String
+        -confidence: Float
+        -category: String
+        +isMalicious(): Boolean
+    }
+    
+    class Threat {
+        -id: String
+        -name: String
+        -severity: String
+        -mitreTTP: String
+        -description: String
+        +getRiskScore(): Integer
+    }
+    
+    class ThreatIntelligenceService {
+        -mispClient: MISPClient
+        -externalFeeds: List~ThreatFeed~
+        +lookupIOC(indicator: String): IOCReport
+        +checkReputation(entity: String): ReputationScore
+        +mergeFeeds(): void
+        +correlateThreats(): List~CorrelatedThreat~
+        +updateFeeds(): void
+    }
+    
+    class IOC {
+        -type: String
+        -value: String
+        -source: String
+        -confidence: Float
+        -lastSeen: DateTime
+        +isExpired(): Boolean
+    }
+    
+    class MLEngine {
+        -modelPath: String
+        -version: String
+        -accuracy: Float
+        +classifyPhishing(features: Vector): Prediction
+        +classifyMalware(features: Vector): Prediction
+        +extractFeatures(data: Binary): Vector
+        +runInference(features: Vector): Result
+        +trainModel(dataset: Dataset): void
+    }
+    
+    class Prediction {
+        -label: String
+        -confidence: Float
+        -modelVersion: String
+        +isHighConfidence(): Boolean
+    }
+    
+    class Sandbox {
+        -vmType: String
+        -timeout: Integer
+        -memoryLimit: Integer
+        +runInVM(file: File): ExecutionSession
+        +captureBehavior(sessionId: String): BehaviorReport
+        +generateHash(file: File): HashSet
+        +extractArtifacts(): List~Artifact~
+        +stopExecution(sessionId: String): void
+    }
+    
+    class BehaviorReport {
+        -sessionId: String
+        -networkActivity: List~NetworkConnection~
+        -fileChanges: List~FileOperation~
+        -registryChanges: List~RegistryKey~
+        -processTree: ProcessTree
+        +isSuspicious(): Boolean
+    }
+    
+    class ThreatModelingEngine {
+        -threagileConfig: Config
+        +generateDFD(architecture: JSON): DFDDiagram
+        +performSTRIDE(components: List~Component~): STRIDEAnalysis
+        +mapMITRE(threats: List~Threat~): MITREMapping
+        +scoreRisk(threats: List~Threat~): RiskScore
+        +generateReport(data: ModelData): Report
+    }
+    
+    class DFDDiagram {
+        -components: List~Component~
+        -dataFlows: List~DataFlow~
+        -trustBoundaries: List~Boundary~
+        +exportToPNG(): File
+        +exportToSVG(): File
+    }
+    
+    class STRIDEAnalysis {
+        -spoofingThreats: List~Threat~
+        -tamperingThreats: List~Threat~
+        -repudiationThreats: List~Threat~
+        -informationDisclosure: List~Threat~
+        -denialOfService: List~Threat~
+        -elevationOfPrivilege: List~Threat~
+        +getTotalThreats(): Integer
+        +getHighRiskThreats(): List~Threat~
+    }
+    
+    class NotificationService {
+        -resendClient: ResendClient
+        -webhooks: List~Webhook~
+        +sendEmail(recipient: String, subject: String, body: String): Boolean
+        +sendWebhook(url: String, payload: JSON): Boolean
+        +sendSMS(phone: String, message: String): Boolean
+        +queueNotification(notification: Notification): void
+    }
+    
+    class Notification {
+        -id: String
+        -type: NotificationType
+        -recipient: String
+        -content: String
+        -sentAt: DateTime
+        -status: DeliveryStatus
+        +markAsSent(): void
+        +retry(): void
+    }
+    
+    class BillingService {
+        -lemonSqueezy: LemonSqueezyClient
+        +createSubscription(userId: String, plan: Plan): Subscription
+        +trackUsage(userId: String, resource: String): Usage
+        +handlePaymentWebhook(event: WebhookEvent): void
+        +cancelSubscription(subscriptionId: String): Boolean
+        +getInvoice(invoiceId: String): Invoice
+    }
+    
+    class Subscription {
+        -id: String
+        -userId: String
+        -plan: Plan
+        -status: SubscriptionStatus
+        -startDate: DateTime
+        -endDate: DateTime
+        +isActive(): Boolean
+        +renew(): void
+        +upgrade(newPlan: Plan): void
+    }
+    
+    class BackgroundJobsQueue {
+        -queueName: String
+        -redisClient: RedisClient
+        -maxRetries: Integer
+        +enqueueJob(jobData: JobData): String
+        +executeJob(jobId: String): JobResult
+        +monitorStatus(): QueueStatus
+        +retryFailed(): void
+        +cancelJob(jobId: String): Boolean
+    }
+    
+    class Job {
+        -id: String
+        -type: JobType
+        -payload: JSON
+        -status: JobStatus
+        -attempts: Integer
+        -createdAt: DateTime
+        +execute(): void
+        +fail(): void
+        +complete(): void
+    }
+
+    %% ============================================
+    %% LAYER 6 - DATA STORAGE LAYER
+    %% ============================================
+    class PostgresDatabase {
+        +storeUser(userData: Object): Boolean
+        +storeScan(scanData: Object): Boolean
+        +storeThreatModel(modelData: Object): Boolean
+        +queryData(criteria: Query): ResultSet
+    }
+    
+    class RedisCache {
+        +cacheSession(sessionId: String, data: Object): Boolean
+        +getRateLimitCounter(key: String): Integer
+        +cacheQueryResult(key: String, data: Object): Boolean
+        +manageJobQueue(): void
+    }
+    
+    class ObjectStorage {
+        +storeFile(fileData: Binary): String
+        +retrieveFile(fileId: String): Binary
+        +storeReport(report: Document): String
+        +storeArtifact(artifact: Binary): String
+    }
+    
+    class ScanResultsDatabase {
+        +storeScanResult(result: ScanResult): Boolean
+        +storeDetection(detection: Detection): Boolean
+        +storeIOCMatch(ioc: IOC): Boolean
+        +queryResults(scanId: String): List~Result~
+    }
+
+    %% ============================================
+    %% LAYER 7 - MONITORING LAYER
+    %% ============================================
+    class SIEM {
+        +collectLogs(): void
+        +correlateEvents(): List~Event~
+        +detectIntrusion(): List~Alert~
+        +generateAlerts(): void
+    }
+    
+    class AlertEngine {
+        +processAlert(alert: Alert): void
+        +deduplicateAlerts(): void
+        +enrichContext(alert: Alert): EnrichedAlert
+        +prioritizeAlerts(): List~Alert~
+        +triggerResponse(): void
+    }
+    
+    class ThreatDashboard {
+        +displayAlerts(): void
+        +visualizeThreats(): void
+        +showTimeline(): void
+        +exportReports(): Document
+    }
+    
+    class ObservabilityStack {
+        +collectMetrics(): void
+        +aggregateLogs(): void
+        +createDashboard(): void
+        +sendAlert(): void
+    }
+
+    %% ============================================
+    %% LAYER 8 - TIBSA CORE
+    %% ============================================
+    class AutomatedThreatModelingEngine {
+        +parseArchitecture(json: JSON): Architecture
+        +identifyAssets(): List~Asset~
+        +mapDataFlows(): List~DataFlow~
+        +detectThreats(): List~Threat~
+    }
+    
+    class DFDDiagramCreator {
+        +generateDFD(components: List~Component~): DFDDiagram
+        +identifyProcesses(): List~Process~
+        +mapRelationships(): List~Relationship~
+        +exportDiagram(format: String): File
+    }
+    
+    class STRIDEMITREMapper {
+        +mapSTRIDE(components: List~Component~): STRIDEAnalysis
+        +correlateMITRE(threats: List~Threat~): MITREMapping
+        +linkTechniques(): List~Technique~
+    }
+    
+    class TTPScoringCalculator {
+        +calculateLikelihood(threat: Threat): Float
+        +assessImpact(threat: Threat): Float
+        +computeRiskScore(threat: Threat): Integer
+    }
+    
+    class SecurityControlsEvaluator {
+        +evaluateControls(inventory: List~Control~): Evaluation
+        +identifyGaps(): List~Gap~
+        +assessEffectiveness(): Report
+    }
+    
+    class ReportGenerator {
+        +compileData(modelData: ModelData): Document
+        +formatReport(template: Template): Document
+        +generatePDF(): File
+        +generateWord(): File
+    }
+
+    %% ============================================
+    %% ENUMERATIONS
+    %% ============================================
+    class ScanStatus {
+        <<enumeration>>
+        PENDING
+        IN_PROGRESS
+        COMPLETED
+        FAILED
+        CANCELLED
+    }
+    
+    class NotificationType {
+        <<enumeration>>
+        EMAIL
+        WEBHOOK
+        SMS
+        IN_APP
+    }
+    
+    class JobType {
+        <<enumeration>>
+        SANDBOX_ANALYSIS
+        ML_INFERENCE
+        THREAT_MODELING
+        FEED_INGESTION
+        REPORT_GENERATION
+    }
+    
+    class SubscriptionStatus {
+        <<enumeration>>
+        ACTIVE
+        CANCELLED
+        EXPIRED
+        SUSPENDED
+    }
+
+    %% ============================================
+    %% RELATIONSHIPS - USER LAYER
+    %% ============================================
+    SecurityAnalystConsole --> FrontendFramework : uses
+    CustomerBrowserInterfaces --> ClientLogicModule : uses
+    ClientLogicModule --> AuthInterceptor : manages auth
+    CustomerBrowserInterfaces --> User : displays
+    User --> Role : has
+    
+    %% ============================================
+    %% RELATIONSHIPS - EDGE LAYER
+    %% ============================================
+    CDN --> WAF : forwards to
+    WAF --> LoadBalancer : validates then sends
+    LoadBalancer --> APIGateway : routes to
+    
+    %% ============================================
+    %% RELATIONSHIPS - FRONTEND TO API
+    %% ============================================
+    FrontendFramework --> FileUploadHandler : uses
+    FileUploadHandler --> APIGateway : sends chunks
+    AuthInterceptor --> APIGateway : sends authenticated requests
+    
+    %% ============================================
+    %% RELATIONSHIPS - API LAYER
+    %% ============================================
+    APIGateway --> AuthenticationService : validates with
+    APIGateway --> UserService : routes to
+    APIGateway --> ScanService : routes to
+    APIGateway --> ThreatModelingEngine : routes to
+    
+    %% ============================================
+    %% RELATIONSHIPS - BACKEND SERVICES
+    %% ============================================
+    ScanService --> MLEngine : uses
+    ScanService --> Sandbox : uses
+    ScanService --> ThreatIntelligenceService : queries
+    ScanService --> NotificationService : notifies via
+    ScanService --> BackgroundJobsQueue : enqueues jobs
+    ScanService --> ScanResult : creates
+    
+    ScanResult --> Detection : contains
+    Detection --> Threat : identifies
+    ScanResult --> ScanStatus : has
+    
+    ThreatIntelligenceService --> IOC : manages
+    
+    MLEngine --> Prediction : produces
+    MLEngine --> ScanResultsDatabase : stores predictions
+    
+    Sandbox --> BehaviorReport : generates
+    Sandbox --> ScanResultsDatabase : stores behavior
+    Sandbox --> ObjectStorage : stores artifacts
+    
+    ThreatModelingEngine --> DFDDiagramCreator : uses
+    ThreatModelingEngine --> STRIDEMITREMapper : uses
+    ThreatModelingEngine --> TTPScoringCalculator : uses
+    ThreatModelingEngine --> SecurityControlsEvaluator : uses
+    ThreatModelingEngine --> ReportGenerator : uses
+    ThreatModelingEngine --> DFDDiagram : creates
+    ThreatModelingEngine --> STRIDEAnalysis : performs
+    
+    NotificationService --> Notification : sends
+    Notification --> NotificationType : has
+    
+    BillingService --> Subscription : manages
+    Subscription --> SubscriptionStatus : has
+    
+    BackgroundJobsQueue --> Job : processes
+    Job --> JobType : has
+    
+    %% ============================================
+    %% RELATIONSHIPS - DATA STORAGE
+    %% ============================================
+    UserService --> PostgresDatabase : stores/queries
+    ScanService --> ScanResultsDatabase : stores results
+    ThreatModelingEngine --> PostgresDatabase : stores models
+    ThreatModelingEngine --> ObjectStorage : stores reports
+    
+    AuthenticationService --> PostgresDatabase : manages users
+    AuthenticationService --> RedisCache : caches sessions
+    
+    BillingService --> PostgresDatabase : stores billing
+    BackgroundJobsQueue --> RedisCache : uses queue
+    
+    %% ============================================
+    %% RELATIONSHIPS - MONITORING
+    %% ============================================
+    SIEM --> AlertEngine : sends events
+    AlertEngine --> ThreatDashboard : updates
+    AlertEngine --> NotificationService : triggers
+    ObservabilityStack --> ThreatDashboard : feeds data
+    
+    %% ============================================
+    %% RELATIONSHIPS - TIBSA CORE
+    %% ============================================
+    AutomatedThreatModelingEngine --> DFDDiagramCreator : generates
+    AutomatedThreatModelingEngine --> STRIDEMITREMapper : applies
+    STRIDEMITREMapper --> TTPScoringCalculator : scores
+    TTPScoringCalculator --> SecurityControlsEvaluator : evaluates
+    SecurityControlsEvaluator --> ReportGenerator : provides data

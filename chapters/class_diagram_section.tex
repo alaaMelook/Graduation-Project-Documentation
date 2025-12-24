@@ -1,0 +1,370 @@
+% ============= CLASS DIAGRAM SECTION =============
+% Insert this section after Layer 8 (TIBSA Suite) and before User Interface Wireframes
+% Suggested placement: After line 551 in chapter4.tex (after "Key Integration Points Summary")
+
+\section{Object-Oriented Class Design}
+
+This section presents the object-oriented class design of the TIBSA platform, illustrating the structural relationships between the system's core components through a comprehensive Unified Modeling Language (UML) class diagram. The class diagram provides a detailed view of the system's software architecture, showcasing the classes, their attributes, methods, and the associations that bind them together. This design follows established object-oriented principles including encapsulation, inheritance, and composition to ensure modularity, maintainability, and extensibility of the codebase.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=1.0\textwidth]{media/class_diagram.png}
+\caption{TIBSA Platform - Comprehensive Class Diagram}
+\label{fig:ch4_class_diagram}
+\end{figure}
+
+\subsection{Core Classes Overview}
+
+The TIBSA platform's class structure is organized around several core domain entities that represent the fundamental building blocks of the system. Each class encapsulates specific functionality and data, with well-defined interfaces for interaction with other components. The following subsections provide detailed descriptions of each class, their attributes, methods, and relationships.
+
+\subsection{URLScanning Class}
+
+The URLScanning class serves as the central component responsible for analyzing web addresses for potential security threats such as phishing attempts, malware distribution, and malicious content. This class encapsulates all functionality related to URL-based threat detection and analysis.
+
+\textbf{Attributes:}
+\begin{itemize}
+    \item \texttt{scanID: String} -- A unique identifier assigned to each URL scanning operation for tracking and reference purposes.
+    \item \texttt{targetURL: String} -- The web address submitted for security analysis.
+    \item \texttt{scanStatus: String} -- The current state of the scanning operation (pending, in-progress, completed, or failed).
+    \item \texttt{createdAt: Date} -- Timestamp recording when the scan request was initiated.
+\end{itemize}
+
+\textbf{Methods:}
+\begin{itemize}
+    \item \texttt{initiateScan(): void} -- Initiates the URL scanning process by sending the target URL to the analysis engines.
+    \item \texttt{getScanResults(): ScanResult} -- Retrieves the complete analysis results including threat indicators and reputation scores.
+    \item \texttt{cancelScan(): Boolean} -- Terminates an ongoing scan operation and releases associated resources.
+\end{itemize}
+
+\subsection{AuthenticationHandler Class}
+
+The AuthenticationHandler class manages all aspects of user authentication and session management within the TIBSA platform. It serves as the primary interface between the user interface layer and the authentication service, ensuring secure access control throughout the system.
+
+\textbf{Attributes:}
+\begin{itemize}
+    \item \texttt{sessionID: String} -- A unique token identifying the current user session.
+    \item \texttt{userEmail: String} -- The email address associated with the authenticated user.
+    \item \texttt{loginAttempts: Integer} -- Counter tracking failed login attempts for security monitoring.
+    \item \texttt{isAuthenticated: Boolean} -- Flag indicating whether the current session is authenticated.
+    \item \texttt{mfaEnabled: Boolean} -- Indicates whether multi-factor authentication is enabled for the account.
+    \item \texttt{lastLogin: Date} -- Timestamp of the user's most recent successful login.
+\end{itemize}
+
+\textbf{Methods:}
+\begin{itemize}
+    \item \texttt{registerUser(email, password): User} -- Creates a new user account with the provided credentials.
+    \item \texttt{authenticateUser(email, password): Token} -- Validates user credentials and issues authentication tokens.
+    \item \texttt{validateToken(token): Boolean} -- Verifies the validity and expiration status of authentication tokens.
+    \item \texttt{refreshToken(refreshToken): Token} -- Issues new access tokens using valid refresh tokens.
+    \item \texttt{verifyMFA(code): Boolean} -- Validates multi-factor authentication codes.
+    \item \texttt{logout(): void} -- Terminates the current session and invalidates associated tokens.
+\end{itemize}
+
+\subsection{UserServices Class}
+
+The UserServices class provides comprehensive user account management functionality, handling user profiles, preferences, and account-related operations. This class acts as the service layer for all user-centric operations beyond authentication.
+
+\textbf{Attributes:}
+\begin{itemize}
+    \item \texttt{userID: String} -- Unique identifier for the user account.
+    \item \texttt{userName: String} -- Display name of the user.
+    \item \texttt{userEmail: String} -- Primary email address associated with the account.
+    \item \texttt{userRole: String} -- The role assigned to the user (Admin, Analyst, User, Guest).
+    \item \texttt{profileData: Object} -- Container for additional user profile information.
+    \item \texttt{createdAt: Date} -- Account creation timestamp.
+\end{itemize}
+
+\textbf{Methods:}
+\begin{itemize}
+    \item \texttt{getProfile(userID): UserProfile} -- Retrieves the complete profile data for a specified user.
+    \item \texttt{updateProfile(userID, data): Boolean} -- Updates user profile information with the provided data.
+    \item \texttt{deleteAccount(userID): Boolean} -- Permanently removes a user account and associated data.
+    \item \texttt{getUserRole(userID): String} -- Returns the current role assignment for a user.
+    \item \texttt{updatePreferences(userID, prefs): Boolean} -- Modifies user preferences and settings.
+\end{itemize}
+
+\subsection{ScanServices Class}
+
+The ScanServices class orchestrates all security scanning operations within the platform, coordinating between file analysis, URL scanning, and threat intelligence services. This class serves as the central hub for initiating, managing, and tracking scan operations across the entire system.
+
+\textbf{Attributes:}
+\begin{itemize}
+    \item \texttt{scanID: String} -- Unique identifier for the scan operation.
+    \item \texttt{scanType: String} -- Classification of the scan (file, URL, or hash lookup).
+    \item \texttt{targetIdentifier: String} -- The subject of the scan (file path, URL, or hash value).
+    \item \texttt{priority: Integer} -- Processing priority level for the scan request.
+    \item \texttt{status: String} -- Current operational status of the scan.
+    \item \texttt{initiatedBy: String} -- User ID of the requesting user.
+\end{itemize}
+
+\textbf{Methods:}
+\begin{itemize}
+    \item \texttt{createScan(type, target, userID): Scan} -- Initializes a new scan operation with specified parameters.
+    \item \texttt{getScanStatus(scanID): Status} -- Returns the current status and progress of a scan.
+    \item \texttt{getScanResults(scanID): Results} -- Retrieves completed scan results and analysis data.
+    \item \texttt{cancelScan(scanID): Boolean} -- Terminates an in-progress scan operation.
+    \item \texttt{queueScan(scan): void} -- Adds a scan to the processing queue for asynchronous execution.
+    \item \texttt{aggregateResults(scanID): Report} -- Combines results from multiple analysis engines into a unified report.
+\end{itemize}
+
+\subsection{FileAnalysis Class}
+
+The FileAnalysis class handles the processing and security analysis of uploaded files, implementing both static and dynamic analysis techniques. This class integrates with sandbox environments, machine learning engines, and threat intelligence services to provide comprehensive file security assessments.
+
+\textbf{Attributes:}
+\begin{itemize}
+    \item \texttt{fileID: String} -- Unique identifier assigned to the uploaded file.
+    \item \texttt{fileName: String} -- Original name of the uploaded file.
+    \item \texttt{fileHash: String} -- SHA-256 hash of the file content for integrity verification.
+    \item \texttt{fileSize: Long} -- Size of the file in bytes.
+    \item \texttt{mimeType: String} -- MIME type classification of the file.
+    \item \texttt{uploadDate: Date} -- Timestamp of file upload.
+    \item \texttt{analysisStatus: String} -- Current state of the analysis process.
+\end{itemize}
+
+\textbf{Methods:}
+\begin{itemize}
+    \item \texttt{uploadFile(file): FileID} -- Processes and stores an uploaded file for analysis.
+    \item \texttt{calculateHash(file): String} -- Computes cryptographic hashes (MD5, SHA-1, SHA-256) for the file.
+    \item \texttt{extractMetadata(fileID): Metadata} -- Extracts file properties and metadata information.
+    \item \texttt{initiateStaticAnalysis(fileID): void} -- Begins static analysis of file structure and content.
+    \item \texttt{initiateDynamicAnalysis(fileID): void} -- Submits the file to sandbox environment for behavioral analysis.
+    \item \texttt{getAnalysisReport(fileID): Report} -- Retrieves the comprehensive analysis report for a file.
+\end{itemize}
+
+\subsection{PentestJobService Class}
+
+The PentestJobService class manages penetration testing operations within the TIBSA platform, handling job scheduling, execution coordination, and results collection for automated security assessments.
+
+\textbf{Attributes:}
+\begin{itemize}
+    \item \texttt{jobID: String} -- Unique identifier for the penetration testing job.
+    \item \texttt{targetScope: String} -- Definition of the target scope for testing.
+    \item \texttt{testModules: List} -- Collection of testing modules to be executed.
+    \item \texttt{scheduledTime: Date} -- Scheduled execution time for the job.
+    \item \texttt{jobStatus: String} -- Current status of the pentest job.
+\end{itemize}
+
+\textbf{Methods:}
+\begin{itemize}
+    \item \texttt{createJob(scope, modules): Job} -- Creates a new penetration testing job with specified parameters.
+    \item \texttt{scheduleJob(jobID, time): Boolean} -- Schedules a job for future execution.
+    \item \texttt{executeJob(jobID): void} -- Initiates the execution of a pentest job.
+    \item \texttt{getJobResults(jobID): Results} -- Retrieves the findings and results from a completed job.
+    \item \texttt{cancelJob(jobID): Boolean} -- Cancels a scheduled or running job.
+\end{itemize}
+
+\subsection{ThreatIntelService Class}
+
+The ThreatIntelService class provides integration with threat intelligence sources, enabling the platform to enrich security analysis with external threat data, indicators of compromise (IOCs), and reputation information.
+
+\textbf{Attributes:}
+\begin{itemize}
+    \item \texttt{queryID: String} -- Unique identifier for threat intelligence queries.
+    \item \texttt{indicatorType: String} -- Type of indicator being queried (IP, domain, hash, URL).
+    \item \texttt{indicatorValue: String} -- The actual indicator value for lookup.
+    \item \texttt{sources: List} -- List of threat intelligence sources to query.
+    \item \texttt{lastUpdated: Date} -- Timestamp of the most recent data refresh.
+\end{itemize}
+
+\textbf{Methods:}
+\begin{itemize}
+    \item \texttt{lookupIOC(indicator): ThreatData} -- Queries threat intelligence sources for indicator information.
+    \item \texttt{getReputation(target): Score} -- Retrieves reputation scores for domains, IPs, or URLs.
+    \item \texttt{enrichData(scanResults): EnrichedResults} -- Augments scan results with threat intelligence context.
+    \item \texttt{syncFeeds(): void} -- Synchronizes local threat data with external feed sources.
+    \item \texttt{queryMISP(indicator): MISPEvent} -- Queries the MISP platform for related threat events.
+\end{itemize}
+
+\subsection{MLEngineService Class}
+
+The MLEngineService class encapsulates the machine learning capabilities of the TIBSA platform, providing intelligent threat detection through trained models for phishing classification, malware detection, and anomaly identification.
+
+\textbf{Attributes:}
+\begin{itemize}
+    \item \texttt{modelID: String} -- Identifier for the machine learning model in use.
+    \item \texttt{modelVersion: String} -- Version number of the deployed model.
+    \item \texttt{modelType: String} -- Classification of the model (phishing, malware, anomaly).
+    \item \texttt{accuracy: Float} -- Current accuracy metric of the model.
+    \item \texttt{lastTrained: Date} -- Timestamp of the most recent model training.
+\end{itemize}
+
+\textbf{Methods:}
+\begin{itemize}
+    \item \texttt{classifyURL(url, features): Prediction} -- Classifies a URL as phishing or legitimate.
+    \item \texttt{classifyFile(fileFeatures): Prediction} -- Determines malware probability for a file.
+    \item \texttt{extractFeatures(input): FeatureVector} -- Extracts relevant features for model input.
+    \item \texttt{runInference(features): Result} -- Executes model inference on provided feature vectors.
+    \item \texttt{getConfidenceScore(prediction): Float} -- Returns the confidence level of a prediction.
+\end{itemize}
+
+\subsection{AccountManager Class}
+
+The AccountManager class handles subscription management, usage tracking, and account tier administration, integrating with billing services to manage user entitlements and resource allocation.
+
+\textbf{Attributes:}
+\begin{itemize}
+    \item \texttt{accountID: String} -- Unique identifier for the billing account.
+    \item \texttt{subscriptionPlan: String} -- Current subscription tier (Freemium, Pro, Enterprise).
+    \item \texttt{usageQuota: Integer} -- Maximum allowed resource usage for the account.
+    \item \texttt{currentUsage: Integer} -- Current resource consumption count.
+    \item \texttt{billingCycle: String} -- Billing period (monthly, annual).
+    \item \texttt{expirationDate: Date} -- Subscription expiration date.
+\end{itemize}
+
+\textbf{Methods:}
+\begin{itemize}
+    \item \texttt{getSubscriptionDetails(accountID): Subscription} -- Retrieves current subscription information.
+    \item \texttt{updateSubscription(accountID, plan): Boolean} -- Modifies the subscription plan.
+    \item \texttt{trackUsage(accountID, resource): void} -- Records resource usage for billing purposes.
+    \item \texttt{checkQuota(accountID): Boolean} -- Verifies if the account has remaining quota.
+    \item \texttt{generateInvoice(accountID): Invoice} -- Creates billing invoices for the account.
+\end{itemize}
+
+\subsection{ThreatAnalysisEngine Class}
+
+The ThreatAnalysisEngine class represents the core threat modeling functionality of the TIBSA platform, automating the generation of threat models, STRIDE analysis, and risk assessments based on system architecture inputs.
+
+\textbf{Attributes:}
+\begin{itemize}
+    \item \texttt{modelID: String} -- Unique identifier for the threat model.
+    \item \texttt{architectureInput: Object} -- System architecture description in JSON or YAML format.
+    \item \texttt{dfdGenerated: Boolean} -- Flag indicating whether DFD has been generated.
+    \item \texttt{riskScore: Float} -- Calculated overall risk score for the system.
+    \item \texttt{analysisDate: Date} -- Timestamp of the threat analysis execution.
+\end{itemize}
+
+\textbf{Methods:}
+\begin{itemize}
+    \item \texttt{generateDFD(architecture): DFDDiagram} -- Creates Data Flow Diagrams from architecture specifications.
+    \item \texttt{performSTRIDE(dfd): STRIDEResults} -- Executes STRIDE threat analysis on the model.
+    \item \texttt{mapMITRE(threats): ATTACKMapping} -- Maps identified threats to MITRE ATT\&CK framework.
+    \item \texttt{calculateRisk(threats, controls): RiskScore} -- Computes risk scores based on likelihood and impact.
+    \item \texttt{generateReport(modelID): ThreatReport} -- Produces comprehensive threat modeling reports.
+\end{itemize}
+
+\subsection{ITScanAPIWrapper Class}
+
+The ITScanAPIWrapper class provides a unified interface for interacting with external scanning APIs and antivirus engines, abstracting the complexity of multiple vendor integrations behind a consistent API.
+
+\textbf{Attributes:}
+\begin{itemize}
+    \item \texttt{apiEndpoint: String} -- Base URL for the external API.
+    \item \texttt{apiKey: String} -- Authentication key for API access.
+    \item \texttt{engineName: String} -- Name of the integrated scanning engine.
+    \item \texttt{isActive: Boolean} -- Indicates whether the integration is currently active.
+    \item \texttt{rateLimitRemaining: Integer} -- Remaining API calls within the rate limit period.
+\end{itemize}
+
+\textbf{Methods:}
+\begin{itemize}
+    \item \texttt{submitScan(target): ScanID} -- Submits a target to the external scanning service.
+    \item \texttt{getResults(scanID): ExternalResults} -- Retrieves scan results from the external service.
+    \item \texttt{checkStatus(scanID): Status} -- Queries the status of an external scan operation.
+    \item \texttt{validateAPIKey(): Boolean} -- Verifies the validity of the configured API key.
+\end{itemize}
+
+\subsection{FTPThreagileInput Class}
+
+The FTPThreagileInput class manages the input processing for the Threagile threat modeling engine, handling file transfers and format conversions required for automated threat model generation.
+
+\textbf{Attributes:}
+\begin{itemize}
+    \item \texttt{inputID: String} -- Unique identifier for the input request.
+    \item \texttt{inputFormat: String} -- Format of the input file (JSON, YAML).
+    \item \texttt{validationStatus: String} -- Status of input validation.
+    \item \texttt{processingQueue: String} -- Queue assignment for processing.
+\end{itemize}
+
+\textbf{Methods:}
+\begin{itemize}
+    \item \texttt{validateInput(data): ValidationResult} -- Validates input data against schema requirements.
+    \item \texttt{transformFormat(input, targetFormat): TransformedData} -- Converts input between supported formats.
+    \item \texttt{queueForProcessing(inputID): Boolean} -- Adds validated input to the processing queue.
+\end{itemize}
+
+\subsection{SecurityControlsEvaluator Class}
+
+The SecurityControlsEvaluator class assesses the effectiveness of existing security controls against identified threats, providing gap analysis and recommendations for security improvements.
+
+\textbf{Attributes:}
+\begin{itemize}
+    \item \texttt{evaluationID: String} -- Unique identifier for the evaluation session.
+    \item \texttt{controlsInventory: List} -- List of security controls under evaluation.
+    \item \texttt{threatsCovered: List} -- Threats addressed by current controls.
+    \item \texttt{gapsIdentified: List} -- Security gaps requiring attention.
+\end{itemize}
+
+\textbf{Methods:}
+\begin{itemize}
+    \item \texttt{evaluateControls(controls, threats): EvaluationReport} -- Assesses control effectiveness against threats.
+    \item \texttt{identifyGaps(evaluation): GapList} -- Identifies areas lacking adequate protection.
+    \item \texttt{recommendControls(gaps): Recommendations} -- Suggests controls to address identified gaps.
+    \item \texttt{calculateCoverage(controls): CoverageScore} -- Computes the percentage of threats mitigated.
+\end{itemize}
+
+\subsection{ReportGenerator Class}
+
+The ReportGenerator class handles the creation and formatting of all reports within the TIBSA platform, including scan reports, threat model documentation, and executive summaries.
+
+\textbf{Attributes:}
+\begin{itemize}
+    \item \texttt{reportID: String} -- Unique identifier for the generated report.
+    \item \texttt{reportType: String} -- Classification of the report (scan, threat model, executive).
+    \item \texttt{outputFormat: String} -- Desired output format (PDF, Word, JSON).
+    \item \texttt{generatedAt: Date} -- Timestamp of report generation.
+    \item \texttt{storageURL: String} -- Location where the report is stored.
+\end{itemize}
+
+\textbf{Methods:}
+\begin{itemize}
+    \item \texttt{compileReportData(sourceID): ReportData} -- Aggregates data required for report generation.
+    \item \texttt{generatePDF(data): PDFDocument} -- Creates PDF format reports with visualizations.
+    \item \texttt{generateWord(data): WordDocument} -- Produces Word format documentation.
+    \item \texttt{exportJSON(data): JSONFile} -- Exports report data in JSON format for integration.
+\end{itemize}
+
+\subsection{Class Relationships and Associations}
+
+The classes within the TIBSA platform exhibit various types of relationships that define how objects interact and collaborate to fulfill system functionality. The following describes the key associations illustrated in the class diagram:
+
+\subsubsection{Composition Relationships}
+
+The ScanServices class maintains a composition relationship with both URLScanning and FileAnalysis classes, indicating that scan operations are composed of specific scanning activities. When a ScanServices instance is destroyed, the associated URLScanning and FileAnalysis instances are also terminated, reflecting the lifecycle dependency between these components.
+
+\subsubsection{Association Relationships}
+
+The AuthenticationHandler class is associated with the UserServices class, enabling user authentication to be linked with profile management. This association allows authenticated sessions to access and modify user-specific data while maintaining separation of concerns between authentication and user management logic.
+
+The ThreatIntelService class associates with the ScanServices class, providing threat intelligence enrichment capabilities to scan operations. This relationship enables scan results to be augmented with external threat data, IOC matches, and reputation information.
+
+\subsubsection{Dependency Relationships}
+
+The MLEngineService class depends on the FileAnalysis and URLScanning classes for feature extraction, as machine learning inference requires preprocessed features derived from analyzed files and URLs. This dependency ensures that ML predictions are based on properly extracted and validated input data.
+
+The ThreatAnalysisEngine class depends on the FTPThreagileInput class for receiving properly formatted architecture specifications, and on the SecurityControlsEvaluator class for assessing control effectiveness during threat modeling operations.
+
+\subsubsection{Aggregation Relationships}
+
+The AccountManager class aggregates UserServices instances, reflecting that a single billing account may encompass multiple user accounts within an organization. This aggregation supports team-based subscriptions and centralized usage tracking across multiple users.
+
+\subsection{Design Patterns Employed}
+
+The class design incorporates several established software design patterns to promote code quality, maintainability, and extensibility:
+
+\begin{itemize}
+    \item \textbf{Service Layer Pattern:} Classes such as UserServices, ScanServices, and ThreatIntelService implement the service layer pattern, encapsulating business logic and providing clean interfaces for upper layers.
+    
+    \item \textbf{Factory Pattern:} The ScanServices class employs factory methods to create appropriate scanning instances (URLScanning or FileAnalysis) based on the type of target being analyzed.
+    
+    \item \textbf{Wrapper Pattern:} The ITScanAPIWrapper class implements the wrapper pattern to provide a unified interface for multiple external scanning APIs, simplifying integration and maintenance.
+    
+    \item \textbf{Strategy Pattern:} The MLEngineService class utilizes the strategy pattern to select appropriate classification models based on the type of input being analyzed (URL vs. file).
+    
+    \item \textbf{Observer Pattern:} The notification and status update mechanisms employ the observer pattern, allowing UI components to react to changes in scan status and analysis completion.
+\end{itemize}
+
+\subsection{Summary}
+
+The class diagram presented in this section provides a comprehensive view of the TIBSA platform's object-oriented architecture. The design emphasizes modularity through well-defined class boundaries, maintainability through clear separation of concerns, and extensibility through the use of established design patterns. Each class encapsulates specific domain functionality while maintaining loose coupling with other components through well-defined interfaces. This architectural approach ensures that the system can evolve to accommodate new features, additional scanning engines, and enhanced threat intelligence capabilities without requiring fundamental structural changes.
+
