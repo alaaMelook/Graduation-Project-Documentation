@@ -3,30 +3,147 @@
 
 \section{Summary}
 
-This project proposes a \textbf{unified, intelligence-driven security assessment framework} that bridges predictive analysis and practical validation. By integrating \textbf{threat modeling}, \textbf{penetration testing}, and \textbf{threat intelligence}, the approach empowers organizations to \textbf{prioritize real risks}, \textbf{respond faster}, and \textbf{continuously strengthen} their defenses in an ever-evolving threat landscape.
+This project has presented the design and architecture of the TIBSA (Threat-Intelligence Based Security Assessment) platform, a unified framework that bridges predictive threat analysis with practical security validation. By integrating threat modeling, penetration testing, and threat intelligence into a cohesive eight-layer architecture, the platform addresses the critical gap identified in current security practices where these essential activities are typically performed in isolation.
 
-The eight-layer TIBSA platform architecture demonstrates how modern security tools and methodologies can be integrated to provide comprehensive, automated, and continuous security assessment capabilities.
+The development of this platform followed a systematic approach, beginning with a comprehensive literature review that examined existing threat modeling methodologies, automated security assessment tools, and the integration challenges faced by modern organizations. This analysis revealed significant research gaps, including the lack of unified platforms that combine predictive threat modeling with practical penetration testing, limited automation in threat-to-test mapping, and insufficient integration of real-time threat intelligence feeds.
 
-\section{Contributions}
+The requirements analysis phase defined clear functional and non-functional requirements based on stakeholder needs, establishing the foundation for a system that supports security analysts, penetration testers, system administrators, and compliance stakeholders. The Scrum-based development methodology ensured iterative progress and continuous validation against project objectives.
 
-The main contributions of this project include:
+The system design phase produced a comprehensive eight-layer architecture that addresses the identified requirements:
 
-\begin{enumerate}
-    \item A comprehensive framework integrating threat modeling with penetration testing
-    \item An eight-layer architecture design for the TIBSA platform
-    \item Integration of 18 different security tools and services
-    \item Automated threat-to-test mapping methodology
-    \item Continuous feedback loops for security improvement
-\end{enumerate}
+\begin{itemize}
+    \item \textbf{Layer 1 (User Layer)} and \textbf{Layer 2 (Edge Layer)}: Provide secure access through CDN, WAF, DDoS protection, and bot detection via Cloudflare integration.
+    \item \textbf{Layer 3 (Frontend Layer)}: Delivers a responsive interface using Next.js 15, Tailwind CSS, and shadcn/ui with robust client-side security controls.
+    \item \textbf{Layer 4 (API Engine)}: Centralizes request handling through KrakenD with Authentik providing comprehensive authentication, MFA, and RBAC.
+    \item \textbf{Layer 5 (Backend Services)}: Implements core business logic including scan coordination, threat intelligence via MISP, ML-powered detection using Ollama, and dynamic malware analysis through CAPE Sandbox.
+    \item \textbf{Layer 6 (Data Storage)}: Uses Neon Serverless Postgres, Upstash Redis, and Cloudflare R2 for structured data, caching, and object storage.
+    \item \textbf{Layer 7 (Monitoring Layer)}: Provides observability through Wazuh SIEM, Grafana, Prometheus, and Loki.
+    \item \textbf{Layer 8 (TIBSA Core)}: Automates the complete threat modeling workflow including DFD generation, STRIDE analysis, MITRE ATT\&CK mapping, and risk scoring.
+\end{itemize}
+
+The design documentation includes detailed UML diagrams covering use cases, sequence diagrams, class diagrams, and entity-relationship diagrams that provide a complete view of the system's structure and behavior.
+
+\section{Achievements and Contributions}
+
+This project makes several significant contributions to the field of cybersecurity assessment:
+
+\subsection{Unified Security Assessment Framework}
+
+The primary contribution is the design of a comprehensive framework that integrates traditionally isolated security practices. Unlike existing solutions that focus on individual aspects of security assessment, TIBSA provides:
+
+\begin{itemize}
+    \item Seamless integration between threat modeling outputs and penetration testing inputs
+    \item Automated mapping of identified threats to corresponding test cases and attack vectors
+    \item Real-time incorporation of threat intelligence to maintain current threat awareness
+    \item Continuous feedback loops where testing results refine and update threat models
+\end{itemize}
+
+\subsection{Eight-Layer Cloud-Native Architecture}
+
+The architectural design demonstrates how modern cloud-native technologies can be leveraged to build scalable, secure, and maintainable security assessment platforms. Key architectural contributions include:
+
+\begin{itemize}
+    \item Modular layered design enabling independent scaling of components
+    \item Integration of 18 different security tools and services into a cohesive platform
+    \item Serverless components reducing operational overhead and costs
+    \item Comprehensive monitoring and observability through integrated SIEM capabilities
+\end{itemize}
+
+\subsection{Automated Threat Modeling Workflow}
+
+The TIBSA Core layer introduces automation capabilities that significantly reduce manual effort:
+
+\begin{itemize}
+    \item Automatic generation of Data Flow Diagrams from system architecture specifications
+    \item Automated STRIDE threat identification based on system components
+    \item MITRE ATT\&CK framework mapping for standardized threat classification
+    \item Risk scoring algorithms that prioritize threats based on likelihood and impact
+\end{itemize}
+
+\subsection{Multi-Engine Security Scanning}
+
+The platform design supports comprehensive security analysis through:
+
+\begin{itemize}
+    \item Integration with multiple antivirus engines for file and URL analysis
+    \item Static and dynamic malware analysis capabilities
+    \item Machine learning-based threat detection for advanced threat identification
+    \item Threat intelligence correlation for contextual enrichment of scan results
+\end{itemize}
+
+\section{Challenges and Lessons Learned}
+
+Throughout the design and documentation process, several challenges were encountered and valuable lessons learned:
+
+\subsection{Complexity of Integration}
+
+Integrating 18 different tools and services required careful consideration of API compatibility, data format consistency, and error handling strategies. The solution involved designing standardized interfaces and implementing robust adapter patterns to abstract vendor-specific implementations.
+
+\subsection{Balancing Automation and Control}
+
+Finding the right balance between automated threat modeling and manual expert oversight proved challenging. The design addresses this by providing automated suggestions while maintaining human-in-the-loop validation for critical security decisions.
+
+\subsection{Scalability Considerations}
+
+Designing for both small-scale and enterprise deployments required flexible architecture decisions. The use of serverless components and containerized services enables horizontal scaling while maintaining cost efficiency for smaller deployments.
+
+\section{Limitations}
+
+While the TIBSA platform design addresses many identified gaps, certain limitations exist:
+
+\begin{itemize}
+    \item The current design focuses on web application security; extending to IoT, mobile, and embedded systems would require additional components.
+    \item Integration with proprietary enterprise security tools may require custom adapter development.
+    \item The threat modeling automation relies on accurate system architecture specifications; incomplete or outdated inputs may affect result quality.
+    \item Performance under extremely high concurrent scanning loads requires additional optimization and infrastructure investment.
+\end{itemize}
 
 \section{Future Work}
 
-Potential areas for future enhancement include:
+Several areas present opportunities for future enhancement and research:
+
+\subsection{Implementation and Deployment}
 
 \begin{itemize}
-    \item Development of the web-based analytical tools dashboard
-    \item Implementation of advanced AI/ML models for threat prediction
-    \item Integration with additional threat intelligence feeds
-    \item Enhanced automation of penetration testing workflows
-    \item Mobile application development for security monitoring
+    \item Complete implementation of all eight layers as a fully functional platform
+    \item Development of comprehensive test suites for validation
+    \item Creation of deployment automation scripts for cloud environments
+    \item Performance benchmarking and optimization
 \end{itemize}
+
+\subsection{Advanced AI/ML Integration}
+
+\begin{itemize}
+    \item Development of custom machine learning models for threat prediction based on organizational data
+    \item Natural language processing for automated threat report generation
+    \item Anomaly detection algorithms for identifying novel attack patterns
+    \item AI-assisted penetration testing recommendations based on threat model analysis
+\end{itemize}
+
+\subsection{Extended Platform Capabilities}
+
+\begin{itemize}
+    \item Mobile application development for real-time security monitoring and alerts
+    \item Browser extension for URL and download safety checking
+    \item Integration with additional threat intelligence feeds and sources
+    \item Support for compliance frameworks beyond the current scope (ISO 27001, SOC 2, HIPAA)
+\end{itemize}
+
+\subsection{Research Extensions}
+
+\begin{itemize}
+    \item Empirical studies comparing threat detection accuracy with existing solutions
+    \item User studies evaluating the effectiveness of the integrated workflow
+    \item Investigation of adversarial machine learning attacks against the threat detection components
+    \item Development of industry-specific threat libraries and test case templates
+\end{itemize}
+
+\section{Final Remarks}
+
+The TIBSA platform represents a significant step toward addressing the fragmentation in organizational security practices. By providing a unified framework that connects threat modeling, penetration testing, and threat intelligence, the platform empowers security teams to work more efficiently, prioritize real risks, and continuously strengthen their defenses.
+
+The eight-layer architecture demonstrates that modern cloud-native technologies and open-source security tools can be combined to create enterprise-grade security assessment capabilities. The modular design ensures that organizations can adopt the platform incrementally, starting with components that address their most pressing needs.
+
+As cyber threats continue to evolve in sophistication and frequency, the need for integrated, intelligence-driven security assessment frameworks will only grow. The TIBSA platform design provides a foundation for building such capabilities, with clear pathways for future enhancement and research.
+
+The knowledge and methodologies developed through this project contribute not only to the academic understanding of integrated security assessment but also provide practical guidance for organizations seeking to improve their security posture through unified threat management approaches.

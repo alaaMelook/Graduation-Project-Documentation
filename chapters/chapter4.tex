@@ -554,229 +554,226 @@ The authentication flow moves from Cloudflare through Next.js to KrakenD to Auth
 \clearpage
 \section{Use Case Diagram Design}
 
-This section presents the Use Case Diagram of the Threat-Intelligence Based Security Assessment (TIBSA) platform, which models the system’s functional behavior from a user interaction perspective. The use case diagram provides a high-level representation of how different actors interact with the platform’s core services, including scanning, reporting, dashboard management, and system administration. By illustrating these interactions, the diagram captures the functional requirements of the platform and clarifies the responsibilities of each actor within the system.
+This section presents the simplified Use Case Diagram of the Threat-Analyzer Multi-AV Scanning System. The diagram provides a high-level behavioral view of the system, focusing on the primary interactions between users, administrators, and core system functionalities. The design intentionally emphasizes clarity and readability by consolidating related functionalities into a reduced set of use cases while preserving the essential system behavior.
 
-The design emphasizes a clear separation of privileges between guest users, registered users, and administrators, while also incorporating interactions with external services such as antivirus engines, authentication providers, email delivery services, and temporary storage systems. This structured representation supports system security, scalability, and maintainability by ensuring that each actor interacts only with the functionalities relevant to their role.
+The simplified representation ensures that the diagram remains understandable and maintainable, especially for academic evaluation, without compromising the core operational requirements of the platform.
 
-\clearpage
-\begin{figure}[p]
+\begin{figure}[H]
 \centering
-\includegraphics[width=1.0\textwidth]{media/usecase1.jpg}
-\caption{TIBSA Platform - Use Case Diagram (Part 1 of 3)}
-\label{fig:usecase_part1}
+\includegraphics[width=1.0\textwidth]{media/usecase.jpg}
+\caption{TIBSA Platform - Use Case Diagram}
+\label{fig:usecase_diagram}
 \end{figure}
-
-\begin{figure}[p]
-\centering
-\includegraphics[width=1.0\textwidth]{media/usecase2.jpg}
-\caption{TIBSA Platform - Use Case Diagram (Part 2 of 3)}
-\label{fig:usecase_part2}
-\end{figure}
-
-\begin{figure}[p]
-\centering
-\includegraphics[width=1.0\textwidth]{media/usecase3.jpg}
-\caption{TIBSA Platform - Use Case Diagram (Part 3 of 3)}
-\label{fig:usecase_part3}
-\end{figure}
-\clearpage
-
 
 \subsection{Actors Overview}
 
-The TIBSA platform defines a set of internal and external actors that represent all entities interacting with the system. The \texttt{Guest} actor represents unauthenticated users who access the platform’s public-facing features. Guests are permitted to view general information and perform limited scanning operations, allowing them to evaluate the platform without full system access.
+The system defines two main actors that interact directly with the platform:
 
-The \texttt{Registered User} actor represents authenticated users who have full access to the platform’s primary functionalities. Registered users can submit scans, view detailed results, generate reports, manage personal dashboards, and access historical scan data. The \texttt{Admin} actor represents system administrators responsible for platform maintenance, monitoring, and configuration. Administrators manage antivirus engines, oversee system operations, update virus definitions, and administer user accounts.
+\textbf{User}: The User actor represents authenticated end users of the platform. Users are responsible for initiating scan requests, viewing scan results, generating reports, and managing personal preferences. This actor encompasses all standard user interactions required for security assessment operations.
 
-In addition to internal actors, the system interacts with several external actors. The \texttt{Antivirus Engine} actor represents integrated scanning engines that analyze files, URLs, and hashes. The \texttt{Email Service} actor represents external services responsible for delivering scan reports to users. The \texttt{OAuth Provider} actor models third-party authentication services used for social login, while the \texttt{Temporary Storage} actor represents external storage used to hold uploaded files during the scanning process.
+\textbf{Admin}: The Admin actor represents system administrators who manage platform infrastructure and operational integrity. Administrators are responsible for managing antivirus engines, maintaining system updates, monitoring overall system health, and administering user accounts.
 
-\subsection{Guest Use Cases}
+In addition to the primary actors, the system interacts with external actors to support core functionality, including antivirus engines, email services, and external authentication providers.
 
-Guest users interact with the TIBSA platform through a restricted set of use cases designed to provide basic functionality while preventing misuse of system resources. Guests can access the home page and documentation, register for a new account, and authenticate into the system. They are also allowed to upload a single file or submit a URL for scanning and view a basic summary of the scan results. Additionally, guests may access shared scan results through public links generated by registered users. These use cases provide limited exposure to platform capabilities while encouraging users to register for advanced features.
+\subsection{User Use Cases}
 
-\subsection{Authentication Use Cases}
+User use cases describe the primary functional capabilities available to authenticated users.
 
-Authentication use cases govern access control, identity verification, and session management for both registered users and administrators. These use cases include standard login and logout functionality, password reset mechanisms, and social authentication through external OAuth providers. The Social Login use case extends the standard Login process by allowing users to authenticate using third-party identity providers as an optional alternative to traditional username and password credentials. This design enhances usability while maintaining secure authentication workflows.
+\textbf{Authenticate}: This use case allows users to securely access the system. Authentication may be performed using traditional credentials or via third-party identity providers through social login mechanisms.
 
-\subsection{Scanning Use Cases}
+\textbf{Submit Scan Request}: This use case represents the core functionality of the platform. Users can submit scan requests for security analysis. The submitted target may include files, URLs, or hash values. The system validates the request and initiates the scanning workflow.
 
-Scanning operations constitute the core functionality of the TIBSA platform and are primarily available to registered users. These use cases include uploading files for analysis, submitting multiple files for batch scanning, submitting URLs for inspection, and performing hash-based reputation lookups. Registered users may optionally select specific antivirus engines to customize the scanning process. All scan submission use cases incorporate input validation to ensure correctness and security of user-provided data.
+\textbf{View Scan Results}: This use case enables users to view the results of completed scan operations. It includes aggregated antivirus detections, analysis summaries, and verdicts generated by the system.
 
-File-based scanning use cases additionally include temporary storage of uploaded files prior to analysis. The \texttt{Start Scan} use case represents the unified scanning pipeline that coordinates communication with external antivirus engines and initiates the analysis process. The \texttt{Select Antivirus Engines} use case extends the \texttt{Start Scan} use case, as engine selection is optional and available only to registered users.
+\textbf{Generate \& Share Report}: This use case allows users to generate formal scan reports based on completed analysis results. Reports can be shared through supported channels, including email delivery, enabling collaboration and documentation.
 
-\subsection{Scan Results, Reporting, and Sharing Use Cases}
+\textbf{View Dashboard \& History}: This use case provides users with an overview of their activity within the platform. It includes access to historical scan records, summarized statistics, and usage insights.
 
-After scan execution is completed, users can access a range of result analysis and reporting functionalities. These use cases include viewing detailed scan results, inspecting antivirus detection tables, analyzing file metadata, and reviewing in-depth analysis information. The platform supports aggregation of results from multiple antivirus engines and calculates detection ratios to provide a comprehensive assessment of potential threats.
-
-Reporting and sharing functionalities enable users to generate scan reports, export reports in supported formats, create shareable public links, and send reports via email. Exporting and emailing operations both depend on report generation as a prerequisite. The process of sending reports via email involves interaction with an external email service, ensuring reliable delivery of analysis results.
-
-\subsection{Dashboard and User Management Use Cases}
-
-Registered users have access to personalized dashboard and account management functionalities that support effective monitoring and customization. These use cases include viewing the user dashboard, accessing scan history, reviewing statistical summaries, managing user profiles and preferences, and viewing system notifications. Together, these functionalities enhance usability, provide transparency into user activity, and allow users to track their interactions with the platform over time.
+\textbf{Manage Preferences}: This use case allows users to configure personal settings such as notification preferences, scan behavior options, and interface customization.
 
 \subsection{Administrative Use Cases}
 
-Administrative use cases support system governance, maintenance, and operational monitoring. Administrators can access the admin dashboard, view the list of available antivirus engines, monitor engine status, and manage engine configurations. Additional use cases include enabling or disabling antivirus engines, removing engines, updating virus definitions, and viewing update progress and logs. Administrators are also responsible for monitoring overall system operations and managing user accounts. These use cases ensure system reliability, security, and traceability of maintenance activities.
+Administrative use cases represent system-level operations required to maintain platform reliability and effectiveness.
+
+\textbf{Manage AV Engines}: This use case allows administrators to add, configure, enable, disable, or remove antivirus engines integrated within the system. Proper engine management ensures accurate and up-to-date threat detection.
+
+\textbf{Update Virus Definitions}: This use case enables administrators to update antivirus signatures and detection rules. Regular updates ensure that the system remains effective against newly emerging threats.
+
+\textbf{Monitor System}: This use case allows administrators to observe system performance, scan processing status, and overall operational health, supporting proactive maintenance and troubleshooting.
+
+\textbf{Manage Users}: This use case provides administrative control over user accounts, including role management and access control.
 
 \subsection{Use Case Relationships}
-This describes the relationships between use cases in the TIBSA platform, illustrating how complex system behavior is decomposed into reusable and well-structured interactions. Use case relationships are employed to model mandatory and optional functionality, reduce redundancy, and improve the clarity of the overall behavioral design. By explicitly defining these relationships, the use case diagram ensures consistent execution of shared processes while supporting flexibility through optional extensions based on user roles and system conditions.
+
+The simplified Use Case Diagram employs limited but essential relationships to maintain clarity.
 
 \subsubsection{Include Relationships}
-Include relationships represent mandatory sub-processes that are always executed as part of a parent use case. In the TIBSA platform, input validation is included in all scan submission use cases to ensure the correctness, integrity, and security of user-provided data. Temporary file storage is included in file-based scanning operations to securely hold uploaded files during analysis. Report generation is included in both export and email operations, as reports must be generated before they can be distributed or shared. Additionally, result aggregation and detection ratio calculation are included in detailed result views and report generation to provide comprehensive and consolidated threat assessment outcomes.
+
+The Submit Scan Request use case includes the Start Scan operation, indicating that scanning is a mandatory step once a scan request is submitted.
+
+The Generate \& Share Report use case includes Send Report via Email, reflecting that email delivery is an integral part of the report sharing process.
 
 \subsubsection{Extend Relationships}
-Extend relationships represent optional or conditional behavior that enhances base use cases without altering their core functionality. In the TIBSA platform, the Social Login use case extends the standard Login use case by allowing users to authenticate through external OAuth providers as an alternative to traditional credentials. Similarly, antivirus engine selection extends the Start Scan use case, enabling registered users to customize scanning operations by choosing specific engines when such customization is required. These extend relationships improve system flexibility while maintaining a clear and reusable use case structure.
+
+The Authenticate use case is extended by Social Login, representing an optional authentication mechanism that supplements standard login credentials.
+
+These relationships reduce redundancy while clearly defining mandatory and optional system behaviors.
+
+\subsection{External System Interactions}
+
+The platform interacts with several external systems to fulfill its functionality:
+
+\begin{itemize}
+    \item \textbf{Antivirus Engines} perform the actual security analysis of submitted scan targets.
+    \item \textbf{Email Services} support the delivery of generated scan reports.
+    \item \textbf{OAuth Providers} enable third-party authentication mechanisms.
+\end{itemize}
+
+These interactions enhance system extensibility and integration without increasing internal complexity.
+
+\clearpage
+
+\section{Sequence Diagram}
+
+This section presents the Sequence Diagram of the TIBSA platform, which illustrates the dynamic behavior of the system by modeling the interactions between key components over time. The sequence diagram provides a chronological view of how different system elements collaborate to fulfill core operations such as user authentication and file scanning workflows. By visualizing these message exchanges, the diagram clarifies the temporal ordering of operations, the responsibilities of each layer, and the communication protocols that ensure secure and efficient data processing throughout the platform.
+
+\subsection{System Components}
+
+The sequence diagram identifies five primary system components that participate in the interaction flows:
+
+\begin{itemize}
+    \item \textbf{User}: The end user who initiates requests through the platform's user interface, including login operations and file submissions for security analysis.
+    \item \textbf{Frontend}: The Next.js-based presentation layer that handles user interactions, validates input, and communicates with the backend API.
+    \item \textbf{API}: The API Gateway (KrakenD) that routes requests, enforces authentication, and coordinates communication between the frontend and backend services.
+    \item \textbf{Backend}: The core processing layer that handles business logic, scan orchestration, and integration with antivirus engines and threat intelligence services.
+    \item \textbf{Database}: The Neon Serverless Postgres database that stores user data, scan results, threat models, and system configuration.
+\end{itemize}
+
+\subsection{Authentication Flow}
+
+The first interaction flow demonstrates the user authentication process:
+
+\begin{enumerate}
+    \item The User initiates the flow by sending a login request to the Frontend with their credentials.
+    \item The Frontend validates the input locally (checking for XSS, format validation) and forwards the authentication request to the API Gateway.
+    \item The API Gateway routes the request to the authentication service (Authentik), which queries the Database to validate the user's credentials.
+    \item Upon successful validation, the Database returns the user data to the API, which generates JWT access and refresh tokens.
+    \item The tokens are returned to the Frontend, which stores them securely and redirects the user to the Dashboard, granting authenticated access to platform features.
+\end{enumerate}
+
+This flow ensures secure authentication while maintaining separation of concerns between presentation, routing, and data persistence layers.
+
+\subsection{File Upload and Scanning Flow}
+
+The second interaction flow illustrates the file upload and security scanning process:
+
+\begin{enumerate}
+    \item The User selects a file for analysis and initiates the upload through the Frontend interface.
+    \item The Frontend calculates the file hash (SHA-256) for integrity verification and sends the file to the API Gateway.
+    \item The API validates the user's authentication token and forwards the file to the Backend processing service.
+    \item The Backend orchestrates the scanning process, distributing the file to multiple antivirus engines for parallel analysis. It also queries threat intelligence services for known indicators of compromise.
+    \item Upon completion, the Backend aggregates results from all engines, calculates confidence scores, and stores the comprehensive scan results in the Database.
+    \item The Backend notifies the API that the scan is complete, and the results are returned through the Frontend to the User as a detailed security report.
+\end{enumerate}
+
+This workflow demonstrates the platform's ability to handle file analysis requests efficiently while leveraging multiple security tools for comprehensive threat detection.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.9\textwidth]{media/sequance diagram.png}
+\caption{TIBSA Platform - System Sequence Diagram}
+\label{fig:sequence_diagram}
+\end{figure}
+
+\subsection{Design Considerations}
+
+The sequence diagram reflects several important design decisions:
+
+\begin{itemize}
+    \item \textbf{Layered Architecture}: Clear separation between User, Frontend, API, Backend, and Database ensures maintainability and scalability.
+    \item \textbf{Asynchronous Processing}: File scanning operations are processed asynchronously to prevent blocking the user interface during long-running scans.
+    \item \textbf{Token-Based Authentication}: JWT tokens enable stateless authentication, improving scalability and security.
+    \item \textbf{Centralized API Gateway}: All requests pass through the API Gateway, enabling consistent rate limiting, logging, and security enforcement.
+\end{itemize}
 
 \clearpage
 
 \section{Object-Oriented Class Design}
 
-\sloppy
-This section presents the object-oriented class design of the TIBSA platform, illustrating the structural relationships between the system's core components through a comprehensive Unified Modeling Language (UML) class diagram. The class diagram provides a detailed view of the system's software architecture, showcasing the classes, their attributes, methods, and the associations that bind them together. This design follows established object-oriented principles including encapsulation, inheritance, and composition to ensure modularity, maintainability, and extensibility of the codebase.
+This section presents the object-oriented class design of the TIBSA platform, illustrating the structural relationships between the system's core components. The design follows established object-oriented principles including encapsulation, inheritance, composition, and aggregation to ensure modularity, maintainability, and extensibility of the codebase. Each class encapsulates specific functionality and data, with well-defined interfaces for interaction with other components.
 
-% Class Diagram - Split across two facing pages
-\clearpage
-\begin{figure}[p]
+\begin{figure}[H]
 \centering
-\includegraphics[width=1.1\textwidth,height=0.88\textheight,keepaspectratio,clip,trim=0cm 0cm 8cm 0cm]{media/class_diagram.jpg}
-\caption{TIBSA Platform - Comprehensive Class Diagram (Part 1 of 2)}
-\label{fig:ch4_class_diagram_part1}
+\includegraphics[width=1.0\textwidth]{media/class diagram.png}
+\caption{TIBSA Platform - Class Diagram}
+\label{fig:class_diagram}
 \end{figure}
-
-\begin{figure}[p]
-\centering
-\includegraphics[width=1.1\textwidth,height=0.88\textheight,keepaspectratio,clip,trim=8cm 0cm 0cm 0cm]{media/class_diagram.jpg}
-\caption{TIBSA Platform - Comprehensive Class Diagram (Part 2 of 2)}
-\label{fig:ch4_class_diagram}
-\end{figure}
-\clearpage
 
 \subsection{Core Classes Overview}
 
-The TIBSA platform's class structure is organized around several core domain entities that represent the fundamental building blocks of the system. Each class encapsulates specific functionality and data, with well-defined interfaces for interaction with other components. The following subsections provide detailed descriptions of each class, their attributes, methods, and relationships.
+The platform's class structure is organized around the following core domain entities that represent the fundamental building blocks of the system:
 
-\subsection{URLScanning Class}
+\textbf{User}: Represents authenticated users of the platform, managing user credentials, roles, and profile information. Users can submit scans, create threat models, and generate reports. Key attributes include \texttt{userId}, \texttt{email}, \texttt{role}, and \texttt{createdAt}. The class provides methods for authentication, profile management, and role-based access control.
 
-The URLScanning class serves as the central component responsible for analyzing web addresses for potential security threats such as phishing attempts, malware distribution, and malicious content. This class encapsulates all functionality related to URL-based threat detection and analysis. The class maintains several key attributes including \texttt{scanID} which serves as a unique identifier assigned to each URL scanning operation for tracking and reference purposes, \texttt{targetURL} representing the web address submitted for security analysis, \texttt{scanStatus} indicating the current state of the scanning operation (pending, in-progress, completed, or failed), and \texttt{createdAt} which records the timestamp when the scan request was initiated.
+\textbf{ScanRequest}: Handles scan submission operations for files, URLs, or hash values. Each request is associated with a user and produces scan results upon completion. Attributes include \texttt{requestId}, \texttt{scanType}, \texttt{target}, and \texttt{status}. Methods include \texttt{initiate()} to begin scanning and \texttt{getResults()} to retrieve outcomes.
 
-The class provides essential methods for URL analysis operations. The \texttt{initiateScan()} method initiates the URL scanning process by sending the target URL to the analysis engines. The \texttt{getScanResults()} method retrieves the complete analysis results including threat indicators and reputation scores. The \texttt{cancelScan()} method terminates an ongoing scan operation and releases associated resources.
+\textbf{ScanResult}: Stores the outcomes of scan operations, including verdicts, confidence scores, and detection details from multiple antivirus engines. Key attributes are \texttt{resultId}, \texttt{verdict}, \texttt{score}, and a collection of \texttt{detections}. The \texttt{isMalicious()} method provides a quick assessment, while \texttt{generateReport()} creates formatted output.
 
-\subsection{AuthenticationHandler Class}
+\textbf{Report}: Manages the generation and export of scan reports in various formats (PDF, JSON), enabling users to share and document security findings. Attributes include \texttt{reportId}, \texttt{format}, and \texttt{generatedAt}. Methods such as \texttt{exportPDF()} and \texttt{share()} facilitate distribution of analysis results.
 
-The AuthenticationHandler class manages all aspects of user authentication and session management within the TIBSA platform. It serves as the primary interface between the user interface layer and the authentication service, ensuring secure access control throughout the system. The class attributes include \texttt{sessionID} which provides a unique token identifying the current user session, \texttt{userEmail} containing the email address associated with the authenticated user, \texttt{loginAttempts} as a counter tracking failed login attempts for security monitoring, \texttt{isAuthenticated} as a flag indicating whether the current session is authenticated, \texttt{mfaEnabled} indicating whether multi-factor authentication is enabled for the account, and \texttt{lastLogin} recording the timestamp of the user's most recent successful login.
+\textbf{ThreatModel}: Represents threat modeling operations, storing architecture definitions, DFD diagrams, and STRIDE analysis results. Key attributes include \texttt{modelId}, \texttt{name}, and \texttt{riskScore}. Methods like \texttt{generateDFD()} and \texttt{analyzeThreats()} automate the threat modeling workflow.
 
-The class implements comprehensive authentication methods. The \texttt{registerUser(email, password)} method creates a new user account with the provided credentials. The \texttt{authenticateUser(email, password)} method validates user credentials and issues authentication tokens. The \texttt{validateToken(token)} method verifies the validity and expiration status of authentication tokens. The \texttt{refreshToken(refreshToken)} method issues new access tokens using valid refresh tokens. The \texttt{verifyMFA(code)} method validates multi-factor authentication codes. The \texttt{logout()} method terminates the current session and invalidates associated tokens.
+\textbf{Threat}: Contains identified threats within a threat model, including category, likelihood, impact, and calculated risk scores. Attributes encompass \texttt{threatId}, \texttt{category}, \texttt{likelihood}, and \texttt{impact}. The \texttt{calculateRisk()} method computes overall threat severity.
 
-\subsection{UserServices Class}
+\textbf{Mitigation}: Represents security controls applied to mitigate identified threats, tracking control effectiveness and coverage. Key attributes are \texttt{mitigationId}, \texttt{controlName}, and \texttt{effectiveness}. The \texttt{apply()} method associates mitigations with specific threats.
 
-The UserServices class provides comprehensive user account management functionality, handling user profiles, preferences, and account-related operations. This class acts as the service layer for all user-centric operations beyond authentication. The class maintains attributes including \texttt{userID} as the unique identifier for the user account, \texttt{userName} representing the display name of the user, \texttt{userEmail} containing the primary email address associated with the account, \texttt{userRole} indicating the role assigned to the user (Admin, Analyst, User, Guest), \texttt{profileData} as a container for additional user profile information, and \texttt{createdAt} recording the account creation timestamp.
+\textbf{AVEngine}: Represents integrated antivirus engines used for file and URL analysis, managing engine status and detection capabilities. Attributes include \texttt{engineId}, \texttt{name}, \texttt{version}, and \texttt{status}. Methods include \texttt{scan()} for analysis and \texttt{update()} for signature updates.
 
-The class provides several methods for user management. The \texttt{getProfile(userID)} method retrieves the complete profile data for a specified user. The \texttt{updateProfile(userID, data)} method updates user profile information with the provided data. The \texttt{deleteAccount(userID)} method permanently removes a user account and associated data. The \texttt{getUserRole(userID)} method returns the current role assignment for a user. The \texttt{updatePreferences(userID, prefs)} method modifies user preferences and settings.
+\textbf{Detection}: Represents individual detection results from antivirus engines. Attributes include \texttt{detected} boolean flag, \texttt{malwareType} classification, and \texttt{confidence} score indicating detection certainty.
 
-\subsection{ScanServices Class}
+\subsection{Class Relationships}
 
-The ScanServices class orchestrates all security scanning operations within the platform, coordinating between file analysis, URL scanning, and threat intelligence services. This class serves as the central hub for initiating, managing, and tracking scan operations across the entire system. The class attributes include \texttt{scanID} as the unique identifier for the scan operation, \texttt{scanType} indicating the classification of the scan (file, URL, or hash lookup), \texttt{targetIdentifier} representing the subject of the scan (file path, URL, or hash value), \texttt{priority} indicating the processing priority level for the scan request, \texttt{status} showing the current operational status of the scan, and \texttt{initiatedBy} containing the user ID of the requesting user.
-
-The class implements comprehensive scanning methods. The \texttt{createScan(type, target, userID)} method initializes a new scan operation with specified parameters. The \texttt{getScanStatus(scanID)} method returns the current status and progress of a scan. The \texttt{getScanResults(scanID)} method retrieves completed scan results and analysis data. The \texttt{cancelScan(scanID)} method terminates an in-progress scan operation. The \texttt{queueScan(scan)} method adds a scan to the processing queue for asynchronous execution. The \texttt{aggregateResults(scanID)} method combines results from multiple analysis engines into a unified report.
-
-\subsection{FileAnalysis Class}
-
-The FileAnalysis class handles the processing and security analysis of uploaded files, implementing both static and dynamic analysis techniques. This class integrates with sandbox environments, machine learning engines, and threat intelligence services to provide comprehensive file security assessments. The class maintains attributes including \texttt{fileID} as the unique identifier assigned to the uploaded file, \texttt{fileName} containing the original name of the uploaded file, \texttt{fileHash} representing the SHA-256 hash of the file content for integrity verification, \texttt{fileSize} indicating the size of the file in bytes, \texttt{mimeType} containing the MIME type classification of the file, \texttt{uploadDate} recording the timestamp of file upload, and \texttt{analysisStatus} indicating the current state of the analysis process.
-
-The class provides essential methods for file analysis. The \texttt{uploadFile(file)} method processes and stores an uploaded file for analysis. The \texttt{calculateHash(file)} method computes cryptographic hashes (MD5, SHA-1, SHA-256) for the file. The \texttt{extractMetadata(fileID)} method extracts file properties and metadata information. The \texttt{initiateStaticAnalysis(fileID)} method begins static analysis of file structure and content. The \texttt{initiateDynamicAnalysis(fileID)} method submits the file to sandbox environment for behavioral analysis. The \texttt{getAnalysisReport(fileID)} method retrieves the comprehensive analysis report for a file.
-
-\subsection{PentestJobService Class}
-
-The PentestJobService class manages penetration testing operations within the TIBSA platform, handling job scheduling, execution coordination, and results collection for automated security assessments. The class attributes include \texttt{jobID} as the unique identifier for the penetration testing job, \texttt{targetScope} defining the target scope for testing, \texttt{testModules} as a collection of testing modules to be executed, \texttt{scheduledTime} indicating the scheduled execution time for the job, and \texttt{jobStatus} representing the current status of the pentest job.
-
-The class implements methods for penetration testing management. The \texttt{createJob(scope, modules)} method creates a new penetration testing job with specified parameters. The \texttt{scheduleJob(jobID, time)} method schedules a job for future execution. The \texttt{executeJob(jobID)} method initiates the execution of a pentest job. The \texttt{getJobResults(jobID)} method retrieves the findings and results from a completed job. The \texttt{cancelJob(jobID)} method cancels a scheduled or running job.
-
-\subsection{ThreatIntelService Class}
-
-The ThreatIntelService class provides integration with threat intelligence sources, enabling the platform to enrich security analysis with external threat data, indicators of compromise (IOCs), and reputation information. The class maintains attributes including \texttt{queryID} as the unique identifier for threat intelligence queries, \texttt{indicatorType} indicating the type of indicator being queried (IP, domain, hash, URL), \texttt{indicatorValue} containing the actual indicator value for lookup, \texttt{sources} as a list of threat intelligence sources to query, and \texttt{lastUpdated} recording the timestamp of the most recent data refresh.
-
-The class provides methods for threat intelligence operations. The \texttt{lookupIOC(indicator)} method queries threat intelligence sources for indicator information. The \texttt{getReputation(target)} method retrieves reputation scores for domains, IPs, or URLs. The \texttt{enrichData(scanResults)} method augments scan results with threat intelligence context. The \texttt{syncFeeds()} method synchronizes local threat data with external feed sources. The \texttt{queryMISP(indicator)} method queries the MISP platform for related threat events.
-
-\subsection{MLEngineService Class}
-
-The MLEngineService class encapsulates the machine learning capabilities of the TIBSA platform, providing intelligent threat detection through trained models for phishing classification, malware detection, and anomaly identification. The class attributes include \texttt{modelID} as the identifier for the machine learning model in use, \texttt{modelVersion} indicating the version number of the deployed model, \texttt{modelType} representing the classification of the model (phishing, malware, anomaly), \texttt{accuracy} containing the current accuracy metric of the model, and \texttt{lastTrained} recording the timestamp of the most recent model training.
-
-The class implements machine learning methods. The \texttt{classifyURL(url, features)} method classifies a URL as phishing or legitimate. The \texttt{classifyFile(fileFeatures)} method determines malware probability for a file. The \texttt{extractFeatures(input)} method extracts relevant features for model input. The \texttt{runInference(features)} method executes model inference on provided feature vectors. The \texttt{getConfidenceScore(prediction)} method returns the confidence level of a prediction.
-
-\subsection{AccountManager Class}
-
-The AccountManager class handles subscription management, usage tracking, and account tier administration, integrating with billing services to manage user entitlements and resource allocation. The class maintains attributes including \texttt{accountID} as the unique identifier for the billing account, \texttt{subscriptionPlan} indicating the current subscription tier (Freemium, Pro, Enterprise), \texttt{usageQuota} representing the maximum allowed resource usage for the account, \texttt{currentUsage} tracking the current resource consumption count, \texttt{billingCycle} indicating the billing period (monthly, annual), and \texttt{expirationDate} recording the subscription expiration date.
-
-The class provides methods for account management. The \texttt{getSubscriptionDetails(accountID)} method retrieves current subscription information. The \texttt{updateSubscription(accountID, plan)} method modifies the subscription plan. The \texttt{trackUsage(accountID, resource)} method records resource usage for billing purposes. The \texttt{checkQuota(accountID)} method verifies if the account has remaining quota. The \texttt{generateInvoice(accountID)} method creates billing invoices for the account.
-
-\subsection{ThreatAnalysisEngine Class}
-
-The ThreatAnalysisEngine class represents the core threat modeling functionality of the TIBSA platform, automating the generation of threat models, STRIDE analysis, and risk assessments based on system architecture inputs. The class attributes include \texttt{modelID} as the unique identifier for the threat model, \texttt{architectureInput} containing the system architecture description in JSON or YAML format, \texttt{dfdGenerated} as a flag indicating whether DFD has been generated, \texttt{riskScore} representing the calculated overall risk score for the system, and \texttt{analysisDate} recording the timestamp of the threat analysis execution.
-
-The class implements comprehensive threat modeling methods. The \texttt{generateDFD(architecture)} method creates Data Flow Diagrams from architecture specifications. The \texttt{performSTRIDE(dfd)} method executes STRIDE threat analysis on the model. The \texttt{mapMITRE(threats)} method maps identified threats to MITRE ATT\&CK framework. The \texttt{calculateRisk(threats, controls)} method computes risk scores based on likelihood and impact. The \texttt{generateReport(modelID)} method produces comprehensive threat modeling reports.
-
-\subsection{ITScanAPIWrapper Class}
-
-The ITScanAPIWrapper class provides a unified interface for interacting with external scanning APIs and antivirus engines, abstracting the complexity of multiple vendor integrations behind a consistent API. The class maintains attributes including \texttt{apiEndpoint} containing the base URL for the external API, \texttt{apiKey} as the authentication key for API access, \texttt{engineName} representing the name of the integrated scanning engine, \texttt{isActive} indicating whether the integration is currently active, and \texttt{rateLimitRemaining} tracking the remaining API calls within the rate limit period.
-
-The class provides methods for external API integration. The \texttt{submitScan(target)} method submits a target to the external scanning service. The \texttt{getResults(scanID)} method retrieves scan results from the external service. The \texttt{checkStatus(scanID)} method queries the status of an external scan operation. The \texttt{validateAPIKey()} method verifies the validity of the configured API key.
-
-\subsection{FTPThreagileInput Class}
-
-The FTPThreagileInput class manages the input processing for the Threagile threat modeling engine, handling file transfers and format conversions required for automated threat model generation. The class attributes include \texttt{inputID} as the unique identifier for the input request, \texttt{inputFormat} indicating the format of the input file (JSON, YAML), \texttt{validationStatus} representing the status of input validation, and \texttt{processingQueue} indicating the queue assignment for processing.
-
-The class implements input processing methods. The \texttt{validateInput(data)} method validates input data against schema requirements. The \texttt{transformFormat(input, targetFormat)} method converts input between supported formats. The \texttt{queueForProcessing(inputID)} method adds validated input to the processing queue.
-
-\subsection{SecurityControlsEvaluator Class}
-
-The SecurityControlsEvaluator class assesses the effectiveness of existing security controls against identified threats, providing gap analysis and recommendations for security improvements. The class maintains attributes including \texttt{evaluationID} as the unique identifier for the evaluation session, \texttt{controlsInventory} as a list of security controls under evaluation, \texttt{threatsCovered} representing the threats addressed by current controls, and \texttt{gapsIdentified} containing the security gaps requiring attention.
-
-The class provides methods for security controls evaluation. The \texttt{evaluateControls(controls, threats)} method assesses control effectiveness against threats. The \texttt{identifyGaps(evaluation)} method identifies areas lacking adequate protection. The \texttt{recommendControls(gaps)} method suggests controls to address identified gaps. The \texttt{calculateCoverage(controls)} method computes the percentage of threats mitigated.
-
-\subsection{ReportGenerator Class}
-
-The ReportGenerator class handles the creation and formatting of all reports within the TIBSA platform, including scan reports, threat model documentation, and executive summaries. The class maintains attributes including \texttt{reportID} as the unique identifier for the generated report, \texttt{reportType} indicating the classification of the report (scan, threat model, executive), \texttt{outputFormat} representing the desired output format (PDF, Word, JSON), \texttt{generatedAt} recording the timestamp of report generation, and \texttt{storageURL} containing the location where the report is stored.
-
-The class implements report generation methods. The \texttt{compileReportData(sourceID)} method aggregates data required for report generation. The \texttt{generatePDF(data)} method creates PDF format reports with visualizations. The \texttt{generateWord(data)} method produces Word format documentation. The \texttt{exportJSON(data)} method exports report data in JSON format for integration.
-
-\subsection{Class Relationships and Associations}
-
-The classes within the TIBSA platform exhibit various types of relationships that define how objects interact and collaborate to fulfill system functionality. The following describes the key associations illustrated in the class diagram:
+The classes within the TIBSA platform exhibit various types of relationships that define how objects interact and collaborate to fulfill system functionality:
 
 \subsubsection{Composition Relationships}
 
-The ScanServices class maintains a composition relationship with both URLScanning and FileAnalysis classes, indicating that scan operations are composed of specific scanning activities. When a ScanServices instance is destroyed, the associated URLScanning and FileAnalysis instances are also terminated, reflecting the lifecycle dependency between these components.
+Composition represents strong ownership where the part cannot exist without the whole:
 
-\subsubsection{Association Relationships}
-
-The AuthenticationHandler class is associated with the UserServices class, enabling user authentication to be linked with profile management. This association allows authenticated sessions to access and modify user-specific data while maintaining separation of concerns between authentication and user management logic.
-
-The ThreatIntelService class associates with the ScanServices class, providing threat intelligence enrichment capabilities to scan operations. This relationship enables scan results to be augmented with external threat data, IOC matches, and reputation information.
-
-\subsubsection{Dependency Relationships}
-
-The MLEngineService class depends on the FileAnalysis and URLScanning classes for feature extraction, as machine learning inference requires preprocessed features derived from analyzed files and URLs. This dependency ensures that ML predictions are based on properly extracted and validated input data.
-
-The ThreatAnalysisEngine class depends on the FTPThreagileInput class for receiving properly formatted architecture specifications, and on the SecurityControlsEvaluator class for assessing control effectiveness during threat modeling operations.
+\begin{itemize}
+    \item \textbf{ScanResult -- Detection}: A ScanResult contains multiple Detection instances from different AV engines. When a ScanResult is deleted, all associated Detection objects are also removed. This reflects the lifecycle dependency where detections have no meaning outside their parent scan result.
+    \item \textbf{ThreatModel -- Threat}: A ThreatModel contains multiple identified Threat instances. Threats are created within the context of a specific model and cannot exist independently. Deleting a threat model cascades to remove all associated threats.
+\end{itemize}
 
 \subsubsection{Aggregation Relationships}
 
-The AccountManager class aggregates UserServices instances, reflecting that a single billing account may encompass multiple user accounts within an organization. This aggregation supports team-based subscriptions and centralized usage tracking across multiple users.
-
-\subsection{Design Patterns Employed}
-
-The class design incorporates several established software design patterns to promote code quality, maintainability, and extensibility:
+Aggregation represents weak ownership where parts can exist independently:
 
 \begin{itemize}
-    \item \textbf{Service Layer Pattern:} Classes such as UserServices, ScanServices, and ThreatIntelService implement the service layer pattern, encapsulating business logic and providing clean interfaces for upper layers.
+    \item \textbf{Threat -- Mitigation}: Threats are mitigated by security controls, but mitigations can exist independently and may apply to multiple threats across different threat models. A single mitigation control (e.g., encryption) can address multiple threats simultaneously.
+\end{itemize}
 
-    \item \textbf{Factory Pattern:} The ScanServices class employs factory methods to create appropriate scanning instances (URLScanning or FileAnalysis) based on the type of target being analyzed.
+\subsubsection{Association Relationships}
 
-    \item \textbf{Wrapper Pattern:} The ITScanAPIWrapper class implements the wrapper pattern to provide a unified interface for multiple external scanning APIs, simplifying integration and maintenance.
+Associations represent general relationships between classes with defined multiplicity:
 
-    \item \textbf{Strategy Pattern:} The MLEngineService class utilizes the strategy pattern to select appropriate classification models based on the type of input being analyzed (URL vs. file).
+\begin{itemize}
+    \item \textbf{User -- ScanRequest} (1 to many): A single user can submit multiple scan requests over time, while each scan request belongs to exactly one user.
+    \item \textbf{User -- ThreatModel} (1 to many): Users create and own multiple threat models, enabling organized security assessment of various systems.
+    \item \textbf{User -- Report} (1 to many): Users can generate multiple reports from their scan results and threat analyses.
+    \item \textbf{ScanRequest -- ScanResult} (1 to 1): Each scan request produces exactly one scan result upon completion.
+    \item \textbf{ScanRequest -- AVEngine} (many to many): Scan requests can utilize multiple AV engines for comprehensive analysis, and each engine handles multiple scan requests.
+    \item \textbf{ScanResult -- Report} (1 to 0..1): A scan result may optionally generate a formal report for documentation purposes.
+    \item \textbf{AVEngine -- Detection} (1 to many): Each antivirus engine produces multiple detection records across different scan operations.
+\end{itemize}
 
-    \item \textbf{Observer Pattern:} The notification and status update mechanisms employ the observer pattern, allowing UI components to react to changes in scan status and analysis completion.
+\subsection{Design Patterns}
+
+The class design incorporates several established software design patterns:
+
+\begin{itemize}
+    \item \textbf{Service Layer Pattern}: Core service classes encapsulate business logic and provide clean interfaces for the presentation layer.
+    \item \textbf{Factory Pattern}: Scan operations use factory methods to create appropriate analysis instances based on target type.
+    \item \textbf{Observer Pattern}: Status updates and notifications employ the observer pattern, allowing UI components to react to scan completion events.
 \end{itemize}
 
 \clearpage

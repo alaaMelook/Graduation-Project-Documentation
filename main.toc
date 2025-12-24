@@ -153,73 +153,74 @@
 \contentsline {subsubsection}{8.1 TIBSA Suite - Level 1 (Absolute Core)}{69}{section*.97}%
 \contentsline {subsection}{\numberline {4.2.9}Key Integration Points Summary}{71}{subsection.4.2.9}%
 \contentsline {section}{\numberline {4.3}Use Case Diagram Design}{72}{section.4.3}%
-\contentsline {subsection}{\numberline {4.3.1}Actors Overview}{75}{subsection.4.3.1}%
-\contentsline {subsection}{\numberline {4.3.2}Guest Use Cases}{75}{subsection.4.3.2}%
-\contentsline {subsection}{\numberline {4.3.3}Authentication Use Cases}{75}{subsection.4.3.3}%
-\contentsline {subsection}{\numberline {4.3.4}Scanning Use Cases}{76}{subsection.4.3.4}%
-\contentsline {subsection}{\numberline {4.3.5}Scan Results, Reporting, and Sharing Use Cases}{76}{subsection.4.3.5}%
-\contentsline {subsection}{\numberline {4.3.6}Dashboard and User Management Use Cases}{76}{subsection.4.3.6}%
-\contentsline {subsection}{\numberline {4.3.7}Administrative Use Cases}{76}{subsection.4.3.7}%
-\contentsline {subsection}{\numberline {4.3.8}Use Case Relationships}{77}{subsection.4.3.8}%
-\contentsline {subsubsection}{Include Relationships}{77}{section*.101}%
-\contentsline {subsubsection}{Extend Relationships}{77}{section*.102}%
-\contentsline {section}{\numberline {4.4}Object-Oriented Class Design}{78}{section.4.4}%
-\contentsline {subsection}{\numberline {4.4.1}Core Classes Overview}{81}{subsection.4.4.1}%
-\contentsline {subsection}{\numberline {4.4.2}URLScanning Class}{81}{subsection.4.4.2}%
-\contentsline {subsection}{\numberline {4.4.3}AuthenticationHandler Class}{81}{subsection.4.4.3}%
-\contentsline {subsection}{\numberline {4.4.4}UserServices Class}{82}{subsection.4.4.4}%
-\contentsline {subsection}{\numberline {4.4.5}ScanServices Class}{82}{subsection.4.4.5}%
-\contentsline {subsection}{\numberline {4.4.6}FileAnalysis Class}{83}{subsection.4.4.6}%
-\contentsline {subsection}{\numberline {4.4.7}PentestJobService Class}{83}{subsection.4.4.7}%
-\contentsline {subsection}{\numberline {4.4.8}ThreatIntelService Class}{84}{subsection.4.4.8}%
-\contentsline {subsection}{\numberline {4.4.9}MLEngineService Class}{84}{subsection.4.4.9}%
-\contentsline {subsection}{\numberline {4.4.10}AccountManager Class}{84}{subsection.4.4.10}%
-\contentsline {subsection}{\numberline {4.4.11}ThreatAnalysisEngine Class}{85}{subsection.4.4.11}%
-\contentsline {subsection}{\numberline {4.4.12}ITScanAPIWrapper Class}{85}{subsection.4.4.12}%
-\contentsline {subsection}{\numberline {4.4.13}FTPThreagileInput Class}{86}{subsection.4.4.13}%
-\contentsline {subsection}{\numberline {4.4.14}SecurityControlsEvaluator Class}{86}{subsection.4.4.14}%
-\contentsline {subsection}{\numberline {4.4.15}ReportGenerator Class}{86}{subsection.4.4.15}%
-\contentsline {subsection}{\numberline {4.4.16}Class Relationships and Associations}{87}{subsection.4.4.16}%
-\contentsline {subsubsection}{Composition Relationships}{87}{section*.105}%
-\contentsline {subsubsection}{Association Relationships}{87}{section*.106}%
-\contentsline {subsubsection}{Dependency Relationships}{87}{section*.107}%
-\contentsline {subsubsection}{Aggregation Relationships}{88}{section*.108}%
-\contentsline {subsection}{\numberline {4.4.17}Design Patterns Employed}{88}{subsection.4.4.17}%
-\contentsline {section}{\numberline {4.5}Entity-Relationship Diagram (ERD)}{89}{section.4.5}%
-\contentsline {subsection}{\numberline {4.5.1}User Table}{89}{subsection.4.5.1}%
-\contentsline {subsection}{\numberline {4.5.2}Scan\_Request Table}{89}{subsection.4.5.2}%
-\contentsline {subsection}{\numberline {4.5.3}File Table}{90}{subsection.4.5.3}%
-\contentsline {subsection}{\numberline {4.5.4}URL Table}{90}{subsection.4.5.4}%
-\contentsline {subsection}{\numberline {4.5.5}Scan\_Result Table}{90}{subsection.4.5.5}%
-\contentsline {subsection}{\numberline {4.5.6}Antivirus\_Engine Table}{90}{subsection.4.5.6}%
-\contentsline {subsection}{\numberline {4.5.7}Engine\_Result Table}{90}{subsection.4.5.7}%
-\contentsline {subsection}{\numberline {4.5.8}Threat\_Model Table}{91}{subsection.4.5.8}%
-\contentsline {subsection}{\numberline {4.5.9}System\_Component Table}{91}{subsection.4.5.9}%
-\contentsline {subsection}{\numberline {4.5.10}Threat Table}{91}{subsection.4.5.10}%
-\contentsline {subsection}{\numberline {4.5.11}Mitigation Table}{91}{subsection.4.5.11}%
-\contentsline {subsection}{\numberline {4.5.12}Relationships and Cardinality}{92}{subsection.4.5.12}%
-\contentsline {subsubsection}{Composition Relationships}{92}{section*.110}%
-\contentsline {subsubsection}{Association Relationships}{92}{section*.111}%
-\contentsline {subsubsection}{Multiplicity Summary}{92}{section*.112}%
-\contentsline {section}{\numberline {4.6}User Interface Wireframes}{94}{section.4.6}%
-\contentsline {subsection}{\numberline {4.6.1}Login Screen}{94}{subsection.4.6.1}%
-\contentsline {subsection}{\numberline {4.6.2}Registration Screen}{95}{subsection.4.6.2}%
-\contentsline {subsection}{\numberline {4.6.3}Main Dashboard}{96}{subsection.4.6.3}%
-\contentsline {subsection}{\numberline {4.6.4}Available Antivirus Engines}{97}{subsection.4.6.4}%
-\contentsline {subsection}{\numberline {4.6.5}Update Antivirus Database}{98}{subsection.4.6.5}%
-\contentsline {subsection}{\numberline {4.6.6}Add \& Manage AV Engines}{98}{subsection.4.6.6}%
-\contentsline {subsection}{\numberline {4.6.7}File Upload \& Scan Request}{100}{subsection.4.6.7}%
-\contentsline {subsection}{\numberline {4.6.8}Multiple File Scan}{101}{subsection.4.6.8}%
-\contentsline {subsection}{\numberline {4.6.9}Scan Results Overview}{102}{subsection.4.6.9}%
-\contentsline {subsection}{\numberline {4.6.10}Detailed File Information}{103}{subsection.4.6.10}%
-\contentsline {subsection}{\numberline {4.6.11}Scan Report Sharing}{104}{subsection.4.6.11}%
-\contentsline {subsection}{\numberline {4.6.12}Scan URL}{105}{subsection.4.6.12}%
-\contentsline {subsection}{\numberline {4.6.13}User Profile}{106}{subsection.4.6.13}%
-\contentsline {subsection}{\numberline {4.6.14}System Settings}{107}{subsection.4.6.14}%
-\contentsline {subsection}{\numberline {4.6.15}Help \& Support Screen}{108}{subsection.4.6.15}%
-\contentsline {section}{\numberline {4.7}Summary}{109}{section.4.7}%
-\contentsline {chapter}{\numberline {5}Conclusion and Future Work}{110}{chapter.5}%
-\contentsline {section}{\numberline {5.1}Summary}{110}{section.5.1}%
-\contentsline {section}{\numberline {5.2}Contributions}{110}{section.5.2}%
-\contentsline {section}{\numberline {5.3}Future Work}{110}{section.5.3}%
-\contentsline {chapter}{List of References}{112}{chapter*.128}%
+\contentsline {subsection}{\numberline {4.3.1}Actors Overview}{73}{subsection.4.3.1}%
+\contentsline {subsection}{\numberline {4.3.2}User Use Cases}{73}{subsection.4.3.2}%
+\contentsline {subsection}{\numberline {4.3.3}Administrative Use Cases}{74}{subsection.4.3.3}%
+\contentsline {subsection}{\numberline {4.3.4}Use Case Relationships}{74}{subsection.4.3.4}%
+\contentsline {subsubsection}{Include Relationships}{74}{section*.99}%
+\contentsline {subsubsection}{Extend Relationships}{74}{section*.100}%
+\contentsline {subsection}{\numberline {4.3.5}External System Interactions}{74}{subsection.4.3.5}%
+\contentsline {section}{\numberline {4.4}Sequence Diagram}{76}{section.4.4}%
+\contentsline {subsection}{\numberline {4.4.1}System Components}{76}{subsection.4.4.1}%
+\contentsline {subsection}{\numberline {4.4.2}Authentication Flow}{76}{subsection.4.4.2}%
+\contentsline {subsection}{\numberline {4.4.3}File Upload and Scanning Flow}{77}{subsection.4.4.3}%
+\contentsline {subsection}{\numberline {4.4.4}Design Considerations}{78}{subsection.4.4.4}%
+\contentsline {section}{\numberline {4.5}Object-Oriented Class Design}{79}{section.4.5}%
+\contentsline {subsection}{\numberline {4.5.1}Core Classes Overview}{80}{subsection.4.5.1}%
+\contentsline {subsection}{\numberline {4.5.2}Class Relationships}{81}{subsection.4.5.2}%
+\contentsline {subsubsection}{Composition Relationships}{81}{section*.103}%
+\contentsline {subsubsection}{Aggregation Relationships}{81}{section*.104}%
+\contentsline {subsubsection}{Association Relationships}{81}{section*.105}%
+\contentsline {subsection}{\numberline {4.5.3}Design Patterns}{82}{subsection.4.5.3}%
+\contentsline {section}{\numberline {4.6}Entity-Relationship Diagram (ERD)}{83}{section.4.6}%
+\contentsline {subsection}{\numberline {4.6.1}User Table}{83}{subsection.4.6.1}%
+\contentsline {subsection}{\numberline {4.6.2}Scan\_Request Table}{83}{subsection.4.6.2}%
+\contentsline {subsection}{\numberline {4.6.3}File Table}{84}{subsection.4.6.3}%
+\contentsline {subsection}{\numberline {4.6.4}URL Table}{84}{subsection.4.6.4}%
+\contentsline {subsection}{\numberline {4.6.5}Scan\_Result Table}{84}{subsection.4.6.5}%
+\contentsline {subsection}{\numberline {4.6.6}Antivirus\_Engine Table}{84}{subsection.4.6.6}%
+\contentsline {subsection}{\numberline {4.6.7}Engine\_Result Table}{84}{subsection.4.6.7}%
+\contentsline {subsection}{\numberline {4.6.8}Threat\_Model Table}{85}{subsection.4.6.8}%
+\contentsline {subsection}{\numberline {4.6.9}System\_Component Table}{85}{subsection.4.6.9}%
+\contentsline {subsection}{\numberline {4.6.10}Threat Table}{85}{subsection.4.6.10}%
+\contentsline {subsection}{\numberline {4.6.11}Mitigation Table}{85}{subsection.4.6.11}%
+\contentsline {subsection}{\numberline {4.6.12}Relationships and Cardinality}{86}{subsection.4.6.12}%
+\contentsline {subsubsection}{Composition Relationships}{86}{section*.107}%
+\contentsline {subsubsection}{Association Relationships}{86}{section*.108}%
+\contentsline {subsubsection}{Multiplicity Summary}{86}{section*.109}%
+\contentsline {section}{\numberline {4.7}User Interface Wireframes}{88}{section.4.7}%
+\contentsline {subsection}{\numberline {4.7.1}Login Screen}{88}{subsection.4.7.1}%
+\contentsline {subsection}{\numberline {4.7.2}Registration Screen}{89}{subsection.4.7.2}%
+\contentsline {subsection}{\numberline {4.7.3}Main Dashboard}{90}{subsection.4.7.3}%
+\contentsline {subsection}{\numberline {4.7.4}Available Antivirus Engines}{91}{subsection.4.7.4}%
+\contentsline {subsection}{\numberline {4.7.5}Update Antivirus Database}{92}{subsection.4.7.5}%
+\contentsline {subsection}{\numberline {4.7.6}Add \& Manage AV Engines}{92}{subsection.4.7.6}%
+\contentsline {subsection}{\numberline {4.7.7}File Upload \& Scan Request}{94}{subsection.4.7.7}%
+\contentsline {subsection}{\numberline {4.7.8}Multiple File Scan}{95}{subsection.4.7.8}%
+\contentsline {subsection}{\numberline {4.7.9}Scan Results Overview}{96}{subsection.4.7.9}%
+\contentsline {subsection}{\numberline {4.7.10}Detailed File Information}{97}{subsection.4.7.10}%
+\contentsline {subsection}{\numberline {4.7.11}Scan Report Sharing}{98}{subsection.4.7.11}%
+\contentsline {subsection}{\numberline {4.7.12}Scan URL}{99}{subsection.4.7.12}%
+\contentsline {subsection}{\numberline {4.7.13}User Profile}{100}{subsection.4.7.13}%
+\contentsline {subsection}{\numberline {4.7.14}System Settings}{101}{subsection.4.7.14}%
+\contentsline {subsection}{\numberline {4.7.15}Help \& Support Screen}{102}{subsection.4.7.15}%
+\contentsline {section}{\numberline {4.8}Summary}{103}{section.4.8}%
+\contentsline {chapter}{\numberline {5}Conclusion and Future Work}{104}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Summary}{104}{section.5.1}%
+\contentsline {section}{\numberline {5.2}Achievements and Contributions}{105}{section.5.2}%
+\contentsline {subsection}{\numberline {5.2.1}Unified Security Assessment Framework}{105}{subsection.5.2.1}%
+\contentsline {subsection}{\numberline {5.2.2}Eight-Layer Cloud-Native Architecture}{106}{subsection.5.2.2}%
+\contentsline {subsection}{\numberline {5.2.3}Automated Threat Modeling Workflow}{106}{subsection.5.2.3}%
+\contentsline {subsection}{\numberline {5.2.4}Multi-Engine Security Scanning}{106}{subsection.5.2.4}%
+\contentsline {section}{\numberline {5.3}Challenges and Lessons Learned}{106}{section.5.3}%
+\contentsline {subsection}{\numberline {5.3.1}Complexity of Integration}{107}{subsection.5.3.1}%
+\contentsline {subsection}{\numberline {5.3.2}Balancing Automation and Control}{107}{subsection.5.3.2}%
+\contentsline {subsection}{\numberline {5.3.3}Scalability Considerations}{107}{subsection.5.3.3}%
+\contentsline {section}{\numberline {5.4}Limitations}{107}{section.5.4}%
+\contentsline {section}{\numberline {5.5}Future Work}{107}{section.5.5}%
+\contentsline {subsection}{\numberline {5.5.1}Implementation and Deployment}{108}{subsection.5.5.1}%
+\contentsline {subsection}{\numberline {5.5.2}Advanced AI/ML Integration}{108}{subsection.5.5.2}%
+\contentsline {subsection}{\numberline {5.5.3}Extended Platform Capabilities}{108}{subsection.5.5.3}%
+\contentsline {subsection}{\numberline {5.5.4}Research Extensions}{108}{subsection.5.5.4}%
+\contentsline {section}{\numberline {5.6}Final Remarks}{109}{section.5.6}%
+\contentsline {chapter}{List of References}{110}{chapter*.125}%
