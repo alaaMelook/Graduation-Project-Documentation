@@ -181,311 +181,175 @@ The threat and risk engine is the analytical core of the TIBSA platform, respons
 \clearpage
 
 \section{System Modeling Diagrams}
+\label{sec:system_modeling_diagrams}
 
-This section presents the system modeling diagrams that provide comprehensive views of the TIBSA platform from multiple perspectives. The diagrams follow standard UML (Unified Modeling Language) notation and database modeling conventions to ensure clarity and industry compliance. Together, these diagrams illustrate the behavioral aspects (Use Case and Sequence diagrams) and structural aspects (Class Diagram and ERD) of the system, providing a complete foundation for implementation and future development.
+System modeling constitutes a foundational pillar of modern software engineering practice, serving as the intellectual bridge between abstract requirements and concrete implementation. Before a single line of code is written, modeling diagrams allow architects, developers, administrators, and academic evaluators to reason about a system's structure, behavior, and data flow in a rigorous and unambiguous manner. In the context of the TIBSA (Threat Intelligence-Based Security Application) platform, system modeling is particularly critical given the complexity of the security domain, the multiplicity of integrated external services, and the need for precise role-based access control across a diverse user base.
 
-\subsection{Use Case Diagram Design}
+The Unified Modeling Language (UML) provides a standardized visual vocabulary for representing software systems from multiple complementary perspectives. Use Case Diagrams capture the functional requirements of a system by identifying actors and the services they consume. Sequence Diagrams illuminate the temporal ordering of interactions between system components during the execution of specific workflows, making it possible to detect design flaws, race conditions, and missing validations before implementation begins. Entity Relationship Diagrams (ERDs) model the persistent data layer of the system, exposing the structural relationships between database entities and forming the basis for schema normalization and integrity enforcement. Class Diagrams, rooted in object-oriented design principles, articulate the static structure of the software by defining classes, their attributes, their methods, and the associations that bind them together into a coherent architecture.
 
-This section presents the simplified Use Case Diagram of the Threat-Analyzer Multi-AV Scanning System. The diagram provides a high-level behavioral view of the system, focusing on the primary interactions between users, administrators, and core system functionalities. The design intentionally emphasizes clarity and readability by consolidating related functionalities into a reduced set of use cases while preserving the essential system behavior.
+Together, these four categories of diagrams provide a comprehensive and multi-dimensional model of the TIBSA platform. They allow different stakeholders --- including security analysts who will use the system operationally, system administrators responsible for its governance, and software developers tasked with its implementation --- to engage with the system at the appropriate level of abstraction. The following subsections present and analyze each diagram category in detail, drawing directly from the models constructed for this project.
 
-The simplified representation ensures that the diagram remains understandable and maintainable, especially for academic evaluation, without compromising the core operational requirements of the platform.
+\subsection{Use Case Diagram}
+\label{subsec:use_case_diagram}
+
+The Use Case Diagram serves as the primary artifact for capturing the functional requirements of the TIBSA platform from the perspective of its human actors. Unlike technical diagrams that expose internal system mechanics, the Use Case Diagram abstracts away implementation detail and focuses exclusively on what the system must do and for whom. This makes it an invaluable communication tool between technical developers and non-technical stakeholders, as well as a validation instrument for ensuring that all identified requirements have been accounted for in the design.
+
+The diagram identifies two primary human actors: the Authenticated User and the Administrator. The Authenticated User represents the operational persona of the system --- a security analyst, penetration tester, or threat intelligence professional who interacts with the platform to conduct investigations, analyze malware, and model threats. The Administrator represents the privileged governance actor responsible for overseeing platform integrity, managing user accounts, reviewing audit trails, and configuring global system behavior. In addition to these human actors, a third implicit actor is represented by the System Background Services, which encapsulates the asynchronous and automated processes that execute independently of direct user interaction, such as background pipeline execution and audit log triggering.
+
+The use cases attributed to the Authenticated User span the full operational lifecycle of the platform. UC-01 covers user registration and authentication, which forms the prerequisite for all subsequent interactions. UC-02 represents the initiation of a Standard Security Investigation, wherein a user submits a target URL or domain for automated vulnerability assessment. This use case includes a dependency on the background pipeline execution service, modeled as an include relationship, reflecting the architectural reality that investigations are processed asynchronously. UC-03, the export of investigation reports in PDF or JSON format, is modeled as an extension of UC-02, indicating that it becomes available only upon the successful completion of an investigation. UC-04 governs the initiation of an Infrastructure Threat Investigation --- a more sophisticated eight-stage analytical pipeline targeting network-level indicators such as IP addresses and domains. UC-05 covers the upload of binary executable files for AI-powered static malware analysis. UC-06 serves as a composite use case representing the invocation of standalone diagnostic modules, internally decomposed into three sub-cases: UC-06A for active web vulnerability pentesting, UC-06B for malware and phishing URL scanning, and UC-06C for STRIDE-based threat modeling review. Each of these sub-cases is modeled with an include relationship to UC-06, reflecting their structural dependence on the parent workflow.
+
+The Administrator actor is associated with five distinct use cases, each targeting a specific dimension of platform governance. UC-07 enables the monitoring and review of user audit logs, providing the administrator with chronological visibility into all system state changes. UC-08 covers user management operations, including role promotion and account suspension. UC-09 allows the administrator to conduct contextual investigations into suspicious users by correlating audit data, geographic information, and device profiles. UC-10 governs the modification of global system settings such as rate limiting thresholds, session timeouts, and two-factor authentication enforcement. UC-11 covers database maintenance operations, including the purging of historical scan records and the resetting of threat intelligence feeds.
+
+A distinguishing feature of this use case model is its explicit representation of cross-cutting system behaviors through the Background Services actor. The audit log trigger is modeled as an include relationship from nearly every state-modifying use case, capturing the architectural requirement that all consequential user actions --- whether initiated by a regular user or an administrator --- must produce a corresponding audit record. This design choice reflects the security-first philosophy of the TIBSA platform, wherein accountability and traceability are treated as first-class system requirements rather than afterthoughts. The Use Case Diagram thus not only maps the functional surface area of the system but also encodes behavioral constraints that have direct implications for the system's security posture and compliance readiness.
+
+\subsection{Sequence Diagrams}
+\label{subsec:sequence_diagrams}
+
+Sequence Diagrams capture the dynamic behavior of a system by modeling the chronological exchange of messages between participating components during the execution of a specific workflow. Unlike static structural diagrams, sequence diagrams expose the temporal logic of system interactions, making it possible to analyze the ordering of operations, identify synchronization requirements, and validate the correctness of control flow. For the TIBSA platform, four sequence diagrams have been constructed --- one for each of the primary system flows identified in the system design --- collectively covering the full behavioral spectrum of the application.
+
+\clearpage
+\subsubsection{Flow 1: Standard Security Investigation}
+\label{subsubsec:flow1_standard_investigation}
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=1.0\textwidth]{media/usecase.jpg}
-\caption{TIBSA Platform - Use Case Diagram}
-\label{fig:usecase_diagram}
+\includegraphics[width=1.0\textwidth]{media/sequence_flow1.jpg}
+\caption{TIBSA Platform - Standard Security Investigation Sequence Diagram}
+\label{fig:sequence_flow1}
 \end{figure}
-
-\subsubsection{Actors Overview}
-
-The system defines two main actors that interact directly with the platform:
-
-\textbf{User}: The User actor represents authenticated end users of the platform. Users are responsible for initiating scan requests, viewing scan results, generating reports, and managing personal preferences. This actor encompasses all standard user interactions required for security assessment operations.
-
-\textbf{Admin}: The Admin actor represents system administrators who manage platform infrastructure and operational integrity. Administrators are responsible for managing antivirus engines, maintaining system updates, monitoring overall system health, and administering user accounts.
-
-In addition to the primary actors, the system interacts with external actors to support core functionality, including antivirus engines, email services, and external authentication providers.
-
-\subsubsection{User Use Cases}
-
-User use cases describe the primary functional capabilities available to authenticated users.
-
-\textbf{Authenticate}: This use case allows users to securely access the system. Authentication may be performed using traditional credentials or via third-party identity providers through social login mechanisms.
-
-\textbf{Submit Scan Request}: This use case represents the core functionality of the platform. Users can submit scan requests for security analysis. The submitted target may include files, URLs, or hash values. The system validates the request and initiates the scanning workflow.
-
-\textbf{View Scan Results}: This use case enables users to view the results of completed scan operations. It includes aggregated antivirus detections, analysis summaries, and verdicts generated by the system.
-
-\textbf{Generate \& Share Report}: This use case allows users to generate formal scan reports based on completed analysis results. Reports can be shared through supported channels, including email delivery, enabling collaboration and documentation.
-
-\textbf{View Dashboard \& History}: This use case provides users with an overview of their activity within the platform. It includes access to historical scan records, summarized statistics, and usage insights.
-
-\textbf{Manage Preferences}: This use case allows users to configure personal settings such as notification preferences, scan behavior options, and interface customization.
-
-\subsubsection{Administrative Use Cases}
-
-Administrative use cases represent system-level operations required to maintain platform reliability and effectiveness.
-
-\textbf{Manage AV Engines}: This use case allows administrators to add, configure, enable, disable, or remove antivirus engines integrated within the system. Proper engine management ensures accurate and up-to-date threat detection.
-
-\textbf{Update Virus Definitions}: This use case enables administrators to update antivirus signatures and detection rules. Regular updates ensure that the system remains effective against newly emerging threats.
-
-\textbf{Monitor System}: This use case allows administrators to observe system performance, scan processing status, and overall operational health, supporting proactive maintenance and troubleshooting.
-
-\textbf{Manage Users}: This use case provides administrative control over user accounts, including role management and access control.
-
-\subsubsection{Use Case Relationships}
-
-The simplified Use Case Diagram employs limited but essential relationships to maintain clarity.
-
-\paragraph{Include Relationships}
-
-The Submit Scan Request use case includes the Start Scan operation, indicating that scanning is a mandatory step once a scan request is submitted.
-
-The Generate \& Share Report use case includes Send Report via Email, reflecting that email delivery is an integral part of the report sharing process.
-
-\paragraph{Extend Relationships}
-
-The Authenticate use case is extended by Social Login, representing an optional authentication mechanism that supplements standard login credentials.
-
-These relationships reduce redundancy while clearly defining mandatory and optional system behaviors.
-
-\subsubsection{External System Interactions}
-
-The platform interacts with several external systems to fulfill its functionality:
-
-\begin{itemize}
-    \item \textbf{Antivirus Engines} perform the actual security analysis of submitted scan targets.
-    \item \textbf{Email Services} support the delivery of generated scan reports.
-    \item \textbf{OAuth Providers} enable third-party authentication mechanisms.
-\end{itemize}
-
-These interactions enhance system extensibility and integration without increasing internal complexity.
-
 \clearpage
 
-\subsection{Sequence Diagram}
+The sequence diagram presented in Figure~\ref{fig:sequence_flow1} models the execution of a Standard Security Investigation, which represents the primary analytical workflow available to authenticated users of the TIBSA platform. The participating components in this flow include the Frontend User, the Frontend Application, the FastAPI Investigations Router, the Investigation Orchestrator Service, the PostgreSQL Database, and the Report Exporter Service.
 
-This section presents the Sequence Diagram of the TIBSA platform, which illustrates the dynamic behavior of the system by modeling the interactions between key components over time. The sequence diagram provides a chronological view of how different system elements collaborate to fulfill core operations such as user authentication and file scanning workflows. By visualizing these message exchanges, the diagram clarifies the temporal ordering of operations, the responsibilities of each layer, and the communication protocols that ensure secure and efficient data processing throughout the platform.
+The flow is initiated when a user enters a target domain or URL into the frontend interface and submits a scan request. The Frontend Application transmits this input to the FastAPI Investigations Router via an HTTP POST request directed at the /api/v1/investigations/start endpoint. Upon receipt, the Router performs immediate syntactic validation of the target URL, ensuring that proper schema prefixes are present and that the target conforms to acceptable format constraints. This early validation step is architecturally significant, as it prevents malformed inputs from propagating into deeper system layers where they could produce undefined behavior or security vulnerabilities.
+
+Following validation, the Router delegates the creation of the investigation record to the Investigation Orchestrator Service, which inserts a new row into the investigations database table with an initial status of pending. The database returns a unique investigation identifier, which is propagated back through the orchestrator to the router. The router then registers an asynchronous background task --- \texttt{run\_pipeline\_task} --- using FastAPI's native BackgroundTasks mechanism and immediately returns an HTTP 200 response to the frontend, allowing the user interface to remain responsive while the investigation executes in the background.
+
+The background pipeline itself proceeds through several sequential stages: updating the investigation status to in-progress, executing port scans, evaluating security configuration settings, performing domain verification checks, correlating discovered vulnerabilities against known threat records, and inserting findings into the database. Upon completion, the orchestrator updates the investigation record to reflect a status of completed and a progress percentage of one hundred. Throughout this asynchronous execution, the frontend application polls the status endpoint --- GET /api/v1/investigations/\{id\}/status --- at regular intervals to retrieve and display the current pipeline stage and progress metrics to the user.
+
+The concluding phase of the flow addresses report exportation. Upon user request, the FastAPI Router queries the investigations, findings, and assets tables from the database and delegates the compilation of the report to the Report Exporter Service, which generates either a formatted PDF binary or a structured JSON document. The report is then streamed directly to the user's browser as a downloadable file. This flow demonstrates a clean separation between the synchronous HTTP layer and the asynchronous computational layer --- a design pattern that enhances system responsiveness and scalability.
+
+\clearpage
+\begin{landscape}
+\subsubsection{Flow 2: Infrastructure Threat Investigation (Eight-Stage Pipeline)}
+\label{subsubsec:flow2_infrastructure_investigation}
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.9\textwidth]{media/sequance diagram.png}
-\caption{TIBSA Platform - System Sequence Diagram}
-\label{fig:sequence_diagram}
+\includegraphics[height=0.65\textheight,width=1.0\linewidth,keepaspectratio]{media/sequence_flow2.jpg}
+\caption{TIBSA Platform - Infrastructure Threat Investigation Sequence Diagram}
+\label{fig:sequence_flow2}
 \end{figure}
-
-\subsubsection{System Components}
-
-The sequence diagram identifies five primary system components that participate in the interaction flows:
-
-\begin{itemize}
-    \item \textbf{User}: The end user who initiates requests through the platform's user interface, including login operations and file submissions for security analysis.
-    \item \textbf{Frontend}: The Next.js-based presentation layer that handles user interactions, validates input, and communicates with the backend API.
-    \item \textbf{API}: The API Gateway (KrakenD) that routes requests, enforces authentication, and coordinates communication between the frontend and backend services.
-    \item \textbf{Backend}: The core processing layer that handles business logic, scan orchestration, and integration with antivirus engines and threat intelligence services.
-    \item \textbf{Database}: The Neon Serverless Postgres database that stores user data, scan results, threat models, and system configuration.
-\end{itemize}
-
-\subsubsection{Authentication Flow}
-
-The first interaction flow demonstrates the user authentication process:
-
-\begin{enumerate}
-    \item The User initiates the flow by sending a login request to the Frontend with their credentials.
-    \item The Frontend validates the input locally (checking for XSS, format validation) and forwards the authentication request to the API Gateway.
-    \item The API Gateway routes the request to the authentication service (Authentik), which queries the Database to validate the user's credentials.
-    \item Upon successful validation, the Database returns the user data to the API, which generates JWT access and refresh tokens.
-    \item The tokens are returned to the Frontend, which stores them securely and redirects the user to the Dashboard, granting authenticated access to platform features.
-\end{enumerate}
-
-This flow ensures secure authentication while maintaining separation of concerns between presentation, routing, and data persistence layers.
-
-\subsubsection{File Upload and Scanning Flow}
-
-The second interaction flow illustrates the file upload and security scanning process:
-
-\begin{enumerate}
-    \item The User selects a file for analysis and initiates the upload through the Frontend interface.
-    \item The Frontend calculates the file hash (SHA-256) for integrity verification and sends the file to the API Gateway.
-    \item The API validates the user's authentication token and forwards the file to the Backend processing service.
-    \item The Backend orchestrates the scanning process, distributing the file to multiple antivirus engines for parallel analysis. It also queries threat intelligence services for known indicators of compromise.
-    \item Upon completion, the Backend aggregates results from all engines, calculates confidence scores, and stores the comprehensive scan results in the Database.
-    \item The Backend notifies the API that the scan is complete, and the results are returned through the Frontend to the User as a detailed security report.
-\end{enumerate}
-
-This workflow demonstrates the platform's ability to handle file analysis requests efficiently while leveraging multiple security tools for comprehensive threat detection.
-
-\subsubsection{Design Considerations}
-
-The sequence diagram reflects several important design decisions:
-
-\begin{itemize}
-    \item \textbf{Layered Architecture}: Clear separation between User, Frontend, API, Backend, and Database ensures maintainability and scalability.
-    \item \textbf{Asynchronous Processing}: File scanning operations are processed asynchronously to prevent blocking the user interface during long-running scans.
-    \item \textbf{Token-Based Authentication}: JWT tokens enable stateless authentication, improving scalability and security.
-    \item \textbf{Centralized API Gateway}: All requests pass through the API Gateway, enabling consistent rate limiting, logging, and security enforcement.
-\end{itemize}
-
+\end{landscape}
 \clearpage
 
-\subsection{Object-Oriented Class Design}
+The sequence diagram illustrated in Figure~\ref{fig:sequence_flow2} models the execution of the Infrastructure Threat Investigation, the most computationally intensive workflow in the TIBSA platform. This flow implements an eight-stage analytical pipeline that processes network-level indicators --- including IP addresses, domain names, and URLs --- through a series of specialized sub-services before producing a comprehensive threat intelligence report.
 
-This section presents the object-oriented class design of the TIBSA platform, illustrating the structural relationships between the system's core components. The design follows established object-oriented principles including encapsulation, inheritance, composition, and aggregation to ensure modularity, maintainability, and extensibility of the codebase. Each class encapsulates specific functionality and data, with well-defined interfaces for interaction with other components.
+The participating components include the Frontend User, the Frontend Application, the FastAPI Infrastructure Router, the Infrastructure Orchestrator Service, and a collection of specialized sub-services: the Intake Service, Reputation Service, Enrichment Service, Passive DNS Service, Indicator Service, Correlation Engine, Risk Scoring Engine, AI Summary Service, Graph Builder Service, and Projection Service, with the PostgreSQL Database serving as the persistent backbone throughout.
+
+The flow commences when the user submits a network indicator through the frontend. The FastAPI Infrastructure Router receives the POST request and initializes the Infrastructure Orchestrator, which in turn invokes the Intake Service to validate the target and classify it as an IP address, domain, or URL. A new record is inserted into the \texttt{infra\_investigations} database table with a status of pending. Unlike Flow 1, which returns an HTTP 200 response, this flow returns an HTTP 202 Accepted response --- a deliberate design choice that semantically communicates the deferred nature of the result to the client.
+
+The eight pipeline stages then execute asynchronously with explicit progress tracking. The Reputation stage, executing at twenty-five percent progress, dispatches parallel queries to AbuseIPDB, URLhaus, ThreatFox, and AlienVault OTX to assess the target's threat reputation across multiple intelligence feeds simultaneously. The Enrichment stage, at forty-two percent progress, invokes the Enrichment Service to retrieve active DNS mappings, WHOIS registration data, SSL certificate chain information, and physical GeoIP coordinates. The Passive DNS stage, at fifty-five percent, queries historical IP A-record mappings to establish temporal context for the target. The Indicators stage, at sixty-five percent, applies fifteen discrete security heuristic rules to the accumulated data. The Correlation stage, at seventy-five percent, analyzes relationship patterns across the collected threat metadata to identify connections between disparate indicators. The Risk Scoring stage, at eighty-five percent, computes a weighted composite risk score on a scale of zero to one hundred, accompanied by a categorical risk label. The AI Summary stage, at ninety-five percent, invokes the AI Summary Service, which calls the OpenRouter language model API to generate a natural-language narrative summarizing the investigation findings and recommending mitigations.
+
+Upon completion of all stages, the orchestrator invokes the Graph Builder Service to synthesize the collected threat data into a network of relational nodes and edges suitable for three-dimensional visualization. The complete results are serialized and persisted to the database, and the Projection Service is triggered to decompose the JSONB results blob into structured relational database tables --- specifically \texttt{infra\_indicators}, \texttt{infra\_enrichment}, \texttt{infra\_graph\_nodes}, \texttt{infra\_graph\_edges}, and \texttt{infra\_ai\_reports} --- enabling efficient querying of individual data dimensions without deserializing the full results object. The combination of parallel sub-service execution, explicit progress tracking, and relational projection makes this flow a sophisticated and architecturally mature component of the TIBSA system.
+
+\clearpage
+\subsubsection{Flow 3: AI Malware Static Analysis}
+\label{subsubsec:flow3_malware_analysis}
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=1.0\textwidth]{media/class diagram.png}
-\caption{TIBSA Platform - Class Diagram}
-\label{fig:class_diagram}
+\includegraphics[width=1.0\textwidth]{media/sequence_flow3.jpg}
+\caption{TIBSA Platform - AI Malware Static Analysis Sequence Diagram}
+\label{fig:sequence_flow3}
 \end{figure}
+\clearpage
 
-\subsubsection{Core Classes Overview}
+The sequence diagram presented in Figure~\ref{fig:sequence_flow3} models the AI Malware Static Analysis workflow, which enables authenticated users to upload binary executable files for automated structural analysis and AI-generated threat reporting. The participating components include the Frontend User, the Frontend Application, the FastAPI Malware Analysis Router, the PE File Parsing Engine, the Malware Static Analysis Service, the Machine Learning Classification Model, the PostgreSQL Database, the Gemini LLM External API, and the PDF Report Generation Engine.
 
-The platform's class structure is organized around the following core domain entities that represent the fundamental building blocks of the system:
+The flow begins when the user selects a portable executable file and submits it through the frontend upload interface. The FastAPI Malware Analysis Router receives the multipart binary payload and performs an immediate size validation check, rejecting files that exceed the five-hundred-and-twelve-megabyte limit with an HTTP 413 Payload Too Large response. This guard clause prevents resource exhaustion attacks and ensures that the processing pipeline is not overwhelmed by excessively large inputs.
 
-\textbf{User}: Represents authenticated users of the platform, managing user credentials, roles, and profile information. Users can submit scans, create threat models, and generate reports. Key attributes include \texttt{userId}, \texttt{email}, \texttt{role}, and \texttt{createdAt}. The class provides methods for authentication, profile management, and role-based access control.
+Upon passing validation, the file's byte stream is forwarded to the PE File Parsing Engine, which attempts to parse the binary's header structure. If the file does not conform to the standard Portable Executable signature layout --- indicating that the uploaded file is not a valid PE binary --- the engine raises a validation error and terminates the flow. This structural validation is architecturally important because it constrains the analysis pipeline to its intended input domain, preventing the misuse of the endpoint for non-PE file types.
 
-\textbf{ScanRequest}: Handles scan submission operations for files, URLs, or hash values. Each request is associated with a user and produces scan results upon completion. Attributes include \texttt{requestId}, \texttt{scanType}, \texttt{target}, and \texttt{status}. Methods include \texttt{initiate()} to begin scanning and \texttt{getResults()} to retrieve outcomes.
+For valid PE files, the Malware Static Analysis Service extracts a rich set of binary features, including the Import Address Table containing imported function names, export symbol tables, per-section entropy scores that indicate potential packing or obfuscation, header attribute metadata, and packing indicators. These features are then passed to the Machine Learning Classification Model --- a locally loaded Pickle model --- which produces a threat level classification and associated prediction confidence scores. The scan results and reference indicators are persisted to the database, and the raw prediction scores along with the PE structure details are returned to the frontend for immediate display.
 
-\textbf{ScanResult}: Stores the outcomes of scan operations, including verdicts, confidence scores, and detection details from multiple antivirus engines. Key attributes are \texttt{resultId}, \texttt{verdict}, \texttt{score}, and a collection of \texttt{detections}. The \texttt{isMalicious()} method provides a quick assessment, while \texttt{generateReport()} creates formatted output.
-
-\textbf{Report}: Manages the generation and export of scan reports in various formats (PDF, JSON), enabling users to share and document security findings. Attributes include \texttt{reportId}, \texttt{format}, and \texttt{generatedAt}. Methods such as \texttt{exportPDF()} and \texttt{share()} facilitate distribution of analysis results.
-
-\textbf{ThreatModel}: Represents threat modeling operations, storing architecture definitions, DFD diagrams, and STRIDE analysis results. Key attributes include \texttt{modelId}, \texttt{name}, and \texttt{riskScore}. Methods like \texttt{generateDFD()} and \texttt{analyzeThreats()} automate the threat modeling workflow.
-
-\textbf{Threat}: Contains identified threats within a threat model, including category, likelihood, impact, and calculated risk scores. Attributes encompass \texttt{threatId}, \texttt{category}, \texttt{likelihood}, and \texttt{impact}. The \texttt{calculateRisk()} method computes overall threat severity.
-
-\textbf{Mitigation}: Represents security controls applied to mitigate identified threats, tracking control effectiveness and coverage. Key attributes are \texttt{mitigationId}, \texttt{controlName}, and \texttt{effectiveness}. The \texttt{apply()} method associates mitigations with specific threats.
-
-\textbf{AVEngine}: Represents integrated antivirus engines used for file and URL analysis, managing engine status and detection capabilities. Attributes include \texttt{engineId}, \texttt{name}, \texttt{version}, and \texttt{status}. Methods include \texttt{scan()} for analysis and \texttt{update()} for signature updates.
-
-\textbf{Detection}: Represents individual detection results from antivirus engines. Attributes include \texttt{detected} boolean flag, \texttt{malwareType} classification, and \texttt{confidence} score indicating detection certainty.
-
-\subsubsection{Class Relationships}
-
-The classes within the TIBSA platform exhibit various types of relationships that define how objects interact and collaborate to fulfill system functionality:
-
-\paragraph{Composition Relationships}
-
-Composition represents strong ownership where the part cannot exist without the whole:
-
-\begin{itemize}
-    \item \textbf{ScanResult -- Detection}: A ScanResult contains multiple Detection instances from different AV engines. When a ScanResult is deleted, all associated Detection objects are also removed. This reflects the lifecycle dependency where detections have no meaning outside their parent scan result.
-    \item \textbf{ThreatModel -- Threat}: A ThreatModel contains multiple identified Threat instances. Threats are created within the context of a specific model and cannot exist independently. Deleting a threat model cascades to remove all associated threats.
-\end{itemize}
-
-\paragraph{Aggregation Relationships}
-
-Aggregation represents weak ownership where parts can exist independently:
-
-\begin{itemize}
-    \item \textbf{Threat -- Mitigation}: Threats are mitigated by security controls, but mitigations can exist independently and may apply to multiple threats across different threat models. A single mitigation control (e.g., encryption) can address multiple threats simultaneously.
-\end{itemize}
-
-\paragraph{Association Relationships}
-
-Associations represent general relationships between classes with defined multiplicity:
-
-\begin{itemize}
-    \item \textbf{User -- ScanRequest} (1 to many): A single user can submit multiple scan requests over time, while each scan request belongs to exactly one user.
-    \item \textbf{User -- ThreatModel} (1 to many): Users create and own multiple threat models, enabling organized security assessment of various systems.
-    \item \textbf{User -- Report} (1 to many): Users can generate multiple reports from their scan results and threat analyses.
-    \item \textbf{ScanRequest -- ScanResult} (1 to 1): Each scan request produces exactly one scan result upon completion.
-    \item \textbf{ScanRequest -- AVEngine} (many to many): Scan requests can utilize multiple AV engines for comprehensive analysis, and each engine handles multiple scan requests.
-    \item \textbf{ScanResult -- Report} (1 to 0..1): A scan result may optionally generate a formal report for documentation purposes.
-    \item \textbf{AVEngine -- Detection} (1 to many): Each antivirus engine produces multiple detection records across different scan operations.
-\end{itemize}
-
-\subsubsection{Design Patterns}
-
-The class design incorporates several established software design patterns:
-
-\begin{itemize}
-    \item \textbf{Service Layer Pattern}: Core service classes encapsulate business logic and provide clean interfaces for the presentation layer.
-    \item \textbf{Factory Pattern}: Scan operations use factory methods to create appropriate analysis instances based on target type.
-    \item \textbf{Observer Pattern}: Status updates and notifications employ the observer pattern, allowing UI components to react to scan completion events.
-\end{itemize}
+The second phase of the flow addresses AI-powered report generation. When the user requests a SOC report from the malware history interface, the Router retrieves the stored scan metadata from the database and submits it to the Gemini LLM API via the \texttt{generate\_gemini\_report()} function. The language model returns a structured analyst narrative encompassing a risk analysis, MITRE ATT\&CK technique mapping, and actionable remediation recommendations. This narrative is returned to the frontend as a markdown document. The third and final phase allows the user to download a professionally formatted PDF version of the report, generated by the PDF Report Generation Engine and streamed to the browser. This three-phase architecture --- structural analysis, AI narration, and formatted export --- distinguishes the TIBSA malware analysis capability as a comprehensive forensic tool rather than a simple scanner.
 
 \clearpage
-\clearpage
-\subsection{Entity-Relationship Diagram (ERD)}
-
-This section presents the entity-relationship design of the cybersecurity platform, illustrating the structural organization of data and the relationships between the system’s core entities through a comprehensive Entity-Relationship Diagram (ERD). The ERD provides a detailed view of the platform’s database schema, showcasing tables, their attributes, primary and foreign keys, and the associations that connect them. This design follows established database normalization principles to ensure data integrity, consistency, and efficient storage, while also supporting the platform’s functional requirements such as scan management, threat modeling, and mitigation tracking. By mapping entities and their relationships in a structured manner, the ERD forms the foundation for both backend implementation and future scalability of the system.
+\subsubsection{Flow 4: Independent Pentesting and Threat Assessment Modules}
+\label{subsubsec:flow4_independent_modules}
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=1.0\textwidth]{media/ERD.jpg}
-\caption{TIBSA Platform - Entity-Relationship Diagram (ERD)}
-\label{fig:erd}
+\includegraphics[width=1.0\textwidth]{media/sequence_flow4.jpg}
+\caption{TIBSA Platform - Independent Diagnostic Modules Sequence Diagram}
+\label{fig:sequence_flow4}
+\end{figure}
+\clearpage
+
+The sequence diagram illustrated in Figure~\ref{fig:sequence_flow4} models three independent diagnostic modules that users may invoke as standalone tools without initiating a full investigation pipeline. These modules --- the Malware and Phishing Scanner, the Active Web Vulnerability Pentesting engine, and the STRIDE Threat Modeling Review --- each represent a distinct analytical capability with dedicated routing, service logic, and database persistence.
+
+The Malware and Phishing Scanner module, serviced by the FastAPI Scans Router and the Scan Service, accepts either a target URL or an uploaded file. The Scan Service dispatches a query to the VirusTotal external API to retrieve the target's reputation score and simultaneously triggers a ClamAV Docker container scan for local antivirus analysis. The combined results from both sources are persisted to the \texttt{scans} database table and returned to the frontend as a unified threat assessment.
+
+The Active Web Vulnerability Pentesting module, serviced by the Website Scanner Router and the Website Scanner Service, accepts a target URL and executes a battery of active security tests. The service begins by establishing a custom 404 page baseline to prevent false positives from directory discovery scans. It then evaluates HTTP security headers and server misconfigurations, discovers exposed directory paths and sensitive endpoints, injects reflected Cross-Site Scripting payloads and evaluates responses, and performs error-based and blind SQL Injection tests. False positives identified through comparison against the 404 baseline and homepage redirect patterns are systematically filtered before findings are persisted to the \texttt{website\_scans} database table and returned to the frontend alongside automated remediation configuration recommendations.
+
+The STRIDE Threat Modeling Review module, serviced by the Threat Modeling Router and the Threat Modeling Service, accepts a structured description of the target application's technical profile --- including its application type, technology stack, deployed frameworks, authentication mechanisms, and data sensitivity classifications. The service executes the STRIDE analysis pipeline, applying a rule base of over fifty threat rules, suppressing inapplicable threats based on stack context, enriching each threat with CAPEC identifiers and ASVS control mappings, and calculating a residual risk score. The results, including a full threat list, mitigation recommendations, and heatmap visualization data, are persisted to the \texttt{threat\_model\_analyses} table and returned to the frontend for rendering. The architectural design of this flow --- three independent modules sharing a common database client and authentication dependency --- reflects a modular service composition pattern that allows each capability to be tested, maintained, and extended independently.
+
+\subsection{Entity Relationship Diagram (ERD)}
+\label{subsec:entity_relationship_diagram_erd}
+
+The Entity Relationship Diagram serves as a comprehensive model of the TIBSA platform's persistent data layer, encompassing sixteen distinct database entities distributed across the investigative, analytical, administrative, and operational dimensions of the system. The schema has been designed for the Supabase PostgreSQL environment, with Row Level Security policies governing data access at the database layer in addition to the application-level authorization mechanisms described elsewhere in this report.
+
+The central entity in the schema is the users table, which serves as the primary anchor for the majority of relational associations in the database. It stores the user's unique identifier --- derived from Supabase's internal authentication system --- along with email address, full name, role classification constrained to either 'user' or 'admin', account activation status, and temporal metadata. Because the users table is referenced by virtually every other entity in the schema through foreign key relationships, it functions as the relational hub around which the entire data model is organized. This hub-and-spoke topology reflects the user-centric nature of the TIBSA platform, wherein all investigative activity, scan data, notifications, and audit records are contextually associated with the initiating user.
+
+The investigative dimension of the schema is represented by four closely related entities. The investigations table records the lifecycle of Standard Security Investigations, storing the target URL, current execution status, progress percentage, pipeline stage metadata in JSONB format, and the final aggregated result payload. Its dependent entities --- findings and assets --- maintain one-to-many relationships with the parent investigation record. The findings entity stores individual vulnerability discoveries, each classified by category, severity, and affected URL, while the assets entity records the hosts, endpoints, and subdomains discovered during the investigation. This three-entity cluster provides a normalized representation of investigation outcomes that supports independent querying of findings and assets without requiring deserialization of a monolithic result object.
+
+The infrastructure investigation dimension of the schema is considerably more complex, reflecting the multi-stage nature of the eight-stage pipeline. The \texttt{infra\_investigations} table serves as the root entity, storing target information, pipeline status, progress metrics, risk score, and a canonical JSONB results blob. Five projection tables --- \texttt{infra\_indicators}, \texttt{infra\_graph\_nodes}, \texttt{infra\_graph\_edges}, \texttt{infra\_enrichment}, and \texttt{infra\_ai\_reports} --- maintain one-to-many relationships with the root entity, each capturing a specific dimension of the investigation results in structured relational form. The \texttt{infra\_indicators} entity stores individual threat indicators with confidence scores, severity classifications, maliciousness flags, and source attribution. The \texttt{infra\_graph\_nodes} and \texttt{infra\_graph\_edges} entities together represent the network topology discovered during the investigation, with nodes carrying risk scores and maliciousness flags, and edges carrying relationship type labels and weight values representing connection strength. The \texttt{infra\_enrichment} entity captures the raw output of each enrichment stage, while the \texttt{infra\_ai\_reports} entity stores the language model-generated narratives along with their associated MITRE ATT\&CK technique references and remediation recommendations.
+
+The standalone scanning dimension encompasses three entities: \texttt{scans}, \texttt{scan\_reports}, and \texttt{website\_scans}. The \texttt{scans} entity records the metadata of file and URL scan operations, including scan type, target identifier, execution status, and threat level classification. It maintains a one-to-one relationship with \texttt{scan\_reports}, which stores the detailed engine output, extracted indicators, and textual summary. The \texttt{website\_scans} entity independently records the results of active web pentesting operations, storing findings, severity summaries, discovered endpoints, server headers, and filtered false positive logs in JSONB columns.
+
+The threat modeling entity --- \texttt{threat\_model\_analyses} --- is the most structurally complex table in the schema, reflecting the richness of the STRIDE analysis input and output. It stores detailed application profile metadata including technology stack arrays, authentication and data sensitivity boolean flags, architectural descriptions, entry points, trust boundaries, and the full output of the analysis pipeline including threats, mitigations, heatmap data, and residual risk scores.
+
+The administrative and operational dimension of the schema is served by four entities. The \texttt{audit\_logs} table provides the systemic accountability mechanism of the platform, recording every consequential user action with action type, severity classification, log message, client IP address, and extensible metadata. The \texttt{login\_attempts} table maintains a separate record of authentication events, independent of the audit log, enabling independent analysis of access patterns and brute-force detection. The \texttt{notifications} table stores user-directed messages generated by the system in response to scan completions and threat detections, with a foreign key reference to the initiating scan. The \texttt{system\_settings} table provides a key-value store for platform-wide configuration parameters managed by administrators.
+
+From a normalization perspective, the schema adheres to third normal form in its relational tables, with JSONB columns used selectively for inherently semi-structured data such as pipeline state metadata, enrichment results, and architectural diagrams. This hybrid approach balances the structural clarity of relational modeling with the flexibility required to accommodate the variable-schema outputs of security analysis engines. The pervasive use of UUID primary keys, cascade delete policies on child entities, and set-null policies on audit and log references reflects a deliberate approach to referential integrity that preserves audit history even when associated user records are deleted.
+
+\subsection{Class Diagram}
+\label{subsec:class_diagram}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=1.0\textwidth]{media/class_diagram_detailed.jpg}
+\caption{TIBSA Platform - Detailed Class Diagram}
+\label{fig:class_diagram_detailed}
 \end{figure}
 
-\subsubsection{User Table}
-The User table stores information about registered users of the cybersecurity platform, serving as the primary entity for user management. Its attributes include \texttt{user\_id}, which uniquely identifies each user, email for communication and login purposes, and timestamps \texttt{created\_at} and \texttt{updated\_at} to track account creation and modifications. Users are responsible for submitting scan requests and creating threat models, forming the basis of the platform’s user-specific operations.
+The Class Diagram presented in Figure~\ref{fig:class_diagram_detailed} models the static object-oriented structure of the TIBSA backend application, organized into two principal layers: the Route Controller layer, which handles HTTP request reception and response formation, and the Core Business Services layer, which encapsulates the analytical and orchestration logic of the platform. This two-layer decomposition reflects the layered architecture principle, wherein each layer has a clearly defined responsibility and communicates with adjacent layers through well-defined interfaces.
 
-\subsubsection{Scan\_Request Table}
-The \texttt{Scan\_Request} table manages individual scan operations initiated by users. Key attributes include \texttt{scan\_id} as the unique identifier, \texttt{user\_id} linking the scan to the submitting user, \texttt{scan\_type} specifying the kind of scan (e.g., file or URL), and \texttt{status} indicating the current state of the scan, such as pending, completed, or failed. This table ensures that every scan is traceable to a user and forms the foundation for subsequent scan results.
+The Route Controller layer comprises seven router classes, each corresponding to a distinct functional domain of the platform. The \texttt{InvestigationsRouter} class exposes eight public methods covering the full lifecycle of standard security investigations --- from initiation and status polling to findings retrieval and multi-format report export. The \texttt{InfraInvestigationsRouter} class provides nine methods covering the infrastructure investigation workflow, including dedicated endpoints for retrieving indicators, graph data, enrichment records, and AI-generated reports as independent resources. The \texttt{AIMalwareAnalysisRouter} class exposes six methods that address the three phases of the malware analysis workflow: health checking and feature prediction, file upload and history retrieval, and report generation and PDF download. The \texttt{ScansRouter} class provides seven methods for managing the standalone scan lifecycle, including endpoints for URL scanning, file hash scanning, and uploaded file scanning, as well as operations for listing, canceling, and deleting scan records. The \texttt{WebsiteScannerRouter} offers two focused methods --- scan initiation and result retrieval --- reflecting the relatively self-contained nature of the web vulnerability scanning workflow. The \texttt{ThreatModelingRouter} exposes five methods covering analysis creation, retrieval, enumeration, export, and scan history access. The \texttt{AdminRouter} is the most functionally broad controller, providing fourteen methods that encompass statistics aggregation, audit log review, user management, contextual investigation, system settings management, webhook testing, threat feed resetting, and historical data purging.
 
+Each router class carries a single typed attribute --- \texttt{router: APIRouter} --- representing its FastAPI routing context. This shared structural pattern across all controllers reflects a consistent design convention that simplifies the router registration process and ensures uniform behavior across the application's HTTP surface.
 
-\subsubsection{File Table}
-The File table handles all files submitted for analysis. Its attributes include\texttt{file\_id} as the unique identifier, \texttt{scan\_id} referencing the associated scan request, and \texttt{original\_filename} storing the name of the submitted file. Each file is linked to a specific scan request, allowing the system to track which files are being analyzed in each scanning operation.
+The Core Business Services layer contains eight classes whose responsibilities range from workflow orchestration to data projection and report generation. The \texttt{InvestigationOrchestrator} class accepts a Supabase database client as a dependency and exposes two primary methods: \texttt{create\_investigation()}, which handles the synchronous portion of investigation creation and record insertion, and \texttt{run\_investigation\_pipeline()}, which encapsulates the full asynchronous background pipeline logic. The \texttt{InfraOrchestrator} class is architecturally more complex, maintaining typed references to seven specialized sub-service instances --- Reputation Service, Enrichment Service, Passive DNS Service, Indicator Service, Correlation Engine, Risk Engine, and Graph Builder --- in addition to its database client. This aggregation of sub-services reflects the Facade design pattern, wherein the orchestrator presents a unified interface over a complex subsystem of coordinated analytical components. The \texttt{ProjectionService} class operates as a post-pipeline decomposer, accepting the canonical JSONB results payload from the Infrastructure Orchestrator and distributing its contents across five relational database tables through four private methods, each responsible for a specific projection dimension.
 
+The \texttt{MalwareStaticService} class encapsulates PE file parsing, feature extraction, machine learning prediction, and scan history management within a single cohesive unit. Its \texttt{analyze\_uploaded\_file()} method coordinates the full analysis sequence from byte stream intake to database persistence. The \texttt{SOCReportService} class separates the AI narrative generation and PDF compilation responsibilities into two distinct methods --- \texttt{generate\_gemini\_report()} and \texttt{generate\_pdf\_report()} --- maintaining a clean separation between language model invocation and document rendering. The \texttt{ScanService} class maintains typed associations with the VirusTotal Service, Machine Learning Engine, and Notification Service, reflecting its role as a coordinator across multiple external and internal dependencies. The \texttt{WebsiteScannerService} class is noteworthy for its stateful design: it maintains instance-level attributes for the custom 404 page body hash, content length, and finding counter, which are populated during an initial calibration phase and referenced throughout the scan to eliminate false positives. The \texttt{ThreatModelingService} maintains an association with the Export Service, enabling it to produce multi-format analytical reports without embedding export logic within its core analysis methods.
 
-\subsubsection{URL Table}
-The URL table stores URLs submitted for scanning. It includes \texttt{url\_id}
-as the primary key, \texttt{scan\_id} linking it to the related scan request,
-and \texttt{url} containing the web address being analyzed. This entity
-parallels the File table and provides a structured way to manage web-based
-submissions for threat detection.
+The dependency relationships between the router and service classes follow a consistent delegation pattern: each router class depends upon one or more service or orchestrator classes, never directly accessing the database or external APIs. All orchestrators and services that require database access maintain a direct association with the SupabaseClient class, which abstracts the underlying database connection and exposes a consistent query interface. The \texttt{InfraOrchestrator} additionally triggers the \texttt{ProjectionService} upon pipeline completion, establishing a directed association that models the post-processing dependency. This dependency topology ensures that the business logic layer remains independent of the HTTP transport layer, supporting testability, replaceability, and adherence to the single responsibility principle throughout the codebase.
 
-\subsubsection{Scan\_Result Table}
-The Scan\_Result table captures the outcomes of scan requests, linking back to
-the corresponding Scan\_Request via \texttt{scan\_id}. It contains
-\texttt{result\_id} as the unique identifier, \texttt{verdict} summarizing the
-outcome of the scan, and \texttt{confidence\_score} to indicate the certainty of
-the results. This table allows for detailed tracking of each scan’s outcome and
-supports subsequent analysis by antivirus engines.
+\subsection{Discussion and Model Validation}
+\label{subsec:discussion_and_model_validation}
 
-\subsubsection{Antivirus\_Engine Table}
-The \texttt{Antivirus\_Engine} table maintains information about the antivirus engines utilized for scanning. Its attributes include \texttt{engine\_id} as the unique identifier, \texttt{engine\_name}, \texttt{version}, \texttt{status} to indicate operational readiness, and \texttt{last\_update} for tracking the engine’s current version. Each engine can execute multiple scans and contribute to the overall scan results.
+The system modeling artifacts presented in this chapter collectively constitute a coherent and internally consistent representation of the TIBSA platform across four distinct analytical perspectives. When examined in conjunction, the Use Case Diagram, Sequence Diagrams, Entity Relationship Diagram, and Class Diagram demonstrate a high degree of alignment with one another and with the functional requirements established during the requirements analysis phase of the project.
 
+The consistency between the Use Case Diagram and the Sequence Diagrams is particularly evident in the traceability of individual use cases to their corresponding execution flows. UC-02, which specifies the initiation of a Standard Security Investigation, is fully elaborated by Flow 1's sequence diagram, which models every interaction from user input to report delivery. UC-04, governing Infrastructure Threat Investigations, is mapped to Flow 2's eight-stage pipeline diagram. UC-05 and UC-06 are elaborated by Flows 3 and 4 respectively. This one-to-one correspondence between functional requirements and behavioral models ensures that no use case has been left unimplemented at the design level, and that no sequence diagram models behavior that was not established as a functional requirement.
 
-\subsubsection{Engine\_Result Table}
-The \texttt{Engine\_Result} table records the detection results provided by individual antivirus engines for specific scan results. Its attributes include \texttt{engine\_result\_id} as the unique identifier, \texttt{result\_id} linking to the parent \texttt{Scan\_Result}, \texttt{engine\_id} linking to the responsible \texttt{Antivirus\_Engine}, \texttt{verdict} detailing the engine’s analysis, and \texttt{scan\_time} measuring the duration of the scan. This table allows detailed attribution of detections to individual engines.
+The alignment between the Sequence Diagrams and the Entity Relationship Diagram is similarly strong. Every database write operation modeled in the sequence diagrams --- including investigation record creation, findings insertion, indicator projection, scan persistence, and audit log generation --- corresponds to a named entity in the ERD. The projection tables introduced in Flow 2's sequence diagram --- \texttt{infra\_indicators}, \texttt{infra\_graph\_nodes}, \texttt{infra\_graph\_edges}, \texttt{infra\_enrichment}, and \texttt{infra\_ai\_reports} --- are all represented as distinct entities in the ERD with appropriate foreign key relationships to the parent \texttt{infra\_investigations} entity. This correspondence validates both the completeness of the database schema and the accuracy of the sequence diagram's modeling of persistence operations.
 
-\subsubsection{Threat\_Model Table}
-The \texttt{Threat\_Model} table represents user-created threat models. Attributes include \texttt{model\_id} as the unique identifier, \texttt{user\_id} linking to the creator, \texttt{model\_name} for the model title, \texttt{architecture\_file\_path} for storing the path to the model file, \texttt{description} providing context, and timestamps \texttt{created\_at} and \texttt{updated\_at}. Each threat model can include multiple system components and identified threats, forming the core structure for threat analysis.
+The relationship between the Class Diagram and the Sequence Diagrams is one of structural instantiation: every component referenced as a participant in the sequence diagrams corresponds to a class or service defined in the class diagram. The Investigation Orchestrator, Infrastructure Orchestrator, Projection Service, Malware Static Analysis Service, SOC Report Service, Scan Service, Website Scanner Service, and Threat Modeling Service are all modeled as classes with the methods invoked in their respective sequence diagrams explicitly declared as public operations. This correspondence confirms that the class design is sufficient to implement the behavioral flows and that no orphaned behavior exists without a structural home.
 
-\subsubsection{System\_Component Table}
-The \texttt{System\_Component} table defines individual components within a threat model. Attributes include \texttt{component\_id} as the unique identifier, \texttt{model\_id} referencing the parent threat model, \texttt{component\_name}, \texttt{component\_type}, and \texttt{trust\_boundary} specifying the security zone of the component. This table allows threat models to be structured according to system architecture.
+From an architectural coherence standpoint, the models collectively reveal a system designed around the principles of separation of concerns, single responsibility, and layered decomposition. The HTTP transport layer --- represented by the router classes in the Class Diagram --- is cleanly separated from the business logic layer --- represented by the service and orchestrator classes. The business logic layer is in turn separated from the data persistence layer --- represented by the database entities in the ERD. This three-layer decomposition is consistently honored across all flows modeled in the sequence diagrams, with no direct coupling between the router layer and the database layer observable in any workflow.
 
-\subsubsection{Threat Table}
-The \texttt{Threat} table stores threats identified within a threat model. Key attributes include \texttt{threat\_id} as the unique identifier, \texttt{model\_id} linking to the parent threat model, \texttt{category} and \texttt{description} detailing the nature of the threat, \texttt{likelihood} and \texttt{impact} for risk assessment, \texttt{risk\_score} as a calculated metric, and \texttt{status} to indicate whether the threat is active or mitigated. Each threat can be associated with multiple \texttt{Mitigation} entries.
-
-\subsubsection{Mitigation Table}
-The \texttt{Mitigation} table represents the security controls applied to threats. Attributes include \texttt{mitigation\_id} as the unique identifier, \texttt{threat\_id} linking to the associated threat, \texttt{control\_name} describing the mitigation, \texttt{effectiveness}, \texttt{cost}, and \texttt{benefit\_cost\_ratio} for evaluating resource efficiency. This table provides a structured way to manage and track threat countermeasures within the system.
-
-\subsubsection{Relationships and Cardinality}
-
-\paragraph{Composition Relationships}
-The \texttt{Scan\_Request} table maintains a composition relationship with both the \texttt{File} and \texttt{URL} tables, indicating that each scan request is composed of a specific file or URL to be analyzed. When a \texttt{Scan\_Request} instance is deleted, the associated \texttt{File} or \texttt{URL} instance is also removed, reflecting the lifecycle dependency between a scan operation and the content being scanned. Similarly, the \texttt{Scan\_Result} table is composed of multiple \texttt{Engine\_Result} instances, representing the outcomes from different antivirus engines. Deletion of a \texttt{Scan\_Result} instance cascades to its related \texttt{Engine\_Result} instances, maintaining the integrity of engine-level scan data.
-
-\paragraph{Association Relationships}
-The \texttt{User} table is associated with the \texttt{Scan\_Request} table, establishing that users can submit multiple scans while each scan belongs to a single user. The \texttt{User} table is also associated with the \texttt{Threat\_Model} table, allowing users to create and manage multiple threat models, each linked back to the creator for traceability.
-
-The \texttt{Threat\_Model} table associates with both the \texttt{System\_Component} and \texttt{Threat} tables, reflecting that each threat model contains multiple system components and identifies multiple threats. Furthermore, the \texttt{Threat} table is associated with the \texttt{Mitigation} table, establishing that each identified threat may have multiple mitigation controls applied to reduce its risk.
-
-The \texttt{Antivirus\_Engine} table is associated with the \texttt{Engine\_Result} table, indicating that each antivirus engine can generate multiple results for different scan outcomes. The \texttt{Scan\_Request} table is also associated with the \texttt{Scan\_Result} table, enabling the system to link scan submissions with their corresponding results, which can be further enriched by antivirus engines.
-
-\paragraph{Multiplicity Summary}
-Each \texttt{User} can submit one or more \texttt{Scan\_Request} instances, while each \texttt{Scan\_Request} is linked to exactly one \texttt{User}. Each \texttt{Scan\_Request} is associated with exactly one \texttt{File} or \texttt{URL}. Each \texttt{Scan\_Result} can contain multiple \texttt{Engine\_Result} instances, while each \texttt{Engine\_Result} belongs to exactly one \texttt{Scan\_Result} and is generated by exactly one \texttt{Antivirus\_Engine}.
-
-Each \texttt{User} can create multiple \texttt{Threat\_Model} instances, with each model belonging to exactly one \texttt{User}. Each \texttt{Threat\_Model} can include multiple \texttt{System\_Component} instances and identify multiple \texttt{Threat} instances. Each \texttt{Threat} may have multiple associated \texttt{Mitigation} entries, while each \texttt{Mitigation} is linked to exactly one \texttt{Threat}.
-
-These multiplicity rules ensure data integrity, traceability, and structured workflows, where all scan operations, threat models, and mitigation measures are fully connected and auditable.
-
-\clearpage
+From a maintainability and extensibility perspective, the architectural models suggest several favorable properties. The modular composition of the Infrastructure Orchestrator --- which aggregates seven independent sub-services --- means that individual analytical capabilities such as reputation checking or passive DNS querying can be enhanced, replaced, or disabled without affecting the remaining pipeline stages. The projection architecture that separates JSONB result storage from relational table persistence means that the database query interface can evolve independently of the pipeline execution logic. The consistent router-to-service delegation pattern means that new functional domains can be added to the platform by introducing new router-service pairs without modifying existing components. Together, these properties suggest that the TIBSA platform has been designed not only to fulfill its immediate functional requirements but also to accommodate the evolutionary pressures inherent in an active cybersecurity domain where threat landscapes, external APIs, and analytical methodologies are subject to continuous change.
 
 \section{Summary}
 

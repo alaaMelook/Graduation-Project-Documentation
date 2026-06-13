@@ -12,8 +12,9 @@
 \contentsline {figure}{\numberline {4.7}{\ignorespaces Layer 6a --- Intelligence and Monitoring Layer Architecture}}{48}{figure.caption.65}%
 \contentsline {figure}{\numberline {4.8}{\ignorespaces Layer 6b --- Data Layer Architecture}}{49}{figure.caption.66}%
 \contentsline {figure}{\numberline {4.9}{\ignorespaces Layer 7 --- Threat and Risk Engine Architecture}}{49}{figure.caption.67}%
-\contentsline {figure}{\numberline {4.10}{\ignorespaces TIBSA Platform - Use Case Diagram}}{52}{figure.caption.68}%
-\contentsline {figure}{\numberline {4.11}{\ignorespaces TIBSA Platform - System Sequence Diagram}}{55}{figure.caption.76}%
-\contentsline {figure}{\numberline {4.12}{\ignorespaces TIBSA Platform - Class Diagram}}{58}{figure.caption.81}%
-\contentsline {figure}{\numberline {4.13}{\ignorespaces TIBSA Platform - Entity-Relationship Diagram (ERD)}}{62}{figure.caption.88}%
+\contentsline {figure}{\numberline {4.10}{\ignorespaces TIBSA Platform - Standard Security Investigation Sequence Diagram}}{55}{figure.caption.69}%
+\contentsline {figure}{\numberline {4.11}{\ignorespaces TIBSA Platform - Infrastructure Threat Investigation Sequence Diagram}}{57}{figure.caption.71}%
+\contentsline {figure}{\numberline {4.12}{\ignorespaces TIBSA Platform - AI Malware Static Analysis Sequence Diagram}}{60}{figure.caption.73}%
+\contentsline {figure}{\numberline {4.13}{\ignorespaces TIBSA Platform - Independent Diagnostic Modules Sequence Diagram}}{62}{figure.caption.75}%
+\contentsline {figure}{\numberline {4.14}{\ignorespaces TIBSA Platform - Detailed Class Diagram}}{66}{figure.caption.76}%
 \addvspace {10\p@ }
