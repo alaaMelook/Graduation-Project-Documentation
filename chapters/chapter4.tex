@@ -192,6 +192,14 @@ Together, these four categories of diagrams provide a comprehensive and multi-di
 \subsection{Use Case Diagram}
 \label{subsec:use_case_diagram}
 
+\begin{figure}[H]
+\centering
+\includegraphics[width=1.0\textwidth,height=0.90\textheight,keepaspectratio]{media/02_Use_Case_Diagram.jpg}
+\caption{TIBSA Platform --- Use Case Diagram}
+\label{fig:use_case_diagram}
+\end{figure}
+\clearpage
+
 The Use Case Diagram serves as the primary artifact for capturing the functional requirements of the TIBSA platform from the perspective of its human actors. Unlike technical diagrams that expose internal system mechanics, the Use Case Diagram abstracts away implementation detail and focuses exclusively on what the system must do and for whom. This makes it an invaluable communication tool between technical developers and non-technical stakeholders, as well as a validation instrument for ensuring that all identified requirements have been accounted for in the design.
 
 The diagram identifies two primary human actors: the Authenticated User and the Administrator. The Authenticated User represents the operational persona of the system --- a security analyst, penetration tester, or threat intelligence professional who interacts with the platform to conduct investigations, analyze malware, and model threats. The Administrator represents the privileged governance actor responsible for overseeing platform integrity, managing user accounts, reviewing audit trails, and configuring global system behavior. In addition to these human actors, a third implicit actor is represented by the System Background Services, which encapsulates the asynchronous and automated processes that execute independently of direct user interaction, such as background pipeline execution and audit log triggering.
@@ -207,17 +215,15 @@ A distinguishing feature of this use case model is its explicit representation o
 
 Sequence Diagrams capture the dynamic behavior of a system by modeling the chronological exchange of messages between participating components during the execution of a specific workflow. Unlike static structural diagrams, sequence diagrams expose the temporal logic of system interactions, making it possible to analyze the ordering of operations, identify synchronization requirements, and validate the correctness of control flow. For the TIBSA platform, four sequence diagrams have been constructed --- one for each of the primary system flows identified in the system design --- collectively covering the full behavioral spectrum of the application.
 
-\clearpage
 \subsubsection{Flow 1: Standard Security Investigation}
 \label{subsubsec:flow1_standard_investigation}
 
-\begin{figure}[H]
+\begin{sidewaysfigure}
 \centering
-\includegraphics[width=1.0\textwidth]{media/sequence_flow1.jpg}
-\caption{TIBSA Platform - Standard Security Investigation Sequence Diagram}
+\includegraphics[width=1.0\textheight,height=0.9\textwidth,keepaspectratio]{media/Flow 1.jpg}
+\caption{TIBSA Platform --- Standard Security Investigation Sequence Diagram}
 \label{fig:sequence_flow1}
-\end{figure}
-\clearpage
+\end{sidewaysfigure}
 
 The sequence diagram presented in Figure~\ref{fig:sequence_flow1} models the execution of a Standard Security Investigation, which represents the primary analytical workflow available to authenticated users of the TIBSA platform. The participating components in this flow include the Frontend User, the Frontend Application, the FastAPI Investigations Router, the Investigation Orchestrator Service, the PostgreSQL Database, and the Report Exporter Service.
 
@@ -229,19 +235,15 @@ The background pipeline itself proceeds through several sequential stages: updat
 
 The concluding phase of the flow addresses report exportation. Upon user request, the FastAPI Router queries the investigations, findings, and assets tables from the database and delegates the compilation of the report to the Report Exporter Service, which generates either a formatted PDF binary or a structured JSON document. The report is then streamed directly to the user's browser as a downloadable file. This flow demonstrates a clean separation between the synchronous HTTP layer and the asynchronous computational layer --- a design pattern that enhances system responsiveness and scalability.
 
-\clearpage
-\begin{landscape}
 \subsubsection{Flow 2: Infrastructure Threat Investigation (Eight-Stage Pipeline)}
 \label{subsubsec:flow2_infrastructure_investigation}
 
-\begin{figure}[H]
+\begin{sidewaysfigure}
 \centering
-\includegraphics[height=0.65\textheight,width=1.0\linewidth,keepaspectratio]{media/sequence_flow2.jpg}
-\caption{TIBSA Platform - Infrastructure Threat Investigation Sequence Diagram}
+\includegraphics[width=1.0\textheight,height=0.9\textwidth,keepaspectratio]{media/Flow 2.jpg}
+\caption{TIBSA Platform --- Infrastructure Threat Investigation Sequence Diagram}
 \label{fig:sequence_flow2}
-\end{figure}
-\end{landscape}
-\clearpage
+\end{sidewaysfigure}
 
 The sequence diagram illustrated in Figure~\ref{fig:sequence_flow2} models the execution of the Infrastructure Threat Investigation, the most computationally intensive workflow in the TIBSA platform. This flow implements an eight-stage analytical pipeline that processes network-level indicators --- including IP addresses, domain names, and URLs --- through a series of specialized sub-services before producing a comprehensive threat intelligence report.
 
@@ -253,17 +255,15 @@ The eight pipeline stages then execute asynchronously with explicit progress tra
 
 Upon completion of all stages, the orchestrator invokes the Graph Builder Service to synthesize the collected threat data into a network of relational nodes and edges suitable for three-dimensional visualization. The complete results are serialized and persisted to the database, and the Projection Service is triggered to decompose the JSONB results blob into structured relational database tables --- specifically \texttt{infra\_indicators}, \texttt{infra\_enrichment}, \texttt{infra\_graph\_nodes}, \texttt{infra\_graph\_edges}, and \texttt{infra\_ai\_reports} --- enabling efficient querying of individual data dimensions without deserializing the full results object. The combination of parallel sub-service execution, explicit progress tracking, and relational projection makes this flow a sophisticated and architecturally mature component of the TIBSA system.
 
-\clearpage
 \subsubsection{Flow 3: AI Malware Static Analysis}
 \label{subsubsec:flow3_malware_analysis}
 
-\begin{figure}[H]
+\begin{sidewaysfigure}
 \centering
-\includegraphics[width=1.0\textwidth]{media/sequence_flow3.jpg}
-\caption{TIBSA Platform - AI Malware Static Analysis Sequence Diagram}
+\includegraphics[width=0.92\textheight,height=0.82\textwidth,keepaspectratio]{media/Flow 3.jpg}
+\caption{TIBSA Platform --- AI Malware Static Analysis Sequence Diagram}
 \label{fig:sequence_flow3}
-\end{figure}
-\clearpage
+\end{sidewaysfigure}
 
 The sequence diagram presented in Figure~\ref{fig:sequence_flow3} models the AI Malware Static Analysis workflow, which enables authenticated users to upload binary executable files for automated structural analysis and AI-generated threat reporting. The participating components include the Frontend User, the Frontend Application, the FastAPI Malware Analysis Router, the PE File Parsing Engine, the Malware Static Analysis Service, the Machine Learning Classification Model, the PostgreSQL Database, the Gemini LLM External API, and the PDF Report Generation Engine.
 
@@ -275,17 +275,15 @@ For valid PE files, the Malware Static Analysis Service extracts a rich set of b
 
 The second phase of the flow addresses AI-powered report generation. When the user requests a SOC report from the malware history interface, the Router retrieves the stored scan metadata from the database and submits it to the Gemini LLM API via the \texttt{generate\_gemini\_report()} function. The language model returns a structured analyst narrative encompassing a risk analysis, MITRE ATT\&CK technique mapping, and actionable remediation recommendations. This narrative is returned to the frontend as a markdown document. The third and final phase allows the user to download a professionally formatted PDF version of the report, generated by the PDF Report Generation Engine and streamed to the browser. This three-phase architecture --- structural analysis, AI narration, and formatted export --- distinguishes the TIBSA malware analysis capability as a comprehensive forensic tool rather than a simple scanner.
 
-\clearpage
 \subsubsection{Flow 4: Independent Pentesting and Threat Assessment Modules}
 \label{subsubsec:flow4_independent_modules}
 
-\begin{figure}[H]
+\begin{sidewaysfigure}
 \centering
-\includegraphics[width=1.0\textwidth]{media/sequence_flow4.jpg}
-\caption{TIBSA Platform - Independent Diagnostic Modules Sequence Diagram}
+\includegraphics[width=1.0\textheight,height=0.9\textwidth,keepaspectratio]{media/Flow 4.jpg}
+\caption{TIBSA Platform --- Independent Diagnostic Modules Sequence Diagram}
 \label{fig:sequence_flow4}
-\end{figure}
-\clearpage
+\end{sidewaysfigure}
 
 The sequence diagram illustrated in Figure~\ref{fig:sequence_flow4} models three independent diagnostic modules that users may invoke as standalone tools without initiating a full investigation pipeline. These modules --- the Malware and Phishing Scanner, the Active Web Vulnerability Pentesting engine, and the STRIDE Threat Modeling Review --- each represent a distinct analytical capability with dedicated routing, service logic, and database persistence.
 
@@ -293,10 +291,26 @@ The Malware and Phishing Scanner module, serviced by the FastAPI Scans Router an
 
 The Active Web Vulnerability Pentesting module, serviced by the Website Scanner Router and the Website Scanner Service, accepts a target URL and executes a battery of active security tests. The service begins by establishing a custom 404 page baseline to prevent false positives from directory discovery scans. It then evaluates HTTP security headers and server misconfigurations, discovers exposed directory paths and sensitive endpoints, injects reflected Cross-Site Scripting payloads and evaluates responses, and performs error-based and blind SQL Injection tests. False positives identified through comparison against the 404 baseline and homepage redirect patterns are systematically filtered before findings are persisted to the \texttt{website\_scans} database table and returned to the frontend alongside automated remediation configuration recommendations.
 
-The STRIDE Threat Modeling Review module, serviced by the Threat Modeling Router and the Threat Modeling Service, accepts a structured description of the target application's technical profile --- including its application type, technology stack, deployed frameworks, authentication mechanisms, and data sensitivity classifications. The service executes the STRIDE analysis pipeline, applying a rule base of over fifty threat rules, suppressing inapplicable threats based on stack context, enriching each threat with CAPEC identifiers and ASVS control mappings, and calculating a residual risk score. The results, including a full threat list, mitigation recommendations, and heatmap visualization data, are persisted to the \texttt{threat\_model\_analyses} table and returned to the frontend for rendering. The architectural design of this flow --- three independent modules sharing a common database client and authentication dependency --- reflects a modular service composition pattern that allows each capability to be tested, maintained, and extended independently.
+The STRIDE Threat Modeling Review module, serviced by the Threat Modeling Router and the Threat Modeling Service, accepts a structured description of the target application's technical profile --- including its application type, technology stack, deployed frameworks, authentication mechanisms, and data sensitivity classifications. The service executes the STRIDE analysis pipeline, applying a rule base of over fifty threat rules, suppressing inapplicable threats based on stack context, enriching each threat with CAPEC identifiers and ASVS control mappings, and calculating a residual risk score. The results, including a full threat list, mitigation recommendations, and heatmap visualization data, are persisted to the \texttt{threat\_model\_analyses} table and returned to the frontend for rendering. The architectural design of this flow --- three independent modules sharing a common database client and authentication dependency --- reflects a modular service composition pattern that allows each capability to be tested, maintained, and extended.
 
 \subsection{Entity Relationship Diagram (ERD)}
 \label{subsec:entity_relationship_diagram_erd}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=1.0\textwidth,height=0.90\textheight,keepaspectratio]{media/ERD Part 1.jpg}
+\caption{TIBSA Platform --- Entity Relationship Diagram (Part 1)}
+\label{fig:erd_part1}
+\end{figure}
+\clearpage
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=1.0\textwidth,height=0.90\textheight,keepaspectratio]{media/ERD Part 2.jpg}
+\caption{TIBSA Platform --- Entity Relationship Diagram (Part 2)}
+\label{fig:erd_part2}
+\end{figure}
+\clearpage
 
 The Entity Relationship Diagram serves as a comprehensive model of the TIBSA platform's persistent data layer, encompassing sixteen distinct database entities distributed across the investigative, analytical, administrative, and operational dimensions of the system. The schema has been designed for the Supabase PostgreSQL environment, with Row Level Security policies governing data access at the database layer in addition to the application-level authorization mechanisms described elsewhere in this report.
 

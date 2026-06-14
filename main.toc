@@ -117,32 +117,32 @@
 \contentsline {subsection}{\numberline {4.3.7}Layer 6b --- Data Layer}{49}{subsection.4.3.7}%
 \contentsline {subsection}{\numberline {4.3.8}Layer 7 --- Threat and Risk Engine}{49}{subsection.4.3.8}%
 \contentsline {section}{\numberline {4.4}System Modeling Diagrams}{51}{section.4.4}%
-\contentsline {subsection}{\numberline {4.4.1}Use Case Diagram}{51}{subsection.4.4.1}%
-\contentsline {subsection}{\numberline {4.4.2}Sequence Diagrams}{53}{subsection.4.4.2}%
-\contentsline {subsubsection}{Flow 1: Standard Security Investigation}{55}{section*.68}%
-\contentsline {subsubsection}{Flow 2: Infrastructure Threat Investigation (Eight-Stage Pipeline)}{57}{section*.70}%
-\contentsline {subsubsection}{Flow 3: AI Malware Static Analysis}{60}{section*.72}%
-\contentsline {subsubsection}{Flow 4: Independent Pentesting and Threat Assessment Modules}{62}{section*.74}%
-\contentsline {subsection}{\numberline {4.4.3}Entity Relationship Diagram (ERD)}{64}{subsection.4.4.3}%
-\contentsline {subsection}{\numberline {4.4.4}Class Diagram}{66}{subsection.4.4.4}%
-\contentsline {subsection}{\numberline {4.4.5}Discussion and Model Validation}{68}{subsection.4.4.5}%
-\contentsline {section}{\numberline {4.5}Summary}{70}{section.4.5}%
-\contentsline {chapter}{\numberline {5}Conclusion and Future Work}{71}{chapter.5}%
-\contentsline {section}{\numberline {5.1}Summary}{71}{section.5.1}%
-\contentsline {section}{\numberline {5.2}Achievements and Contributions}{72}{section.5.2}%
-\contentsline {subsection}{\numberline {5.2.1}Unified Security Assessment Framework}{72}{subsection.5.2.1}%
-\contentsline {subsection}{\numberline {5.2.2}Eight-Layer Cloud-Native Architecture}{73}{subsection.5.2.2}%
-\contentsline {subsection}{\numberline {5.2.3}Automated Threat Modeling Workflow}{73}{subsection.5.2.3}%
-\contentsline {subsection}{\numberline {5.2.4}Multi-Engine Security Scanning}{73}{subsection.5.2.4}%
-\contentsline {section}{\numberline {5.3}Challenges and Lessons Learned}{73}{section.5.3}%
-\contentsline {subsection}{\numberline {5.3.1}Complexity of Integration}{74}{subsection.5.3.1}%
-\contentsline {subsection}{\numberline {5.3.2}Balancing Automation and Control}{74}{subsection.5.3.2}%
-\contentsline {subsection}{\numberline {5.3.3}Scalability Considerations}{74}{subsection.5.3.3}%
-\contentsline {section}{\numberline {5.4}Limitations}{74}{section.5.4}%
-\contentsline {section}{\numberline {5.5}Future Work}{74}{section.5.5}%
-\contentsline {subsection}{\numberline {5.5.1}Implementation and Deployment}{75}{subsection.5.5.1}%
-\contentsline {subsection}{\numberline {5.5.2}Advanced AI/ML Integration}{75}{subsection.5.5.2}%
-\contentsline {subsection}{\numberline {5.5.3}Extended Platform Capabilities}{75}{subsection.5.5.3}%
-\contentsline {subsection}{\numberline {5.5.4}Research Extensions}{75}{subsection.5.5.4}%
-\contentsline {section}{\numberline {5.6}Final Remarks}{76}{section.5.6}%
-\contentsline {chapter}{List of References}{77}{chapter*.77}%
+\contentsline {subsection}{\numberline {4.4.1}Use Case Diagram}{52}{subsection.4.4.1}%
+\contentsline {subsection}{\numberline {4.4.2}Sequence Diagrams}{54}{subsection.4.4.2}%
+\contentsline {subsubsection}{Flow 1: Standard Security Investigation}{54}{section*.69}%
+\contentsline {subsubsection}{Flow 2: Infrastructure Threat Investigation (Eight-Stage Pipeline)}{56}{section*.71}%
+\contentsline {subsubsection}{Flow 3: AI Malware Static Analysis}{59}{section*.73}%
+\contentsline {subsubsection}{Flow 4: Independent Pentesting and Threat Assessment Modules}{61}{section*.75}%
+\contentsline {subsection}{\numberline {4.4.3}Entity Relationship Diagram (ERD)}{63}{subsection.4.4.3}%
+\contentsline {subsection}{\numberline {4.4.4}Class Diagram}{67}{subsection.4.4.4}%
+\contentsline {subsection}{\numberline {4.4.5}Discussion and Model Validation}{69}{subsection.4.4.5}%
+\contentsline {section}{\numberline {4.5}Summary}{71}{section.4.5}%
+\contentsline {chapter}{\numberline {5}Conclusion and Future Work}{72}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Summary}{72}{section.5.1}%
+\contentsline {section}{\numberline {5.2}Achievements and Contributions}{73}{section.5.2}%
+\contentsline {subsection}{\numberline {5.2.1}Unified Security Assessment Framework}{73}{subsection.5.2.1}%
+\contentsline {subsection}{\numberline {5.2.2}Eight-Layer Cloud-Native Architecture}{74}{subsection.5.2.2}%
+\contentsline {subsection}{\numberline {5.2.3}Automated Threat Modeling Workflow}{74}{subsection.5.2.3}%
+\contentsline {subsection}{\numberline {5.2.4}Multi-Engine Security Scanning}{74}{subsection.5.2.4}%
+\contentsline {section}{\numberline {5.3}Challenges and Lessons Learned}{74}{section.5.3}%
+\contentsline {subsection}{\numberline {5.3.1}Complexity of Integration}{75}{subsection.5.3.1}%
+\contentsline {subsection}{\numberline {5.3.2}Balancing Automation and Control}{75}{subsection.5.3.2}%
+\contentsline {subsection}{\numberline {5.3.3}Scalability Considerations}{75}{subsection.5.3.3}%
+\contentsline {section}{\numberline {5.4}Limitations}{75}{section.5.4}%
+\contentsline {section}{\numberline {5.5}Future Work}{75}{section.5.5}%
+\contentsline {subsection}{\numberline {5.5.1}Implementation and Deployment}{76}{subsection.5.5.1}%
+\contentsline {subsection}{\numberline {5.5.2}Advanced AI/ML Integration}{76}{subsection.5.5.2}%
+\contentsline {subsection}{\numberline {5.5.3}Extended Platform Capabilities}{76}{subsection.5.5.3}%
+\contentsline {subsection}{\numberline {5.5.4}Research Extensions}{76}{subsection.5.5.4}%
+\contentsline {section}{\numberline {5.6}Final Remarks}{77}{section.5.6}%
+\contentsline {chapter}{List of References}{78}{chapter*.80}%

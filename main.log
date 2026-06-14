@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2025.12.21)  13 JUN 2026 04:41
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2025.12.21)  14 JUN 2026 03:07
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -277,6 +277,18 @@ Package: lscape 2020/05/28 v3.02 Landscape Pages (DPC)
 )
 Package pdflscape Info: Auto-detected driver: pdftex on input line 81.
 ))
+(D:\Apps\MiKTeX\tex/latex/graphics\rotating.sty
+Package: rotating 2016/08/11 v2.16d rotated objects in LaTeX
+
+(D:\Apps\MiKTeX\tex/latex/base\ifthen.sty
+Package: ifthen 2022/04/13 v1.1d Standard LaTeX ifthen package (DPC)
+)
+\c@r@tfl@t=\count279
+\rotFPtop=\skip51
+\rotFPbot=\skip52
+\rot@float@box=\box51
+\rot@mess@toks=\toks21
+)
 (D:\Apps\MiKTeX\tex/latex/cite\cite.sty
 LaTeX Info: Redefining \cite on input line 302.
 LaTeX Info: Redefining \nocite on input line 332.
@@ -284,7 +296,7 @@ Package: cite 2015/02/27  v 5.5
 )
 (D:\Apps\MiKTeX\tex/latex/amsmath\amsmath.sty
 Package: amsmath 2023/05/13 v2.17o AMS math features
-\@mathmargin=\skip51
+\@mathmargin=\skip53
 
 For additional information on amsmath, use the `?' option.
 (D:\Apps\MiKTeX\tex/latex/amsmath\amstext.sty
@@ -292,7 +304,7 @@ Package: amstext 2021/08/26 v2.01 AMS text
 
 (D:\Apps\MiKTeX\tex/latex/amsmath\amsgen.sty
 File: amsgen.sty 1999/11/30 v2.0 generic functions
-\@emptytoks=\toks21
+\@emptytoks=\toks22
 \ex@=\dimen156
 ))
 (D:\Apps\MiKTeX\tex/latex/amsmath\amsbsy.sty
@@ -302,19 +314,19 @@ Package: amsbsy 1999/11/29 v1.2d Bold Symbols
 (D:\Apps\MiKTeX\tex/latex/amsmath\amsopn.sty
 Package: amsopn 2022/04/08 v2.04 operator names
 )
-\inf@bad=\count279
+\inf@bad=\count280
 LaTeX Info: Redefining \frac on input line 234.
-\uproot@=\count280
-\leftroot@=\count281
+\uproot@=\count281
+\leftroot@=\count282
 LaTeX Info: Redefining \overline on input line 399.
 LaTeX Info: Redefining \colon on input line 410.
-\classnum@=\count282
-\DOTSCASE@=\count283
+\classnum@=\count283
+\DOTSCASE@=\count284
 LaTeX Info: Redefining \ldots on input line 496.
 LaTeX Info: Redefining \dots on input line 499.
 LaTeX Info: Redefining \cdots on input line 620.
-\Mathstrutbox@=\box51
-\strutbox@=\box52
+\Mathstrutbox@=\box52
+\strutbox@=\box53
 LaTeX Info: Redefining \big on input line 722.
 LaTeX Info: Redefining \Big on input line 723.
 LaTeX Info: Redefining \bigg on input line 724.
@@ -322,31 +334,31 @@ LaTeX Info: Redefining \Bigg on input line 725.
 \big@size=\dimen158
 LaTeX Font Info:    Redeclaring font encoding OML on input line 743.
 LaTeX Font Info:    Redeclaring font encoding OMS on input line 744.
-\macc@depth=\count284
+\macc@depth=\count285
 LaTeX Info: Redefining \bmod on input line 905.
 LaTeX Info: Redefining \pmod on input line 910.
 LaTeX Info: Redefining \smash on input line 940.
 LaTeX Info: Redefining \relbar on input line 970.
 LaTeX Info: Redefining \Relbar on input line 971.
-\c@MaxMatrixCols=\count285
+\c@MaxMatrixCols=\count286
 \dotsspace@=\muskip17
-\c@parentequation=\count286
-\dspbrk@lvl=\count287
-\tag@help=\toks22
-\row@=\count288
-\column@=\count289
-\maxfields@=\count290
-\andhelp@=\toks23
+\c@parentequation=\count287
+\dspbrk@lvl=\count288
+\tag@help=\toks23
+\row@=\count289
+\column@=\count290
+\maxfields@=\count291
+\andhelp@=\toks24
 \eqnshift@=\dimen159
 \alignsep@=\dimen160
 \tagshift@=\dimen161
 \tagwidth@=\dimen162
 \totwidth@=\dimen163
 \lineht@=\dimen164
-\@envbody=\toks24
-\multlinegap=\skip52
-\multlinetaggap=\skip53
-\mathdisplay@stack=\toks25
+\@envbody=\toks25
+\multlinegap=\skip54
+\multlinetaggap=\skip55
+\mathdisplay@stack=\toks26
 LaTeX Info: Redefining \[ on input line 2953.
 LaTeX Info: Redefining \] on input line 2954.
 )
@@ -363,31 +375,31 @@ LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
 ))
 (D:\Apps\MiKTeX\tex/latex/float\float.sty
 Package: float 2001/11/08 v1.3d Float enhancements (AL)
-\c@float@type=\count291
-\float@exts=\toks26
-\float@box=\box53
-\@float@everytoks=\toks27
-\@floatcapt=\box54
+\c@float@type=\count292
+\float@exts=\toks27
+\float@box=\box54
+\@float@everytoks=\toks28
+\@floatcapt=\box55
 )
 (D:\Apps\MiKTeX\tex/latex/listings\listings.sty
-\lst@mode=\count292
-\lst@gtempboxa=\box55
-\lst@token=\toks28
-\lst@length=\count293
+\lst@mode=\count293
+\lst@gtempboxa=\box56
+\lst@token=\toks29
+\lst@length=\count294
 \lst@currlwidth=\dimen165
-\lst@column=\count294
-\lst@pos=\count295
+\lst@column=\count295
+\lst@pos=\count296
 \lst@lostspace=\dimen166
 \lst@width=\dimen167
-\lst@newlines=\count296
-\lst@lineno=\count297
+\lst@newlines=\count297
+\lst@lineno=\count298
 \lst@maxwidth=\dimen168
 
 (D:\Apps\MiKTeX\tex/latex/listings\lstmisc.sty
 File: lstmisc.sty 2023/02/27 1.9 (Carsten Heinz)
-\c@lstnumber=\count298
-\lst@skipnumbers=\count299
-\lst@framebox=\box56
+\c@lstnumber=\count299
+\lst@skipnumbers=\count300
+\lst@framebox=\box57
 )
 (D:\Apps\MiKTeX\tex/latex/listings\listings.cfg
 File: listings.cfg 2023/02/27 1.9 listings configuration
@@ -419,20 +431,20 @@ Package: tabularx 2023/07/08 v2.11c `tabularx' package (DPC)
 (D:\Apps\MiKTeX\tex/latex/tools\array.sty
 Package: array 2023/10/16 v2.5g Tabular extension package (FMi)
 \col@sep=\dimen169
-\ar@mcellbox=\box57
+\ar@mcellbox=\box58
 \extrarowheight=\dimen170
-\NC@list=\toks29
-\extratabsurround=\skip54
-\backup@length=\skip55
-\ar@cellbox=\box58
+\NC@list=\toks30
+\extratabsurround=\skip56
+\backup@length=\skip57
+\ar@cellbox=\box59
 )
 \TX@col@width=\dimen171
 \TX@old@table=\dimen172
 \TX@old@col=\dimen173
 \TX@target=\dimen174
 \TX@delta=\dimen175
-\TX@cols=\count300
-\TX@ftn=\toks30
+\TX@cols=\count301
+\TX@ftn=\toks31
 )
 (D:\Apps\MiKTeX\tex/latex/booktabs\booktabs.sty
 Package: booktabs 2020/01/12 v1.61803398 Publication quality tables
@@ -446,32 +458,32 @@ Package: booktabs 2020/01/12 v1.61803398 Publication quality tables
 \cmidrulesep=\dimen183
 \cmidrulekern=\dimen184
 \defaultaddspace=\dimen185
-\@cmidla=\count301
-\@cmidlb=\count302
+\@cmidla=\count302
+\@cmidlb=\count303
 \@aboverulesep=\dimen186
 \@belowrulesep=\dimen187
-\@thisruleclass=\count303
-\@lastruleclass=\count304
+\@thisruleclass=\count304
+\@lastruleclass=\count305
 \@thisrulewidth=\dimen188
 )
 (D:\Apps\MiKTeX\tex/latex/tools\longtable.sty
 Package: longtable 2023-11-01 v4.19 Multi-page Table package (DPC)
-\LTleft=\skip56
-\LTright=\skip57
-\LTpre=\skip58
-\LTpost=\skip59
-\LTchunksize=\count305
+\LTleft=\skip58
+\LTright=\skip59
+\LTpre=\skip60
+\LTpost=\skip61
+\LTchunksize=\count306
 \LTcapwidth=\dimen189
-\LT@head=\box59
-\LT@firsthead=\box60
-\LT@foot=\box61
-\LT@lastfoot=\box62
-\LT@gbox=\box63
-\LT@cols=\count306
-\LT@rows=\count307
-\c@LT@tables=\count308
-\c@LT@chunks=\count309
-\LT@p@ftn=\toks31
+\LT@head=\box60
+\LT@firsthead=\box61
+\LT@foot=\box62
+\LT@lastfoot=\box63
+\LT@gbox=\box64
+\LT@cols=\count307
+\LT@rows=\count308
+\c@LT@tables=\count309
+\c@LT@chunks=\count310
+\LT@p@ftn=\toks32
 ) (ltablex.sty
 Package: ltablex 2014/08/13 v1.1 Modified tabularx
 )
@@ -490,8 +502,8 @@ Package: caption3 2023/07/31 v2.4d caption3 kernel (AR)
 \caption@hangindent=\dimen197
 Package caption Info: Standard document class detected.
 )
-\c@caption@flags=\count310
-\c@continuedfloat=\count311
+\c@caption@flags=\count311
+\c@continuedfloat=\count312
 Package caption Info: float package is loaded.
 Package caption Info: hyperref package is loaded.
 Package caption Info: listings package is loaded.
@@ -499,82 +511,84 @@ Package caption Info: longtable package is loaded.
 
 (D:\Apps\MiKTeX\tex/latex/caption\ltcaption.sty
 Package: ltcaption 2021/01/08 v1.4c longtable captions (AR)
-))
+)
+Package caption Info: rotating package is loaded.
+)
 (D:\Apps\MiKTeX\tex/latex/caption\subcaption.sty
 Package: subcaption 2023/07/28 v1.6b Sub-captions (AR)
 Package caption Info: New subtype `subfigure' on input line 238.
-\c@subfigure=\count312
+\c@subfigure=\count313
 Package caption Info: New subtype `subtable' on input line 238.
-\c@subtable=\count313
+\c@subtable=\count314
 )
 (D:\Apps\MiKTeX\tex/latex/fancyhdr\fancyhdr.sty
 Package: fancyhdr 2025/02/07 v5.2 Extensive control of page headers and footers
 
-\f@nch@headwidth=\skip60
-\f@nch@offset@elh=\skip61
-\f@nch@offset@erh=\skip62
-\f@nch@offset@olh=\skip63
-\f@nch@offset@orh=\skip64
-\f@nch@offset@elf=\skip65
-\f@nch@offset@erf=\skip66
-\f@nch@offset@olf=\skip67
-\f@nch@offset@orf=\skip68
-\f@nch@height=\skip69
-\f@nch@footalignment=\skip70
-\f@nch@widthL=\skip71
-\f@nch@widthC=\skip72
-\f@nch@widthR=\skip73
-\@temptokenb=\toks32
+\f@nch@headwidth=\skip62
+\f@nch@offset@elh=\skip63
+\f@nch@offset@erh=\skip64
+\f@nch@offset@olh=\skip65
+\f@nch@offset@orh=\skip66
+\f@nch@offset@elf=\skip67
+\f@nch@offset@erf=\skip68
+\f@nch@offset@olf=\skip69
+\f@nch@offset@orf=\skip70
+\f@nch@height=\skip71
+\f@nch@footalignment=\skip72
+\f@nch@widthL=\skip73
+\f@nch@widthC=\skip74
+\f@nch@widthR=\skip75
+\@temptokenb=\toks33
 )
 (D:\Apps\MiKTeX\tex/latex/tocloft\tocloft.sty
 Package: tocloft 2017/08/31 v2.3i parameterised ToC, etc., typesetting
 Package tocloft Info: The document has chapter divisions on input line 51.
-\cftparskip=\skip74
-\cftbeforetoctitleskip=\skip75
-\cftaftertoctitleskip=\skip76
-\cftbeforepartskip=\skip77
-\cftpartnumwidth=\skip78
-\cftpartindent=\skip79
-\cftbeforechapskip=\skip80
-\cftchapindent=\skip81
-\cftchapnumwidth=\skip82
-\cftbeforesecskip=\skip83
-\cftsecindent=\skip84
-\cftsecnumwidth=\skip85
-\cftbeforesubsecskip=\skip86
-\cftsubsecindent=\skip87
-\cftsubsecnumwidth=\skip88
-\cftbeforesubsubsecskip=\skip89
-\cftsubsubsecindent=\skip90
-\cftsubsubsecnumwidth=\skip91
-\cftbeforeparaskip=\skip92
-\cftparaindent=\skip93
-\cftparanumwidth=\skip94
-\cftbeforesubparaskip=\skip95
-\cftsubparaindent=\skip96
-\cftsubparanumwidth=\skip97
-\cftbeforeloftitleskip=\skip98
-\cftafterloftitleskip=\skip99
-\cftbeforefigskip=\skip100
-\cftfigindent=\skip101
-\cftfignumwidth=\skip102
-\c@lofdepth=\count314
-\c@lotdepth=\count315
-\cftbeforelottitleskip=\skip103
-\cftafterlottitleskip=\skip104
-\cftbeforetabskip=\skip105
-\cfttabindent=\skip106
-\cfttabnumwidth=\skip107
+\cftparskip=\skip76
+\cftbeforetoctitleskip=\skip77
+\cftaftertoctitleskip=\skip78
+\cftbeforepartskip=\skip79
+\cftpartnumwidth=\skip80
+\cftpartindent=\skip81
+\cftbeforechapskip=\skip82
+\cftchapindent=\skip83
+\cftchapnumwidth=\skip84
+\cftbeforesecskip=\skip85
+\cftsecindent=\skip86
+\cftsecnumwidth=\skip87
+\cftbeforesubsecskip=\skip88
+\cftsubsecindent=\skip89
+\cftsubsecnumwidth=\skip90
+\cftbeforesubsubsecskip=\skip91
+\cftsubsubsecindent=\skip92
+\cftsubsubsecnumwidth=\skip93
+\cftbeforeparaskip=\skip94
+\cftparaindent=\skip95
+\cftparanumwidth=\skip96
+\cftbeforesubparaskip=\skip97
+\cftsubparaindent=\skip98
+\cftsubparanumwidth=\skip99
+\cftbeforeloftitleskip=\skip100
+\cftafterloftitleskip=\skip101
+\cftbeforefigskip=\skip102
+\cftfigindent=\skip103
+\cftfignumwidth=\skip104
+\c@lofdepth=\count315
+\c@lotdepth=\count316
+\cftbeforelottitleskip=\skip105
+\cftafterlottitleskip=\skip106
+\cftbeforetabskip=\skip107
+\cfttabindent=\skip108
+\cfttabnumwidth=\skip109
 )
 (D:\Apps\MiKTeX\tex/latex/setspace\setspace.sty
 Package: setspace 2022/12/04 v6.7b set line spacing
 )
-Package hyperref Info: Option `colorlinks' set `true' on input line 63.
+Package hyperref Info: Option `colorlinks' set `true' on input line 64.
 )
 (D:\Apps\MiKTeX\tex/latex/l3backend\l3backend-pdftex.def
 File: l3backend-pdftex.def 2024-01-04 L3 backend support: PDF output (pdfTeX)
-\l__color_backend_stack_int=\count316
-\l__pdf_internal_box=\box64
+\l__color_backend_stack_int=\count317
+\l__pdf_internal_box=\box65
 ) (main.aux)
 \openout1 = `main.aux'.
 
@@ -638,17 +652,17 @@ Package hyperref Info: Link coloring ON on input line 3.
 
  (D:\Apps\MiKTeX\tex/context/base/mkii\supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count317
+\scratchcounter=\count318
 \scratchdimen=\dimen198
-\scratchbox=\box65
-\nofMPsegments=\count318
-\nofMParguments=\count319
-\everyMPshowfont=\toks33
-\MPscratchCnt=\count320
+\scratchbox=\box66
+\nofMPsegments=\count319
+\nofMParguments=\count320
+\everyMPshowfont=\toks34
+\MPscratchCnt=\count321
 \MPscratchDim=\dimen199
-\MPnumerator=\count321
-\makeMPintoPDFobject=\count322
-\everyMPtoPDFconversion=\toks34
+\MPnumerator=\count322
+\makeMPintoPDFobject=\count323
+\everyMPtoPDFconversion=\toks35
 ) (D:\Apps\MiKTeX\tex/latex/epstopdf-pkg\epstopdf-base.sty
 Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
 Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
@@ -657,7 +671,7 @@ Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
 (D:\Apps\MiKTeX\tex/latex/00miktex\epstopdf-sys.cfg
 File: epstopdf-sys.cfg 2021/03/18 v2.0 Configuration of epstopdf for MiKTeX
 ))
-\c@lstlisting=\count323
+\c@lstlisting=\count324
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: End \AtBeginDocument code.
 <media/image1.jpg, id=400, 225.84375pt x 225.84375pt>
@@ -1409,7 +1423,7 @@ ON event pay-loads to user-configured
  []
 
 [41] [42]
-<media/Low Level Arch_page-0001.jpg, id=869, 753.2943pt x 1257.2571pt>
+<media/Low Level Arch_page-0001.jpg, id=875, 753.2943pt x 1257.2571pt>
 File: media/Low Level Arch_page-0001.jpg Graphic file (type jpg)
 <use media/Low Level Arch_page-0001.jpg>
 Package pdftex.def Info: media/Low Level Arch_page-0001.jpg  used on input line
@@ -1418,12 +1432,12 @@ Package pdftex.def Info: media/Low Level Arch_page-0001.jpg  used on input line
  [43
 
  <./media/Low Level Arch_page-0001.jpg>]
-<media/1.jpg, id=875, 781.4796pt x 111.7776pt>
+<media/1.jpg, id=881, 781.4796pt x 111.7776pt>
 File: media/1.jpg Graphic file (type jpg)
 <use media/1.jpg>
 Package pdftex.def Info: media/1.jpg  used on input line 97.
 (pdftex.def)             Requested size: 385.02547pt x 55.07167pt.
-<media/2.jpg, id=876, 808.9422pt x 110.814pt>
+<media/2.jpg, id=882, 808.9422pt x 110.814pt>
 File: media/2.jpg Graphic file (type jpg)
 <use media/2.jpg>
 Package pdftex.def Info: media/2.jpg  used on input line 108.
@@ -1431,19 +1445,19 @@ Package pdftex.def Info: media/2.jpg  used on input line 108.
  [44
 
  <./media/1.jpg>]
-<media/3.jpg, id=881, 807.2559pt x 119.2455pt>
+<media/3.jpg, id=887, 807.2559pt x 119.2455pt>
 File: media/3.jpg Graphic file (type jpg)
 <use media/3.jpg>
 Package pdftex.def Info: media/3.jpg  used on input line 119.
 (pdftex.def)             Requested size: 452.9679pt x 66.90984pt.
 
 [45 <./media/2.jpg> <./media/3.jpg>]
-<media/4.jpg, id=887, 809.9058pt x 109.3686pt>
+<media/4.jpg, id=893, 809.9058pt x 109.3686pt>
 File: media/4.jpg Graphic file (type jpg)
 <use media/4.jpg>
 Package pdftex.def Info: media/4.jpg  used on input line 130.
 (pdftex.def)             Requested size: 452.9679pt x 61.16922pt.
-<media/5.jpg, id=888, 807.2559pt x 118.5228pt>
+<media/5.jpg, id=894, 807.2559pt x 118.5228pt>
 File: media/5.jpg Graphic file (type jpg)
 <use media/5.jpg>
 Package pdftex.def Info: media/5.jpg  used on input line 141.
@@ -1455,19 +1469,19 @@ Overfull \hbox (29.50252pt too wide) in paragraph at lines 146--147
 e.py\T1/cmr/m/n/12 )
  []
 
-<media/6a.jpg, id=894, 383.9946pt x 130.086pt>
+<media/6a.jpg, id=900, 383.9946pt x 130.086pt>
 File: media/6a.jpg Graphic file (type jpg)
 <use media/6a.jpg>
 Package pdftex.def Info: media/6a.jpg  used on input line 152.
 (pdftex.def)             Requested size: 385.02547pt x 130.44295pt.
 [47 <./media/5.jpg>]
-<media/6b.jpg, id=899, 382.3083pt x 129.8451pt>
+<media/6b.jpg, id=905, 382.3083pt x 129.8451pt>
 File: media/6b.jpg Graphic file (type jpg)
 <use media/6b.jpg>
 Package pdftex.def Info: media/6b.jpg  used on input line 163.
 (pdftex.def)             Requested size: 385.02547pt x 130.77596pt.
  [48 <./media/6a.jpg>]
-<media/7.jpg, id=904, 812.7966pt x 128.3997pt>
+<media/7.jpg, id=910, 812.7966pt x 128.3997pt>
 File: media/7.jpg Graphic file (type jpg)
 <use media/7.jpg>
 Package pdftex.def Info: media/7.jpg  used on input line 174.
@@ -1478,97 +1492,98 @@ Overfull \hbox (21.42458pt too wide) in paragraph at lines 190--191
 -pre-hen-sive and multi-dimensional
  []
 
+<media/02_Use_Case_Diagram.jpg, id=919, 1722.435pt x 1714.90688pt>
+File: media/02_Use_Case_Diagram.jpg Graphic file (type jpg)
+<use media/02_Use_Case_Diagram.jpg>
+Package pdftex.def Info: media/02_Use_Case_Diagram.jpg  used on input line 197.
+
+(pdftex.def)             Requested size: 452.97386pt x 450.99406pt.
 [51
 
-] [52] [53]
-<media/sequence_flow1.jpg, id=926, 1963.335pt x 2967.085pt>
-File: media/sequence_flow1.jpg Graphic file (type jpg)
-<use media/sequence_flow1.jpg>
-Package pdftex.def Info: media/sequence_flow1.jpg  used on input line 216.
-(pdftex.def)             Requested size: 452.9679pt x 684.54309pt.
- [54
+] [52 <./media/02_Use_Case_Diagram.jpg>] [53
 
 ]
-Overfull \vbox (40.71709pt too high) has occurred while \output is active []
+<media/Flow 1.jpg, id=933, 1785.67125pt x 1167.61218pt>
+File: media/Flow 1.jpg Graphic file (type jpg)
+<use media/Flow 1.jpg>
+Package pdftex.def Info: media/Flow 1.jpg  used on input line 223.
+(pdftex.def)             Requested size: 700.49606pt x 458.03937pt.
+ [54] [55 <./media/Flow 1.jpg>]
+<media/Flow 2.jpg, id=944, 1755.55875pt x 1237.62375pt>
+File: media/Flow 2.jpg Graphic file (type jpg)
+<use media/Flow 2.jpg>
+Package pdftex.def Info: media/Flow 2.jpg  used on input line 243.
+(pdftex.def)             Requested size: 700.52345pt x 493.85101pt.
+[56] [57 <./media/Flow 2.jpg>]
+<media/Flow 3.jpg, id=956, 1512.40031pt x 1002.74625pt>
+File: media/Flow 3.jpg Graphic file (type jpg)
+<use media/Flow 3.jpg>
+Package pdftex.def Info: media/Flow 3.jpg  used on input line 263.
+(pdftex.def)             Requested size: 644.45782pt x 427.28612pt.
+ [58] [59] [60 <./media/Flow 3.jpg>]
+<media/Flow 4.jpg, id=971, 1630.59187pt x 1068.99374pt>
+File: media/Flow 4.jpg Graphic file (type jpg)
+<use media/Flow 4.jpg>
+Package pdftex.def Info: media/Flow 4.jpg  used on input line 283.
+(pdftex.def)             Requested size: 700.49394pt x 459.23425pt.
+<media/ERD Part 1.jpg, id=973, 1754.80594pt x 2064.21187pt>
+File: media/ERD Part 1.jpg Graphic file (type jpg)
+<use media/ERD Part 1.jpg>
+Package pdftex.def Info: media/ERD Part 1.jpg  used on input line 301.
+(pdftex.def)             Requested size: 452.97209pt x 532.83977pt.
+ [61]
+[62 <./media/Flow 4.jpg>] [63 <./media/ERD Part 1.jpg>]
+<media/ERD Part 2.jpg, id=988, 1708.13156pt x 1826.32312pt>
+File: media/ERD Part 2.jpg Graphic file (type jpg)
+<use media/ERD Part 2.jpg>
+Package pdftex.def Info: media/ERD Part 2.jpg  used on input line 309.
+(pdftex.def)             Requested size: 452.96548pt x 484.30774pt.
+ [64
 
-
-[55 <./media/sequence_flow1.jpg>] [56
-
-]
-<media/sequence_flow2.jpg, id=941, 4492.785pt x 3288.285pt>
-File: media/sequence_flow2.jpg Graphic file (type jpg)
-<use media/sequence_flow2.jpg>
-Package pdftex.def Info: media/sequence_flow2.jpg  used on input line 239.
-(pdftex.def)             Requested size: 402.27658pt x 294.42763pt.
- [57
-
-
- <./media/sequence_flow2.jpg>]
-[58
-
-
-] [59]
-<media/sequence_flow3.jpg, id=957, 2806.485pt x 2967.085pt>
-File: media/sequence_flow3.jpg Graphic file (type jpg)
-<use media/sequence_flow3.jpg>
-Package pdftex.def Info: media/sequence_flow3.jpg  used on input line 262.
-(pdftex.def)             Requested size: 452.9679pt x 478.86324pt.
- [60
-
- <./media/sequence_flow3.jpg>] [61
-
-]
-<media/sequence_flow4.jpg, id=968, 3368.585pt x 3689.785pt>
-File: media/sequence_flow4.jpg Graphic file (type jpg)
-<use media/sequence_flow4.jpg>
-Package pdftex.def Info: media/sequence_flow4.jpg  used on input line 284.
-(pdftex.def)             Requested size: 452.9679pt x 496.12894pt.
- [62
-
- <./media/sequence_flow4.jpg>] [63
-
-]
-Overfull \hbox (21.89354pt too wide) in paragraph at lines 307--308
+ <./media/ERD Part 2.jpg>]
+Overfull \hbox (21.89354pt too wide) in paragraph at lines 321--322
 \T1/cmr/m/n/12 plex, re-flect-ing the multi-stage na-ture of the eight-stage pi
 peline. The \T1/cmtt/m/n/12 infra_investigations
  []
 
 
-Overfull \hbox (39.96674pt too wide) in paragraph at lines 307--308
+Overfull \hbox (39.96674pt too wide) in paragraph at lines 321--322
 \T1/cmr/m/n/12 rics, risk score, and a canon-i-cal JSONB re-sults blob. Five pr
 o-jec-tion ta-bles --- \T1/cmtt/m/n/12 infra_indicators\T1/cmr/m/n/12 ,
  []
 
 
-Overfull \hbox (24.6566pt too wide) in paragraph at lines 307--308
+Overfull \hbox (24.6566pt too wide) in paragraph at lines 321--322
 \T1/cmr/m/n/12 ma-li-cious-ness flags, and source at-tri-bu-tion. The \T1/cmtt/
 m/n/12 infra_graph_nodes \T1/cmr/m/n/12 and \T1/cmtt/m/n/12 infra_graph_edges
  []
 
-[64]
-Overfull \hbox (0.87537pt too wide) in paragraph at lines 309--310
+[65
+
+]
+Overfull \hbox (0.87537pt too wide) in paragraph at lines 323--324
 []\T1/cmr/m/n/12 The stan-dalone scan-ning di-men-sion en-com-passes three en-t
 i-ties: \T1/cmtt/m/n/12 scans\T1/cmr/m/n/12 , \T1/cmtt/m/n/12 scan_reports\T1/c
 mr/m/n/12 ,
  []
 
-<media/class_diagram_detailed.jpg, id=984, 3417.76875pt x 2922.92pt>
+<media/class_diagram_detailed.jpg, id=997, 3417.76875pt x 2922.92pt>
 File: media/class_diagram_detailed.jpg Graphic file (type jpg)
 <use media/class_diagram_detailed.jpg>
 Package pdftex.def Info: media/class_diagram_detailed.jpg  used on input line 3
-22.
+36.
 (pdftex.def)             Requested size: 452.9679pt x 387.35196pt.
-[65] [66 <./media/class_diagram_detailed.jpg>]
-Overfull \hbox (78.53943pt too wide) in paragraph at lines 333--334
+[66] [67 <./media/class_diagram_detailed.jpg>]
+Overfull \hbox (78.53943pt too wide) in paragraph at lines 347--348
 \T1/cmr/m/n/12 from work-flow or-ches-tra-tion to data pro-jec-tion and re-port
  gen-er-a-tion. The \T1/cmtt/m/n/12 InvestigationOrchestrator
  []
 
-[67] [68] [69]) (chapters/chapter5.tex [70]
+[68] [69] [70]) (chapters/chapter5.tex [71]
 Chapter 5.
-[71
+[72
 
-] [72] [73] [74] [75]) (backmatter/references.tex [76] [77
+] [73] [74] [75] [76]) (backmatter/references.tex [77] [78
 
 ]
 Underfull \hbox (badness 2261) in paragraph at lines 69--70
@@ -1582,19 +1597,19 @@ Underfull \hbox (badness 2173) in paragraph at lines 72--73
 ail-able: [][][]$\T1/cmtt/m/n/12 https : / / www .
  []
 
-[78]) [79] (main.aux)
+[79]) [80] (main.aux)
  ***********
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-01-04>
  ***********
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: BA185B4A693135CCEF49139018ECAF5C;18956.
+(rerunfilecheck)             Checksum: 61B452C5639C9E61C13FD8C68117982C;18956.
  ) 
 Here is how much of TeX's memory you used:
- 16590 strings out of 474486
- 260455 string characters out of 5757812
+ 16758 strings out of 474486
+ 263118 string characters out of 5757812
  1989542 words of memory out of 5000000
- 38304 multiletter control sequences out of 15000+600000
+ 38462 multiletter control sequences out of 15000+600000
  577057 words of font info for 80 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  80i,12n,82p,3116b,622s stack positions out of 10000i,1000n,20000p,200000b,200000s
@@ -1618,9 +1633,9 @@ sion\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx2074.pk><D:/Ap
 ps/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><D:/Apps/MiKTeX/fonts/type1
 /public/amsfonts/cm/cmsy8.pfb><D:/Apps/MiKTeX/fonts/type1/public/amsfonts/symbo
 ls/msam10.pfb>
-Output written on main.pdf (89 pages, 13940231 bytes).
+Output written on main.pdf (90 pages, 9716237 bytes).
 PDF statistics:
- 1911 PDF objects out of 2073 (max. 8388607)
- 296 named destinations out of 1000 (max. 500000)
- 876 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 1924 PDF objects out of 2073 (max. 8388607)
+ 300 named destinations out of 1000 (max. 500000)
+ 891 words of extra memory for PDF output out of 10000 (max. 10000000)
 
