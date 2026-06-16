@@ -1,149 +1,262 @@
-﻿\chapter{Conclusion and Future Work}
-\label{ch:conclusion}
+% ============= CHAPTER 5: SYSTEM IMPLEMENTATION =============
+\chapter{System Implementation}
+\label{ch:chapter5}
 
-\section{Summary}
+\section{Introduction and System Architecture Overview}
+The implementation phase represents the practical realization of the proposed architecture and design requirements of the Threat Intelligence-Based Security Application (TIBSA). The primary objective of this phase was to transform the conceptual framework into a fully operational cybersecurity platform capable of integrating threat modeling, website penetration testing, malware investigation, and threat intelligence enrichment within a unified environment. Unlike conventional security tools that operate independently, TIBSA combines multiple analytical capabilities into a centralized platform designed to support continuous monitoring and intelligent security assessment.
 
-This project has presented the design and architecture of the TIBSA (Threat-Intelligence Based Security Assessment) platform, a unified framework that bridges predictive threat analysis with practical security validation. By integrating threat modeling, penetration testing, and threat intelligence into a cohesive eight-layer architecture, the platform addresses the critical gap identified in current security practices where these essential activities are typically performed in isolation.
+The overall system follows a decoupled multi-tier architecture to ensure scalability, maintainability, and flexibility. The architecture consists of four major layers: the presentation layer, the application layer, the persistence layer, and the analysis layer. Each layer performs specific responsibilities while maintaining interoperability through well-defined interfaces.
 
-The development of this platform followed a systematic approach, beginning with a comprehensive literature review that examined existing threat modeling methodologies, automated security assessment tools, and the integration challenges faced by modern organizations. This analysis revealed significant research gaps, including the lack of unified platforms that combine predictive threat modeling with practical penetration testing, limited automation in threat-to-test mapping, and insufficient integration of real-time threat intelligence feeds.
+The presentation layer is implemented using Next.js 14 and React 19, providing an interactive dashboard-oriented interface that centralizes access to all system functionalities. The application layer is developed using FastAPI and acts as the main orchestration component responsible for coordinating analytical workflows and integrating external services. Data storage and authentication are handled by Supabase PostgreSQL and Supabase Authentication services. The analysis layer contains specialized engines responsible for threat modeling, vulnerability assessment, malware analysis, and threat intelligence correlation.
 
-The requirements analysis phase defined clear functional and non-functional requirements based on stakeholder needs, establishing the foundation for a system that supports security analysts, penetration testers, system administrators, and compliance stakeholders. The Scrum-based development methodology ensured iterative progress and continuous validation against project objectives.
+To improve performance and responsiveness, asynchronous execution mechanisms based on Python asyncio are employed throughout the platform. This design enables multiple operations to execute concurrently, thereby reducing processing time and improving scalability.
 
-The system design phase produced a comprehensive eight-layer architecture that addresses the identified requirements:
+\section{Backend Implementation}
+The backend layer represents the central processing component of the platform. It is implemented using Python 3.10 and the FastAPI framework due to their high performance, asynchronous capabilities, and support for automatic API documentation generation.
 
-\begin{itemize}
-    \item \textbf{Layer 1 (User Layer)} and \textbf{Layer 2 (Edge Layer)}: Provide secure access through CDN, WAF, DDoS protection, and bot detection via Cloudflare integration.
-    \item \textbf{Layer 3 (Frontend Layer)}: Delivers a responsive interface using Next.js 15, Tailwind CSS, and shadcn/ui with robust client-side security controls.
-    \item \textbf{Layer 4 (API Engine)}: Centralizes request handling through KrakenD with Authentik providing comprehensive authentication, MFA, and RBAC.
-    \item \textbf{Layer 5 (Backend Services)}: Implements core business logic including scan coordination, threat intelligence via MISP, ML-powered detection using Ollama, and dynamic malware analysis through CAPE Sandbox.
-    \item \textbf{Layer 6 (Data Storage)}: Uses Neon Serverless Postgres, Upstash Redis, and Cloudflare R2 for structured data, caching, and object storage.
-    \item \textbf{Layer 7 (Monitoring Layer)}: Provides observability through Wazuh SIEM, Grafana, Prometheus, and Loki.
-    \item \textbf{Layer 8 (TIBSA Core)}: Automates the complete threat modeling workflow including DFD generation, STRIDE analysis, MITRE ATT\&CK mapping, and risk scoring.
-\end{itemize}
+The implementation adopts a service-oriented architecture that separates API controllers from business logic components. This design improves maintainability and simplifies future system extensions. Incoming requests are handled by routers, while computational operations are delegated to specialized services.
 
-The design documentation includes detailed UML diagrams covering use cases, sequence diagrams, class diagrams, and entity-relationship diagrams that provide a complete view of the system's structure and behavior.
+The routers layer contains endpoints responsible for authentication, user management, website scanning, malware investigation, administration, and threat modeling. Each router communicates with corresponding service modules that encapsulate the business logic required to perform analytical tasks.
 
-\section{Achievements and Contributions}
+The services layer contains the primary analytical engines of the platform. These components include penetration testing modules, malware analysis services, machine learning engines, orchestration mechanisms, and threat intelligence processors. Such separation reduces coupling between components and enhances modularity.
 
-This project makes several significant contributions to the field of cybersecurity assessment:
+Input validation and response serialization are implemented using Pydantic schemas. These schemas provide strict type checking and ensure consistency across API boundaries. Dependency injection mechanisms provided by FastAPI simplify database access and user context management while improving code reusability.
 
-\subsection{Unified Security Assessment Framework}
+Authentication is performed using JSON Web Tokens issued by Supabase Authentication. Protected endpoints verify token validity before granting access to resources. Role-based access control mechanisms are also employed to restrict administrative operations.
 
-The primary contribution is the design of a comprehensive framework that integrates traditionally isolated security practices. Unlike existing solutions that focus on individual aspects of security assessment, TIBSA provides:
+To maximize performance, asynchronous execution is extensively utilized throughout the backend infrastructure. Long-running operations such as malware analysis and penetration testing are executed concurrently whenever possible. On Windows environments, the application explicitly configures the Windows Proactor Event Loop Policy to ensure compatibility between asynchronous subprocesses and browser automation frameworks.
 
-\begin{itemize}
-    \item Seamless integration between threat modeling outputs and penetration testing inputs
-    \item Automated mapping of identified threats to corresponding test cases and attack vectors
-    \item Real-time incorporation of threat intelligence to maintain current threat awareness
-    \item Continuous feedback loops where testing results refine and update threat models
-\end{itemize}
+The backend exposes RESTful APIs that provide functionalities related to user authentication, website assessment, malware investigation, threat modeling, and dashboard statistics. Automatic OpenAPI documentation generated by FastAPI facilitates testing and simplifies future integration efforts.
 
-\subsection{Eight-Layer Cloud-Native Architecture}
+\section{Threat Modeling Engine Implementation}
+The threat modeling subsystem enables proactive identification of security weaknesses during the system design phase. The implementation follows a deterministic rule-based approach inspired by the STRIDE methodology. Instead of relying solely on dynamic analysis, the engine evaluates architectural characteristics supplied by users to identify potential attack vectors and security concerns.
 
-The architectural design demonstrates how modern cloud-native technologies can be leveraged to build scalable, secure, and maintainable security assessment platforms. Key architectural contributions include:
+The input parameters include deployment environments, communication protocols, databases, authentication mechanisms, and application types. These architectural attributes are evaluated against predefined security rules to determine possible threats associated with the system design.
 
-\begin{itemize}
-    \item Modular layered design enabling independent scaling of components
-    \item Integration of 18 different security tools and services into a cohesive platform
-    \item Serverless components reducing operational overhead and costs
-    \item Comprehensive monitoring and observability through integrated SIEM capabilities
-\end{itemize}
+The engine categorizes findings according to the six STRIDE categories: Spoofing, Tampering, Repudiation, Information Disclosure, Denial of Service, and Elevation of Privilege. Whenever specific conditions are satisfied, corresponding threats are generated and included in the assessment results.
 
-\subsection{Automated Threat Modeling Workflow}
+For example, the use of certain databases may introduce injection-related risks, whereas inadequate authentication mechanisms may increase the likelihood of privilege escalation attacks. Such rules are implemented using deterministic conditional logic to ensure consistent outputs.
 
-The TIBSA Core layer introduces automation capabilities that significantly reduce manual effort:
+To quantify the overall architecture risk, severity scores are assigned to each finding. Critical threats contribute twenty-five points, high-severity findings contribute fifteen points, medium-severity findings contribute eight points, and low-severity findings contribute three points. The accumulated score is normalized to generate the final risk score.
 
-\begin{itemize}
-    \item Automatic generation of Data Flow Diagrams from system architecture specifications
-    \item Automated STRIDE threat identification based on system components
-    \item MITRE ATT\&CK framework mapping for standardized threat classification
-    \item Risk scoring algorithms that prioritize threats based on likelihood and impact
-\end{itemize}
+In addition to identifying threats, the subsystem generates summaries and mitigation recommendations to improve users' understanding of architectural weaknesses. This functionality enables organizations to address vulnerabilities during early development stages and reduce security risks before deployment.
 
-\subsection{Multi-Engine Security Scanning}
+\subsection{STRIDE-Based Analysis}
+The implemented rule engine maps architectural characteristics to STRIDE categories and evaluates security controls according to predefined conditions. This deterministic approach ensures reproducible assessments and minimizes inconsistencies in generated findings.
 
-The platform design supports comprehensive security analysis through:
+\subsection{Risk Scoring Mechanism}
+Severity levels are translated into numerical values that contribute to the overall architecture risk score. This quantitative approach enables users to prioritize mitigation efforts according to the significance of identified threats.
 
-\begin{itemize}
-    \item Integration with multiple antivirus engines for file and URL analysis
-    \item Static and dynamic malware analysis capabilities
-    \item Machine learning-based threat detection for advanced threat identification
-    \item Threat intelligence correlation for contextual enrichment of scan results
-\end{itemize}
+\section{Website Penetration Testing Engine}
+The website penetration testing subsystem is designed as an asynchronous orchestration framework intended to automate vulnerability assessment processes. The entire workflow is managed by the Pentest Orchestrator, which coordinates multiple phases and ensures efficient execution of security modules.
 
-\section{Challenges and Lessons Learned}
+The assessment process begins with an authentication phase that attempts to establish authenticated sessions and capture cookies whenever credentials are available. Authenticated scanning enables the platform to evaluate protected areas of web applications and increases assessment coverage.
 
-Throughout the design and documentation process, several challenges were encountered and valuable lessons learned:
+After authentication, an endpoint discovery phase is initiated. The crawler traverses pages and extracts links, forms, and accessible resources to identify the attack surface exposed by the target application. Additional resources such as JavaScript files are also collected for further analysis.
 
-\subsection{Complexity of Integration}
+Technology fingerprinting mechanisms analyze HTTP headers and page contents to determine the underlying technology stack. Information regarding frameworks and web technologies assists the system in performing targeted vulnerability assessments.
 
-Integrating 18 different tools and services required careful consideration of API compatibility, data format consistency, and error handling strategies. The solution involved designing standardized interfaces and implementing robust adapter patterns to abstract vendor-specific implementations.
+The exploitation phase executes multiple scanners concurrently using Python asyncio. This parallel execution significantly reduces scanning time and improves overall efficiency. Each scanner focuses on a particular category of vulnerabilities and produces structured outputs that are normalized during post-processing.
 
-\subsection{Balancing Automation and Control}
+The final stage removes duplicate findings and filters unnecessary alerts to improve report readability and reduce noise.
 
-Finding the right balance between automated threat modeling and manual expert oversight proved challenging. The design addresses this by providing automated suggestions while maintaining human-in-the-loop validation for critical security decisions.
+\subsection{Cross-Site Scripting Detection}
+The XSS scanner analyzes user-controllable inputs and injects predefined payloads to determine whether malicious scripts can be reflected or executed. In safe mode, the scanner performs reflection analysis, while aggressive mode utilizes Playwright to verify JavaScript execution within a browser environment.
 
-\subsection{Scalability Considerations}
+\subsection{SQL Injection Detection}
+The SQL injection scanner evaluates parameters for potential database manipulation vulnerabilities. Responses generated by injected payloads are analyzed to identify abnormal behavior and database-related errors that indicate possible injection weaknesses.
 
-Designing for both small-scale and enterprise deployments required flexible architecture decisions. The use of serverless components and containerized services enables horizontal scaling while maintaining cost efficiency for smaller deployments.
+\subsection{Broken Access Control Detection}
+Broken access control testing attempts to manipulate identifiers and resources to determine whether unauthorized access is possible. Privilege violations and insufficient authorization mechanisms are reported whenever access restrictions are bypassed.
 
-\section{Limitations}
+\subsection{Endpoint Discovery}
+Following authentication, the platform initiates an endpoint discovery phase to identify accessible resources and expand the attack surface under investigation. The crawler traverses application pages and extracts links, forms, and JavaScript resources that may expose hidden functionalities or vulnerable parameters.
 
-While the TIBSA platform design addresses many identified gaps, certain limitations exist:
+By automatically enumerating reachable endpoints, the platform increases assessment coverage and ensures that subsequent scanning modules operate on a comprehensive and representative set of targets.
 
-\begin{itemize}
-    \item The current design focuses on web application security; extending to IoT, mobile, and embedded systems would require additional components.
-    \item Integration with proprietary enterprise security tools may require custom adapter development.
-    \item The threat modeling automation relies on accurate system architecture specifications; incomplete or outdated inputs may affect result quality.
-    \item Performance under extremely high concurrent scanning loads requires additional optimization and infrastructure investment.
-\end{itemize}
+\subsection{Technology Fingerprinting}
+Technology fingerprinting mechanisms analyze HTTP headers and page content in order to identify the underlying technologies used by the target application. This includes frameworks, libraries, and server-side components that define the application's technology stack.
 
-\section{Future Work}
+The extracted metadata is utilized to tailor scanning strategies according to the detected technologies, thereby improving detection accuracy and enhancing the relevance of generated findings.
 
-Several areas present opportunities for future enhancement and research:
+\subsection{Finding Normalization}
+After vulnerability assessment is completed, the generated findings are processed through a normalization stage responsible for removing duplicates and standardizing severity levels. This procedure improves readability and facilitates subsequent risk evaluation processes.
 
-\subsection{Implementation and Deployment}
+\section{AI-Powered Malware Analysis Pipeline}
+The malware analysis subsystem represents one of the primary analytical components of the platform. Its objective is to investigate suspicious files through multiple complementary techniques while maintaining isolation from the host operating system. The implementation combines static analysis, signature-based detection, and capability extraction techniques to provide a comprehensive understanding of file behavior. These complementary approaches enable the system to investigate suspicious files without executing them directly and provide valuable insights regarding their internal structure and potential malicious capabilities.
 
-\begin{itemize}
-    \item Complete implementation of all eight layers as a fully functional platform
-    \item Development of comprehensive test suites for validation
-    \item Creation of deployment automation scripts for cloud environments
-    \item Performance benchmarking and optimization
-\end{itemize}
+Uploaded files are received through FastAPI endpoints and processed within isolated Docker environments. Temporary volumes are dynamically created to securely transfer files to analysis containers while preventing direct interaction with the host system. This approach minimizes the risks associated with handling potentially malicious samples and improves operational safety.
 
-\subsection{Advanced AI/ML Integration}
+To improve detection accuracy, multiple analysis engines are executed concurrently. Each engine performs an independent assessment and generates structured outputs that are subsequently aggregated into a unified representation. Resource consumption is controlled through concurrency limits to maintain system stability and prevent excessive memory utilization.
 
-\begin{itemize}
-    \item Development of custom machine learning models for threat prediction based on organizational data
-    \item Natural language processing for automated threat report generation
-    \item Anomaly detection algorithms for identifying novel attack patterns
-    \item AI-assisted penetration testing recommendations based on threat model analysis
-\end{itemize}
+\subsection{Static Analysis}
+Static analysis is performed without executing the binary. The PEFile library is utilized to extract metadata from Portable Executable files, including headers, imported libraries, sections, and timestamps. These characteristics provide valuable information regarding suspicious behavior and help identify malicious indicators.
 
-\subsection{Extended Platform Capabilities}
+The analysis process enables investigators to understand the internal structure of executable files while avoiding the risks associated with dynamic execution. Information obtained during this stage contributes to the overall risk evaluation process.
 
-\begin{itemize}
-    \item Mobile application development for real-time security monitoring and alerts
-    \item Browser extension for URL and download safety checking
-    \item Integration with additional threat intelligence feeds and sources
-    \item Support for compliance frameworks beyond the current scope (ISO 27001, SOC 2, HIPAA)
-\end{itemize}
+\subsection{Multi-Engine Antivirus Analysis}
+The platform employs multiple antivirus engines to improve detection reliability and increase confidence in the generated results. Each engine independently evaluates uploaded samples and returns its findings in a structured format. By combining the outputs of multiple scanners, the platform reduces dependency on a single detection mechanism and enhances the robustness of malware investigations.
 
-\subsection{Research Extensions}
+To improve performance, analysis engines are executed concurrently. However, unrestricted execution of multiple containers may lead to excessive resource consumption. Therefore, asynchronous semaphore mechanisms are utilized to limit the maximum number of simultaneously running analysis containers. This approach prevents memory exhaustion, improves scalability, and ensures stable operation under heavy workloads.
 
-\begin{itemize}
-    \item Empirical studies comparing threat detection accuracy with existing solutions
-    \item User studies evaluating the effectiveness of the integrated workflow
-    \item Investigation of adversarial machine learning attacks against the threat detection components
-    \item Development of industry-specific threat libraries and test case templates
-\end{itemize}
+Furthermore, analysis containers operate within isolated environments with restricted permissions and disabled network connectivity. Files are mounted in read-only mode to prevent modifications and protect the host operating system from compromise. Such isolation mechanisms provide an additional layer of security and minimize the risks associated with handling potentially malicious samples.
 
-\section{Final Remarks}
+\subsection{Result Aggregation}
+The outputs generated by antivirus engines, YARA analysis, and CAPA are collected and normalized before being forwarded to higher-level components. Aggregation mechanisms provide a unified representation of findings and simplify subsequent processing stages.
 
-The TIBSA platform represents a significant step toward addressing the fragmentation in organizational security practices. By providing a unified framework that connects threat modeling, penetration testing, and threat intelligence, the platform empowers security teams to work more efficiently, prioritize real risks, and continuously strengthen their defenses.
+The resulting information serves as the basis for threat intelligence enrichment and overall risk assessment, enabling investigators to obtain a comprehensive view of malicious activities associated with analyzed samples.
 
-The eight-layer architecture demonstrates that modern cloud-native technologies and open-source security tools can be combined to create enterprise-grade security assessment capabilities. The modular design ensures that organizations can adopt the platform incrementally, starting with components that address their most pressing needs.
+Although artificial intelligence does not constitute a core analytical component, it is employed as a supporting mechanism to improve the readability and interpretation of investigation results. Following the completion of malware analysis, outputs generated by antivirus engines, YARA rules, and CAPA capability extraction are aggregated and transformed into a structured context.
 
-As cyber threats continue to evolve in sophistication and frequency, the need for integrated, intelligence-driven security assessment frameworks will only grow. The TIBSA platform design provides a foundation for building such capabilities, with clear pathways for future enhancement and research.
+The aggregated findings are supplied to Google Gemini 2.5 Flash through carefully designed prompts that enforce predefined output structures. To ensure consistency and reliability, responses are constrained using JSON schemas and subsequently validated before being presented to users.
 
-The knowledge and methodologies developed through this project contribute not only to the academic understanding of integrated security assessment but also provide practical guidance for organizations seeking to improve their security posture through unified threat management approaches.
+This approach enables the platform to generate executive summaries and investigation reports that assist analysts in understanding complex technical findings. Since artificial intelligence is utilized solely for interpretation purposes, deterministic analytical mechanisms remain responsible for the actual detection and assessment processes.
+
+\section{Machine Learning Implementation}
+Machine learning techniques are incorporated into the platform to support phishing URL detection. The implementation relies on the Random Forest algorithm due to its robustness and effectiveness in classification problems.
+
+The current implementation focuses primarily on URL analysis. Feature extraction mechanisms generate numerical representations that capture lexical characteristics commonly associated with phishing attacks. These characteristics are subsequently utilized by the classifier to estimate the probability of malicious behavior.
+
+\subsection{Feature Extraction}
+Before classification, URLs are processed through a dedicated feature extraction module responsible for generating numerical attributes suitable for machine learning models. Extracted features include entropy values, URL length, and the distribution of characters and symbols.
+
+These features capture structural properties that distinguish legitimate URLs from malicious ones. By transforming URLs into numerical representations, the platform enables efficient classification and improves detection performance.
+
+\subsection{Prediction Process}
+Extracted features are normalized using a StandardScaler model before being supplied to the Random Forest classifier. The model produces probability values representing the likelihood that a URL is malicious.
+
+The generated confidence values contribute to the overall risk assessment process and provide additional evidence during security investigations. Machine learning predictions complement traditional analytical mechanisms and enhance detection capabilities.
+
+\section{Threat Intelligence Implementation}
+The threat intelligence subsystem enriches analytical findings using external Open-Source Intelligence (OSINT) providers. Its objective is to provide additional context regarding suspicious indicators and improve the accuracy of risk assessments.
+
+The implementation integrates VirusTotal and AlienVault OTX services. Asynchronous HTTP requests are issued to both providers to minimize latency and improve efficiency. Information obtained from these sources includes reputation scores, malicious detections, and threat intelligence pulses associated with investigated indicators.
+
+Before intelligence enrichment begins, indicators are extracted and normalized to ensure consistent formatting. This process prevents duplicate requests and simplifies subsequent correlation procedures.
+
+\subsection{Indicator Extraction}
+Indicators of compromise are automatically extracted from analytical findings generated by various modules. Supported indicators include IP addresses, URLs, domains, and cryptographic hashes.
+
+These indicators are normalized and prepared for external intelligence queries. Standardization mechanisms ensure consistency and facilitate efficient correlation across multiple intelligence providers.
+
+\subsection{Threat Correlation}
+Threat correlation mechanisms aggregate information collected from multiple external intelligence services to determine the confidence level associated with suspicious indicators. The correlation engine combines data from different intelligence providers in order to reduce false positives and improve the overall reliability of threat assessment.
+
+Within the implemented correlation framework, indicators are evaluated based on both detection consensus and contextual intelligence. An indicator is classified as a confirmed threat when the number of malicious detections reported by VirusTotal exceeds a predefined threshold, and at least one supporting threat intelligence pulse is available from AlienVault OTX. This multi-source verification strategy ensures that isolated or weak signals are not overvalued, while indicators corroborated across multiple sources are given higher confidence scores.
+
+Indicators associated with multiple detections and enriched with existing threat intelligence records are considered more reliable than standalone observations. This additional contextual correlation improves analytical accuracy, enhances situational awareness, and assists security analysts in prioritizing threats and making more informed decisions within the system.
+
+\subsection{Risk Evaluation}
+The enriched intelligence information contributes to the overall risk assessment process. Confidence scores generated during correlation are utilized to distinguish between isolated anomalies and confirmed threats.
+
+By combining information from multiple intelligence sources, the platform enhances contextual awareness and provides more reliable security insights compared with isolated analysis mechanisms.
+
+\section{Security Architecture}
+Security mechanisms are integrated throughout the platform following a defense-in-depth strategy to ensure confidentiality, integrity, and availability. Authentication is handled through Supabase Authentication using JSON Web Tokens (JWT), enabling secure access to protected resources. Incoming requests are validated before processing to ensure that only authorized users can interact with sensitive functionalities.
+
+Role-based access control mechanisms are implemented to restrict privileged operations and separate administrative functions from regular user activities. User permissions are verified before granting access to protected endpoints, thereby reducing the possibility of unauthorized actions.
+
+Security middleware components automatically inject several HTTP security headers to mitigate common web attacks. These headers include Content Security Policy (CSP), HTTP Strict Transport Security (HSTS), and X-Frame-Options. Such mechanisms strengthen browser-side security and reduce exposure to clickjacking and content injection attacks.
+
+Request rate limiting mechanisms are employed to protect backend resources from abuse and denial-of-service attempts. By regulating incoming traffic, the platform prevents excessive resource consumption and improves service availability.
+
+Input validation is enforced using Pydantic schemas. Strict validation procedures ensure data consistency and minimize the risks associated with malformed requests and unexpected inputs.
+
+To safely investigate suspicious files, malware analysis operations are executed inside isolated Docker containers configured with restricted privileges and disabled network connectivity. This isolation strategy prevents malicious samples from affecting the host environment and provides an additional layer of protection.
+
+\subsection{Authentication and Authorization}
+Authentication relies on JWT tokens issued by Supabase services. Protected endpoints validate tokens before processing requests, while role-based access control mechanisms ensure that privileged operations remain accessible only to authorized users.
+
+\subsection{Security Headers}
+Security middleware injects multiple protective headers to strengthen web security. These mechanisms provide protection against clickjacking attacks, malicious content injection, and insecure communications.
+
+\subsection{Request Rate Limiting}
+Rate limiting mechanisms regulate incoming traffic and protect backend services from excessive requests. This approach enhances system availability and minimizes the impact of automated attacks.
+
+\subsection{Container Isolation}
+Malware analysis processes are executed within isolated Docker environments. Network connectivity is disabled and file systems are mounted in read-only mode to prevent malicious samples from interacting with external resources or modifying host files.
+
+\section{Database Implementation}
+Supabase PostgreSQL serves as the primary persistence layer of the platform. The database is responsible for storing user information, investigation records, analytical findings, and threat intelligence results generated by various subsystems.
+
+The database schema is designed to support flexible storage requirements while maintaining efficient retrieval capabilities. Several entities are interconnected to preserve relationships among users, investigations, and analysis results.
+
+The Users table stores account information, authentication metadata, and user roles. Investigation records maintain information associated with website assessments and malware analysis operations. Additional records preserve threat intelligence findings and historical scan results for future reference.
+
+To accommodate dynamic cybersecurity information, PostgreSQL JSONB fields are extensively utilized. This approach enables the storage of semi-structured outputs generated by scanners without requiring frequent schema modifications. Consequently, the database remains flexible while supporting continuously evolving analytical requirements.
+
+Indexing mechanisms are employed to improve query performance and accelerate access to historical records. Efficient database operations contribute to dashboard responsiveness and enhance the overall user experience.
+
+\subsection{Data Persistence}
+Analytical findings generated by different modules are stored to maintain historical information and facilitate future investigations. Persisted records enable users to review previous assessments and monitor security trends over time.
+
+\subsection{JSONB Storage}
+Semi-structured scanner outputs are stored using JSONB columns. This design provides flexibility and simplifies the integration of additional analytical modules without extensive database restructuring.
+
+\subsection{Relationship Management}
+Relationships between users, investigations, and analysis results enable efficient retrieval of historical information and support dashboard visualization requirements.
+
+\section{Frontend Implementation}
+The frontend layer is implemented using Next.js 14 and React 19. The application follows a component-based architecture that promotes modularity, maintainability, and reusability while providing a responsive user interface.
+
+The dashboard-oriented design centralizes access to all platform functionalities, allowing users to perform malware investigations, website assessments, threat modeling operations, and threat intelligence analysis through a unified environment.
+
+Authentication states are managed globally using the React Context API. User sessions are synchronized with backend services to maintain secure access throughout the application lifecycle.
+
+Communication between frontend components and backend services is performed through authenticated HTTP requests carrying bearer tokens. Responses received from the backend are processed and displayed through interactive user interface components.
+
+Animations and dynamic rendering mechanisms enhance usability and improve the overall user experience. Long-running analytical operations are continuously monitored, allowing users to receive updates as soon as results become available.
+
+\subsection{Component-Based Architecture}
+The frontend consists of reusable components responsible for rendering dashboards, forms, visualizations, and analytical outputs. This design improves maintainability and simplifies future enhancements.
+
+\subsection{State Management}
+Global session information is managed through the React Context API. This approach enables efficient sharing of authentication states across different pages and components.
+
+\subsection{API Communication}
+Frontend services communicate with FastAPI endpoints through authenticated requests. The integration layer ensures secure and reliable exchange of information between system components.
+
+\subsection{Visualization Components}
+Visualization elements display risk scores, vulnerabilities, and investigation results in a format that facilitates rapid interpretation and supports decision-making.
+
+\section{Deployment Environment}
+The deployment architecture separates frontend, backend, database, and analysis components to improve maintainability and scalability. Such separation allows individual subsystems to evolve independently without affecting the overall functionality of the platform.
+
+The frontend application operates independently and communicates with backend APIs through secure channels. The backend hosts analytical engines and coordinates interactions among system components. Supabase provides managed database infrastructure and authentication services.
+
+Docker containers are utilized to isolate malware analysis workloads and provide secure execution environments. Environment variables are employed to manage API credentials and sensitive configuration parameters while preventing exposure of confidential information.
+
+This modular deployment strategy enables independent scaling and simplifies maintenance procedures. Furthermore, containerized environments improve portability and facilitate deployment across different operating systems.
+
+\subsection{Backend Environment}
+The backend is implemented using Python 3.10 and executed through FastAPI and Uvicorn. Asynchronous mechanisms enable efficient processing of computationally intensive tasks.
+
+\subsection{Frontend Environment}
+The frontend layer is developed using Next.js and React and operates independently from backend services. This separation improves maintainability and supports future scalability.
+
+\subsection{Containerized Analysis Environment}
+Docker containers provide isolated environments for malware analysis and enhance operational safety. Isolation mechanisms minimize risks associated with handling malicious samples.
+
+\section{Challenges Encountered During Development}
+Several technical challenges were encountered during the implementation process.
+
+One major challenge involved safely handling potentially malicious files. Executing suspicious binaries directly on the host system represented a considerable security risk. This issue was mitigated through Docker-based isolation mechanisms and temporary volume management; however, additional complexity emerged when dealing with systems protected by host-based antivirus solutions. In such environments, uploaded samples were often quarantined or modified before analysis could begin.
+
+To overcome this limitation, an intermediate architecture based on ephemeral Docker volumes and helper containers was introduced. This mechanism ensures that files are transferred into isolated analysis environments without being directly exposed to the host operating system or its security layers. As a result, the platform maintains operational safety while preserving the integrity and reliability of malware analysis workflows.
+
+Another challenge involved compatibility issues between asynchronous subprocess execution and browser automation frameworks under Windows environments. This was resolved by explicitly configuring the Windows Proactor Event Loop Policy, enabling stable execution of Playwright-based scanning modules.
+
+Outputs generated by antivirus containers occasionally contained additional logs and warning messages that complicated structured parsing. Custom extraction mechanisms were implemented to isolate valid JSON payloads and ensure consistent processing.
+
+External threat intelligence providers also impose rate limitations that can affect response times. To address this, efficient request scheduling and asynchronous execution strategies were adopted to reduce latency and improve overall performance.
+
+Maintaining structured and consistent responses from AI-driven analysis components represented another challenge. This was handled through strict validation rules and enforced JSON formatting constraints to ensure reliable output generation.
+
+Collectively, these solutions enhanced the system's robustness, scalability, and security, while ensuring stable operation across diverse execution environments.
+
+\section{Chapter Summary}
+This chapter presented the implementation details of the proposed Threat Intelligence-Based Security Application (TIBSA). The discussion covered the backend architecture, threat modeling engine, penetration testing framework, malware analysis pipeline, machine learning components, threat intelligence mechanisms, database design, frontend implementation, security architecture, and deployment environment.
+
+The platform adopts a modular service-oriented architecture that combines asynchronous execution, containerized analysis environments, and external intelligence integration to support modern cybersecurity operations. Multiple security mechanisms, including authentication, access control, request validation, and container isolation, were incorporated to ensure secure and reliable operation.
+
+Through the integration of threat modeling, penetration testing, malware investigation, machine learning techniques, and threat intelligence enrichment, the implemented system provides a unified environment for continuous security assessment and intelligent cyber threat analysis.
