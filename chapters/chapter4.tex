@@ -293,22 +293,15 @@ The Active Web Vulnerability Pentesting module, serviced by the Website Scanner 
 
 The STRIDE Threat Modeling Review module, serviced by the Threat Modeling Router and the Threat Modeling Service, accepts a structured description of the target application's technical profile --- including its application type, technology stack, deployed frameworks, authentication mechanisms, and data sensitivity classifications. The service executes the STRIDE analysis pipeline, applying a rule base of over fifty threat rules, suppressing inapplicable threats based on stack context, enriching each threat with CAPEC identifiers and ASVS control mappings, and calculating a residual risk score. The results, including a full threat list, mitigation recommendations, and heatmap visualization data, are persisted to the \texttt{threat\_model\_analyses} table and returned to the frontend for rendering. The architectural design of this flow --- three independent modules sharing a common database client and authentication dependency --- reflects a modular service composition pattern that allows each capability to be tested, maintained, and extended.
 
+\clearpage
 \subsection{Entity Relationship Diagram (ERD)}
 \label{subsec:entity_relationship_diagram_erd}
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=1.0\textwidth,height=0.90\textheight,keepaspectratio]{media/ERD Part 1.jpg}
-\caption{TIBSA Platform --- Entity Relationship Diagram (Part 1)}
-\label{fig:erd_part1}
-\end{figure}
-\clearpage
-
-\begin{figure}[H]
-\centering
-\includegraphics[width=1.0\textwidth,height=0.90\textheight,keepaspectratio]{media/ERD Part 2.jpg}
-\caption{TIBSA Platform --- Entity Relationship Diagram (Part 2)}
-\label{fig:erd_part2}
+\rotatebox{90}{\includegraphics[width=0.85\textheight,height=\textwidth,keepaspectratio]{media/TIBSA_ERD_full.jpg}}
+\caption{TIBSA Platform --- Full Entity Relationship Diagram}
+\label{fig:erd_full}
 \end{figure}
 \clearpage
 
@@ -328,15 +321,17 @@ The administrative and operational dimension of the schema is served by four ent
 
 From a normalization perspective, the schema adheres to third normal form in its relational tables, with JSONB columns used selectively for inherently semi-structured data such as pipeline state metadata, enrichment results, and architectural diagrams. This hybrid approach balances the structural clarity of relational modeling with the flexibility required to accommodate the variable-schema outputs of security analysis engines. The pervasive use of UUID primary keys, cascade delete policies on child entities, and set-null policies on audit and log references reflects a deliberate approach to referential integrity that preserves audit history even when associated user records are deleted.
 
+\clearpage
 \subsection{Class Diagram}
 \label{subsec:class_diagram}
 
-\begin{sidewaysfigure}
+\begin{figure}[H]
 \centering
-\includegraphics[width=1.0\textheight,height=0.9\textwidth,keepaspectratio]{media/class_diagram_detailed.jpg}
-\caption{TIBSA Platform - Detailed Class Diagram}
+\rotatebox{90}{\includegraphics[width=0.85\textheight,height=\textwidth,keepaspectratio]{media/class_diagram_detailed.jpg}}
+\caption{TIBSA Platform --- Detailed Class Diagram}
 \label{fig:class_diagram_detailed}
-\end{sidewaysfigure}
+\end{figure}
+\clearpage
 
 The Class Diagram presented in Figure~\ref{fig:class_diagram_detailed} models the static object-oriented structure of the TIBSA backend application, organized into two principal layers: the Route Controller layer, which handles HTTP request reception and response formation, and the Core Business Services layer, which encapsulates the analytical and orchestration logic of the platform. This two-layer decomposition reflects the layered architecture principle, wherein each layer has a clearly defined responsibility and communicates with adjacent layers through well-defined interfaces.
 
@@ -363,9 +358,7 @@ The relationship between the Class Diagram and the Sequence Diagrams is one of s
 
 From an architectural coherence standpoint, the models collectively reveal a system designed around the principles of separation of concerns, single responsibility, and layered decomposition. The HTTP transport layer --- represented by the router classes in the Class Diagram --- is cleanly separated from the business logic layer --- represented by the service and orchestrator classes. The business logic layer is in turn separated from the data persistence layer --- represented by the database entities in the ERD. This three-layer decomposition is consistently honored across all flows modeled in the sequence diagrams, with no direct coupling between the router layer and the database layer observable in any workflow.
 
-From a maintainability and extensibility perspective, the architectural models suggest several favorable properties. The modular composition of the Infrastructure Orchestrator --- which aggregates seven independent sub-services --- means that individual analytical capabilities such as reputation checking or passive DNS querying can be enhanced, replaced, or disabled without affecting the remaining pipeline stages. The projection architecture that separates JSONB result storage from relational table persistence means that the database query interface can evolve independently of the pipeline execution logic. The consistent router-to-service delegation pattern means that new functional domains can be added to the platform by introducing new router-service pairs without modifying existing components. Together, these properties suggest that the TIBSA platform has been designed not only to fulfill its immediate functional requirements but also to accommodate the evolutionary pressures inherent in an active cybersecurity domain where threat landscapes, external APIs, and analytical methodologies are subject to continuous change.
-
-\section{Summary}
+\section{Conclusion}
 
 This chapter has described the seven-layer architecture of the TIBSA platform, from the user layer at the top to the threat and risk engine at the bottom. Each layer has a clearly defined set of responsibilities and communicates with adjacent layers through controlled, authenticated interfaces. The architecture prioritises security at every tier --- from TLS-encrypted transport and JWT-based authentication, through middleware-enforced rate limiting and input validation, to database-level Row Level Security --- while maintaining a clean separation of concerns that supports independent development, testing, and extension of each component.
 

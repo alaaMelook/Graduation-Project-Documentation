@@ -38,215 +38,215 @@
 \contentsline {section}{\numberline {2.3}Automated and AI-enhanced Threat Modeling}{9}{section.2.3}%
 \contentsline {section}{\numberline {2.4}Integration of Threat Modeling with Penetration Testing}{12}{section.2.4}%
 \contentsline {section}{\numberline {2.5}Comparative Summary and Research Gaps}{16}{section.2.5}%
-\contentsline {subsection}{\numberline {2.5.1}Comparative Features Matrix}{20}{subsection.2.5.1}%
-\contentsline {subsection}{\numberline {2.5.2}Research Gap Summary}{20}{subsection.2.5.2}%
-\contentsline {section}{\numberline {2.6}Currently Available Solutions and Features Matrix}{21}{section.2.6}%
-\contentsline {subsection}{\numberline {2.6.1}Commercial Solutions}{21}{subsection.2.6.1}%
-\contentsline {subsubsection}{Microsoft Threat Modeling Tool}{21}{section*.11}%
-\contentsline {subsubsection}{Cigent Threat Modeling Platform}{21}{section*.12}%
-\contentsline {subsubsection}{ThreatModeler}{21}{section*.13}%
-\contentsline {subsubsection}{IriusRisk}{22}{section*.14}%
-\contentsline {subsection}{\numberline {2.6.2}Open-Source Solutions}{22}{subsection.2.6.2}%
-\contentsline {subsubsection}{OWASP Threat Dragon}{22}{section*.15}%
-\contentsline {subsubsection}{PyTM (Python Threat Modeling)}{22}{section*.16}%
-\contentsline {subsubsection}{Threagile}{22}{section*.17}%
-\contentsline {subsubsection}{OWASP ZAP (Zed Attack Proxy)}{22}{section*.18}%
-\contentsline {subsubsection}{Metasploit Framework}{23}{section*.19}%
-\contentsline {subsection}{\numberline {2.6.3}Gap Analysis}{23}{subsection.2.6.3}%
-\contentsline {section}{\numberline {2.7}Tools Background}{24}{section.2.7}%
-\contentsline {subsection}{\numberline {2.7.1}Threat Modeling Frameworks and Standards}{24}{subsection.2.7.1}%
-\contentsline {subsubsection}{STRIDE Framework}{24}{section*.20}%
-\contentsline {subsubsection}{DREAD Framework}{24}{section*.21}%
-\contentsline {subsubsection}{PASTA (Process for Attack Simulation and Threat Analysis)}{24}{section*.22}%
-\contentsline {subsubsection}{MITRE ATT\&CK Framework}{25}{section*.23}%
-\contentsline {subsubsection}{CAPEC (Common Attack Pattern Enumeration and Classification)}{25}{section*.24}%
-\contentsline {subsection}{\numberline {2.7.2}Penetration Testing Tools}{25}{subsection.2.7.2}%
-\contentsline {subsubsection}{Metasploit Framework}{25}{section*.25}%
-\contentsline {subsubsection}{Nmap (Network Mapper)}{26}{section*.26}%
-\contentsline {subsubsection}{OWASP ZAP (Zed Attack Proxy)}{26}{section*.27}%
-\contentsline {subsubsection}{Burp Suite}{26}{section*.28}%
-\contentsline {subsubsection}{Nikto}{27}{section*.29}%
-\contentsline {subsubsection}{SQLMap}{27}{section*.30}%
-\contentsline {subsubsection}{Hydra}{27}{section*.31}%
-\contentsline {subsection}{\numberline {2.7.3}Vulnerability Assessment Tools}{27}{subsection.2.7.3}%
-\contentsline {subsubsection}{Nessus}{27}{section*.32}%
-\contentsline {subsubsection}{OpenVAS}{28}{section*.33}%
-\contentsline {subsubsection}{Nexpose}{28}{section*.34}%
-\contentsline {subsection}{\numberline {2.7.4}Automation and Integration Frameworks}{28}{subsection.2.7.4}%
-\contentsline {subsubsection}{PTES (Penetration Testing Execution Standard)}{28}{section*.35}%
-\contentsline {subsubsection}{OWASP Testing Guide}{28}{section*.36}%
-\contentsline {subsubsection}{Jenkins and CI/CD Integration}{29}{section*.37}%
-\contentsline {subsection}{\numberline {2.7.5}Artificial Intelligence and Machine Learning Tools}{29}{subsection.2.7.5}%
-\contentsline {subsubsection}{TensorFlow and PyTorch}{29}{section*.38}%
-\contentsline {subsubsection}{Scikit-learn}{29}{section*.39}%
-\contentsline {subsubsection}{Natural Language Processing (NLP) Tools}{29}{section*.40}%
-\contentsline {subsection}{\numberline {2.7.6}Threat Intelligence Platforms}{30}{subsection.2.7.6}%
-\contentsline {subsubsection}{MISP (Malware Information Sharing Platform)}{30}{section*.41}%
-\contentsline {subsubsection}{STIX/TAXII}{30}{section*.42}%
-\contentsline {subsubsection}{AlienVault OTX (Open Threat Exchange)}{30}{section*.43}%
-\contentsline {subsection}{\numberline {2.7.7}Containerization and Virtualization Technologies}{30}{subsection.2.7.7}%
-\contentsline {subsubsection}{Docker}{30}{section*.44}%
-\contentsline {subsubsection}{Kubernetes}{31}{section*.45}%
-\contentsline {subsubsection}{VirtualBox and VMware}{31}{section*.46}%
-\contentsline {section}{\numberline {2.8}Summary}{31}{section.2.8}%
-\contentsline {chapter}{\numberline {3}Requirements Analysis}{32}{chapter.3}%
-\contentsline {section}{\numberline {3.1}Chapter Overview}{32}{section.3.1}%
-\contentsline {section}{\numberline {3.2}Business Requirements Identification}{32}{section.3.2}%
-\contentsline {subsection}{\numberline {3.2.1}Software Development Methodology}{33}{subsection.3.2.1}%
-\contentsline {subsection}{\numberline {3.2.2}Justification for Scrum Selection}{34}{subsection.3.2.2}%
-\contentsline {subsection}{\numberline {3.2.3}Scrum-Based Development Plan}{34}{subsection.3.2.3}%
-\contentsline {section}{\numberline {3.3}User Functional Requirements}{34}{section.3.3}%
-\contentsline {subsection}{\numberline {3.3.1}User Roles}{35}{subsection.3.3.1}%
-\contentsline {subsection}{\numberline {3.3.2}User Functional Requirements}{35}{subsection.3.3.2}%
-\contentsline {section}{\numberline {3.4}System Functional and Non-Functional Requirements}{36}{section.3.4}%
-\contentsline {subsection}{\numberline {3.4.1}System Functional Requirements}{36}{subsection.3.4.1}%
-\contentsline {subsection}{\numberline {3.4.2}Non-Functional Requirements}{37}{subsection.3.4.2}%
-\contentsline {section}{\numberline {3.5}System Evaluation and Validation Criteria}{38}{section.3.5}%
-\contentsline {section}{\numberline {3.6}Chapter Summary}{38}{section.3.6}%
-\contentsline {chapter}{\numberline {4}System Design}{39}{chapter.4}%
-\contentsline {section}{\numberline {4.1}Introduction}{39}{section.4.1}%
-\contentsline {subsection}{\numberline {4.1.1}Integrated Services and Core APIs}{40}{subsection.4.1.1}%
-\contentsline {section}{\numberline {4.2}Architectural Overview}{43}{section.4.2}%
-\contentsline {section}{\numberline {4.3}Layer Descriptions}{44}{section.4.3}%
-\contentsline {subsection}{\numberline {4.3.1}Layer 1 --- User Layer}{44}{subsection.4.3.1}%
-\contentsline {subsection}{\numberline {4.3.2}Layer 2 --- Edge Layer}{45}{subsection.4.3.2}%
-\contentsline {subsection}{\numberline {4.3.3}Layer 3 --- Frontend Layer}{45}{subsection.4.3.3}%
-\contentsline {subsection}{\numberline {4.3.4}Layer 4 --- API Gateway and Middleware Layer}{46}{subsection.4.3.4}%
-\contentsline {subsection}{\numberline {4.3.5}Layer 5 --- Backend Services Layer}{47}{subsection.4.3.5}%
-\contentsline {subsection}{\numberline {4.3.6}Layer 6a --- Intelligence and Monitoring Layer}{48}{subsection.4.3.6}%
-\contentsline {subsection}{\numberline {4.3.7}Layer 6b --- Data Layer}{49}{subsection.4.3.7}%
-\contentsline {subsection}{\numberline {4.3.8}Layer 7 --- Threat and Risk Engine}{49}{subsection.4.3.8}%
-\contentsline {section}{\numberline {4.4}System Modeling Diagrams}{51}{section.4.4}%
-\contentsline {subsection}{\numberline {4.4.1}Use Case Diagram}{52}{subsection.4.4.1}%
-\contentsline {subsection}{\numberline {4.4.2}Sequence Diagrams}{54}{subsection.4.4.2}%
-\contentsline {subsubsection}{Flow 1: Standard Security Investigation}{54}{section*.69}%
-\contentsline {subsubsection}{Flow 2: Infrastructure Threat Investigation (Eight-Stage Pipeline)}{56}{section*.71}%
-\contentsline {subsubsection}{Flow 3: AI Malware Static Analysis}{59}{section*.73}%
-\contentsline {subsubsection}{Flow 4: Independent Pentesting and Threat Assessment Modules}{61}{section*.75}%
-\contentsline {subsection}{\numberline {4.4.3}Entity Relationship Diagram (ERD)}{63}{subsection.4.4.3}%
-\contentsline {subsection}{\numberline {4.4.4}Class Diagram}{68}{subsection.4.4.4}%
-\contentsline {subsection}{\numberline {4.4.5}Discussion and Model Validation}{70}{subsection.4.4.5}%
-\contentsline {section}{\numberline {4.5}Summary}{71}{section.4.5}%
-\contentsline {chapter}{\numberline {5}System Implementation}{73}{chapter.5}%
-\contentsline {section}{\numberline {5.1}Introduction and System Architecture Overview}{73}{section.5.1}%
-\contentsline {section}{\numberline {5.2}Backend Implementation}{74}{section.5.2}%
-\contentsline {section}{\numberline {5.3}Threat Modeling Engine Implementation}{74}{section.5.3}%
-\contentsline {subsection}{\numberline {5.3.1}STRIDE-Based Analysis}{75}{subsection.5.3.1}%
-\contentsline {subsection}{\numberline {5.3.2}Risk Scoring Mechanism}{75}{subsection.5.3.2}%
-\contentsline {section}{\numberline {5.4}Website Penetration Testing Engine}{76}{section.5.4}%
-\contentsline {subsection}{\numberline {5.4.1}Cross-Site Scripting Detection}{76}{subsection.5.4.1}%
-\contentsline {subsection}{\numberline {5.4.2}SQL Injection Detection}{76}{subsection.5.4.2}%
-\contentsline {subsection}{\numberline {5.4.3}Broken Access Control Detection}{77}{subsection.5.4.3}%
-\contentsline {subsection}{\numberline {5.4.4}Endpoint Discovery}{77}{subsection.5.4.4}%
-\contentsline {subsection}{\numberline {5.4.5}Technology Fingerprinting}{77}{subsection.5.4.5}%
-\contentsline {subsection}{\numberline {5.4.6}Finding Normalization}{77}{subsection.5.4.6}%
-\contentsline {section}{\numberline {5.5}AI-Powered Malware Analysis Pipeline}{77}{section.5.5}%
-\contentsline {subsection}{\numberline {5.5.1}Static Analysis}{78}{subsection.5.5.1}%
-\contentsline {subsection}{\numberline {5.5.2}Multi-Engine Antivirus Analysis}{78}{subsection.5.5.2}%
-\contentsline {subsection}{\numberline {5.5.3}Result Aggregation}{79}{subsection.5.5.3}%
-\contentsline {section}{\numberline {5.6}Machine Learning Implementation}{79}{section.5.6}%
-\contentsline {subsection}{\numberline {5.6.1}Feature Extraction}{79}{subsection.5.6.1}%
-\contentsline {subsection}{\numberline {5.6.2}Prediction Process}{80}{subsection.5.6.2}%
-\contentsline {section}{\numberline {5.7}Threat Intelligence Implementation}{80}{section.5.7}%
-\contentsline {subsection}{\numberline {5.7.1}Indicator Extraction}{80}{subsection.5.7.1}%
-\contentsline {subsection}{\numberline {5.7.2}Threat Correlation}{81}{subsection.5.7.2}%
-\contentsline {subsection}{\numberline {5.7.3}Risk Evaluation}{81}{subsection.5.7.3}%
-\contentsline {section}{\numberline {5.8}Security Architecture}{81}{section.5.8}%
-\contentsline {subsection}{\numberline {5.8.1}Authentication and Authorization}{82}{subsection.5.8.1}%
-\contentsline {subsection}{\numberline {5.8.2}Security Headers}{82}{subsection.5.8.2}%
-\contentsline {subsection}{\numberline {5.8.3}Request Rate Limiting}{82}{subsection.5.8.3}%
-\contentsline {subsection}{\numberline {5.8.4}Container Isolation}{82}{subsection.5.8.4}%
-\contentsline {section}{\numberline {5.9}Database Implementation}{83}{section.5.9}%
-\contentsline {subsection}{\numberline {5.9.1}Data Persistence}{83}{subsection.5.9.1}%
-\contentsline {subsection}{\numberline {5.9.2}JSONB Storage}{83}{subsection.5.9.2}%
-\contentsline {subsection}{\numberline {5.9.3}Relationship Management}{83}{subsection.5.9.3}%
-\contentsline {section}{\numberline {5.10}Frontend Implementation}{84}{section.5.10}%
-\contentsline {subsection}{\numberline {5.10.1}Component-Based Architecture}{84}{subsection.5.10.1}%
-\contentsline {subsection}{\numberline {5.10.2}State Management}{84}{subsection.5.10.2}%
-\contentsline {subsection}{\numberline {5.10.3}API Communication}{84}{subsection.5.10.3}%
-\contentsline {subsection}{\numberline {5.10.4}Visualization Components}{84}{subsection.5.10.4}%
-\contentsline {section}{\numberline {5.11}Deployment Environment}{85}{section.5.11}%
-\contentsline {subsection}{\numberline {5.11.1}Backend Environment}{85}{subsection.5.11.1}%
-\contentsline {subsection}{\numberline {5.11.2}Frontend Environment}{85}{subsection.5.11.2}%
-\contentsline {subsection}{\numberline {5.11.3}Containerized Analysis Environment}{85}{subsection.5.11.3}%
-\contentsline {section}{\numberline {5.12}Challenges Encountered During Development}{85}{section.5.12}%
-\contentsline {section}{\numberline {5.13}Chapter Summary}{86}{section.5.13}%
-\contentsline {chapter}{\numberline {6}User Manual}{88}{chapter.6}%
-\contentsline {section}{\numberline {6.1}Chapter Overview}{88}{section.6.1}%
-\contentsline {section}{\numberline {6.2}System Access and Authentication}{88}{section.6.2}%
-\contentsline {subsection}{\numberline {6.2.1}Public Landing Page}{88}{subsection.6.2.1}%
-\contentsline {subsection}{\numberline {6.2.2}Registration and Login}{89}{subsection.6.2.2}%
-\contentsline {subsection}{\numberline {6.2.3}Session Management}{90}{subsection.6.2.3}%
-\contentsline {subsection}{\numberline {6.2.4}Roles and Permissions}{91}{subsection.6.2.4}%
-\contentsline {section}{\numberline {6.3}Platform Navigation and Global Interface}{91}{section.6.3}%
-\contentsline {subsection}{\numberline {6.3.1}Sidebar Navigation}{91}{subsection.6.3.1}%
-\contentsline {subsection}{\numberline {6.3.2}Header and Notifications}{91}{subsection.6.3.2}%
-\contentsline {subsection}{\numberline {6.3.3}AI Assistant and Admin Switcher}{91}{subsection.6.3.3}%
-\contentsline {section}{\numberline {6.4}Main Dashboard}{92}{section.6.4}%
-\contentsline {subsection}{\numberline {6.4.1}Dashboard Overview}{93}{subsection.6.4.1}%
-\contentsline {subsection}{\numberline {6.4.2}Investigation Flow Cards}{93}{subsection.6.4.2}%
-\contentsline {subsection}{\numberline {6.4.3}Standalone Security Services}{93}{subsection.6.4.3}%
-\contentsline {subsection}{\numberline {6.4.4}Dashboard UX and Design Logic}{94}{subsection.6.4.4}%
-\contentsline {section}{\numberline {6.5}Security Investigations}{94}{section.6.5}%
-\contentsline {subsection}{\numberline {6.5.1}Launching a Security Investigation}{94}{subsection.6.5.1}%
-\contentsline {subsection}{\numberline {6.5.2}Investigation Execution and Live Monitoring}{94}{subsection.6.5.2}%
-\contentsline {subsection}{\numberline {6.5.3}Results and Analysis Tabs}{95}{subsection.6.5.3}%
-\contentsline {subsection}{\numberline {6.5.4}Investigation Report Export}{95}{subsection.6.5.4}%
-\contentsline {subsection}{\numberline {6.5.5}Investigation History and Management}{95}{subsection.6.5.5}%
-\contentsline {section}{\numberline {6.6}Infra Intelligence}{95}{section.6.6}%
-\contentsline {subsection}{\numberline {6.6.1}Infra Intelligence Module Overview}{95}{subsection.6.6.1}%
-\contentsline {subsection}{\numberline {6.6.2}Launching an Infra Investigation}{95}{subsection.6.6.2}%
-\contentsline {subsection}{\numberline {6.6.3}Infra Investigation Pipeline Execution}{96}{subsection.6.6.3}%
-\contentsline {subsection}{\numberline {6.6.4}Results and Analysis Tabs}{96}{subsection.6.6.4}%
-\contentsline {subsection}{\numberline {6.6.5}Risk Scoring and Verdict Generation}{96}{subsection.6.6.5}%
-\contentsline {subsection}{\numberline {6.6.6}Infra Investigation History and Reports}{96}{subsection.6.6.6}%
-\contentsline {section}{\numberline {6.7}Security Scans}{97}{section.6.7}%
-\contentsline {subsection}{\numberline {6.7.1}Security Scans Module Overview}{97}{subsection.6.7.1}%
-\contentsline {subsection}{\numberline {6.7.2}URL Scanning}{97}{subsection.6.7.2}%
-\contentsline {subsection}{\numberline {6.7.3}File Scanning and Hash Analysis}{98}{subsection.6.7.3}%
-\contentsline {subsection}{\numberline {6.7.4}Scan Results Interpretation}{98}{subsection.6.7.4}%
-\contentsline {subsection}{\numberline {6.7.5}Scan History and Management}{98}{subsection.6.7.5}%
-\contentsline {section}{\numberline {6.8}Penetration Testing}{98}{section.6.8}%
-\contentsline {subsection}{\numberline {6.8.1}Penetration Testing Module Overview}{98}{subsection.6.8.1}%
-\contentsline {subsection}{\numberline {6.8.2}Configuring a Penetration Test}{98}{subsection.6.8.2}%
-\contentsline {subsection}{\numberline {6.8.3}Executing the Website Scan}{99}{subsection.6.8.3}%
-\contentsline {subsection}{\numberline {6.8.4}Reviewing Penetration Testing Results}{99}{subsection.6.8.4}%
-\contentsline {subsection}{\numberline {6.8.5}Exporting and Reviewing Scan Results}{99}{subsection.6.8.5}%
-\contentsline {subsection}{\numberline {6.8.6}Penetration Testing History}{100}{subsection.6.8.6}%
-\contentsline {section}{\numberline {6.9}Threat Modeling}{100}{section.6.9}%
-\contentsline {subsection}{\numberline {6.9.1}Threat Modeling Module Overview}{100}{subsection.6.9.1}%
-\contentsline {subsection}{\numberline {6.9.2}Application Profile Configuration}{100}{subsection.6.9.2}%
-\contentsline {subsection}{\numberline {6.9.3}Threat Analysis Generation}{100}{subsection.6.9.3}%
-\contentsline {subsection}{\numberline {6.9.4}Reviewing Threat Modeling Results}{101}{subsection.6.9.4}%
-\contentsline {subsection}{\numberline {6.9.5}Exporting Threat Model Reports}{101}{subsection.6.9.5}%
-\contentsline {subsection}{\numberline {6.9.6}Saved Threat Models and History}{101}{subsection.6.9.6}%
-\contentsline {section}{\numberline {6.10}AI Malware Analysis}{101}{section.6.10}%
-\contentsline {subsection}{\numberline {6.10.1}AI Malware Analysis Module Overview}{102}{subsection.6.10.1}%
-\contentsline {subsection}{\numberline {6.10.2}Uploading and Submitting a File}{102}{subsection.6.10.2}%
-\contentsline {subsection}{\numberline {6.10.3}Malware Analysis Pipeline Execution}{102}{subsection.6.10.3}%
-\contentsline {subsection}{\numberline {6.10.4}Reviewing Analysis Results}{102}{subsection.6.10.4}%
-\contentsline {subsection}{\numberline {6.10.5}AI-Powered Malware Explanation}{103}{subsection.6.10.5}%
-\contentsline {subsection}{\numberline {6.10.6}Exporting Malware Analysis Reports}{103}{subsection.6.10.6}%
-\contentsline {subsection}{\numberline {6.10.7}Session History and Previous Analyses}{103}{subsection.6.10.7}%
-\contentsline {section}{\numberline {6.11}Reports History}{103}{section.6.11}%
-\contentsline {subsection}{\numberline {6.11.1}Reports History Overview}{103}{subsection.6.11.1}%
-\contentsline {subsection}{\numberline {6.11.2}Available Report Categories}{104}{subsection.6.11.2}%
-\contentsline {subsection}{\numberline {6.11.3}Accessing Historical Results}{104}{subsection.6.11.3}%
-\contentsline {section}{\numberline {6.12}User Profile \& Notifications}{104}{section.6.12}%
-\contentsline {subsection}{\numberline {6.12.1}User Profile}{104}{subsection.6.12.1}%
-\contentsline {subsection}{\numberline {6.12.2}Notification System}{105}{subsection.6.12.2}%
-\contentsline {section}{\numberline {6.13}Administration (SOC Nexus)}{105}{section.6.13}%
-\contentsline {subsection}{\numberline {6.13.1}Administrative Dashboard}{105}{subsection.6.13.1}%
-\contentsline {subsection}{\numberline {6.13.2}User and Threat Management}{106}{subsection.6.13.2}%
-\contentsline {subsection}{\numberline {6.13.3}Monitoring and Analytics}{106}{subsection.6.13.3}%
-\contentsline {subsection}{\numberline {6.13.4}System Configuration}{106}{subsection.6.13.4}%
-\contentsline {section}{\numberline {6.14}AI Features}{106}{section.6.14}%
-\contentsline {section}{\numberline {6.15}Report Export Reference}{107}{section.6.15}%
-\contentsline {section}{\numberline {6.16}Investigation Types and Target Matrix}{107}{section.6.16}%
-\contentsline {subsection}{\numberline {6.16.1}Investigation Types Overview}{107}{subsection.6.16.1}%
-\contentsline {subsection}{\numberline {6.16.2}Supported Target Types}{107}{subsection.6.16.2}%
-\contentsline {subsection}{\numberline {6.16.3}Investigation Types and Target Matrix}{108}{subsection.6.16.3}%
-\contentsline {subsection}{\numberline {6.16.4}Module Selection Guidelines}{108}{subsection.6.16.4}%
-\contentsline {subsection}{\numberline {6.16.5}Cross-Module Investigation Strategy}{108}{subsection.6.16.5}%
-\contentsline {section}{\numberline {6.17}Chapter Summary}{108}{section.6.17}%
-\contentsline {chapter}{List of References}{110}{chapter*.95}%
+\contentsline {subsection}{\numberline {2.5.1}Comparative Features Matrix}{21}{subsection.2.5.1}%
+\contentsline {subsection}{\numberline {2.5.2}Research Gap Summary}{21}{subsection.2.5.2}%
+\contentsline {section}{\numberline {2.6}Currently Available Solutions and Features Matrix}{22}{section.2.6}%
+\contentsline {subsection}{\numberline {2.6.1}Commercial Solutions}{22}{subsection.2.6.1}%
+\contentsline {subsubsection}{Microsoft Threat Modeling Tool}{22}{section*.11}%
+\contentsline {subsubsection}{Cigent Threat Modeling Platform}{22}{section*.12}%
+\contentsline {subsubsection}{ThreatModeler}{22}{section*.13}%
+\contentsline {subsubsection}{IriusRisk}{23}{section*.14}%
+\contentsline {subsection}{\numberline {2.6.2}Open-Source Solutions}{23}{subsection.2.6.2}%
+\contentsline {subsubsection}{OWASP Threat Dragon}{23}{section*.15}%
+\contentsline {subsubsection}{PyTM (Python Threat Modeling)}{23}{section*.16}%
+\contentsline {subsubsection}{Threagile}{23}{section*.17}%
+\contentsline {subsubsection}{OWASP ZAP (Zed Attack Proxy)}{23}{section*.18}%
+\contentsline {subsubsection}{Metasploit Framework}{24}{section*.19}%
+\contentsline {subsection}{\numberline {2.6.3}Gap Analysis}{24}{subsection.2.6.3}%
+\contentsline {section}{\numberline {2.7}Tools Background}{25}{section.2.7}%
+\contentsline {subsection}{\numberline {2.7.1}Threat Modeling Frameworks and Standards}{25}{subsection.2.7.1}%
+\contentsline {subsubsection}{STRIDE Framework}{25}{section*.20}%
+\contentsline {subsubsection}{DREAD Framework}{25}{section*.21}%
+\contentsline {subsubsection}{PASTA (Process for Attack Simulation and Threat Analysis)}{25}{section*.22}%
+\contentsline {subsubsection}{MITRE ATT\&CK Framework}{26}{section*.23}%
+\contentsline {subsubsection}{CAPEC (Common Attack Pattern Enumeration and Classification)}{26}{section*.24}%
+\contentsline {subsection}{\numberline {2.7.2}Penetration Testing Tools}{26}{subsection.2.7.2}%
+\contentsline {subsubsection}{Metasploit Framework}{26}{section*.25}%
+\contentsline {subsubsection}{Nmap (Network Mapper)}{27}{section*.26}%
+\contentsline {subsubsection}{OWASP ZAP (Zed Attack Proxy)}{27}{section*.27}%
+\contentsline {subsubsection}{Burp Suite}{27}{section*.28}%
+\contentsline {subsubsection}{Nikto}{28}{section*.29}%
+\contentsline {subsubsection}{SQLMap}{28}{section*.30}%
+\contentsline {subsubsection}{Hydra}{28}{section*.31}%
+\contentsline {subsection}{\numberline {2.7.3}Vulnerability Assessment Tools}{28}{subsection.2.7.3}%
+\contentsline {subsubsection}{Nessus}{28}{section*.32}%
+\contentsline {subsubsection}{OpenVAS}{29}{section*.33}%
+\contentsline {subsubsection}{Nexpose}{29}{section*.34}%
+\contentsline {subsection}{\numberline {2.7.4}Automation and Integration Frameworks}{29}{subsection.2.7.4}%
+\contentsline {subsubsection}{PTES (Penetration Testing Execution Standard)}{29}{section*.35}%
+\contentsline {subsubsection}{OWASP Testing Guide}{29}{section*.36}%
+\contentsline {subsubsection}{Jenkins and CI/CD Integration}{30}{section*.37}%
+\contentsline {subsection}{\numberline {2.7.5}Artificial Intelligence and Machine Learning Tools}{30}{subsection.2.7.5}%
+\contentsline {subsubsection}{TensorFlow and PyTorch}{30}{section*.38}%
+\contentsline {subsubsection}{Scikit-learn}{30}{section*.39}%
+\contentsline {subsubsection}{Natural Language Processing (NLP) Tools}{30}{section*.40}%
+\contentsline {subsection}{\numberline {2.7.6}Threat Intelligence Platforms}{31}{subsection.2.7.6}%
+\contentsline {subsubsection}{MISP (Malware Information Sharing Platform)}{31}{section*.41}%
+\contentsline {subsubsection}{STIX/TAXII}{31}{section*.42}%
+\contentsline {subsubsection}{AlienVault OTX (Open Threat Exchange)}{31}{section*.43}%
+\contentsline {subsection}{\numberline {2.7.7}Containerization and Virtualization Technologies}{31}{subsection.2.7.7}%
+\contentsline {subsubsection}{Docker}{31}{section*.44}%
+\contentsline {subsubsection}{Kubernetes}{32}{section*.45}%
+\contentsline {subsubsection}{VirtualBox and VMware}{32}{section*.46}%
+\contentsline {section}{\numberline {2.8}Summary}{32}{section.2.8}%
+\contentsline {chapter}{\numberline {3}Requirements Analysis}{33}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Chapter Overview}{33}{section.3.1}%
+\contentsline {section}{\numberline {3.2}Business Requirements Identification}{33}{section.3.2}%
+\contentsline {subsection}{\numberline {3.2.1}Software Development Methodology}{34}{subsection.3.2.1}%
+\contentsline {subsection}{\numberline {3.2.2}Justification for Scrum Selection}{35}{subsection.3.2.2}%
+\contentsline {subsection}{\numberline {3.2.3}Scrum-Based Development Plan}{35}{subsection.3.2.3}%
+\contentsline {section}{\numberline {3.3}User Functional Requirements}{35}{section.3.3}%
+\contentsline {subsection}{\numberline {3.3.1}User Roles}{36}{subsection.3.3.1}%
+\contentsline {subsection}{\numberline {3.3.2}User Functional Requirements}{36}{subsection.3.3.2}%
+\contentsline {section}{\numberline {3.4}System Functional and Non-Functional Requirements}{37}{section.3.4}%
+\contentsline {subsection}{\numberline {3.4.1}System Functional Requirements}{37}{subsection.3.4.1}%
+\contentsline {subsection}{\numberline {3.4.2}Non-Functional Requirements}{38}{subsection.3.4.2}%
+\contentsline {section}{\numberline {3.5}System Evaluation and Validation Criteria}{39}{section.3.5}%
+\contentsline {section}{\numberline {3.6}Chapter Summary}{39}{section.3.6}%
+\contentsline {chapter}{\numberline {4}System Design}{40}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Introduction}{40}{section.4.1}%
+\contentsline {subsection}{\numberline {4.1.1}Integrated Services and Core APIs}{41}{subsection.4.1.1}%
+\contentsline {section}{\numberline {4.2}Architectural Overview}{44}{section.4.2}%
+\contentsline {section}{\numberline {4.3}Layer Descriptions}{45}{section.4.3}%
+\contentsline {subsection}{\numberline {4.3.1}Layer 1 --- User Layer}{45}{subsection.4.3.1}%
+\contentsline {subsection}{\numberline {4.3.2}Layer 2 --- Edge Layer}{46}{subsection.4.3.2}%
+\contentsline {subsection}{\numberline {4.3.3}Layer 3 --- Frontend Layer}{46}{subsection.4.3.3}%
+\contentsline {subsection}{\numberline {4.3.4}Layer 4 --- API Gateway and Middleware Layer}{47}{subsection.4.3.4}%
+\contentsline {subsection}{\numberline {4.3.5}Layer 5 --- Backend Services Layer}{48}{subsection.4.3.5}%
+\contentsline {subsection}{\numberline {4.3.6}Layer 6a --- Intelligence and Monitoring Layer}{49}{subsection.4.3.6}%
+\contentsline {subsection}{\numberline {4.3.7}Layer 6b --- Data Layer}{50}{subsection.4.3.7}%
+\contentsline {subsection}{\numberline {4.3.8}Layer 7 --- Threat and Risk Engine}{50}{subsection.4.3.8}%
+\contentsline {section}{\numberline {4.4}System Modeling Diagrams}{52}{section.4.4}%
+\contentsline {subsection}{\numberline {4.4.1}Use Case Diagram}{53}{subsection.4.4.1}%
+\contentsline {subsection}{\numberline {4.4.2}Sequence Diagrams}{55}{subsection.4.4.2}%
+\contentsline {subsubsection}{Flow 1: Standard Security Investigation}{55}{section*.69}%
+\contentsline {subsubsection}{Flow 2: Infrastructure Threat Investigation (Eight-Stage Pipeline)}{57}{section*.71}%
+\contentsline {subsubsection}{Flow 3: AI Malware Static Analysis}{60}{section*.73}%
+\contentsline {subsubsection}{Flow 4: Independent Pentesting and Threat Assessment Modules}{62}{section*.75}%
+\contentsline {subsection}{\numberline {4.4.3}Entity Relationship Diagram (ERD)}{64}{subsection.4.4.3}%
+\contentsline {subsection}{\numberline {4.4.4}Class Diagram}{67}{subsection.4.4.4}%
+\contentsline {subsection}{\numberline {4.4.5}Discussion and Model Validation}{69}{subsection.4.4.5}%
+\contentsline {section}{\numberline {4.5}Conclusion}{71}{section.4.5}%
+\contentsline {chapter}{\numberline {5}System Implementation}{72}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Introduction and System Architecture Overview}{72}{section.5.1}%
+\contentsline {section}{\numberline {5.2}Backend Implementation}{73}{section.5.2}%
+\contentsline {section}{\numberline {5.3}Threat Modeling Engine Implementation}{73}{section.5.3}%
+\contentsline {subsection}{\numberline {5.3.1}STRIDE-Based Analysis}{74}{subsection.5.3.1}%
+\contentsline {subsection}{\numberline {5.3.2}Risk Scoring Mechanism}{74}{subsection.5.3.2}%
+\contentsline {section}{\numberline {5.4}Website Penetration Testing Engine}{75}{section.5.4}%
+\contentsline {subsection}{\numberline {5.4.1}Cross-Site Scripting Detection}{75}{subsection.5.4.1}%
+\contentsline {subsection}{\numberline {5.4.2}SQL Injection Detection}{75}{subsection.5.4.2}%
+\contentsline {subsection}{\numberline {5.4.3}Broken Access Control Detection}{76}{subsection.5.4.3}%
+\contentsline {subsection}{\numberline {5.4.4}Endpoint Discovery}{76}{subsection.5.4.4}%
+\contentsline {subsection}{\numberline {5.4.5}Technology Fingerprinting}{76}{subsection.5.4.5}%
+\contentsline {subsection}{\numberline {5.4.6}Finding Normalization}{76}{subsection.5.4.6}%
+\contentsline {section}{\numberline {5.5}AI-Powered Malware Analysis Pipeline}{76}{section.5.5}%
+\contentsline {subsection}{\numberline {5.5.1}Static Analysis}{77}{subsection.5.5.1}%
+\contentsline {subsection}{\numberline {5.5.2}Multi-Engine Antivirus Analysis}{77}{subsection.5.5.2}%
+\contentsline {subsection}{\numberline {5.5.3}Result Aggregation}{78}{subsection.5.5.3}%
+\contentsline {section}{\numberline {5.6}Machine Learning Implementation}{78}{section.5.6}%
+\contentsline {subsection}{\numberline {5.6.1}Feature Extraction}{78}{subsection.5.6.1}%
+\contentsline {subsection}{\numberline {5.6.2}Prediction Process}{79}{subsection.5.6.2}%
+\contentsline {section}{\numberline {5.7}Threat Intelligence Implementation}{79}{section.5.7}%
+\contentsline {subsection}{\numberline {5.7.1}Indicator Extraction}{79}{subsection.5.7.1}%
+\contentsline {subsection}{\numberline {5.7.2}Threat Correlation}{80}{subsection.5.7.2}%
+\contentsline {subsection}{\numberline {5.7.3}Risk Evaluation}{80}{subsection.5.7.3}%
+\contentsline {section}{\numberline {5.8}Security Architecture}{80}{section.5.8}%
+\contentsline {subsection}{\numberline {5.8.1}Authentication and Authorization}{81}{subsection.5.8.1}%
+\contentsline {subsection}{\numberline {5.8.2}Security Headers}{81}{subsection.5.8.2}%
+\contentsline {subsection}{\numberline {5.8.3}Request Rate Limiting}{81}{subsection.5.8.3}%
+\contentsline {subsection}{\numberline {5.8.4}Container Isolation}{81}{subsection.5.8.4}%
+\contentsline {section}{\numberline {5.9}Database Implementation}{82}{section.5.9}%
+\contentsline {subsection}{\numberline {5.9.1}Data Persistence}{82}{subsection.5.9.1}%
+\contentsline {subsection}{\numberline {5.9.2}JSONB Storage}{82}{subsection.5.9.2}%
+\contentsline {subsection}{\numberline {5.9.3}Relationship Management}{82}{subsection.5.9.3}%
+\contentsline {section}{\numberline {5.10}Frontend Implementation}{83}{section.5.10}%
+\contentsline {subsection}{\numberline {5.10.1}Component-Based Architecture}{83}{subsection.5.10.1}%
+\contentsline {subsection}{\numberline {5.10.2}State Management}{83}{subsection.5.10.2}%
+\contentsline {subsection}{\numberline {5.10.3}API Communication}{83}{subsection.5.10.3}%
+\contentsline {subsection}{\numberline {5.10.4}Visualization Components}{83}{subsection.5.10.4}%
+\contentsline {section}{\numberline {5.11}Deployment Environment}{84}{section.5.11}%
+\contentsline {subsection}{\numberline {5.11.1}Backend Environment}{84}{subsection.5.11.1}%
+\contentsline {subsection}{\numberline {5.11.2}Frontend Environment}{84}{subsection.5.11.2}%
+\contentsline {subsection}{\numberline {5.11.3}Containerized Analysis Environment}{84}{subsection.5.11.3}%
+\contentsline {section}{\numberline {5.12}Challenges Encountered During Development}{84}{section.5.12}%
+\contentsline {section}{\numberline {5.13}Chapter Summary}{85}{section.5.13}%
+\contentsline {chapter}{\numberline {6}User Manual}{87}{chapter.6}%
+\contentsline {section}{\numberline {6.1}Chapter Overview}{87}{section.6.1}%
+\contentsline {section}{\numberline {6.2}System Access and Authentication}{87}{section.6.2}%
+\contentsline {subsection}{\numberline {6.2.1}Public Landing Page}{87}{subsection.6.2.1}%
+\contentsline {subsection}{\numberline {6.2.2}Registration and Login}{88}{subsection.6.2.2}%
+\contentsline {subsection}{\numberline {6.2.3}Session Management}{89}{subsection.6.2.3}%
+\contentsline {subsection}{\numberline {6.2.4}Roles and Permissions}{90}{subsection.6.2.4}%
+\contentsline {section}{\numberline {6.3}Platform Navigation and Global Interface}{90}{section.6.3}%
+\contentsline {subsection}{\numberline {6.3.1}Sidebar Navigation}{90}{subsection.6.3.1}%
+\contentsline {subsection}{\numberline {6.3.2}Header and Notifications}{90}{subsection.6.3.2}%
+\contentsline {subsection}{\numberline {6.3.3}AI Assistant and Admin Switcher}{90}{subsection.6.3.3}%
+\contentsline {section}{\numberline {6.4}Main Dashboard}{91}{section.6.4}%
+\contentsline {subsection}{\numberline {6.4.1}Dashboard Overview}{92}{subsection.6.4.1}%
+\contentsline {subsection}{\numberline {6.4.2}Investigation Flow Cards}{92}{subsection.6.4.2}%
+\contentsline {subsection}{\numberline {6.4.3}Standalone Security Services}{92}{subsection.6.4.3}%
+\contentsline {subsection}{\numberline {6.4.4}Dashboard UX and Design Logic}{93}{subsection.6.4.4}%
+\contentsline {section}{\numberline {6.5}Security Investigations}{93}{section.6.5}%
+\contentsline {subsection}{\numberline {6.5.1}Launching a Security Investigation}{93}{subsection.6.5.1}%
+\contentsline {subsection}{\numberline {6.5.2}Investigation Execution and Live Monitoring}{93}{subsection.6.5.2}%
+\contentsline {subsection}{\numberline {6.5.3}Results and Analysis Tabs}{94}{subsection.6.5.3}%
+\contentsline {subsection}{\numberline {6.5.4}Investigation Report Export}{94}{subsection.6.5.4}%
+\contentsline {subsection}{\numberline {6.5.5}Investigation History and Management}{94}{subsection.6.5.5}%
+\contentsline {section}{\numberline {6.6}Infra Intelligence}{94}{section.6.6}%
+\contentsline {subsection}{\numberline {6.6.1}Infra Intelligence Module Overview}{94}{subsection.6.6.1}%
+\contentsline {subsection}{\numberline {6.6.2}Launching an Infra Investigation}{94}{subsection.6.6.2}%
+\contentsline {subsection}{\numberline {6.6.3}Infra Investigation Pipeline Execution}{95}{subsection.6.6.3}%
+\contentsline {subsection}{\numberline {6.6.4}Results and Analysis Tabs}{95}{subsection.6.6.4}%
+\contentsline {subsection}{\numberline {6.6.5}Risk Scoring and Verdict Generation}{95}{subsection.6.6.5}%
+\contentsline {subsection}{\numberline {6.6.6}Infra Investigation History and Reports}{95}{subsection.6.6.6}%
+\contentsline {section}{\numberline {6.7}Security Scans}{96}{section.6.7}%
+\contentsline {subsection}{\numberline {6.7.1}Security Scans Module Overview}{96}{subsection.6.7.1}%
+\contentsline {subsection}{\numberline {6.7.2}URL Scanning}{96}{subsection.6.7.2}%
+\contentsline {subsection}{\numberline {6.7.3}File Scanning and Hash Analysis}{97}{subsection.6.7.3}%
+\contentsline {subsection}{\numberline {6.7.4}Scan Results Interpretation}{97}{subsection.6.7.4}%
+\contentsline {subsection}{\numberline {6.7.5}Scan History and Management}{97}{subsection.6.7.5}%
+\contentsline {section}{\numberline {6.8}Penetration Testing}{97}{section.6.8}%
+\contentsline {subsection}{\numberline {6.8.1}Penetration Testing Module Overview}{97}{subsection.6.8.1}%
+\contentsline {subsection}{\numberline {6.8.2}Configuring a Penetration Test}{97}{subsection.6.8.2}%
+\contentsline {subsection}{\numberline {6.8.3}Executing the Website Scan}{98}{subsection.6.8.3}%
+\contentsline {subsection}{\numberline {6.8.4}Reviewing Penetration Testing Results}{98}{subsection.6.8.4}%
+\contentsline {subsection}{\numberline {6.8.5}Exporting and Reviewing Scan Results}{98}{subsection.6.8.5}%
+\contentsline {subsection}{\numberline {6.8.6}Penetration Testing History}{99}{subsection.6.8.6}%
+\contentsline {section}{\numberline {6.9}Threat Modeling}{99}{section.6.9}%
+\contentsline {subsection}{\numberline {6.9.1}Threat Modeling Module Overview}{99}{subsection.6.9.1}%
+\contentsline {subsection}{\numberline {6.9.2}Application Profile Configuration}{99}{subsection.6.9.2}%
+\contentsline {subsection}{\numberline {6.9.3}Threat Analysis Generation}{99}{subsection.6.9.3}%
+\contentsline {subsection}{\numberline {6.9.4}Reviewing Threat Modeling Results}{100}{subsection.6.9.4}%
+\contentsline {subsection}{\numberline {6.9.5}Exporting Threat Model Reports}{100}{subsection.6.9.5}%
+\contentsline {subsection}{\numberline {6.9.6}Saved Threat Models and History}{100}{subsection.6.9.6}%
+\contentsline {section}{\numberline {6.10}AI Malware Analysis}{100}{section.6.10}%
+\contentsline {subsection}{\numberline {6.10.1}AI Malware Analysis Module Overview}{101}{subsection.6.10.1}%
+\contentsline {subsection}{\numberline {6.10.2}Uploading and Submitting a File}{101}{subsection.6.10.2}%
+\contentsline {subsection}{\numberline {6.10.3}Malware Analysis Pipeline Execution}{101}{subsection.6.10.3}%
+\contentsline {subsection}{\numberline {6.10.4}Reviewing Analysis Results}{101}{subsection.6.10.4}%
+\contentsline {subsection}{\numberline {6.10.5}AI-Powered Malware Explanation}{102}{subsection.6.10.5}%
+\contentsline {subsection}{\numberline {6.10.6}Exporting Malware Analysis Reports}{102}{subsection.6.10.6}%
+\contentsline {subsection}{\numberline {6.10.7}Session History and Previous Analyses}{102}{subsection.6.10.7}%
+\contentsline {section}{\numberline {6.11}Reports History}{102}{section.6.11}%
+\contentsline {subsection}{\numberline {6.11.1}Reports History Overview}{102}{subsection.6.11.1}%
+\contentsline {subsection}{\numberline {6.11.2}Available Report Categories}{103}{subsection.6.11.2}%
+\contentsline {subsection}{\numberline {6.11.3}Accessing Historical Results}{103}{subsection.6.11.3}%
+\contentsline {section}{\numberline {6.12}User Profile \& Notifications}{103}{section.6.12}%
+\contentsline {subsection}{\numberline {6.12.1}User Profile}{103}{subsection.6.12.1}%
+\contentsline {subsection}{\numberline {6.12.2}Notification System}{104}{subsection.6.12.2}%
+\contentsline {section}{\numberline {6.13}Administration (SOC Nexus)}{104}{section.6.13}%
+\contentsline {subsection}{\numberline {6.13.1}Administrative Dashboard}{104}{subsection.6.13.1}%
+\contentsline {subsection}{\numberline {6.13.2}User and Threat Management}{105}{subsection.6.13.2}%
+\contentsline {subsection}{\numberline {6.13.3}Monitoring and Analytics}{105}{subsection.6.13.3}%
+\contentsline {subsection}{\numberline {6.13.4}System Configuration}{105}{subsection.6.13.4}%
+\contentsline {section}{\numberline {6.14}AI Features}{105}{section.6.14}%
+\contentsline {section}{\numberline {6.15}Report Export Reference}{106}{section.6.15}%
+\contentsline {section}{\numberline {6.16}Investigation Types and Target Matrix}{106}{section.6.16}%
+\contentsline {subsection}{\numberline {6.16.1}Investigation Types Overview}{106}{subsection.6.16.1}%
+\contentsline {subsection}{\numberline {6.16.2}Supported Target Types}{106}{subsection.6.16.2}%
+\contentsline {subsection}{\numberline {6.16.3}Investigation Types and Target Matrix}{107}{subsection.6.16.3}%
+\contentsline {subsection}{\numberline {6.16.4}Module Selection Guidelines}{107}{subsection.6.16.4}%
+\contentsline {subsection}{\numberline {6.16.5}Cross-Module Investigation Strategy}{107}{subsection.6.16.5}%
+\contentsline {section}{\numberline {6.17}Chapter Summary}{107}{section.6.17}%
+\contentsline {chapter}{List of References}{109}{chapter*.94}%

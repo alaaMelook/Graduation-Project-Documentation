@@ -14,7 +14,7 @@ TIBSA employs Supabase Auth with a FastAPI backend for credential validation, pr
 
 Unauthenticated users access the platform at the root URL, which presents branding, capability summary, and navigation to login and registration. No analytical functionality is exposed prior to authentication.
 
-Login and Get Started controls route to /login and /register respectively. Authenticated users visiting the root URL are redirected to the dashboard.
+Login and Get Started controls route to \url{/login} and \url{/register} respectively. Authenticated users visiting the root URL are redirected to the dashboard.
 
 \begin{figure}[H]
 \centering
@@ -25,9 +25,9 @@ Login and Get Started controls route to /login and /register respectively. Authe
 
 \subsection{Registration and Login}
 
-Registration requires full name, valid email, and a password meeting the twelve-character complexity policy (uppercase, lowercase, numeric, and special characters). Login accepts email and password via POST /api/v1/auth/login, returning a JWT bearer token. Google and GitHub OAuth are supported through Supabase. Registration is rate-limited to three requests per minute; login to five per minute. Failed authentication returns generic error messages to prevent user enumeration.
+Registration requires full name, valid email, and a password meeting the twelve-character complexity policy (uppercase, lowercase, numeric, and special characters). Login accepts email and password via \texttt{POST /api/v1/auth/login}, returning a JWT bearer token. Google and GitHub OAuth are supported through Supabase. Registration is rate-limited to three requests per minute; login to five per minute. Failed authentication returns generic error messages to prevent user enumeration.
 
-OAuth users receive automatically provisioned profiles on first authentication. Token refresh is supported via POST /api/v1/auth/refresh for session continuity.
+OAuth users receive automatically provisioned profiles on first authentication. Token refresh is supported via \texttt{POST /api/v1/auth/refresh} for session continuity.
 
 \begin{figure}[H]
 \centering
@@ -38,15 +38,15 @@ OAuth users receive automatically provisioned profiles on first authentication. 
 
 \subsection{Session Management}
 
-Upon authentication, the platform retrieves the user profile from GET /api/v1/users/me. Session state is maintained through Supabase AuthContext listeners. Users sign out via the header profile menu, invoking POST /api/v1/auth/logout. Deactivated accounts (is\_active = false) are redirected to the suspended-account page and cannot access protected routes.
+Upon authentication, the platform retrieves the user profile from \texttt{GET /api/v1/users/me}. Session state is maintained through Supabase AuthContext listeners. Users sign out via the header profile menu, invoking \texttt{POST /api/v1/auth/logout}. Deactivated accounts (\texttt{is\_active = false}) are redirected to the suspended-account page and cannot access protected routes.
 
 Protected routes employ RoleGuard verification before rendering module content. Expired tokens require full reauthentication through the login interface.
 
 \subsection{Roles and Permissions}
 
-Two roles are implemented: user and admin. Standard users access dashboard analytical modules. Administrators additionally access the SOC Nexus console at /admin for user management, threat feeds, analytics, system health, audit logs, and platform settings. Role enforcement is applied through RoleGuard components on protected routes.
+Two roles are implemented: user and admin. Standard users access dashboard analytical modules. Administrators additionally access the SOC Nexus console at \url{/admin} for user management, threat feeds, analytics, system health, audit logs, and platform settings. Role enforcement is applied through RoleGuard components on protected routes.
 
-Role changes are performed by administrators through the User Management interface in SOC Nexus. Standard users cannot access /admin routes.
+Role changes are performed by administrators through the User Management interface in SOC Nexus. Standard users cannot access \url{/admin} routes.
 
 \section{Platform Navigation and Global Interface}
 
@@ -60,7 +60,7 @@ The Threats link opens on-demand Threat Intelligence Lookup for rapid IOC reputa
 
 \subsection{Header and Notifications}
 
-The header displays platform branding, breadcrumb navigation, a notification bell, and profile controls. Notifications are fetched from GET /api/v1/notifications/ with fifteen-second auto-refresh. Users may mark individual or all notifications as read.
+The header displays platform branding, breadcrumb navigation, a notification bell, and profile controls. Notifications are fetched from \texttt{GET /api/v1/notifications/} with fifteen-second auto-refresh. Users may mark individual or all notifications as read.
 
 The profile dropdown provides access to Profile and Sign Out controls. Breadcrumb trails are constructed dynamically from the active route pathname.
 
@@ -79,13 +79,13 @@ The AI assistant accepts natural-language security queries and is available on a
 
 \section{Main Dashboard}
 
-The main dashboard at /dashboard serves as a workflow-oriented module launcher rather than a metrics dashboard.
+The main dashboard at \url{/dashboard} serves as a workflow-oriented module launcher rather than a metrics dashboard.
 
 \subsection{Dashboard Overview}
 
 The dashboard displays a personalised welcome banner and platform summary. It provides direct entry to investigation pipelines and standalone services without intermediate configuration.
 
-Account status is verified via GET /api/v1/users/dashboard/stats on page load. Deactivated accounts are redirected before module content renders.
+Account status is verified via \texttt{GET /api/v1/users/dashboard/stats} on page load. Deactivated accounts are redirected before module content renders.
 
 \begin{figure}[H]
 \centering
@@ -114,7 +114,7 @@ This design supports SOC workflows where analysts select the appropriate tool ba
 
 \section{Security Investigations}
 
-Security Investigations execute a multi-stage URL-targeted pipeline combining penetration testing, threat intelligence, correlation, and AI reporting at /dashboard/investigations. This module represents the platform's primary integrated assessment workflow, orchestrating multiple analytical stages within a single investigation context linked to a submitted URL.
+Security Investigations execute a multi-stage URL-targeted pipeline combining penetration testing, threat intelligence, correlation, and AI reporting at \url{/dashboard/investigations}. This module represents the platform's primary integrated assessment workflow, orchestrating multiple analytical stages within a single investigation context linked to a submitted URL.
 
 \subsection{Launching a Security Investigation}
 
@@ -155,13 +155,13 @@ Failed investigations retain partial results where stages completed before termi
 
 \section{Infra Intelligence}
 
-Infra Intelligence performs eight-stage infrastructure IOC enrichment for domain, IP, URL, hash, and email targets at /dashboard/infra-investigations. The pipeline aggregates DNS, WHOIS, reputation, certificate, and heuristic data to produce a composite infrastructure risk assessment suitable for threat hunting and incident triage.
+Infra Intelligence performs eight-stage infrastructure IOC enrichment for domain, IP, URL, hash, and email targets at \url{/dashboard/infra-investigations}. The pipeline aggregates DNS, WHOIS, reputation, certificate, and heuristic data to produce a composite infrastructure risk assessment suitable for threat hunting and incident triage.
 
 \subsection{Infra Intelligence Module Overview}
 
 The module accepts heterogeneous indicators and executes DNS, WHOIS, reputation, certificate, and heuristic analysis stages to produce a composite risk assessment.
 
-The Threat Intelligence Lookup module (/dashboard/threats) provides rapid on-demand reputation checks using the same IOC types without full pipeline execution.
+The Threat Intelligence Lookup module (\url{/dashboard/threats}) provides rapid on-demand reputation checks using the same IOC types without full pipeline execution.
 
 \subsection{Launching an Infra Investigation}
 
@@ -202,7 +202,7 @@ The reports page provides a dedicated view for browsing completed investigations
 
 \section{Security Scans}
 
-Security Scans provides VirusTotal-integrated URL and file reputation scanning at /dashboard/scans. The module supports asynchronous background scanning with automatic status polling, enabling analysts to submit multiple indicators concurrently.
+Security Scans provides VirusTotal-integrated URL and file reputation scanning at \url{/dashboard/scans}. The module supports asynchronous background scanning with automatic status polling, enabling analysts to submit multiple indicators concurrently.
 
 \subsection{Security Scans Module Overview}
 
@@ -243,7 +243,7 @@ Cancelled scans display a distinct status badge. Delete controls remove entries 
 
 \section{Penetration Testing}
 
-Penetration Testing provides standalone website vulnerability scanning at /dashboard/website-scanner, accepting URL targets only. The scanner executes automated security tests and categorises findings by severity for prioritised remediation.
+Penetration Testing provides standalone website vulnerability scanning at \url{/dashboard/website-scanner}, accepting URL targets only. The scanner executes automated security tests and categorises findings by severity for prioritised remediation.
 
 \subsection{Penetration Testing Module Overview}
 
@@ -280,7 +280,7 @@ Findings are expandable to reveal technical evidence including header values, co
 
 Export scan data as JSON for integration or review in the dedicated review page. JSON is cached in localStorage for client-side review.
 
-The review page at /dashboard/website-scanner/review loads cached JSON from localStorage for offline-capable result inspection.
+The review page at \url{/dashboard/website-scanner/review} loads cached JSON from localStorage for offline-capable result inspection.
 
 \subsection{Penetration Testing History}
 
@@ -290,7 +290,7 @@ Completed scans appear in Reports History under the Penetration Testing tab with
 
 \section{Threat Modeling}
 
-Threat Modeling applies STRIDE methodology to application design profiles at /dashboard/threat-modeling without requiring live target scanning. The module supports proactive security assessment during application design and architecture review phases.
+Threat Modeling applies STRIDE methodology to application design profiles at \url{/dashboard/threat-modeling} without requiring live target scanning. The module supports proactive security assessment during application design and architecture review phases.
 
 \subsection{Threat Modeling Module Overview}
 
@@ -337,7 +337,7 @@ Saved models retain the application profile and generated threat set for retrosp
 
 \section{AI Malware Analysis}
 
-AI Malware Analysis performs static PE classification and AI-generated SOC reporting at /dashboard/ai-malware-analysis for .exe, .dll, and .sys files (max 512 MB). Files are analysed without execution; classification is based on extracted static PE features.
+AI Malware Analysis performs static PE classification and AI-generated SOC reporting at \url{/dashboard/ai-malware-analysis} for .exe, .dll, and .sys files (max 512 MB). Files are analysed without execution; classification is based on extracted static PE features.
 
 \subsection{AI Malware Analysis Module Overview}
 
@@ -390,7 +390,7 @@ Backend history retrieves prior scans via the module API; local session records 
 
 \section{Reports History}
 
-Reports History at /dashboard/reports aggregates completed outputs from Security Investigations, Penetration Testing, Security Scans, and Threat Modeling.
+Reports History at \url{/dashboard/reports} aggregates completed outputs from Security Investigations, Penetration Testing, Security Scans, and Threat Modeling.
 
 \subsection{Reports History Overview}
 
@@ -417,10 +417,10 @@ Table~\ref{tab:ch6_reports_history_categories} summarises report categories, sou
 \toprule
 \textbf{Category} & \textbf{Source Module} & \textbf{Access Path} \\
 \midrule
-Security Investigations & Investigations pipeline & /dashboard/investigations/\{id\} \\
-Penetration Testing & Website scanner & /dashboard/website-scanner \\
-Threat Scans & Security Scans & /dashboard/scans \\
-Threat Models & Threat Modeling & /dashboard/threat-modeling \\
+Security Investigations & Investigations pipeline & \url{/dashboard/investigations/{id}} \\
+Penetration Testing & Website scanner & \url{/dashboard/website-scanner} \\
+Threat Scans & Security Scans & \url{/dashboard/scans} \\
+Threat Models & Threat Modeling & \url{/dashboard/threat-modeling} \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -435,7 +435,7 @@ Empty tabs indicate no completed analyses exist for that category. Users should 
 
 \subsection{User Profile}
 
-The Profile page at /dashboard/profile displays read-only account information including full name, email, role, and account status retrieved from GET /api/v1/users/me.
+The Profile page at \url{/dashboard/profile} displays read-only account information including full name, email, role, and account status retrieved from \texttt{GET /api/v1/users/me}.
 
 Profile fields are read-only in the current implementation; account modifications require administrator intervention through SOC Nexus User Management.
 
