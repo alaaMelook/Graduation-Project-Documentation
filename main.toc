@@ -2,9 +2,9 @@
 \contentsline {chapter}{Abstract}{i}{chapter*.1}%
 \contentsline {chapter}{Acknowledgments}{ii}{chapter*.2}%
 \contentsline {chapter}{Table of Contents}{iii}{chapter*.2}%
-\contentsline {chapter}{List of Figures}{viii}{chapter*.2}%
-\contentsline {chapter}{List of Tables}{ix}{chapter*.2}%
-\contentsline {chapter}{List of Abbreviations}{x}{chapter*.3}%
+\contentsline {chapter}{List of Figures}{ix}{chapter*.2}%
+\contentsline {chapter}{List of Tables}{x}{chapter*.2}%
+\contentsline {chapter}{List of Abbreviations}{xi}{chapter*.3}%
 \contentsline {chapter}{\numberline {1}Introduction}{1}{chapter.1}%
 \contentsline {section}{\numberline {1.1}Introduction}{1}{section.1.1}%
 \contentsline {section}{\numberline {1.2}Problem Statement}{1}{section.1.2}%
@@ -171,22 +171,82 @@
 \contentsline {subsection}{\numberline {5.11.3}Containerized Analysis Environment}{85}{subsection.5.11.3}%
 \contentsline {section}{\numberline {5.12}Challenges Encountered During Development}{85}{section.5.12}%
 \contentsline {section}{\numberline {5.13}Chapter Summary}{86}{section.5.13}%
-\contentsline {chapter}{\numberline {6}Conclusion and Future Work}{88}{chapter.6}%
-\contentsline {section}{\numberline {6.1}Summary}{88}{section.6.1}%
-\contentsline {section}{\numberline {6.2}Achievements and Contributions}{89}{section.6.2}%
-\contentsline {subsection}{\numberline {6.2.1}Unified Security Assessment Framework}{89}{subsection.6.2.1}%
-\contentsline {subsection}{\numberline {6.2.2}Eight-Layer Cloud-Native Architecture}{90}{subsection.6.2.2}%
-\contentsline {subsection}{\numberline {6.2.3}Automated Threat Modeling Workflow}{90}{subsection.6.2.3}%
-\contentsline {subsection}{\numberline {6.2.4}Multi-Engine Security Scanning}{90}{subsection.6.2.4}%
-\contentsline {section}{\numberline {6.3}Challenges and Lessons Learned}{90}{section.6.3}%
-\contentsline {subsection}{\numberline {6.3.1}Complexity of Integration}{91}{subsection.6.3.1}%
-\contentsline {subsection}{\numberline {6.3.2}Balancing Automation and Control}{91}{subsection.6.3.2}%
-\contentsline {subsection}{\numberline {6.3.3}Scalability Considerations}{91}{subsection.6.3.3}%
-\contentsline {section}{\numberline {6.4}Limitations}{91}{section.6.4}%
-\contentsline {section}{\numberline {6.5}Future Work}{91}{section.6.5}%
-\contentsline {subsection}{\numberline {6.5.1}Implementation and Deployment}{92}{subsection.6.5.1}%
-\contentsline {subsection}{\numberline {6.5.2}Advanced AI/ML Integration}{92}{subsection.6.5.2}%
-\contentsline {subsection}{\numberline {6.5.3}Extended Platform Capabilities}{92}{subsection.6.5.3}%
-\contentsline {subsection}{\numberline {6.5.4}Research Extensions}{92}{subsection.6.5.4}%
-\contentsline {section}{\numberline {6.6}Final Remarks}{93}{section.6.6}%
-\contentsline {chapter}{List of References}{94}{chapter*.80}%
+\contentsline {chapter}{\numberline {6}User Manual}{88}{chapter.6}%
+\contentsline {section}{\numberline {6.1}Chapter Overview}{88}{section.6.1}%
+\contentsline {section}{\numberline {6.2}System Access and Authentication}{88}{section.6.2}%
+\contentsline {subsection}{\numberline {6.2.1}Public Landing Page}{88}{subsection.6.2.1}%
+\contentsline {subsection}{\numberline {6.2.2}Registration and Login}{89}{subsection.6.2.2}%
+\contentsline {subsection}{\numberline {6.2.3}Session Management}{90}{subsection.6.2.3}%
+\contentsline {subsection}{\numberline {6.2.4}Roles and Permissions}{91}{subsection.6.2.4}%
+\contentsline {section}{\numberline {6.3}Platform Navigation and Global Interface}{91}{section.6.3}%
+\contentsline {subsection}{\numberline {6.3.1}Sidebar Navigation}{91}{subsection.6.3.1}%
+\contentsline {subsection}{\numberline {6.3.2}Header and Notifications}{91}{subsection.6.3.2}%
+\contentsline {subsection}{\numberline {6.3.3}AI Assistant and Admin Switcher}{91}{subsection.6.3.3}%
+\contentsline {section}{\numberline {6.4}Main Dashboard}{92}{section.6.4}%
+\contentsline {subsection}{\numberline {6.4.1}Dashboard Overview}{93}{subsection.6.4.1}%
+\contentsline {subsection}{\numberline {6.4.2}Investigation Flow Cards}{93}{subsection.6.4.2}%
+\contentsline {subsection}{\numberline {6.4.3}Standalone Security Services}{93}{subsection.6.4.3}%
+\contentsline {subsection}{\numberline {6.4.4}Dashboard UX and Design Logic}{94}{subsection.6.4.4}%
+\contentsline {section}{\numberline {6.5}Security Investigations}{94}{section.6.5}%
+\contentsline {subsection}{\numberline {6.5.1}Launching a Security Investigation}{94}{subsection.6.5.1}%
+\contentsline {subsection}{\numberline {6.5.2}Investigation Execution and Live Monitoring}{94}{subsection.6.5.2}%
+\contentsline {subsection}{\numberline {6.5.3}Results and Analysis Tabs}{95}{subsection.6.5.3}%
+\contentsline {subsection}{\numberline {6.5.4}Investigation Report Export}{95}{subsection.6.5.4}%
+\contentsline {subsection}{\numberline {6.5.5}Investigation History and Management}{95}{subsection.6.5.5}%
+\contentsline {section}{\numberline {6.6}Infra Intelligence}{95}{section.6.6}%
+\contentsline {subsection}{\numberline {6.6.1}Infra Intelligence Module Overview}{95}{subsection.6.6.1}%
+\contentsline {subsection}{\numberline {6.6.2}Launching an Infra Investigation}{95}{subsection.6.6.2}%
+\contentsline {subsection}{\numberline {6.6.3}Infra Investigation Pipeline Execution}{96}{subsection.6.6.3}%
+\contentsline {subsection}{\numberline {6.6.4}Results and Analysis Tabs}{96}{subsection.6.6.4}%
+\contentsline {subsection}{\numberline {6.6.5}Risk Scoring and Verdict Generation}{96}{subsection.6.6.5}%
+\contentsline {subsection}{\numberline {6.6.6}Infra Investigation History and Reports}{96}{subsection.6.6.6}%
+\contentsline {section}{\numberline {6.7}Security Scans}{97}{section.6.7}%
+\contentsline {subsection}{\numberline {6.7.1}Security Scans Module Overview}{97}{subsection.6.7.1}%
+\contentsline {subsection}{\numberline {6.7.2}URL Scanning}{97}{subsection.6.7.2}%
+\contentsline {subsection}{\numberline {6.7.3}File Scanning and Hash Analysis}{98}{subsection.6.7.3}%
+\contentsline {subsection}{\numberline {6.7.4}Scan Results Interpretation}{98}{subsection.6.7.4}%
+\contentsline {subsection}{\numberline {6.7.5}Scan History and Management}{98}{subsection.6.7.5}%
+\contentsline {section}{\numberline {6.8}Penetration Testing}{98}{section.6.8}%
+\contentsline {subsection}{\numberline {6.8.1}Penetration Testing Module Overview}{98}{subsection.6.8.1}%
+\contentsline {subsection}{\numberline {6.8.2}Configuring a Penetration Test}{98}{subsection.6.8.2}%
+\contentsline {subsection}{\numberline {6.8.3}Executing the Website Scan}{99}{subsection.6.8.3}%
+\contentsline {subsection}{\numberline {6.8.4}Reviewing Penetration Testing Results}{99}{subsection.6.8.4}%
+\contentsline {subsection}{\numberline {6.8.5}Exporting and Reviewing Scan Results}{99}{subsection.6.8.5}%
+\contentsline {subsection}{\numberline {6.8.6}Penetration Testing History}{100}{subsection.6.8.6}%
+\contentsline {section}{\numberline {6.9}Threat Modeling}{100}{section.6.9}%
+\contentsline {subsection}{\numberline {6.9.1}Threat Modeling Module Overview}{100}{subsection.6.9.1}%
+\contentsline {subsection}{\numberline {6.9.2}Application Profile Configuration}{100}{subsection.6.9.2}%
+\contentsline {subsection}{\numberline {6.9.3}Threat Analysis Generation}{100}{subsection.6.9.3}%
+\contentsline {subsection}{\numberline {6.9.4}Reviewing Threat Modeling Results}{101}{subsection.6.9.4}%
+\contentsline {subsection}{\numberline {6.9.5}Exporting Threat Model Reports}{101}{subsection.6.9.5}%
+\contentsline {subsection}{\numberline {6.9.6}Saved Threat Models and History}{101}{subsection.6.9.6}%
+\contentsline {section}{\numberline {6.10}AI Malware Analysis}{101}{section.6.10}%
+\contentsline {subsection}{\numberline {6.10.1}AI Malware Analysis Module Overview}{102}{subsection.6.10.1}%
+\contentsline {subsection}{\numberline {6.10.2}Uploading and Submitting a File}{102}{subsection.6.10.2}%
+\contentsline {subsection}{\numberline {6.10.3}Malware Analysis Pipeline Execution}{102}{subsection.6.10.3}%
+\contentsline {subsection}{\numberline {6.10.4}Reviewing Analysis Results}{102}{subsection.6.10.4}%
+\contentsline {subsection}{\numberline {6.10.5}AI-Powered Malware Explanation}{103}{subsection.6.10.5}%
+\contentsline {subsection}{\numberline {6.10.6}Exporting Malware Analysis Reports}{103}{subsection.6.10.6}%
+\contentsline {subsection}{\numberline {6.10.7}Session History and Previous Analyses}{103}{subsection.6.10.7}%
+\contentsline {section}{\numberline {6.11}Reports History}{103}{section.6.11}%
+\contentsline {subsection}{\numberline {6.11.1}Reports History Overview}{103}{subsection.6.11.1}%
+\contentsline {subsection}{\numberline {6.11.2}Available Report Categories}{104}{subsection.6.11.2}%
+\contentsline {subsection}{\numberline {6.11.3}Accessing Historical Results}{104}{subsection.6.11.3}%
+\contentsline {section}{\numberline {6.12}User Profile \& Notifications}{104}{section.6.12}%
+\contentsline {subsection}{\numberline {6.12.1}User Profile}{104}{subsection.6.12.1}%
+\contentsline {subsection}{\numberline {6.12.2}Notification System}{105}{subsection.6.12.2}%
+\contentsline {section}{\numberline {6.13}Administration (SOC Nexus)}{105}{section.6.13}%
+\contentsline {subsection}{\numberline {6.13.1}Administrative Dashboard}{105}{subsection.6.13.1}%
+\contentsline {subsection}{\numberline {6.13.2}User and Threat Management}{106}{subsection.6.13.2}%
+\contentsline {subsection}{\numberline {6.13.3}Monitoring and Analytics}{106}{subsection.6.13.3}%
+\contentsline {subsection}{\numberline {6.13.4}System Configuration}{106}{subsection.6.13.4}%
+\contentsline {section}{\numberline {6.14}AI Features}{106}{section.6.14}%
+\contentsline {section}{\numberline {6.15}Report Export Reference}{107}{section.6.15}%
+\contentsline {section}{\numberline {6.16}Investigation Types and Target Matrix}{107}{section.6.16}%
+\contentsline {subsection}{\numberline {6.16.1}Investigation Types Overview}{107}{subsection.6.16.1}%
+\contentsline {subsection}{\numberline {6.16.2}Supported Target Types}{107}{subsection.6.16.2}%
+\contentsline {subsection}{\numberline {6.16.3}Investigation Types and Target Matrix}{108}{subsection.6.16.3}%
+\contentsline {subsection}{\numberline {6.16.4}Module Selection Guidelines}{108}{subsection.6.16.4}%
+\contentsline {subsection}{\numberline {6.16.5}Cross-Module Investigation Strategy}{108}{subsection.6.16.5}%
+\contentsline {section}{\numberline {6.17}Chapter Summary}{108}{section.6.17}%
+\contentsline {chapter}{List of References}{110}{chapter*.95}%
