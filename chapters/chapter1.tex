@@ -4,136 +4,111 @@
 
 \section{Introduction}
 
-This project focuses on integrating Threat Modeling with Penetration Testing to develop a more risk-driven and intelligence-oriented security assessment framework.
- By combining the predictive power of threat modeling with the practical validation of penetration testing, the proposed integration aims to help organizations prioritize real business risks, improve testing efficiency, and enhance their overall security posture.
+This project focuses on the design, development, and implementation of the Threat Intelligence-Based Security Assessment (TIBSA) platform, a unified full-stack cybersecurity application. The platform is engineered to seamlessly integrate threat modeling, automated vulnerability scanning, threat intelligence ingestion, malware sandboxing analysis, and incident correlation. By combining the predictive analysis of threat modeling with the empirical validation of automated penetration testing and real-time threat intelligence feeds, TIBSA delivers a context-aware and risk-driven security posture assessment.
 
-Furthermore, the project incorporates Threat Intelligence into this integration to make the process more context-aware and adaptive. Threat intelligence provides insights into real-world attack patterns, emerging threats, and adversary tactics—allowing the threat model to evolve dynamically in line with the current threat landscape.
-
-This unified approach ensures that both threat modeling and penetration testing are driven by up-to-date, intelligence-backed data, leading to more relevant, actionable, and continuous security assessments.
+Unlike traditional security workflows where threat analysis, scanning, and incident investigation operate in isolated silos, TIBSA provides a unified workspace. In this workspace, identified architectural threats directly generate targeted security scanning jobs, while scan findings dynamically feed back to update the system's active threat model database, adjusting severity levels and recalculating the overall risk score. Additionally, the platform integrates advanced malware and URL analyzers (leveraging static and dynamic sandboxing, external intelligence APIs, and local machine learning models), a multi-stage incident investigation orchestrator (generating interactive attack chains and log timelines), and an interactive AI security chatbot. This unified framework bridges the gap between design-time security analysis and run-time security testing, allowing organizations to prioritize business-critical risks, simulate real-world adversary tactics, and dynamically adapt to an ever-evolving threat landscape.
 
 \section{Problem Statement}
 
-In many organizations, Threat Modeling, Penetration Testing, and Continuous Monitoring are performed as isolated processes, resulting in fragmented and inefficient security management.
+In many organizations, security analysis, vulnerability testing, malware research, and threat intelligence operate as fragmented, disconnected processes. This lack of integration leads to several critical security management issues:
 
 \begin{itemize}
-    \item Threat modeling identifies potential attack vectors but lacks real-world validation.
-    \item Penetration testing confirms vulnerabilities but does not leverage predictive threat insights.
-    \item Security assessments that exclude threat intelligence often fail to capture emerging attack trends and adversary behaviors.
+    \item \textbf{Isolated Threat Modeling:} Traditional threat modeling (such as STRIDE) identifies potential architectural weaknesses during the design phase but lacks direct empirical validation. There is no automated link to verify if these theoretical threats translate into actual, exploitable vulnerabilities in the running system.
+    \item \textbf{Context-Unaware Security Scanning:} Automated penetration testing and vulnerability scanners discover weaknesses but do not leverage threat intelligence or design-phase threat models. Consequently, security teams waste resources remediating low-impact findings instead of focusing on critical business risks and active attack vectors.
+    \item \textbf{Siloed Malware and URL Analysis:} Suspicious files and URLs are typically analyzed using standalone third-party websites or disconnected local tools. The results and indicators of compromise (IOCs) are not automatically correlated with the system's threat model or historical scan data.
+    \item \textbf{Delayed Incident Investigation and Correlation:} When security events occur, analysts must manually reconstruct attack vectors by linking logs, scanning findings, and intelligence feeds. This lack of centralized event correlation slows down incident response and increases system exposure times.
 \end{itemize}
 
-This disconnection leads to delayed detection, misprioritized vulnerabilities, and repeated exposures---leaving systems vulnerable to preventable attacks.
-
-Therefore, a unified framework is needed to integrate Threat Modeling, Penetration Testing, Threat Intelligence, and Continuous Monitoring, creating an adaptive and intelligence-driven security process.
+This disconnection leads to delayed threat detection, misprioritized vulnerabilities, and repeated exposures---leaving systems vulnerable to preventable attacks. Therefore, a unified, interactive platform is required to integrate Threat Modeling, Penetration Testing, Malware Analysis, and Incident Investigation, creating a continuous, intelligence-driven, and adaptive security process.
 
 \section{Motivation}
 
-As cyberattacks become increasingly sophisticated and dynamic, traditional one-time assessments are insufficient to ensure ongoing protection.
-
-Integrating threat intelligence with threat modeling and penetration testing improves both accuracy and timeliness in threat detection and validation.
-
-This integration allows security teams to:
+As cyberattacks become more automated, multi-staged, and complex, traditional point-in-time assessments (like annual penetration tests or static threat diagrams) are insufficient to ensure ongoing protection. The integration of threat modeling, automated scanning, malware analysis, and real-time threat intelligence into a unified platform provides several key advantages:
 
 \begin{itemize}
-    \item Focus on high-impact business risks.
-    \item Simulate real-world adversary tactics.
-    \item Build smarter and adaptive defense strategies.
+    \item \textbf{Risk-Centric Prioritization:} Empowers security teams to prioritize vulnerabilities based on realistic business risk scoring (inherent vs. residual risk) and compliance guidelines (OWASP ASVS), rather than relying on generic severity ratings.
+    \item \textbf{Continuous Security Validation:} Establishes a direct loop where threats identified in the system model are translated into target test cases, and actual scan results dynamically update the state and confidence level of modeled threats.
+    \item \textbf{Proactive Threat Intelligence Integration:} Incorporates real-world adversary behavioral models (CAPEC attack patterns mapped to CWEs) and file reputation checks (VirusTotal API) to identify and analyze active threats.
+    \item \textbf{Rapid Incident Response:} Automates the correlation of security incidents and host activities, mapping them into interactive node-based attack chains to speed up diagnostic investigations.
 \end{itemize}
 
-For cybersecurity students and professionals, this project bridges the gap between predictive analysis and practical validation, providing valuable hands-on experience aligned with modern organizational security practices.
+For cybersecurity professionals and system developers, this platform provides a unified workspace that bridges the gap between predictive design-level threat modeling and active operational validation, aligning security processes with modern agile DevSecOps workflows.
 
 \section{Project Objectives}
 
+The primary objectives of this project are:
+
 \begin{enumerate}
-    \item Integrate Threat Modeling with Penetration Testing to create a risk-driven, efficient, and intelligence-informed security assessment process.
-    \item Focus testing on high-impact assets and critical attack vectors based on real business risks.
-    \item Translate threat scenarios into actionable penetration test cases for targeted validation.
-    \item Establish a continuous feedback loop where pentest results refine the threat model.
-    \item Strengthen the organization's security posture through collaboration and risk-based decision-making.
+    \item \textbf{Develop a Unified Cybersecurity Platform:} Implement a robust full-stack web application consisting of a Next.js (TypeScript) frontend, a FastAPI (Python) backend, and a Supabase database and authentication infrastructure.
+    \item \textbf{Build an Advanced Threat Modeling Engine:} Develop an automated STRIDE-based threat modeling service enriched with CAPEC attack patterns, mapped to OWASP ASVS compliance controls, and integrated with dynamic risk-scoring and heatmap generators.
+    \item \textbf{Implement a Vulnerability Scanning Engine:} Create an automated penetration testing scanner to check targets for configuration weaknesses, security headers, cookie properties, and directory paths, feeding results back to the system.
+    \item \textbf{Establish a Continuous Posture Feedback Loop:} Design a database synchronization model where the vulnerability scanner's findings automatically update the status (e.g., potential vs. verified) of threats in the model.
+    \item \textbf{Incorporate a Malware and URL Analysis Layer:} Implement an analysis module capable of scanning suspicious files and URLs, integrating external API reputations, and running local machine learning classifiers to predict phishing probability.
+    \item \textbf{Orchestrate Security Incident Investigations:} Create a correlation engine that aggregates scan logs and security event feeds to map potential multi-stage threat movements and visualize them as attack chains.
+    \item \textbf{Integrate an AI Security Chatbot:} Embed an LLM-powered interactive security assistant to guide analysts through threat modeling inputs, scan diagnostics, and mitigation rules.
 \end{enumerate}
 
 \section{Expected Solutions}
 
-\subsection{Threat-Driven Testing Framework}
-Penetration testing activities will be derived directly from the threat model, ensuring focused testing on high-risk and business-critical areas.
+The TIBSA platform delivers a complete set of integrated solutions to address modern security assessment and incident correlation requirements:
 
-\subsection{Automated Threat Mapping}
-Each identified threat will be automatically mapped to corresponding test cases, attack vectors, and mitigation strategies, allowing faster and more structured analysis.
+\subsection{Interactive Full-Stack Web Platform}
+A web application built using Next.js for a responsive, modern frontend and FastAPI for a lightweight, high-performance backend, utilizing Supabase for secure multi-tenant user authentication, database management, and role-based access control (Admin/User).
 
-\subsection{Dynamic Scope Definition}
-The testing scope will dynamically adjust based on system updates and the evolving threat model---preventing scope creep while maintaining complete coverage of critical assets.
+\subsection{Automated STRIDE Threat Modeling Engine}
+A modeling module that processes system metadata, trust boundaries, and asset inputs to generate threat logs mapped to the CAPEC database (including CWE references) and OWASP ASVS compliance checks. It calculates inherent and residual risk scores using weighted formulas and visualizes them on an interactive risk matrix heatmap.
 
-\subsection{Centralized Documentation}
-All threat models, pentest results, vulnerabilities, and remediation actions will be stored in a unified repository to ensure traceability, auditability, and collaboration.
+\subsection{Automated Vulnerability Scanner (Penetration Testing)}
+A scanning component that conducts automated penetration testing on target domains. The scanner fingerprints web technologies, brute-forces common directory paths, evaluates security-related HTTP headers, and analyzes cookie configurations (such as HttpOnly and Secure flags).
 
-\subsection{Risk Prioritization and Visualization}
-A visual risk scoring tool (e.g., heatmaps, risk matrices) will be incorporated to help stakeholders prioritize vulnerabilities based on impact, likelihood, and exploitability.
+\subsection{Continuous Feedback and Posture Update Loop}
+A database synchronization workflow where penetration testing findings are automatically linked back to matching categories in the threat model, updating threat statuses from potential to verified, adjusting the residual risk score, and reflecting updates in the system dashboard.
 
-\subsection{Continuous Feedback and Improvement Loop}
-Findings from penetration testing will feed back into the threat model, maintaining a continuous improvement cycle that adapts to new threats.
+\subsection{Malware and URL Threat Analysis Layer}
+An analysis dashboard where users upload suspicious files or input URLs/hashes. The platform performs reputational audits via VirusTotal API integration, extracts indicators of compromise (IOCs), and executes local machine learning models (trained on URL phishing indicators) to classify malice probabilities.
 
-\subsection{Collaboration and Role Integration}
-Encourages communication between developers, architects, and security testers through shared threat models, diagrams, and testing objectives---bridging the gap between design and defense.
+\subsection{Incident and SOC Event Correlation Dashboard}
+A monitoring center that processes system events, scanner findings, and network records. It automatically correlates these occurrences to reconstruct multi-stage adversary movements, presenting them as interactive node graphs (attack chains) and historical chronological event feeds.
 
-\subsection{Comprehensive Reporting}
-Generates integrated reports that link each vulnerability to:
-\begin{itemize}
-    \item Its originating threat scenario
-    \item The associated risk level
-    \item The recommended mitigation strategy
-\end{itemize}
+\subsection{Interactive Security AI Chatbot}
+An embedded virtual security consultant powered by a large language model. The chatbot helps security analysts query threat rules, write customized security policies, interpret scan logs, and recommend specific mitigation steps.
+
+\subsection{Comprehensive Reporting Engine}
+A document generator that compiles threat models, scan findings, compliance gaps, and mitigations into formal, downloadable PDF and JSON security assessment reports.
 
 \section{System Scope}
 
-The project aims to deliver a framework and process model (not a commercial platform) that demonstrates how Threat Modeling, Penetration Testing, and Threat Intelligence can be seamlessly integrated.
+The scope of the TIBSA project covers the complete software development lifecycle, implementation, and deployment of a full-stack cybersecurity application. The components within scope are:
 
-It focuses on:
-
-Designing the integration workflow between these components.
-
-Implementing sample use cases to validate the concept.
-
-Providing risk visualization and documentation tools to support security decision-making.
+\begin{itemize}
+    \item \textbf{Frontend Application:} A responsive user interface built using Next.js 16 (TypeScript) and styled with custom themes, CSS tokens, and interactive components. It includes dedicated dashboards for threat modeling, malware upload, vulnerability scanning, attack-chain visualization, and an AI chat interface.
+    \item \textbf{Backend API Service:} A high-performance FastAPI (Python) application exposing REST endpoints for threat generation, scanning triggers, file reputation lookups, ML classification predictions, and report generation.
+    \item \textbf{Database and Security Policy Layer:} A Supabase database storing project schemas (users, threat models, scan logs, vulnerabilities, findings, and events) and managing secure, role-based access permissions.
+    \item \textbf{External Integrations:} Integration with the VirusTotal API for reputation services, as well as the CAPEC attack taxonomy and OWASP ASVS control database.
+\end{itemize}
 
 \section{Out of Scope}
 
-The following features and tools are not part of the main project scope, but may serve as potential extensions or future enhancements:
+To focus the project resources on core research and application logic, the following domains and capabilities are excluded from the implementation:
 
-\subsection{Development of a Website or Web-Based Service}
-
-A web-based service that provides analytical tools such as:
-
-\subsubsection{Malware Analyzer}
-\subsubsection{URL Analysis}
-\subsubsection{IP Analysis}
-\subsubsection{Port Scanner}
-\subsubsection{Hash Analyzer}
-\subsubsection{Password Strength Checker}
-
-\subsection{Dashboards that Visualize}
-
-Dashboards that visualize:
 \begin{itemize}
-    \item Attack trends over time (e.g., via graphs)
-    \item Statistical data such as:
-    \begin{itemize}
-        \item Most common malware types
-        \item Ratio of malicious vs. clean files
-        \item Total number of files analyzed
-    \end{itemize}
+    \item \textbf{Automated Source Code Patching:} The platform identifies vulnerabilities and provides step-by-step mitigation instructions, but it does not execute automated code modifications or directly patch source repositories.
+    \item \textbf{Inline Network Traffic Filtering (IDS/IPS):} The application does not function as an active inline intrusion detection or prevention firewall (such as Snort or Suricata) operating at the network packet level.
+    \item \textbf{Physical and Hardware-Level Penetration Testing:} Security testing focusing on hardware components, side-channel signal leaks, or physical entry audits (e.g., badge copying or locks) is excluded.
+    \item \textbf{Threat Intelligence Feed Hosting:} The platform ingests external threat feeds and indicators of compromise (IOCs), but it does not host a public, global threat intelligence registry.
 \end{itemize}
-
-These functionalities represent a separate web application layer, which is outside the project's core research and implementation scope.
 
 \section{Expected Outcomes}
 
+The project is expected to yield the following deliverables:
+
 \begin{itemize}
-    \item A proof-of-concept framework that demonstrates how integrating threat modeling, penetration testing, and threat intelligence enhances organizational security.
-    \item Documentation and reports showing the relationship between modeled threats and verified vulnerabilities.
-    \item A risk-driven testing process adaptable to evolving cyber threats.
-    \item A collaborative workflow improving communication among security and development teams.
+    \item A fully deployed, full-stack proof-of-concept platform (TIBSA) demonstrating the integration of threat modeling, scanning, and malware analysis.
+    \item An automated workflow mapping system components to STRIDE categories, CAPEC identifiers, and OWASP ASVS guidelines.
+    \item Visualized risk dashboards, dynamic heatmaps, and interactive attack chains that simplify security posturing and forensic audits.
+    \item Downloadable security reports that detail identified vulnerabilities, active threat statuses, compliance scores, and actionable remediation steps.
 \end{itemize}
 
 \section{Conclusion}
 
-This project proposes a unified, intelligence-driven security assessment framework that bridges predictive analysis and practical validation.
- By integrating threat modeling, penetration testing, and threat intelligence, the approach empowers organizations to prioritize real risks, respond faster, and continuously strengthen their defenses in an ever-evolving threat landscape.
+The TIBSA platform establishes a unified, intelligence-driven framework that bridges the gap between design-stage threat prediction and operational-stage validation. By integrating STRIDE-based threat modeling, automated penetration testing scans, malware/URL reputation engines, and multi-stage event correlation into a responsive full-stack application, the platform empowers organizations to systematically identify vulnerabilities, assess overall risks, and protect their digital assets in an ever-evolving threat landscape.

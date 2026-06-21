@@ -3,33 +3,33 @@
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {4.1}{\ignorespaces TIBSA Platform High-Level Architecture Diagram}}{44}{figure.caption.59}%
-\contentsline {figure}{\numberline {4.2}{\ignorespaces Layer 1 --- User Layer Architecture}}{45}{figure.caption.60}%
-\contentsline {figure}{\numberline {4.3}{\ignorespaces Layer 2 --- Edge Layer Architecture}}{46}{figure.caption.61}%
-\contentsline {figure}{\numberline {4.4}{\ignorespaces Layer 3 --- Frontend Layer Architecture}}{46}{figure.caption.62}%
-\contentsline {figure}{\numberline {4.5}{\ignorespaces Layer 4 --- API Gateway and Middleware Layer Architecture}}{47}{figure.caption.63}%
-\contentsline {figure}{\numberline {4.6}{\ignorespaces Layer 5 --- Backend Services Layer Architecture}}{48}{figure.caption.64}%
-\contentsline {figure}{\numberline {4.7}{\ignorespaces Layer 6a --- Intelligence and Monitoring Layer Architecture}}{49}{figure.caption.65}%
-\contentsline {figure}{\numberline {4.8}{\ignorespaces Layer 6b --- Data Layer Architecture}}{50}{figure.caption.66}%
-\contentsline {figure}{\numberline {4.9}{\ignorespaces Layer 7 --- Threat and Risk Engine Architecture}}{50}{figure.caption.67}%
-\contentsline {figure}{\numberline {4.10}{\ignorespaces TIBSA Platform --- Use Case Diagram}}{53}{figure.caption.68}%
-\contentsline {figure}{\numberline {4.11}{\ignorespaces TIBSA Platform --- Standard Security Investigation Sequence Diagram}}{56}{figure.caption.70}%
-\contentsline {figure}{\numberline {4.12}{\ignorespaces TIBSA Platform --- Infrastructure Threat Investigation Sequence Diagram}}{58}{figure.caption.72}%
-\contentsline {figure}{\numberline {4.13}{\ignorespaces TIBSA Platform --- AI Malware Static Analysis Sequence Diagram}}{61}{figure.caption.74}%
-\contentsline {figure}{\numberline {4.14}{\ignorespaces TIBSA Platform --- Independent Diagnostic Modules Sequence Diagram}}{63}{figure.caption.76}%
-\contentsline {figure}{\numberline {4.15}{\ignorespaces TIBSA Platform --- Full Entity Relationship Diagram}}{64}{figure.caption.77}%
-\contentsline {figure}{\numberline {4.16}{\ignorespaces TIBSA Platform --- Detailed Class Diagram}}{67}{figure.caption.78}%
+\contentsline {figure}{\numberline {4.1}{\ignorespaces TIBSA Platform High-Level Architecture Diagram}}{44}{figure.caption.46}%
+\contentsline {figure}{\numberline {4.2}{\ignorespaces Layer 1 --- User Layer Architecture}}{45}{figure.caption.47}%
+\contentsline {figure}{\numberline {4.3}{\ignorespaces Layer 2 --- Edge Layer Architecture}}{45}{figure.caption.48}%
+\contentsline {figure}{\numberline {4.4}{\ignorespaces Layer 3 --- Frontend Layer Architecture}}{46}{figure.caption.49}%
+\contentsline {figure}{\numberline {4.5}{\ignorespaces Layer 4 --- API Gateway and Middleware Layer Architecture}}{46}{figure.caption.50}%
+\contentsline {figure}{\numberline {4.6}{\ignorespaces Layer 5 --- Backend Services Layer Architecture}}{47}{figure.caption.51}%
+\contentsline {figure}{\numberline {4.7}{\ignorespaces Layer 6a --- Intelligence and Monitoring Layer Architecture}}{47}{figure.caption.52}%
+\contentsline {figure}{\numberline {4.8}{\ignorespaces Layer 6b --- Data Layer Architecture}}{48}{figure.caption.53}%
+\contentsline {figure}{\numberline {4.9}{\ignorespaces Layer 7 --- Threat and Risk Engine Architecture}}{48}{figure.caption.54}%
+\contentsline {figure}{\numberline {4.10}{\ignorespaces TIBSA Platform --- Use Case Diagram}}{50}{figure.caption.55}%
+\contentsline {figure}{\numberline {4.11}{\ignorespaces TIBSA Platform --- Standard Security Investigation Sequence Diagram}}{52}{figure.caption.57}%
+\contentsline {figure}{\numberline {4.12}{\ignorespaces TIBSA Platform --- Infrastructure Threat Investigation Sequence Diagram}}{54}{figure.caption.59}%
+\contentsline {figure}{\numberline {4.13}{\ignorespaces TIBSA Platform --- AI Malware Static Analysis Sequence Diagram}}{56}{figure.caption.61}%
+\contentsline {figure}{\numberline {4.14}{\ignorespaces TIBSA Platform --- Independent Diagnostic Modules Sequence Diagram}}{58}{figure.caption.63}%
+\contentsline {figure}{\numberline {4.15}{\ignorespaces TIBSA Platform --- Full Entity Relationship Diagram}}{60}{figure.caption.64}%
+\contentsline {figure}{\numberline {4.16}{\ignorespaces TIBSA Platform --- Detailed Class Diagram}}{62}{figure.caption.65}%
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {6.1}{\ignorespaces TIBSA Public Landing Page}}{88}{figure.caption.79}%
-\contentsline {figure}{\numberline {6.2}{\ignorespaces Registration and Login Interface}}{89}{figure.caption.80}%
-\contentsline {figure}{\numberline {6.3}{\ignorespaces AI Assistant and Admin Console Switcher}}{91}{figure.caption.81}%
-\contentsline {figure}{\numberline {6.4}{\ignorespaces Main Dashboard}}{92}{figure.caption.82}%
-\contentsline {figure}{\numberline {6.5}{\ignorespaces Security Investigation Pipeline}}{93}{figure.caption.83}%
-\contentsline {figure}{\numberline {6.6}{\ignorespaces Infra Intelligence Pipeline}}{95}{figure.caption.84}%
-\contentsline {figure}{\numberline {6.7}{\ignorespaces Security Scans Interface}}{96}{figure.caption.85}%
-\contentsline {figure}{\numberline {6.8}{\ignorespaces Penetration Testing Results}}{98}{figure.caption.86}%
-\contentsline {figure}{\numberline {6.9}{\ignorespaces Threat Modeling Analysis}}{100}{figure.caption.87}%
-\contentsline {figure}{\numberline {6.10}{\ignorespaces AI Malware Analysis Upload}}{101}{figure.caption.88}%
-\contentsline {figure}{\numberline {6.11}{\ignorespaces Reports History Interface}}{103}{figure.caption.89}%
-\contentsline {figure}{\numberline {6.12}{\ignorespaces SOC Nexus Admin Dashboard}}{104}{figure.caption.91}%
+\contentsline {figure}{\numberline {6.1}{\ignorespaces TIBSA Public Landing Page}}{81}{figure.caption.66}%
+\contentsline {figure}{\numberline {6.2}{\ignorespaces Registration and Login Interface}}{82}{figure.caption.67}%
+\contentsline {figure}{\numberline {6.3}{\ignorespaces AI Assistant and Admin Console Switcher}}{84}{figure.caption.68}%
+\contentsline {figure}{\numberline {6.4}{\ignorespaces Main Dashboard}}{85}{figure.caption.69}%
+\contentsline {figure}{\numberline {6.5}{\ignorespaces Security Investigation Pipeline}}{86}{figure.caption.70}%
+\contentsline {figure}{\numberline {6.6}{\ignorespaces Infra Intelligence Pipeline}}{88}{figure.caption.71}%
+\contentsline {figure}{\numberline {6.7}{\ignorespaces Security Scans Interface}}{89}{figure.caption.72}%
+\contentsline {figure}{\numberline {6.8}{\ignorespaces Penetration Testing Results}}{91}{figure.caption.73}%
+\contentsline {figure}{\numberline {6.9}{\ignorespaces Threat Modeling Analysis}}{93}{figure.caption.74}%
+\contentsline {figure}{\numberline {6.10}{\ignorespaces AI Malware Analysis Upload}}{94}{figure.caption.75}%
+\contentsline {figure}{\numberline {6.11}{\ignorespaces Reports History Interface}}{96}{figure.caption.76}%
+\contentsline {figure}{\numberline {6.12}{\ignorespaces SOC Nexus Admin Dashboard}}{97}{figure.caption.78}%
