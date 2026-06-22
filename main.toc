@@ -241,4 +241,26 @@
 \contentsline {subsection}{\numberline {6.16.4}Module Selection Guidelines}{100}{subsection.6.16.4}%
 \contentsline {subsection}{\numberline {6.16.5}Cross-Module Investigation Strategy}{100}{subsection.6.16.5}%
 \contentsline {section}{\numberline {6.17}Chapter Summary}{100}{section.6.17}%
-\contentsline {chapter}{List of References}{102}{chapter*.81}%
+\contentsline {chapter}{\numberline {7}Conclusion and Future Work}{102}{chapter.7}%
+\contentsline {section}{\numberline {7.1}Project Summary}{102}{section.7.1}%
+\contentsline {section}{\numberline {7.2}Main Contributions}{104}{section.7.2}%
+\contentsline {subsection}{\numberline {7.2.1}Technical and Structural Contributions}{104}{subsection.7.2.1}%
+\contentsline {subsection}{\numberline {7.2.2}Business and User Contributions}{104}{subsection.7.2.2}%
+\contentsline {subsection}{\numberline {7.2.3}Security and AI/ML Contributions}{105}{subsection.7.2.3}%
+\contentsline {section}{\numberline {7.3}Achievement of Objectives}{106}{section.7.3}%
+\contentsline {section}{\numberline {7.4}Project Impact}{106}{section.7.4}%
+\contentsline {subsection}{\numberline {7.4.1}Operational Efficiency for Security Teams}{107}{subsection.7.4.1}%
+\contentsline {subsection}{\numberline {7.4.2}Proactive Security Culture for Organizations}{107}{subsection.7.4.2}%
+\contentsline {subsection}{\numberline {7.4.3}Scalability and Performance Potential}{107}{subsection.7.4.3}%
+\contentsline {section}{\numberline {7.5}Limitations}{107}{section.7.5}%
+\contentsline {subsection}{\numberline {7.5.1}Static-Only Local Malware Analysis}{108}{subsection.7.5.1}%
+\contentsline {subsection}{\numberline {7.5.2}Dependency on External API Rate Limits}{108}{subsection.7.5.2}%
+\contentsline {subsection}{\numberline {7.5.3}Web Application Scanning Constraints}{108}{subsection.7.5.3}%
+\contentsline {subsection}{\numberline {7.5.4}Phishing URL Classifier Training Data}{108}{subsection.7.5.4}%
+\contentsline {section}{\numberline {7.6}Future Work}{108}{section.7.6}%
+\contentsline {subsection}{\numberline {7.6.1}Integration of Dynamic Malware Sandboxing}{109}{subsection.7.6.1}%
+\contentsline {subsection}{\numberline {7.6.2}Remediation Automation and Code Patching}{109}{subsection.7.6.2}%
+\contentsline {subsection}{\numberline {7.6.3}Enhanced Machine Learning with Online Learning}{109}{subsection.7.6.3}%
+\contentsline {subsection}{\numberline {7.6.4}Enterprise SSO and Authenticated Scanning Agent}{109}{subsection.7.6.4}%
+\contentsline {subsection}{\numberline {7.6.5}Transition to Distributed Microservices}{110}{subsection.7.6.5}%
+\contentsline {chapter}{List of References}{111}{chapter*.82}%

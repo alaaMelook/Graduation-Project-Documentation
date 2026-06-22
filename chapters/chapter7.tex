@@ -1,0 +1,131 @@
+% ============= CHAPTER 7: CONCLUSION AND FUTURE WORK =============
+\chapter{Conclusion and Future Work}
+\label{ch:conclusion_future_work}
+
+\section{Project Summary}
+\label{sec:ch7_project_summary}
+
+Cybersecurity assessments in modern enterprise environments have long suffered from structural fragmentation. Within typical organizational workflows, threat modeling, active penetration testing, and threat intelligence operate in isolated operational silos. Threat modeling is traditionally executed during the design phase of a system, resulting in static, theoretical diagrams (e.g., STRIDE-based Data Flow Diagrams) that are rarely validated against real-world systems. Conversely, automated vulnerability scanning and manual penetration testing are conducted post-deployment in a context-unaware manner, yielding extensive lists of raw vulnerabilities that lack design-level architectural context and business risk alignment. This division prevents security teams from efficiently identifying, prioritizing, and remediating high-risk threats, while leaving networks exposed to rapidly evolving, multi-staged cyberattacks.
+
+To resolve these challenges, this graduation project proposed, designed, and implemented the Threat Intelligence-Based Security Assessment (TIBSA) platform. The TIBSA platform represents a unified, intelligence-driven cybersecurity framework that bridges the gap between design-time security analysis and run-time security validation. By combining the predictive capabilities of automated threat modeling with the empirical validation of automated penetration testing and active cyber threat intelligence (CTI) feeds, the platform delivers a context-aware, risk-driven, and continuous security posture assessment. 
+
+The application utilizes a decoupled, service-oriented architecture implemented using a modern full-stack technology stack. The frontend is built on the Next.js 14 framework utilizing TypeScript, offering a responsive, dashboard-oriented interface. The frontend communicates via secure, authenticated channels with a containerized FastAPI (Python 3.10) backend. Decoupled services coordinate the business logic for scanning, threat modeling, and incident correlation, while a relational PostgreSQL database managed by Supabase serves as the persistent data and session store. Role-based access control (RBAC) and row-level security (RLS) policies are enforced to guarantee the confidentiality and integrity of all security artifacts.
+
+The TIBSA platform integrates several core components to form a continuous security assessment lifecycle:
+\begin{enumerate}
+    \item \textbf{Automated STRIDE Threat Modeling Engine:} Evaluates user-supplied application profiles and technology stacks against deterministic rulesets to generate threat logs. These threats are mapped directly to Common Attack Pattern Enumeration and Classification (CAPEC) categories, Common Weakness Enumerations (CWEs), and Open Web Application Security Project (OWASP) Application Security Verification Standard (ASVS) compliance controls.
+    \item \textbf{Automated Website Penetration Testing Engine:} Executes multi-threaded, asynchronous scans against target URLs using Playwright-based browser automation and custom Python security scanners. The scanner checks for web application vulnerabilities, including Cross-Site Scripting (XSS), SQL Injection (SQLi), Broken Access Control, technology stack fingerprinting, directory brute-forcing, and security-related HTTP headers.
+    \item \textbf{Continuous Feedback and Posture Update Loop:} Integrates a database synchronization mechanism that links active scan findings back to corresponding categories in the threat model. When a scanner verifies a vulnerability, the state of the corresponding threat in the model shifts from ``potential'' to ``verified,'' dynamically recalculating the residual risk score and updating the overall 5x5 threat matrix heatmap.
+    \item \textbf{Malware and URL Threat Analysis Layer:} Processes suspicious files and URLs using static Portable Executable (PE) file parsing (via the \texttt{pefile} library) and multi-engine antivirus container scans (utilizing ClamAV). Lexical features of URLs are extracted and classified using a local Random Forest machine learning classifier to determine phishing probabilities, complemented by VirusTotal and AlienVault OTX reputational lookups.
+    \item \textbf{Incident and SOC Event Correlation Dashboard:} Aggregates scanner findings, host events, and threat intelligence to correlate multi-stage adversary movements. It projects these events into interactive, node-based attack chains and chronological timelines to support security analysts during incident response.
+    \item \textbf{LLM-Powered Security Chatbot and Summaries:} Employs Large Language Model (LLM) gateways (Google Gemini 2.5 Flash and OpenRouter API) to generate natural-language executive summaries, explain complex technical findings, and provide conversational security guidance.
+\end{enumerate}
+
+The project followed an Agile--Scrum software development methodology, spanning 15 weeks across five distinct Sprints. This iterative approach supported rapid prototyping of core integration features, continuous alignment of system requirements, and systematic debugging of asynchronous workflows. The final project outcome is a fully functional, containerized, and deployed proof-of-concept application demonstrating that the integration of design-time prediction and runtime validation significantly improves security assessment coverage, prioritizes remediation efforts, and lowers operational overhead for security operations center (SOC) analysts.
+
+\section{Main Contributions}
+\label{sec:ch7_main_contributions}
+
+The design and development of the TIBSA platform introduce several significant contributions to academic research and practical cybersecurity workflows. These contributions span technical, business, and specialized security domains, elevating the platform above traditional standalone tools.
+
+\subsection{Technical and Structural Contributions}
+The platform establishes a novel, automated feedback loop between design-phase architectural threat modeling and operational-phase vulnerability scanning. Traditional threat modeling is a manual, point-in-time documentation exercise that sits in text files. By representing threat models as relational PostgreSQL entities mapped to target profiles, the platform allows programmatically-driven test execution. Rather than performing exhaustive, time-consuming web scans, the scanner prioritizes testing based on the components identified in the threat model. When vulnerabilities are verified, the platform automatically feeds the status back into the threat model, changing threat states from ``potential'' to ``verified.'' This closed-loop design ensures that threat models are dynamic living documents reflecting the actual, verified posture of the target system.
+
+\subsection{Business and User Contributions}
+The platform introduces risk-driven prioritization to optimize security resources. Rather than flooding security analysts with generic, high-volume vulnerability lists, the platform calculates a composite risk score based on asset criticality, threat likelihood, and impact. A normalized scoring engine projects these results onto an interactive 5x5 heatmap. This enables compliance stakeholders and business leaders to focus their limited remediation budgets on verified, high-severity risks that directly threaten organizational compliance (OWASP ASVS) and business continuity. 
+
+\subsection{Security and AI/ML Contributions}
+From a security perspective, the platform integrates safe, isolated binary and file analysis. Long-running malware analysis tasks are executed inside restricted, network-disabled Docker containers, protecting the host system from potential compromise. The platform also contributes a local machine learning-driven classifier for predictive URL analysis. By extracting lexical features (entropy, length, character distribution) and running them through a StandardScaler and Random Forest classifier, the system predicts phishing probabilities without relying solely on external reputation lists, which may be slow to index zero-day campaigns. 
+
+The formal list of contributions is summarized below:
+\begin{enumerate}
+    \item \textbf{Unified Security Lifecycle Integration:} Replaces fragmented security practices by combining threat modeling, vulnerability scanning, reputational lookup, and incident correlation within a single interactive dashboard.
+    \item \textbf{Dynamic Residual Risk Recalculation:} Automates the correlation between active scanning results and design-level threat model databases, dynamically adjusting risk scores and visual heatmaps.
+    \item \textbf{Standardized Security Knowledge Mapping:} Unifies industry security standards by automatically mapping threat models to the CAPEC taxonomy, CWE identifiers, and compliance frameworks (OWASP ASVS).
+    \item \textbf{Isolated Multi-Engine Malware Scanning:} Implements containerized file analysis leveraging static headers analysis and local signature scanning while ensuring host environment security.
+    \item \textbf{Lexical URL Phishing Classifier:} Incorporates a local Random Forest machine learning model to estimate the maliciousness of URLs based on structural characteristics.
+    \item \textbf{Multi-Stage Incident Projection:} Visualizes correlated SOC events as interactive attack chains, allowing analysts to easily reconstruct and analyze complex multi-step adversary movement.
+    \item \textbf{Generative AI Explanations and Contextual Guidance:} Leverages LLM gateways to translate complex technical findings, malware reports, and scan logs into structured, natural-language executive summaries.
+\end{enumerate}
+
+\section{Achievement of Objectives}
+\label{sec:ch7_achievement_objectives}
+
+To validate the success of this graduation project, Table~\ref{tab:ch7_objectives_matrix} maps each of the original objectives defined in Chapter~1 to its implementation status and verification evidence within the final TIBSA platform.
+
+\begin{table}[H]
+\centering
+\small
+\caption{Objective Achievement Matrix}
+\label{tab:ch7_objectives_matrix}
+\begin{tabularx}{\textwidth}{|p{3.5cm}|c|X|}
+\hline
+\textbf{Objective} & \textbf{Status} & \textbf{Verification Evidence} \\
+\hline\hline
+\textbf{1. Develop a Unified Cybersecurity Platform} & ✅ Achieved & A fully deployed web application consisting of a Next.js (TypeScript) frontend on Vercel, a containerized FastAPI (Python) backend on Railway, and PostgreSQL database storage on Supabase. \\
+\hline
+\textbf{2. Build an Advanced Threat Modeling Engine} & ✅ Achieved & Implemented a rules-based STRIDE modeler in Chapter 5 that parses user profiles, maps threats to CAPEC/ASVS databases, and generates a visual 5x5 risk matrix heatmap. \\
+\hline
+\textbf{3. Implement a Vulnerability Scanning Engine} & ✅ Achieved & Developed an asynchronous website scanner utilizing Playwright to conduct port scans, fingerprint technology stacks, verify security headers, audit cookie flags, and locate directory structures. \\
+\hline
+\textbf{4. Establish a Posture Feedback Loop} & ✅ Achieved & Implemented database triggers and service synchronization workflows in Chapter 5. Verified that active scanning findings automatically update ``potential'' threats in PostgreSQL to ``verified'' status. \\
+\hline
+\textbf{5. Incorporate Malware \& URL Analysis Layer} & ✅ Achieved & Created a static file parser using the Python \texttt{pefile} library, co-located containerized ClamAV scanning, and built a Random Forest classifier that estimates phishing probability. \\
+\hline
+\textbf{6. Orchestrate Security Investigations} & ✅ Achieved & Engineered the `InfraOrchestrator` service to execute an eight-stage collection pipeline (DNS, WHOIS, reputation, etc.) and project findings as Node-Edge interactive attack graphs. \\
+\hline
+\textbf{7. Integrate an AI Security Chatbot} & ✅ Achieved & Implemented a floating AI assistant in the React frontend utilizing Google Gemini and OpenRouter API wrappers to parse natural-language queries against threat rules. \\
+\hline
+\end{tabularx}
+\end{table}
+
+\section{Project Impact}
+\label{sec:ch7_project_impact}
+
+The deployment of the TIBSA platform introduces significant practical advantages for security teams, developers, and the broader organization. These impacts are described across three main domains.
+
+\subsection{Operational Efficiency for Security Teams}
+For security analysts and penetration testers, the primary benefit of the TIBSA platform is the elimination of manual tool coordination. Traditionally, analysts waste valuable hours running separate port scanners, copying domains into web scrapers, logging into threat intelligence accounts, and compiling PDF report summaries. TIBSA consolidates these activities into a single workspace. The automatic intake and normalization services process indicators of compromise (IOCs) and route them to appropriate analysis modules instantly. Moreover, the integration of generative AI summaries allows junior analysts to quickly comprehend technical reports and PE binary attributes, shortening incident response times and reducing operational stress in modern Security Operations Centers (SOCs).
+
+\subsection{Proactive Security Culture for Organizations}
+By integrating threat modeling with active validation, organizations can transition from a reactive security posture to a proactive defense strategy. Developers and system architects use the STRIDE threat modeler to assess architectural weaknesses before code is written, ensuring that security controls are integrated into early development sprints. The dynamic feedback loop confirms whether those theoretical weaknesses translate into actual vulnerabilities once the code is compiled and scanned, establishing a measurable security assurance metrics loop. This alignment directly supports DevSecOps adoption, ensuring compliance with standards such as OWASP ASVS and reducing the cost of post-deployment security patching.
+
+\subsection{Scalability and Performance Potential}
+The architectural decision to employ asynchronous execution models using Python's \texttt{asyncio} library allows the backend service to scale efficiently. Multiple security scans, reputation lookups, and ML classifications execute concurrently without blocking Backend worker threads. The deployment of the database layer in Supabase (PostgreSQL) supported by row-level security policy sets guarantees that multi-tenant user records remain isolated, allowing the platform to expand to handle hundreds of targets and user accounts without structural redesigns.
+
+\section{Limitations}
+\label{sec:ch7_limitations}
+
+Despite the successful implementation of all core objectives, the current TIBSA platform has several academic and practical limitations that must be documented.
+
+\subsection{Static-Only Local Malware Analysis}
+The platform's local malware analysis layer relies exclusively on static file headers parsing and signature-based scanning (via ClamAV). The application does not run binaries inside a dynamic sandbox environment (such as an automated Cuckoo or CAPE Sandbox setup co-located with the backend). Consequently, the platform is unable to capture behavioral indicators of compromise, such as dynamic registry changes, system file modification calls, or network callbacks during execution. While the draft architecture conceptualized this, the implementation is restricted to static characteristics.
+
+\subsection{Dependency on External API Rate Limits}
+To execute threat intelligence lookups and reputational scans, the platform communicates with external services, including the VirusTotal and AlienVault OTX APIs. Because the platform operates under free-tier developer plans, it is subject to strict API rate limiting (e.g., 4 requests per minute for VirusTotal). Under heavy usage or batch scanning scenarios, these limits cause scanning bottlenecks or API timeouts, delaying the completion of multi-stage investigations.
+
+\subsection{Web Application Scanning Constraints}
+The website penetration testing scanner is configured for black-box testing against public targets. The crawler and scanning modules cannot bypass multi-factor authentication (MFA) prompts or complex corporate single sign-on (SSO) gateways to scan authenticated subdomains. Consequently, the scanning coverage is restricted to public-facing pages, and the platform cannot evaluate deep, authenticated business logic paths without manual cookie harvesting.
+
+\subsection{Phishing URL Classifier Training Data}
+The Random Forest machine learning classifier for phishing URL detection is trained on a localized, static lexical dataset. Lexical patterns change dynamically as attackers adopt new techniques (such as using homoglyph attacks or masking domains behind legitimate CDN paths). Because the model does not continuously update its training weights via online learning streams, its detection accuracy may degrade over time unless the model is manually retrained and redeployed with fresh datasets.
+
+\section{Future Work}
+\label{sec:ch7_future_work}
+
+To build upon the foundation established by the TIBSA platform, several future enhancement paths are recommended for subsequent development phases.
+
+\subsection{Integration of Dynamic Malware Sandboxing}
+To resolve the static analysis limitations, a major recommendation for future versions is to integrate a local or cloud-based dynamic malware sandbox. By configuring API communication with an instance of CAPE Sandbox, the platform could upload PE files to isolated Windows virtual machines, execute the samples safely, and record behavioral actions. The resulting dynamic indicators (e.g., registry modifications, process tree structures, and network PCAP logs) would then feed directly into the incident correlation module to produce complete attack chain projections.
+
+\subsection{Remediation Automation and Code Patching}
+While the current platform generates clear remediation steps based on OWASP ASVS guidelines, it does not modify the target system. Future extensions could integrate the AI Security Chatbot with code repositories (such as GitHub or GitLab) via secure webhook triggers. Once a vulnerability is verified by the scanner, the platform could generate a proposed code patch (such as updating dependency versions or adding input sanitization wrappers) and open a pull request automatically, streamlining the vulnerability remediation workflow.
+
+\subsection{Enhanced Machine Learning with Online Learning}
+To improve the URL phishing detection engine, the Random Forest model should be replaced or augmented with a deep learning model (e.g., a LSTM or Transformer-based classifier) trained on both lexical patterns and active DOM characteristics of target pages. Furthermore, implementing an online learning pipeline utilizing streaming platforms would allow the classifier to continuously adapt its weights as security analysts flag new phishing campaigns, maintaining high classification precision over time.
+
+\subsection{Enterprise SSO and Authenticated Scanning Agent}
+To support enterprise deployment, the penetration testing engine should be extended to support authenticated scanning via a local agent model. Organizations would deploy lightweight scanning agents inside their internal networks. These agents would securely retrieve authentication sessions or cookies, execute scans behind corporate firewalls and SSO gateways, and relay structured JSON findings back to the cloud-based TIBSA platform database, ensuring comprehensive internal coverage.
+
+\subsection{Transition to Distributed Microservices}
+As request volume scales, the monolithic FastAPI backend should be refactored into distributed microservices deployed on a Kubernetes cluster. Individual services (e.g., threat modeler, scanner, malware parser, AI reports generator) would operate in isolated containers, communicating asynchronously via message queues (such as RabbitMQ or Apache Kafka). This microservice migration would allow independent resource allocation and horizontal scaling of performance-heavy scanning modules.
