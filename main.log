@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2025.12.21)  22 JUN 2026 17:20
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2025.12.21)  22 JUN 2026 17:25
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -674,7 +674,7 @@ File: epstopdf-sys.cfg 2021/03/18 v2.0 Configuration of epstopdf for MiKTeX
 \c@lstlisting=\count324
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: End \AtBeginDocument code.
-<media/image1.jpg, id=808, 225.84375pt x 225.84375pt>
+<media/image1.jpg, id=896, 225.84375pt x 225.84375pt>
 File: media/image1.jpg Graphic file (type jpg)
 <use media/image1.jpg>
 Package pdftex.def Info: media/image1.jpg  used on input line 13.
@@ -701,20 +701,20 @@ image1.jpg>]
 ] (main.toc
 [3] [4
 
-] [5] [6] [7])
+] [5] [6] [7] [8])
 \tf@toc=\write4
 \openout4 = `main.toc'.
 
- [8] (main.lof)
+ [9] (main.lof)
 \tf@lof=\write5
 \openout5 = `main.lof'.
 
- [9] (main.lot)
+ [10] (main.lot)
 \tf@lot=\write6
 \openout6 = `main.lot'.
 
- [10]
-(frontmatter/abbreviations.tex [11
+ [11]
+(frontmatter/abbreviations.tex [12
 
 ]) (chapters/chapter1.tex
 Chapter 1.
@@ -1594,7 +1594,7 @@ Chapter 4.
 [42
 
 ] [43]
-<media/Low Level Arch_page-0001.jpg, id=1412, 753.2943pt x 1257.2571pt>
+<media/Low Level Arch_page-0001.jpg, id=1528, 753.2943pt x 1257.2571pt>
 File: media/Low Level Arch_page-0001.jpg Graphic file (type jpg)
 <use media/Low Level Arch_page-0001.jpg>
 Package pdftex.def Info: media/Low Level Arch_page-0001.jpg  used on input line
@@ -1603,12 +1603,12 @@ Package pdftex.def Info: media/Low Level Arch_page-0001.jpg  used on input line
  [44
 
  <./media/Low Level Arch_page-0001.jpg>]
-<media/1.jpg, id=1418, 781.4796pt x 111.7776pt>
+<media/1.jpg, id=1534, 781.4796pt x 111.7776pt>
 File: media/1.jpg Graphic file (type jpg)
 <use media/1.jpg>
 Package pdftex.def Info: media/1.jpg  used on input line 49.
 (pdftex.def)             Requested size: 385.02547pt x 55.07167pt.
-<media/2.jpg, id=1420, 808.9422pt x 110.814pt>
+<media/2.jpg, id=1536, 808.9422pt x 110.814pt>
 File: media/2.jpg Graphic file (type jpg)
 <use media/2.jpg>
 Package pdftex.def Info: media/2.jpg  used on input line 60.
@@ -1616,40 +1616,40 @@ Package pdftex.def Info: media/2.jpg  used on input line 60.
  [45
 
  <./media/1.jpg> <./media/2.jpg>]
-<media/3.jpg, id=1426, 807.2559pt x 119.2455pt>
+<media/3.jpg, id=1542, 807.2559pt x 119.2455pt>
 File: media/3.jpg Graphic file (type jpg)
 <use media/3.jpg>
 Package pdftex.def Info: media/3.jpg  used on input line 71.
 (pdftex.def)             Requested size: 452.9679pt x 66.90984pt.
-<media/4.jpg, id=1428, 809.9058pt x 109.3686pt>
+<media/4.jpg, id=1544, 809.9058pt x 109.3686pt>
 File: media/4.jpg Graphic file (type jpg)
 <use media/4.jpg>
 Package pdftex.def Info: media/4.jpg  used on input line 87.
 (pdftex.def)             Requested size: 452.9679pt x 61.16922pt.
  [46 <./media/3.jpg> <./media/4.jpg>]
-<media/5.jpg, id=1437, 807.2559pt x 118.5228pt>
+<media/5.jpg, id=1553, 807.2559pt x 118.5228pt>
 File: media/5.jpg Graphic file (type jpg)
 <use media/5.jpg>
 Package pdftex.def Info: media/5.jpg  used on input line 105.
 (pdftex.def)             Requested size: 385.02547pt x 56.5304pt.
-<media/6a.jpg, id=1439, 383.9946pt x 130.086pt>
+<media/6a.jpg, id=1555, 383.9946pt x 130.086pt>
 File: media/6a.jpg Graphic file (type jpg)
 <use media/6a.jpg>
 Package pdftex.def Info: media/6a.jpg  used on input line 123.
 (pdftex.def)             Requested size: 385.02547pt x 130.44295pt.
  [47 <./media/5.jpg> <./media/6a.jpg>]
-<media/6b.jpg, id=1446, 382.3083pt x 129.8451pt>
+<media/6b.jpg, id=1562, 382.3083pt x 129.8451pt>
 File: media/6b.jpg Graphic file (type jpg)
 <use media/6b.jpg>
 Package pdftex.def Info: media/6b.jpg  used on input line 134.
 (pdftex.def)             Requested size: 385.02547pt x 130.77596pt.
-<media/7.jpg, id=1448, 812.7966pt x 128.3997pt>
+<media/7.jpg, id=1564, 812.7966pt x 128.3997pt>
 File: media/7.jpg Graphic file (type jpg)
 <use media/7.jpg>
 Package pdftex.def Info: media/7.jpg  used on input line 152.
 (pdftex.def)             Requested size: 452.9679pt x 71.55655pt.
  [48 <./media/6b.jpg> <./media/7.jpg>] [49]
-<media/02_Use_Case_Diagram.jpg, id=1459, 1011.78pt x 1050.92625pt>
+<media/02_Use_Case_Diagram.jpg, id=1575, 1011.78pt x 1050.92625pt>
 File: media/02_Use_Case_Diagram.jpg Graphic file (type jpg)
 <use media/02_Use_Case_Diagram.jpg>
 Package pdftex.def Info: media/02_Use_Case_Diagram.jpg  used on input line 170.
@@ -1658,7 +1658,7 @@ Package pdftex.def Info: media/02_Use_Case_Diagram.jpg  used on input line 170.
  [50
 
  <./media/02_Use_Case_Diagram.jpg>]
-<media/Flow 1.jpg, id=1467, 1785.67125pt x 1167.61218pt>
+<media/Flow 1.jpg, id=1583, 1785.67125pt x 1167.61218pt>
 File: media/Flow 1.jpg Graphic file (type jpg)
 <use media/Flow 1.jpg>
 Package pdftex.def Info: media/Flow 1.jpg  used on input line 194.
@@ -1666,7 +1666,7 @@ Package pdftex.def Info: media/Flow 1.jpg  used on input line 194.
  [51
 
 ] [52 <./media/Flow 1.jpg>]
-<media/Flow 2.jpg, id=1478, 1755.55875pt x 1237.62375pt>
+<media/Flow 2.jpg, id=1594, 1755.55875pt x 1237.62375pt>
 File: media/Flow 2.jpg Graphic file (type jpg)
 <use media/Flow 2.jpg>
 Package pdftex.def Info: media/Flow 2.jpg  used on input line 211.
@@ -1680,7 +1680,7 @@ LaTeX Font Info:    Trying to load font information for T1+cmtt on input line 2
 (D:\Apps\MiKTeX\tex/latex/base\t1cmtt.fd
 File: t1cmtt.fd 2023/04/13 v2.5m Standard LaTeX font definitions
 )
-<media/Flow 3.jpg, id=1489, 1512.40031pt x 1002.74625pt>
+<media/Flow 3.jpg, id=1606, 1512.40031pt x 1002.74625pt>
 File: media/Flow 3.jpg Graphic file (type jpg)
 <use media/Flow 3.jpg>
 Package pdftex.def Info: media/Flow 3.jpg  used on input line 235.
@@ -1688,7 +1688,7 @@ Package pdftex.def Info: media/Flow 3.jpg  used on input line 235.
  [55
 
 ] [56 <./media/Flow 3.jpg>]
-<media/Flow 4.jpg, id=1510, 1630.59187pt x 1068.99374pt>
+<media/Flow 4.jpg, id=1626, 1630.59187pt x 1068.99374pt>
 File: media/Flow 4.jpg Graphic file (type jpg)
 <use media/Flow 4.jpg>
 Package pdftex.def Info: media/Flow 4.jpg  used on input line 250.
@@ -1697,7 +1697,7 @@ Package pdftex.def Info: media/Flow 4.jpg  used on input line 250.
 [57
 
 ] [58 <./media/Flow 4.jpg>]
-<media/TIBSA_ERD_full.jpg, id=1521, 6022.5pt x 2943.99875pt>
+<media/TIBSA_ERD_full.jpg, id=1637, 6022.5pt x 2943.99875pt>
 File: media/TIBSA_ERD_full.jpg Graphic file (type jpg)
 <use media/TIBSA_ERD_full.jpg>
 Package pdftex.def Info: media/TIBSA_ERD_full.jpg  used on input line 268.
@@ -1713,7 +1713,7 @@ Underfull \hbox (badness 3954) in paragraph at lines 279--280
 ile hash checks (\T1/cmtt/m/n/12 scans\T1/cmr/m/n/12 ,
  []
 
-<media/class_diagram_detailed.jpg, id=1531, 5274.20438pt x 3151.775pt>
+<media/class_diagram_detailed.jpg, id=1648, 5274.20438pt x 3151.775pt>
 File: media/class_diagram_detailed.jpg Graphic file (type jpg)
 <use media/class_diagram_detailed.jpg>
 Package pdftex.def Info: media/class_diagram_detailed.jpg  used on input line 2
@@ -1731,7 +1731,7 @@ Chapter 5.
 ] [66] [67] [68] [69] [70] [71] [72] [73] [74] [75] [76] [77])
 (chapters/chapter6.tex [78] [79]
 Chapter 6.
-<media/TIBSA Public Landing Page.png, id=1620, 670.30424pt x 410.13225pt>
+<media/TIBSA Public Landing Page.png, id=1736, 670.30424pt x 410.13225pt>
 File: media/TIBSA Public Landing Page.png Graphic file (type png)
 <use media/TIBSA Public Landing Page.png>
 Package pdftex.def Info: media/TIBSA Public Landing Page.png  used on input lin
@@ -1740,7 +1740,7 @@ e 21.
 [80
 
 ]
-<media/Registration and Login Interface.png, id=1625, 398.6895pt x 422.17725pt>
+<media/Registration and Login Interface.png, id=1741, 398.6895pt x 422.17725pt>
 
 File: media/Registration and Login Interface.png Graphic file (type png)
 <use media/Registration and Login Interface.png>
@@ -1749,7 +1749,7 @@ put line 34.
 (pdftex.def)             Requested size: 452.9679pt x 479.65082pt.
  [81 <./media/TIBSA Public Landing Page.png>] [82 <./media/Registration and Log
 in Interface.png>]
-<media/AI Assistant and Admin Console Switcher.png, id=1638, 337.86224pt x 405.
+<media/AI Assistant and Admin Console Switcher.png, id=1754, 337.86224pt x 405.
 31425pt>
 File: media/AI Assistant and Admin Console Switcher.png Graphic file (type png)
 
@@ -1758,7 +1758,7 @@ Package pdftex.def Info: media/AI Assistant and Admin Console Switcher.png  use
 d on input line 75.
 (pdftex.def)             Requested size: 452.9679pt x 543.4275pt.
  [83] [84 <./media/AI Assistant and Admin Console Switcher.png>]
-<media/main dashboard.png, id=1649, 741.972pt x 399.29175pt>
+<media/main dashboard.png, id=1766, 741.972pt x 399.29175pt>
 File: media/main dashboard.png Graphic file (type png)
 <use media/main dashboard.png>
 Package pdftex.def Info: media/main dashboard.png  used on input line 92.
@@ -1775,28 +1775,28 @@ Underfull \hbox (badness 4048) in paragraph at lines 117--118
 ion, and AI re-port-ing at
  []
 
-<media/Security Investigation Pipeline.png, id=1657, 768.471pt x 287.27325pt>
+<media/Security Investigation Pipeline.png, id=1773, 768.471pt x 287.27325pt>
 File: media/Security Investigation Pipeline.png Graphic file (type png)
 <use media/Security Investigation Pipeline.png>
 Package pdftex.def Info: media/Security Investigation Pipeline.png  used on inp
 ut line 133.
 (pdftex.def)             Requested size: 452.9679pt x 169.32756pt.
 [86 <./media/Security Investigation Pipeline.png>] [87]
-<media/Infra Intelligence Pipeline.png, id=1669, 778.107pt x 398.08725pt>
+<media/Infra Intelligence Pipeline.png, id=1785, 778.107pt x 398.08725pt>
 File: media/Infra Intelligence Pipeline.png Graphic file (type png)
 <use media/Infra Intelligence Pipeline.png>
 Package pdftex.def Info: media/Infra Intelligence Pipeline.png  used on input l
 ine 180.
 (pdftex.def)             Requested size: 452.9679pt x 231.74117pt.
  [88 <./media/Infra Intelligence Pipeline.png>]
-<media/Security Scans Interface.png, id=1676, 799.18575pt x 404.712pt>
+<media/Security Scans Interface.png, id=1792, 799.18575pt x 404.712pt>
 File: media/Security Scans Interface.png Graphic file (type png)
 <use media/Security Scans Interface.png>
 Package pdftex.def Info: media/Security Scans Interface.png  used on input line
  215.
 (pdftex.def)             Requested size: 452.9679pt x 229.3914pt.
  [89 <./media/Security Scans Interface.png>] [90]
-<media/Penetration Testing Results.png, id=1688, 611.886pt x 390.258pt>
+<media/Penetration Testing Results.png, id=1805, 611.886pt x 390.258pt>
 File: media/Penetration Testing Results.png Graphic file (type png)
 <use media/Penetration Testing Results.png>
 Package pdftex.def Info: media/Penetration Testing Results.png  used on input l
@@ -1809,28 +1809,28 @@ Underfull \hbox (badness 1394) in paragraph at lines 293--294
 n de-sign pro-files at
  []
 
-<media/Threat Modeling Analysis.png, id=1697, 789.54974pt x 362.5545pt>
+<media/Threat Modeling Analysis.png, id=1813, 789.54974pt x 362.5545pt>
 File: media/Threat Modeling Analysis.png Graphic file (type png)
 <use media/Threat Modeling Analysis.png>
 Package pdftex.def Info: media/Threat Modeling Analysis.png  used on input line
  315.
 (pdftex.def)             Requested size: 452.9679pt x 208.00252pt.
 [92] [93 <./media/Threat Modeling Analysis.png>]
-<media/AI Malware Analysis Upload.png, id=1708, 763.05075pt x 392.667pt>
+<media/AI Malware Analysis Upload.png, id=1824, 763.05075pt x 392.667pt>
 File: media/AI Malware Analysis Upload.png Graphic file (type png)
 <use media/AI Malware Analysis Upload.png>
 Package pdftex.def Info: media/AI Malware Analysis Upload.png  used on input li
 ne 356.
 (pdftex.def)             Requested size: 452.9679pt x 233.09752pt.
  [94 <./media/AI Malware Analysis Upload.png>]
-<media/Reports History Interface.png, id=1715, 773.89125pt x 385.44pt>
+<media/Reports History Interface.png, id=1831, 773.89125pt x 385.44pt>
 File: media/Reports History Interface.png Graphic file (type png)
 <use media/Reports History Interface.png>
 Package pdftex.def Info: media/Reports History Interface.png  used on input lin
 e 403.
 (pdftex.def)             Requested size: 452.9679pt x 225.60205pt.
  [95] [96 <./media/Reports History Interface.png>]
-<media/SOC Nexus Admin Dashboard.png, id=1731, 684.75826pt x 375.20175pt>
+<media/SOC Nexus Admin Dashboard.png, id=1848, 684.75826pt x 375.20175pt>
 File: media/SOC Nexus Admin Dashboard.png Graphic file (type png)
 <use media/SOC Nexus Admin Dashboard.png>
 Package pdftex.def Info: media/SOC Nexus Admin Dashboard.png  used on input lin
@@ -1842,276 +1842,10 @@ r7.tex
 Chapter 7.
 [102
 
-] [103] [104]
-
-LaTeX Warning: Reference `tab:ch7_objectives_matrix' on page 105 undefined on i
-nput line 54.
-
-[105]
-! LaTeX Error: Unicode character ✅ (U+2705)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.79 \end{tabularx}
-                   
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-! LaTeX Error: Unicode character ✅ (U+2705)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.79 \end{tabularx}
-                   
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-! LaTeX Error: Unicode character ✅ (U+2705)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.79 \end{tabularx}
-                   
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-! LaTeX Error: Unicode character ✅ (U+2705)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.79 \end{tabularx}
-                   
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-! LaTeX Error: Unicode character ✅ (U+2705)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.79 \end{tabularx}
-                   
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-! LaTeX Error: Unicode character ✅ (U+2705)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.79 \end{tabularx}
-                   
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-! LaTeX Error: Unicode character ✅ (U+2705)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.79 \end{tabularx}
-                   
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-! LaTeX Error: Unicode character ✅ (U+2705)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.79 \end{tabularx}
-                   
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-! LaTeX Error: Unicode character ✅ (U+2705)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.79 \end{tabularx}
-                   
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-! LaTeX Error: Unicode character ✅ (U+2705)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.79 \end{tabularx}
-                   
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-! LaTeX Error: Unicode character ✅ (U+2705)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.79 \end{tabularx}
-                   
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-! LaTeX Error: Unicode character ✅ (U+2705)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.79 \end{tabularx}
-                   
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-! LaTeX Error: Unicode character ✅ (U+2705)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.79 \end{tabularx}
-                   
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-! LaTeX Error: Unicode character ✅ (U+2705)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.79 \end{tabularx}
-                   
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-! LaTeX Error: Unicode character ✅ (U+2705)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.79 \end{tabularx}
-                   
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-! LaTeX Error: Unicode character ✅ (U+2705)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.79 \end{tabularx}
-                   
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-! LaTeX Error: Unicode character ✅ (U+2705)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.79 \end{tabularx}
-                   
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-! LaTeX Error: Unicode character ✅ (U+2705)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.79 \end{tabularx}
-                   
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-! LaTeX Error: Unicode character ✅ (U+2705)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.79 \end{tabularx}
-                   
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-! LaTeX Error: Unicode character ✅ (U+2705)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.79 \end{tabularx}
-                   
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-! LaTeX Error: Unicode character ✅ (U+2705)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.79 \end{tabularx}
-                   
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-! LaTeX Error: Unicode character ✅ (U+2705)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.79 \end{tabularx}
-                   
-You may provide a definition with
-\DeclareUnicodeCharacter 
+] [103] [104] [105]
+Underfull \hbox (badness 1629) in paragraph at lines 79--79
+[]|\T1/cmr/m/n/10.95 A fully de-ployed web ap-pli-ca-tion con-sist-ing of a
+ []
 
 
 Underfull \hbox (badness 10000) in paragraph at lines 79--79
@@ -2119,21 +1853,8 @@ Underfull \hbox (badness 10000) in paragraph at lines 79--79
  []
 
 
-! LaTeX Error: Unicode character ✅ (U+2705)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.79 \end{tabularx}
-                   
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-Underfull \hbox (badness 1803) in paragraph at lines 79--79
-\T1/cmr/m/n/10.95 databases, and gen-er-ates a vi-sual 5x5 risk ma-trix
+Underfull \hbox (badness 1796) in paragraph at lines 79--79
+\T1/cmr/m/n/10.95 ter 5 that parses user pro-files, maps threats to
  []
 
 
@@ -2147,53 +1868,14 @@ Underfull \hbox (badness 10000) in paragraph at lines 79--79
  []
 
 
-! LaTeX Error: Unicode character ✅ (U+2705)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.79 \end{tabularx}
-                   
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
 Underfull \hbox (badness 2426) in paragraph at lines 79--79
 []|\T1/cmr/bx/n/10.95 4. Es-tab-lish a
  []
 
 
-! LaTeX Error: Unicode character ✅ (U+2705)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.79 \end{tabularx}
-                   
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
 Underfull \hbox (badness 3460) in paragraph at lines 79--79
 []|\T1/cmr/bx/n/10.95 5. In-cor-po-rate
  []
-
-
-! LaTeX Error: Unicode character ✅ (U+2705)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.79 \end{tabularx}
-                   
-You may provide a definition with
-\DeclareUnicodeCharacter 
 
 
 Underfull \hbox (badness 3417) in paragraph at lines 79--79
@@ -2204,32 +1886,6 @@ Underfull \hbox (badness 3417) in paragraph at lines 79--79
 Underfull \hbox (badness 10000) in paragraph at lines 79--79
 \T1/cmr/bx/n/10.95 Se-cu-rity In-ves-ti-
  []
-
-
-! LaTeX Error: Unicode character ✅ (U+2705)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.79 \end{tabularx}
-                   
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-! LaTeX Error: Unicode character ✅ (U+2705)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.79 \end{tabularx}
-                   
-You may provide a definition with
-\DeclareUnicodeCharacter 
 
 [106] [107] [108]) [109] (backmatter/references.tex [110] [111
 
@@ -2250,54 +1906,37 @@ ail-able: [][][]$\T1/cmtt/m/n/12 https : / / www .
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-01-04>
  ***********
-
-
-LaTeX Warning: There were undefined references.
-
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
-
-
-Package rerunfilecheck Warning: File `main.out' has changed.
-(rerunfilecheck)                Rerun to get outlines right
-(rerunfilecheck)                or use package `bookmark'.
-
-Package rerunfilecheck Info: Checksums for `main.out':
-(rerunfilecheck)             Before: 5ABE708C288EE2BFF3C15ADC295E5D81;39351
-(rerunfilecheck)             After:  92173A9143D0C705231ED1BC34DEF1EF;44377.
+Package rerunfilecheck Info: File `main.out' has not changed.
+(rerunfilecheck)             Checksum: 92173A9143D0C705231ED1BC34DEF1EF;44377.
  ) 
 Here is how much of TeX's memory you used:
- 17170 strings out of 474486
- 272105 string characters out of 5757812
+ 17191 strings out of 474486
+ 272455 string characters out of 5757812
  1992542 words of memory out of 5000000
- 38677 multiletter control sequences out of 15000+600000
+ 38698 multiletter control sequences out of 15000+600000
  576587 words of font info for 80 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  80i,15n,82p,3116b,622s stack positions out of 10000i,1000n,20000p,200000b,200000s
-
-pdfTeX warning (dest): name{chapter*.81} has been referenced but does not exist
-, replaced by a fixed one
-
- <C:\Users\NewVision\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ec
-tt1095.pk> <C:\Users\NewVision\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec
-/dpi600\ectt1200.pk> <C:\Users\NewVision\AppData\Local\MiKTeX\fonts/pk/ljfour/j
-knappen/ec/dpi600\ecrm0800.pk> <C:\Users\NewVision\AppData\Local\MiKTeX\fonts/p
-k/ljfour/jknappen/ec/dpi600\ecbx0800.pk> <C:\Users\NewVision\AppData\Local\MiKT
-eX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm1095.pk> <C:\Users\NewVision\AppData\
-Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx1095.pk> <C:\Users\NewVisio
-n\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecti1200.pk> <C:\User
-s\NewVision\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcrm1200.pk
-> <C:\Users\NewVision\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\e
-cbx1200.pk> <C:\Users\NewVision\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/e
-c/dpi600\ecbx2488.pk> <C:\Users\NewVision\AppData\Local\MiKTeX\fonts/pk/ljfour/
-jknappen/ec/dpi600\ecrm1200.pk> <C:\Users\NewVision\AppData\Local\MiKTeX\fonts/
-pk/ljfour/jknappen/ec/dpi600\ecbx1728.pk> <C:\Users\NewVision\AppData\Local\MiK
-TeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx1440.pk><D:/Apps/MiKTeX/fonts/type1/
-public/amsfonts/cm/cmsy10.pfb><D:/Apps/MiKTeX/fonts/type1/public/amsfonts/cm/cm
-sy8.pfb><D:/Apps/MiKTeX/fonts/type1/public/amsfonts/symbols/msam10.pfb>
-Output written on main.pdf (125 pages, 13257575 bytes).
+ <C:\Users\NewVision\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\
+ectt1095.pk> <C:\Users\NewVision\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/
+ec/dpi600\ectt1200.pk> <C:\Users\NewVision\AppData\Local\MiKTeX\fonts/pk/ljfour
+/jknappen/ec/dpi600\ecrm0800.pk> <C:\Users\NewVision\AppData\Local\MiKTeX\fonts
+/pk/ljfour/jknappen/ec/dpi600\ecbx0800.pk> <C:\Users\NewVision\AppData\Local\Mi
+KTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm1095.pk> <C:\Users\NewVision\AppDat
+a\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx1095.pk> <C:\Users\NewVis
+ion\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecti1200.pk> <C:\Us
+ers\NewVision\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcrm1200.
+pk> <C:\Users\NewVision\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600
+\ecbx1200.pk> <C:\Users\NewVision\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen
+/ec/dpi600\ecbx2488.pk> <C:\Users\NewVision\AppData\Local\MiKTeX\fonts/pk/ljfou
+r/jknappen/ec/dpi600\ecrm1200.pk> <C:\Users\NewVision\AppData\Local\MiKTeX\font
+s/pk/ljfour/jknappen/ec/dpi600\ecbx1728.pk> <C:\Users\NewVision\AppData\Local\M
+iKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx1440.pk><D:/Apps/MiKTeX/fonts/type
+1/public/amsfonts/cm/cmsy10.pfb><D:/Apps/MiKTeX/fonts/type1/public/amsfonts/cm/
+cmsy8.pfb><D:/Apps/MiKTeX/fonts/type1/public/amsfonts/symbols/msam10.pfb>
+Output written on main.pdf (126 pages, 13272674 bytes).
 PDF statistics:
- 2712 PDF objects out of 2984 (max. 8388607)
+ 2805 PDF objects out of 2984 (max. 8388607)
  491 named destinations out of 1000 (max. 500000)
- 1762 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 1938 words of extra memory for PDF output out of 10000 (max. 10000000)
 

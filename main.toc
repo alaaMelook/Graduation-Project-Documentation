@@ -2,9 +2,9 @@
 \contentsline {chapter}{Abstract}{i}{chapter*.1}%
 \contentsline {chapter}{Acknowledgments}{ii}{chapter*.2}%
 \contentsline {chapter}{Table of Contents}{iii}{chapter*.2}%
-\contentsline {chapter}{List of Figures}{ix}{chapter*.2}%
-\contentsline {chapter}{List of Tables}{x}{chapter*.2}%
-\contentsline {chapter}{List of Abbreviations}{xi}{chapter*.3}%
+\contentsline {chapter}{List of Figures}{x}{chapter*.2}%
+\contentsline {chapter}{List of Tables}{xi}{chapter*.2}%
+\contentsline {chapter}{List of Abbreviations}{xii}{chapter*.3}%
 \contentsline {chapter}{\numberline {1}Introduction}{1}{chapter.1}%
 \contentsline {section}{\numberline {1.1}Introduction}{1}{section.1.1}%
 \contentsline {section}{\numberline {1.2}Problem Statement}{1}{section.1.2}%
